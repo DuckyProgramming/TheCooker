@@ -224,3 +224,6 @@ function mergeColor(color1,color2,value){
 	return [color1[0]*(1-value)+color2[0]*value,color1[1]*(1-value)+color2[1]*value,color1[2]*(1-value)+color2[2]*value]
 }
 //main
+function checkValid(){
+}
+//dev

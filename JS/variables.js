@@ -271,6 +271,14 @@ types={
             effect:[-1,0],
             spec:[],
             desc:'Holds 8 plates',
+            upgrade:['Large Plates'],
+        },{
+            name:'Large Plates',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            desc:'Holds 12 plates',
             upgrade:[],
         },{
             name:'Pots',
@@ -279,6 +287,30 @@ types={
             effect:[-1,0],
             spec:[],
             desc:'Holds 3 pots',
+            upgrade:[],
+        },{
+            name:'Tray',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            desc:'Counter with a tray on it',
+            upgrade:[],
+        },{
+            name:'Tin',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            desc:'Counter with a tin on it',
+            upgrade:[],
+        },{
+            name:'Donut Tray',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            desc:'Counter with a donut tray on it',
             upgrade:[],
         },
 
@@ -314,6 +346,32 @@ types={
             spec:[],
             desc:'Turns up to 5 things into a trash bag that can be burnt',
             upgrade:['Large Trash Bin'],
+        },
+
+        {
+            name:'Coffee Machine',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            desc:'Produces coffee',
+            upgrade:[],
+        },{
+            name:'Ketchup',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            desc:'Holds 3 ketchup bottles',
+            upgrade:[],
+        },{
+            name:'Mustard',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            desc:'Holds 3 mustard bottles',
+            upgrade:[],
         },
 
         {
@@ -524,6 +582,62 @@ types={
             spec:[2],provide:['Thick Meat'],
             desc:'Provides Thick Meat',
             upgrade:[],
+        },{
+            name:'Nuts',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[2],provide:['Nuts'],
+            desc:'Provides Nuts',
+            upgrade:[],
+        },{
+            name:'Oil',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[2],provide:['Oil'],
+            desc:'Provides Oil',
+            upgrade:[],
+        },{
+            name:'Hot Dogs',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[2],provide:['Hot Dogs'],
+            desc:'Provides Hot Dogs',
+            upgrade:[],
+        },{
+            name:'Noodles',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[2],provide:['Noodles'],
+            desc:'Provides Noodles',
+            upgrade:[],
+        },{
+            name:'Milk',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[2],provide:['Milk'],
+            desc:'Provides Milk',
+            upgrade:[],
+        },{
+            name:'Pasta Sheet',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[2],provide:['Pasta Sheet'],
+            desc:'Provides Pasta Sheet',
+            upgrade:[],
+        },{
+            name:'Bonito',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[2],provide:['Bonito'],
+            desc:'Provides Bonito',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -560,6 +674,11 @@ types={
                 [5,'Trash','Plate'],
             ],
         },{
+            name:'Bone Food Plate',
+            process:[
+                [5,'Trash','Plate'],
+            ],
+        },{
             name:'Pot',
             process:[
                 [5,'Water','Water Pot'],
@@ -569,6 +688,14 @@ types={
                 [0,'Potato','Potato in Pot'],
                 [0,'Macaroni','Macaroni in Pot'],
                 [0,'Mixed Egg','Raw Mixed Egg'],
+                [0,'Noodles','Noodles in Pot'],
+                [0,'Tomato Sauce','Tomato Sauce in Pot'],
+                [0,'Cooked Mince','Cooked Mince in Pot'],
+                [0,'Butter','Butter in Pot'],
+                [0,'Flour','Flour in Pot'],
+                [0,'Oil','Oil in Pot'],
+                [0,'Raw Donut','Donut in Pot'],
+                [0,'Chopped Potato','Chopped Potato in Pot'],
             ],
         },{
             name:'Water Pot',
@@ -578,6 +705,8 @@ types={
                 [0,'Broccoli','Raw Broccoli'],
                 [0,'Potato','Raw Potato'],
                 [0,'Macaroni','Raw Macaroni'],
+                [0,'Chopped Potato','Chopped Potato in Pot'],
+                [0,'Noodles','Raw Noodles'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -609,6 +738,7 @@ types={
                 [0,'Broccoli','Broccoli in Broth'],
                 [0,'Cheese','Cheese in Broth'],
                 [0,'Chopped Cheese','Chopped Cheese in Broth'],
+                [0,'Bonito','Raw Ramen Soup'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -619,7 +749,9 @@ types={
             ],
         },{
             name:'Chopped Meat',
-            process:[],
+            process:[
+                [1,120,'Cooked Mince'],
+            ],
         },{
             name:'Burnt',
             process:[],
@@ -658,7 +790,9 @@ types={
             ],
         },{
             name:'Tomato Sauce',
-            process:[],
+            process:[
+                [0,'Plate','Plated Tomato Sauce'],
+            ],
         },{
             name:'Tomato in Broth',
             process:[
@@ -769,18 +903,21 @@ types={
                 [0,'Chopped Lettuce','Lettuce Dough'],
                 [0,'Chopped Onions','Onion Dough'],
                 [0,'Sugar','Sugar Dough'],
+                [0,'Oil','Pizza Base'],
             ],
         },{
             name:'Bread',
-            portions:4,
+            portions:3,
             process:[
-                [6,60,'Bread Slice',''],
+                [6,60,'Bread Slice','Bread Slice'],
                 [1,1200,'Burnt'],
             ],
         },{
             name:'Bread Slice',
             process:[
-                [0,'Chopped Garlic','Raw Garlic Bread'],
+                [0,'Chopped Garlic','Garlic on Bread'],
+                [0,'Chopped Cheese','Cheese on Bread'],
+                [1,90,'Toast'],
             ],
         },{
             name:'Butter',
@@ -807,7 +944,19 @@ types={
             ],
         },{
             name:'Chopped Garlic',
-            process:[],
+            process:[
+                [0,'Plate','Plated Garlic'],
+            ],
+        },{
+            name:'Garlic on Bread',
+            process:[
+                [0,'Chopped Cheese','Raw Garlic Bread'],
+            ],
+        },{
+            name:'Cheese on Bread',
+            process:[
+                [0,'Chopped Garlic','Raw Garlic Bread'],
+            ],
         },{
             name:'Raw Garlic Bread',
             process:[
@@ -884,10 +1033,14 @@ types={
             ],
         },{
             name:'Chopped Lettuce',
-            process:[],
+            process:[
+                [0,'Plate','Plated Lettuce'],
+            ],
         },{
             name:'Chopped Onion',
-            process:[],
+            process:[
+                [0,'Plate','Chopped Onion'],
+            ],
         },{
             name:'Lettuce Dough',
             process:[
@@ -905,15 +1058,14 @@ types={
             ],
         },{
             name:'Raw Spring Rolls',
-            portions:4,
             process:[
                 [1,90,'Spring Rolls'],
             ],
         },{
             name:'Spring Rolls',
-            portions:4,
+            portions:3,
             process:[
-                [6,30,'Spring Roll',''],
+                [6,30,'Spring Roll','Spring Roll'],
                 [1,60,'Burnt'],
             ],
         },{
@@ -1069,6 +1221,9 @@ types={
             name:'Cracked Egg',
             process:[
                 [3,30,'Mixed Egg'],
+                [1,180,'Fried Egg'],
+                [0,'Sugar','Sugar Egg'],
+                [0,'Flour','Flour Egg'],
             ],
         },{
             name:'Mixed Egg',
@@ -1099,10 +1254,13 @@ types={
             process:[
                 [0,'Sugar','Chopped Apple With Sugar'],
                 [0,'Flour','Chopped Apple With Flour'],
+                [0,'Plate','Plated Apple'],
             ],
         },{
             name:'Cherry',
-            process:[],
+            process:[
+                [1,60,'Cherry Sauce'],
+            ],
         },{
             name:'Sugar',
             process:[
@@ -1120,6 +1278,11 @@ types={
             name:'Pastry Crust',
             process:[
                 [1,240,'Pastry'],
+                [0,'Meat','Raw Uncooked Meat Pie'],
+                [0,'Meat','Raw Uncooked Chopped Meat Pie'],
+                [0,'Broccoli','Raw Uncooked Broccoli Pie'],
+                [0,'Potato','Raw Uncooked Potato Pie'],
+                [0,'Potato','Raw Uncooked Chopped Potato Pie'],
             ],
         },{
             name:'Pastry',
@@ -1128,7 +1291,12 @@ types={
                 [0,'Chopped Apple','Raw Apple Pie'],
                 [0,'Cherry','Raw Cherry Pie'],
                 [0,'Caramel','Raw Caramel Pie'],
-                [0,'Lemon Meringue','Raw Lemon Meringue'],
+                [0,'Lemon Meringue','Raw Lemon Meringue Pie'],
+                [0,'Meat','Raw Meat Pie'],
+                [0,'Meat','Raw Chopped Meat Pie'],
+                [0,'Broccoli','Raw Broccoli Pie'],
+                [0,'Potato','Raw Potato Pie'],
+                [0,'Potato','Raw Chopped Potato Pie'],
             ],
         },{
             name:'Raw Apple Pie',
@@ -1137,9 +1305,9 @@ types={
             ],
         },{
             name:'Apple Pie',
-            portions:4,
+            portions:3,
             process:[
-                [6,60,'Apple Pie Slice'],
+                [6,60,'Apple Pie Slice','Apple Pie Slice'],
                 [1,240,'Burnt'],
             ],
         },{
@@ -1152,9 +1320,9 @@ types={
             ],
         },{
             name:'Cherry Pie',
-            portions:4,
+            portions:3,
             process:[
-                [6,60,'Cherry Pie Slice'],
+                [6,60,'Cherry Pie Slice','Cherry Pie Slice'],
                 [1,420,'Burnt'],
             ],
         },{
@@ -1167,9 +1335,9 @@ types={
             ],
         },{
             name:'Caramel Pie',
-            portions:4,
+            portions:3,
             process:[
-                [6,60,'Caramel Pie Slice'],
+                [6,60,'Caramel Pie Slice','Caramel Pie Slice'],
                 [1,240,'Burnt'],
             ],
         },{
@@ -1215,9 +1383,9 @@ types={
             ],
         },{
             name:'Lemon Meringue Pie',
-            portions:4,
+            portions:3,
             process:[
-                [6,60,'Lemon Meringue Pie Slice'],
+                [6,60,'Lemon Meringue Pie Slice','Lemon Meringue Pie Slice'],
                 [1,300,'Burnt'],
             ],
         },{
@@ -1237,6 +1405,7 @@ types={
             name:'Flour With Sugar',
             process:[
                 [0,'Chopped Apple','Raw Apple Crisp'],
+                [0,'Cracked Egg','Sugar Flour Egg'],
             ],
         },{
             name:'Raw Apple Crisp',
@@ -1432,6 +1601,10 @@ types={
                 [0,'Rare Thick Steak','Plated Rare Thick Steak With Tomato'],
                 [0,'Medium Thick Steak','Plated Medium Thick Steak With Tomato'],
                 [0,'Well Done Thick Steak','Plated Well Done Thick Steak With Tomato'],
+                [0,'Chopped Lettuce','Plated Lettuce and Tomato'],
+                [0,'Chopped Onion','Plated Tomato and Onion'],
+                [0,'Toast','Plated Tomato Toast'],
+                [0,'Fried Egg','Plated Egg and Tomato'],
                 [7,'Plate'],
             ],
         },{
@@ -1615,6 +1788,1018 @@ types={
                 [5,'Trash','Plate'],
                 [7,'Plate'],
             ],
+        },{
+            name:'Plated Lettuce',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Lettuce and Tomato'],
+                [0,'Chopped Onion','Plated Lettuce and Onion'],
+                [0,'Breadcrumbs','Plated Lettuce and Breadcrumbs'],
+                [0,'Chopped Garlic','Plated Lettuce and Garlic'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Onion',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lettuce','Plated Lettuce and Onion'],
+                [0,'Chopped Tomato','Plated Tomato and Onion'],
+                [0,'Boiled Potato','Plated Boiled Potato and Onion'],
+                [0,'Mayo','Plated Onion and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Lettuce and Tomato',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Onion','Plated Lettuce, Tomato, and Onion'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Lettuce and Onion',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Lettuce, Tomato, and Onion'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Tomato and Onion',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lettuce','Plated Lettuce, Tomato, and Onion'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Lettuce, Tomato, and Onion',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Toast',
+            process:[
+                [0,'Plate','Plated Toast'],
+                [1,150,'Burnt'],
+                [2,60,'Breadcrumbs'],
+            ],
+        },{
+            name:'Breadcrumbs',
+            process:[
+                [0,'Plate','Plated Breadcrumbs'],
+            ],
+        },{
+            name:'Plated Garlic',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lettuce','Plated Lettuce and Garlic'],
+                [0,'Breadcrumbs','Plated Garlic and Breacrumbs'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Breadcrumbs',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lettuce','Plated Lettuce and Breadcrumbs'],
+                [0,'Chopped Garlic','Plated Garlic and Breadcrumbs'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Lettuce and Garlic',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Breadcrumbs','Plated Lettuce, Garlic, and Breadcrumbs'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Lettuce and Breadcrumbs',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Garlic','Plated Lettuce, Garlic, and Breadcrumbs'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Garlic and Breadcrumbs',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lettuce','Plated Lettuce, Garlic, and Breadcrumbs'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Lettuce, Garlic, and Breadcrumbs',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Nuts',
+            process:[
+                [0,'Plate','Plated Nuts'],
+                [2,120,'Chopped Nuts'],
+            ],
+        },{
+            name:'Oil',
+            process:[
+                [0,'Cracked Egg','Mayo'],
+            ],
+        },{
+            name:'Mayo',
+            process:[
+                [0,'Plate','Plated Mayo'],
+            ],
+        },{
+            name:'Plated Apple',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Nuts','Plated Apple and Nuts'],
+                [0,'Mayo','Plated Apple and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Nuts',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Apple','Plated Apple and Nuts'],
+                [0,'Mayo','Plated Nuts and Breacrumbs'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Mayo',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Apple','Plated Apple and Mayo'],
+                [0,'Nuts','Plated Nuts and Mayo'],
+                [0,'Boiled Potato','Plated Boiled Potato and Mayo'],
+                [0,'Chopped Onion','Plated Onion and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Apple and Nuts',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Mayo','Plated Apple, Nuts, and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Apple and Mayo',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Nuts','Plated Apple, Nuts, and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Nuts and Mayo',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Apple','Plated Apple, Nuts, and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Apple, Nuts, and Mayo',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Chopped Potato in Pot',
+            process:[
+                [5,'Water','Raw Boiled Potato'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Raw Boiled Potato',
+            process:[
+                [1,300,'Boiled Potato Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Boiled Potato Pot',
+            portions:1,
+            process:[
+                [6,60,'Boiled Potato','Water Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Boiled Potato',
+            process:[
+                [0,'Plate','Plated Boiled Potato'],
+            ],
+        },{
+            name:'Plated Boiled Potato',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Onions','Plated Boiled Potato and Onion'],
+                [0,'Mayo','Plated Boiled Potato and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Boiled Potato and Onion',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Mayo','Plated Boiled Potato, Onion, and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Boiled Potato and Mayo',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Onion','Plated Boiled Potato, Onion, and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Onion and Mayo',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Boiled Potato','Plated Boiled Potato, Onion, and Mayo'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Boiled Potato, Onion, and Mayo',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Fried Egg',
+            process:[
+                [0,'Plate','Plated Egg'],
+                [1,240,'Burnt'],
+            ],
+        },{
+            name:'Plated Egg',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Toast','Plated Egg Toast'],
+                [0,'Chopped Tomato','Plated Egg and Tomato'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Toast',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Fried Egg','Plated Egg Toast'],
+                [0,'Chopped Tomato','Plated Tomato Toast'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Egg and Tomato',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Toast','Plated Egg and Tomato Toast'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Egg Toast',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Egg and Tomato Toast'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Tomato Toast',
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Fried Egg','Plated Egg and Tomato Toast'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Egg and Tomato Toast',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Pizza Base',
+            process:[
+                [0,'Tomato Sauce','Sauce Pizza Base'],
+            ],
+        },{
+            name:'Sauce Pizza Base',
+            process:[
+                [0,'Chopped Cheese','Raw Cheese Pizza'],
+            ],
+        },{
+            name:'Raw Cheese Pizza',
+            process:[
+                [1,480,'Cheese Pizza'],
+                [0,'Chopped Onion','Raw Onion Pizza'],
+                [0,'Chopped Meat','Raw Meat Pizza'],
+            ],
+        },{
+            name:'Cheese Pizza',
+            portions:3,
+            process:[
+                [1,480,'Burnt'],
+                [6,60,'Cheese Pizza Slice','Cheese Pizza Slice'],
+            ],
+        },{
+            name:'Cheese Pizza Slice',
+            portions:4,
+            process:[
+                [0,'Plate','Plated Cheese Pizza Slice'],
+            ],
+        },{
+            name:'Plated Cheese Pizza Slice',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Raw Onion Pizza',
+            process:[
+                [1,480,'Onion Pizza'],
+                [0,'Chopped Meat','Raw Onion and Meat Pizza'],
+            ],
+        },{
+            name:'Raw Meat Pizza',
+            process:[
+                [1,480,'Meat Pizza'],
+                [0,'Chopped Meat','Raw Onion and Meat Pizza'],
+            ],
+        },{
+            name:'Raw Onion and Meat Pizza',
+            process:[
+                [1,480,'Onion and Meat Pizza'],
+            ],
+        },{
+            name:'Onion Pizza',
+            portions:3,
+            process:[
+                [1,480,'Burnt'],
+                [6,60,'Onion Pizza Slice','Onion Pizza Slice'],
+            ],
+        },{
+            name:'Onion Pizza Slice',
+            process:[
+                [0,'Plate','Plated Onion Pizza Slice'],
+            ],
+        },{
+            name:'Plated Onion Pizza Slice',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Meat Pizza',
+            portions:3,
+            process:[
+                [1,480,'Burnt'],
+                [6,60,'Meat Pizza Slice','Meat Pizza Slice'],
+            ],
+        },{
+            name:'Meat Pizza Slice',
+            process:[
+                [0,'Plate','Plated Meat Pizza Slice'],
+            ],
+        },{
+            name:'Plated Meat Pizza Slice',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Onion and Meat Pizza',
+            portions:3,
+            process:[
+                [1,480,'Burnt'],
+                [6,60,'Onion and Meat Pizza Slice','Onion and Meat Pizza Slice'],
+            ],
+        },{
+            name:'Onion and Meat Pizza Slice',
+            process:[
+                [0,'Plate','Plated Onion and Meat Pizza Slice'],
+            ],
+        },{
+            name:'Plated Onion and Meat Pizza Slice',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Raw Uncooked Meat Pie',
+            process:[
+                [1,300,'Meat Pie'],
+            ],
+        },{
+            name:'Raw Meat Pie',
+            process:[
+                [1,120,'Meat Pie'],
+            ],
+        },{
+            name:'Raw Uncooked Chopped Meat Pie',
+            process:[
+                [1,180,'Meat Pie'],
+            ],
+        },{
+            name:'Raw Chopped Meat Pie',
+            process:[
+                [1,60,'Meat Pie'],
+            ],
+        },{
+            name:'Meat Pie',
+            process:[
+                [0,'Plate','Plated Meat Pie'],
+                [1,300,'Burnt'],
+            ],
+        },{
+            name:'Plated Meat Pie',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Raw Uncooked Broccoli Pie',
+            process:[
+                [0,'Potato','Raw Uncooked Vegetable Pie'],
+                [0,'Chopped Potato','Raw Uncooked Chopped Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Broccoli Pie',
+            process:[
+                [0,'Potato','Raw Vegetable Pie'],
+                [0,'Chopped Potato','Raw Chopped Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Uncooked Potato Pie',
+            process:[
+                [0,'Broccoli','Raw Uncooked Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Potato Pie',
+            process:[
+                [0,'Broccoli','Raw Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Uncooked Chopped Potato Pie',
+            process:[
+                [0,'Broccoli','Raw Uncooked Chopped Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Chopped Potato Pie',
+            process:[
+                [0,'Broccoli','Raw Chopped Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Uncooked Vegetable Pie',
+            process:[
+                [1,300,'Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Vegetable Pie',
+            process:[
+                [1,120,'Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Uncooked Chopped Vegetable Pie',
+            process:[
+                [1,180,'Vegetable Pie'],
+            ],
+        },{
+            name:'Raw Chopped Vegetable Pie',
+            process:[
+                [1,60,'Vegetable Pie'],
+            ],
+        },{
+            name:'Vegetable Pie',
+            process:[
+                [0,'Plate','Plated Vegetable Pie'],
+                [1,300,'Burnt'],
+            ],
+        },{
+            name:'Plated Vegetable Pie',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Coffee',
+            process:[
+                [0,'Ice Cream V','Affogato'],
+            ],
+        },{
+            name:'Affogato',
+            process:[],
+        },{
+            name:'Chopped Nuts',
+            process:[
+                [0,'Chopped Onion','Raw Nut Roast'],
+            ],
+        },{
+            name:'Raw Nut Roast',
+            process:[
+                [1,1200,'Nut Roast'],
+            ],
+        },{
+            name:'Nut Roast',
+            portions:3,
+            process:[
+                [1,1200,'Burnt'],
+                [6,'Nut Roast Slice','Nut Roast Slice'],
+            ],
+        },{
+            name:'Nut Roast Slice',
+            process:[
+                [0,'Plate','Plated Nut Roast Slice'],
+                [0,'Chopped Lemon','Lemon Nut Roast Slice'],
+            ],
+        },{
+            name:'Lemon Nut Roast Slice',
+            process:[
+                [0,'Plate','Plated Lemon Nut Roast Slice'],
+            ],
+        },{
+            name:'Plated Nut Roast Slice',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Lemon Nut Roast Slice',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Raw Hot Dog',
+            process:[
+                [1,240,'Unbunned Hot Dog'],
+            ],
+        },{
+            name:'Hot Dog Bun',
+            process:[],
+        },{
+            name:'Unbunned Hot Dog',
+            process:[
+                [1,240,'Burnt'],
+                [0,'Plate','Plated Unbunned Hot Dog'],
+                [0,'Hot Dog Bun','Hot Dog'],
+            ],
+        },{
+            name:'Hot Dog',
+            process:[
+                [0,'Plate','Plated Hot Dog'],
+                [0,'Sliced Cheese','Cheese Hot Dog'],
+            ],
+        },{
+            name:'Cheese Hot Dog',
+            process:[
+                [0,'Plate','Plated Cheese Hot Dog'],
+            ],
+        },{
+            name:'Plated Hot Dog',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Cheese Hot Dog',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Noodles in Pot',
+            process:[
+                [5,'Water','Raw Noodles'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Raw Noodles',
+            process:[
+                [1,480,'Noodles Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Noodles Pot',
+            process:[
+                [0,'Water','Cooked Noodles in Pot'],
+                [5,'Trash','Cooked Noodles in Pot'],
+            ],
+        },{
+            name:'Cooked Noodles in Pot',
+            portions:2,
+            process:[
+                [6,120,'Noodles','Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Noodles',
+            process:[
+                [0,'Plate','Plated Noodles'],
+            ],
+        },{
+            name:'Plated Noodles',
+            process:[
+                [0,'Tomato Sauce','Plated Spaghetti'],
+                [0,'Bolognese Sauce','Plated Bolognese Spaghetti'],
+                [0,'White Sauce','Plated White Spaghetti'],
+                [0,'Sliced Cheese','Plated Spaghetti With Cheese'],
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Tomato Sauce',
+            process:[
+                [0,'Noodles','Plated Spaghetti'],
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Spaghetti',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Tomato Sauce in Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Cooked Mince','Raw Bolognese Sauce Pot'],
+            ],
+        },{
+            name:'Cooked Mince in Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Tomato Sauce','Raw Bolognese Sauce Pot'],
+            ],
+        },{
+            name:'Raw Bolognese Sauce Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [1,180,'Bolognese Sauce Pot'],
+            ],
+        },{
+            name:'Bolognese Sauce Pot',
+            portions:2,
+            process:[
+                [5,'Trash','Pot'],
+                [6,60,'Bolognese Sauce','Pot'],
+            ],
+        },{
+            name:'Bolognese Sauce',
+            portions:2,
+            process:[
+                [0,'Plate','Plated Bolognese Sauce'],
+            ],
+        },{
+            name:'Plated Bolognese Sauce',
+            process:[
+                [0,'Noodles','Plated Bolognese Spaghetti'],
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Bolognese Spaghetti',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Butter in Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Flour','Raw Roux Pot'],
+            ],
+        },{
+            name:'Flour in Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Butter','Raw Roux Pot'],
+            ],
+        },{
+            name:'Raw Roux Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [1,120,'Roux Pot'],
+            ],
+        },{
+            name:'Roux With Milk Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [3,60,'White Sauce Pot'],
+            ],
+        },{
+            name:'White Sauce Pot',
+            portions:2,
+            process:[
+                [5,'Trash','Pot'],
+                [6,60,'White Sauce','Pot'],
+            ],
+        },{
+            name:'White Sauce',
+            portions:2,
+            process:[
+                [0,'Plate','Plated White Sauce'],
+            ],
+        },{
+            name:'Plated White Sauce',
+            process:[
+                [0,'Noodles','Plated White Spaghetti'],
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated White Spaghetti',
+            process:[
+                [0,'Sliced Cheese','Plated Cheese Spaghetti'],
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Spaghetti With Cheese',
+            process:[
+                [0,'White Sauce','Plated Cheese Spaghetti'],
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Cheese Spaghetti',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Tray',
+            process:[
+                [0,'Bolognese Sauce','Tray With Lasagne 1'],
+            ],
+        },{
+            name:'Tin',
+            process:[],
+        },{
+            name:'Donut Tray',
+            process:[],
+        },{
+            name:'Tray With Lasagne 1',
+            process:[
+                [0,'Pasta Sheet','Tray With Lasagne 2'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Lasagne 2',
+            process:[
+                [0,'White Sauce','Tray With Lasagne 3'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Lasagne 3',
+            process:[
+                [0,'Bolognese Sauce','Tray With Lasagne 4'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Lasagne 4',
+            process:[
+                [0,'Pasta Sheet','Tray With Lasagne 5'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Lasagne 5',
+            process:[
+                [0,'White Sauce','Tray With Lasagne 6'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Lasagne 6',
+            process:[
+                [1,1200,'Lasagne Tray'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Lasagne Tray',
+            portions:4,
+            process:[
+                [1,1200,'Burnt Tray'],
+                [6,60,'Lasagne Slice'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Burnt Tray',
+            process:[
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Lasagne Slice',
+            process:[
+                [0,'Plate','Plated Lasagne Slice'],
+            ],
+        },{
+            name:'Plated Lasagna Slice',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Raw Ramen Soup',
+            process:[
+                [1,540,'Ramen Soup Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Ramen Soup Pot',
+            portions:4,
+            process:[
+                [6,60,'Ramen Soup','Onion in Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Ramen Soup',
+            process:[
+                [0,'Noodles','Ramen'],
+            ],
+        },{
+            name:'Sugar Egg',
+            process:[
+                [0,'Flour','Sugar Flour Egg'],
+            ],
+        },{
+            name:'Flour Egg',
+            process:[
+                [0,'Sugar','Sugar Flour Egg'],
+            ],
+        },{
+            name:'Sugar Flour Egg',
+            process:[
+                [3,120,'Batter'],
+            ],
+        },{
+            name:'Batter',
+            process:[
+                [5,'Waffle Iron','Waffle'],
+                [0,'Milk','Milk Batter'],
+            ],
+        },{
+            name:'Cherry Sauce',
+            process:[],
+        },{
+            name:'Waffle',
+            process:[
+                [0,'Plate','Plated Waffle'],
+                [0,'Butter','Butter Waffle'],
+                [0,'Cherry Sauce','Cherry Waffle'],
+            ],
+        },{
+            name:'Butter Waffle',
+            process:[
+                [0,'Plate','Plated Butter Waffle'],
+                [0,'Cherry Sauce','Butter Cherry Waffle'],
+            ],
+        },{
+            name:'Cherry Waffle',
+            process:[
+                [0,'Plate','Plated Cherry Waffle'],
+                [0,'Butter','Butter Cherry Waffle'],
+            ],
+        },{
+            name:'Butter Cherry Waffle',
+            process:[
+                [0,'Plate','Plated Butter Cherry Waffle'],
+            ],
+        },{
+            name:'Plated Waffle',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Butter Waffle',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Cherry Waffle',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Plated Butter Cherry Waffle',
+            process:[
+                [5,'Trash','Plate'],
+                [7,'Plate'],
+            ],
+        },{
+            name:'Milk Batter',
+            process:[
+                [0,'Tin','Batter Tin'],
+                [0,'Donut Tray','Batter Donut Tray']
+            ],
+        },{
+            name:'Batter Tin',
+            process:[
+                [1,1800,'Cake Tin'],
+                [5,'Trash','Tin'],
+            ],
+        },{
+            name:'Cake Tin',
+            process:[
+                [0,'Melted Chocolate','Chocolate Cake Tin'],
+                [0,'Coffee','Coffee Cake Tin'],
+                [0,'Cherry Sauce','Cherry Cake Tin'],
+                [0,'Chopped Lemon','Lemon Cake Tin'],
+                [1,720,'Burnt Tin'],
+                [5,'Trash','Tin'],
+            ],
+        },{
+            name:'Burnt Tin',
+            process:[
+                [5,'Trash','Tin'],
+            ],
+        },{
+            name:'Chocolate Cake Tin',
+            portions:6,
+            process:[
+                [6,60,'Chocolate Cake Slice','Tin'],
+                [5,'Trash','Tin'],
+            ],
+        },{
+            name:'Coffee Cake Tin',
+            portions:6,
+            process:[
+                [6,60,'Coffee Cake Slice','Tin'],
+                [5,'Trash','Tin'],
+            ],
+        },{
+            name:'Cherry Cake Tin',
+            portions:6,
+            process:[
+                [6,60,'Cherry Cake Slice','Tin'],
+                [5,'Trash','Tin'],
+            ],
+        },{
+            name:'Lemon Cake Tin',
+            portions:6,
+            process:[
+                [6,60,'Lemon Cake Slice','Tin'],
+                [5,'Trash','Tin'],
+            ],
+        },{
+            name:'Chocolate Cake Slice',
+            process:[],
+        },{
+            name:'Coffee Cake Slice',
+            process:[],
+        },{
+            name:'Cherry Cake Slice',
+            process:[],
+        },{
+            name:'Lemon Cake Slice',
+            process:[],
+        },{
+            name:'Batter Donut Tray',
+            portions:12,
+            process:[
+                [6,60,'Raw Donut','Donut Tray']
+                [5,'Trash','Donut Tray'],
+            ],
+        },{
+            name:'Raw Donut',
+            process:[],
+        },{
+            name:'Oil in Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Raw Donut','Raw Donut Pot'],
+            ],
+        },{
+            name:'Donut in Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Oil','Raw Donut Pot'],
+            ],
+        },{
+            name:'Raw Donut Pot',
+            process:[
+                [5,'Trash','Pot'],
+                [1,12,'Donut Pot'],
+            ],
+        },{
+            name:'Donut Pot',
+            portions:1,
+            process:[
+                [5,'Trash','Pot'],
+                [6,60,'Donut','Oil in Pot'],
+            ],
+        },{
+            name:'Donut',
+            process:[
+                [0,'Melted Chocolate','Chocolate Donut'],
+                [0,'Coffee','Coffee Donut'],
+                [0,'Cherry Sauce','Cherry Donut'],
+                [0,'Chopped Lemon','Lemon Donut'],
+            ],
+        },{
+            name:'Chocolate Donut',
+            process:[],
+        },{
+            name:'Coffee Donut',
+            process:[],
+        },{
+            name:'Cherry Donut',
+            process:[],
+        },{
+            name:'Lemon Donut',
+            process:[],
         },
     ],dish:[
         /*
@@ -1694,7 +2879,256 @@ types={
                 ['Plated Medium Thick Steak','Plated Medium Thick Steak With Tomato',5],
                 ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Tomato',5],
             ],
-            desc:'Cook meat to desired level and serve.',
+            desc:'Add chopped tomato to plated steak and serve.',
+        },
+
+        {
+            name:'Salad',
+            type:0,
+            obj:[
+                ['Plated Lettuce',3],
+                ['Plated Lettuce and Tomato',4],
+            ],
+            desc:'Chop and serve lettuce.\nOptionally add chopped tomato.',
+        },{
+            name:'Onion Salad',
+            type:0,
+            obj:[
+                ['Plated Lettuce and Onion',4],
+                ['Plated Lettuce, Tomato, and Onion',5],
+            ],
+            desc:'Add chopped onion to plated salad and serve.',
+        },{
+            name:'Apple Salad',
+            type:0,
+            obj:[
+                ['Plated Apple, Nuts, and Mayo',6],
+            ],
+            desc:'Combine cracked egg and oil to make mayo.\nCombine with chopped apple and nuts and serve.',
+        },{
+            name:'Potato Salad',
+            type:0,
+            obj:[
+                ['Plated Boiled Potato, Onion, and Mayo',7],
+            ],
+            desc:'Combine cracked egg and oil to make mayo.\nBoil chopped potato in a pot.\nCombine boiled potato, chopped onion, and mayo, and serve.',
+        },{
+            name:'Caesar Salad',
+            type:0,
+            obj:[
+                ['Plated Lettuce, Garlic, and Breadcrumbs',6],
+            ],
+            desc:'Add water to flour to make dough.\nCook to make bread, portion bread slices, cook, and chop to make breadcrumbs.\nCombine chopped lettuce, chopped garlic, and breadcrumbs, and serve.',
+        },
+
+        {
+            name:'Toast',
+            type:0,
+            obj:[
+                ['Plated Toast',4],
+            ],
+            desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slices.\nCook bread slice again and serve.',
+        },{
+            name:'Egg Toast',
+            type:0,
+            obj:[
+                ['Plated Egg Toast',5],
+            ],
+            desc:'Crack egg and cook to make fried egg.\nAdd to plated toast and serve.',
+        },{
+            name:'Tomato Toast',
+            type:0,
+            obj:[
+                ['Plated Tomato Toast',5],
+                ['Plated Egg Toast','Plated Egg and Tomato Toast',6],
+            ],
+            desc:'Chop tomato, add to plated toast, and serve.',
+        },
+
+        {
+            name:'Pizza',
+            type:0,
+            obj:[
+                ['Plated Cheese Pizza Slice',5],
+            ],
+            desc:'Add water to flour to make dough.\nAdd oil to make pizza base.\nChop tomato twice and cheese once, and combine with pizza base.\nCook, portion, and serve.',
+        },{
+            name:'Onion Pizza',
+            type:0,
+            obj:[
+                ['Plated Onion Pizza Slice',6],
+            ],
+            desc:'Add chopped onion to pizza before cooking.',
+        },{
+            name:'Meat Pizza',
+            type:0,
+            obj:[
+                ['Plated Meat Pizza Slice',6],
+                ['Plated Onion Pizza Slice','Plated Onion and Meat Pizza Slice',7],
+            ],
+            desc:'Add chopped meat to pizza before cooking.',
+        },
+
+        {
+            name:'Meat Pie',
+            type:0,
+            obj:[
+                ['Plated Meat Pie',6],
+            ],
+            desc:'Add water to flour to make dough.\nKnead dough to make pie crust, optionally cook.\nAdd meat to pastry and cook again, then serve.',
+        },{
+            name:'Vegetable Pie',
+            type:0,
+            obj:[
+                ['Plated Vegetable Pie',6],
+            ],
+            desc:'Add water to flour to make dough.\nKnead dough to make pie crust, optionally cook.\nAdd broccoli and potato to pastry and cook again, then serve.',
+        },
+
+        {
+            name:'Coffee',
+            type:3,
+            obj:[
+                ['Coffee',1],
+            ],
+            desc:'Activate coffee machine, then take the cup and serve.',
+        },{
+            name:'Affogato',
+            type:3,
+            obj:[
+                ['Affogato',2],
+            ],
+            desc:'Take vanilla ice cream, add to coffee cup, and serve.',
+        },
+
+        {
+            name:'Nut Roast',
+            type:0,
+            obj:[
+                ['Plated Nut Roast Slice',4],
+            ],
+            desc:'Slice nuts and onions.\nCombine and cook to make nut roast.\nPortion and serve.',
+        },{
+            name:'Lemon Nut Roast',
+            type:0,
+            obj:[
+                ['Plated Lemon Nut Roast Slice',5],
+            ],
+            desc:'Slice a lemon and add to a slice of nut roast.',
+        },
+
+        {
+            name:'Hot Dog',
+            type:0,
+            obj:[
+                ['Plated Hot Dog',5],
+            ],
+            desc:'Cook hot dog.\nAdd to bun and serve.\nDeliver condiments as needed.',
+        },{
+            name:'Cheese Hot Dog',
+            type:0,
+            obj:[
+                ['Plated Cheese Hot Dog',6],
+            ],
+            desc:'Add sliced cheese to a plated hot dog.',
+        },
+
+        {
+            name:'Spaghetti',
+            type:0,
+            obj:[
+                ['Plated Spaghetti',5],
+            ],
+            desc:'Boil noodles in water, then remove water, and portion noodles out.\nPlate noodles and add tomato sauce, then serve.',
+        },{
+            name:'Bolognese Spaghetti',
+            type:0,
+            obj:[
+                ['Plated Bolognese Spaghetti',7],
+            ],
+            desc:'Chop and cook meat to make mince.\nAdd mince to tomato sauce in pot and cook to make bolognese sauce.\nAdd to plated noodles, then serve.',
+        },{
+            name:'Bolognese Spaghetti',
+            type:0,
+            obj:[
+                ['Plated Bolognese Spaghetti',7],
+            ],
+            desc:'Add butter and flour to pot, then cook to make roux.\nAdd milk and knead to make white sauce.\nCombine plated noodles, white sauce, and chopped cheese, then serve.',
+        },{
+            name:'Lasagne',
+            type:0,
+            obj:[
+                ['Plated Lasagne Slice',9],
+            ],
+            desc:'Add bolognese sauce, pasta sheet, and white sauce to tray, in order, two times.\nCook tray, portion, and serve.',
+        },{
+            name:'Ramen',
+            type:0,
+            obj:[
+                ['Ramen',6],
+            ],
+            desc:'Boil water with onion to make broth.\nAdd bonito to broth and cook again.\nPortion soup and add noodles to make ramen, then serve.',
+        },
+
+        {
+            name:'Waffle',
+            type:0,
+            obj:[
+                ['Plated Waffle',5],
+            ],
+            desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd batter to waffle iron and activate.\nWhen done, take waffle, plate and serve.',
+        },{
+            name:'Butter Waffle',
+            type:0,
+            obj:[
+                ['Plated Butter Waffle',6],
+            ],
+            desc:'Add butter to a plated waffle, then serve.',
+        },{
+            name:'Cherry Waffle',
+            type:0,
+            obj:[
+                ['Plated Cherry Waffle',6],
+                ['Plated Butter Waffle','Player Butter Cherry Waffle',7],
+            ],
+            desc:'Chop cherries and add to a plated waffle, then serve.',
+        },
+
+        {
+            name:'Cake',
+            type:0,
+            obj:[
+                ['Chocolate Cake Slice',5],
+            ],
+            desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd milk to batter, then place in cake tin.\nCook, then add melted chocolate as flavoring.\nPortion, and serve.',
+        },{
+            name:'Coffee Cake',
+            type:0,
+            obj:[
+                ['Coffee Cake Slice',5],
+            ],
+            desc:'After cooking, use coffee from coffee machine as cake flavoring.',
+        },{
+            name:'Cherry Cake',
+            type:0,
+            obj:[
+                ['Cherry Cake Slice',5],
+            ],
+            desc:'After cooking, use cherry sauce as cake flavoring.',
+        },{
+            name:'Lemon Cake',
+            type:0,
+            obj:[
+                ['Lemon Cake Slice',5],
+            ],
+            desc:'After cooking, use chopped lemon as cake flavoring.',
+        },{
+            name:'Donut',
+            type:0,
+            obj:[
+                ['Chocolate Donut',5],
+            ],
+            desc:'Add batter with milk to donut tray.\nPortion a donut out of the tray.\nAdd oil and donut to pot.\nCook, then portion out donut, add flavoring, and serve.',
         },
         
         {
@@ -1738,7 +3172,7 @@ types={
             obj:[
                 ['Garlic Bread Slice',2],
             ],
-            desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and add Chopped garlic.\nCook again and serve.',
+            desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and add chopped garlic and chopped cheese.\nCook again and serve.',
         },{
             name:'Croisant',
             type:1,
@@ -1803,7 +3237,7 @@ types={
             obj:[
                 ['Macaroni and Cheese',2],
             ],
-            desc:'Boil water with macaroni.\nRemove water and add Chopped cheese and butter.\nPortion and serve.',
+            desc:'Boil water with macaroni.\nRemove water and add chopped cheese and butter.\nPortion and serve.',
         },{
             name:'Scrambled Eggs',
             type:2,
@@ -1973,7 +3407,7 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            wall:['Starter Hob','Starter Hob','Tomato','Spaghetti','Pot Stack'],
+            wall:['Starter Hob','Starter Hob','Tomato','Noodles','Pot Stack'],
             desc:'',
         },{
             name:'Waffles',
@@ -1981,7 +3415,7 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            wall:['Waffle Iron','Sugar','Flour','Eggs','Milk'],
+            wall:['Waffle Iron','Sugar','Flour','Eggs'],
             desc:'',
         },{
             name:'Cakes',
@@ -1989,7 +3423,7 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            wall:['Sugar','Flour','Eggs','Milk','Chocolate','Tray','Oven'],
+            wall:['Sugar','Flour','Eggs','Milk','Chocolate','Tin','Oven'],
             desc:'Adds cakes as a dessert',
         },
 
@@ -2042,9 +3476,17 @@ types={
             wall:['Tomato'],
             desc:'Adds tomato as a steak topping',
         },{
+            name:'Onion Salad',
+            list:1,
+            customerMult:1,
+            prereq:['Salad'],
+            mutex:[],
+            wall:['Onions'],
+            desc:'Adds onions as a salad topping',
+        },{
             name:'Apple Salad',
             list:1,
-            customerMult:0.64,
+            customerMult:0.8,
             prereq:['Salad'],
             mutex:[],
             wall:['Apples','Eggs','Oil','Nuts'],
@@ -2056,23 +3498,15 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Starter Hob','Potatoes','Pot Stack','Eggs','Oil','Onions'],
-            desc:'Consists of boiled potatoes, chopped onion, and mayo',
+            desc:'Consists of boiled potato, chopped onion, and mayo',
         },{
-            name:'Onion Salad',
+            name:'Caesar Salad',
             list:1,
-            customerMult:1,
+            customerMult:0.8,
             prereq:['Salad'],
             mutex:[],
-            wall:['Onions'],
-            desc:'Adds onions as a salad topping',
-        },{
-            name:'Crouton Salad',
-            list:1,
-            customerMult:1,
-            prereq:['Salad'],
-            mutex:[],
-            wall:['Oven','Flour'],
-            desc:'Adds croutons as a salad topping',
+            wall:['Garlic','Flour','Oven'],
+            desc:'Consists of lettuce, garlic, and breadcrumbs',
         },{
             name:'Egg Toast',
             list:1,
@@ -2122,13 +3556,13 @@ types={
             wall:['Ice Cream'],
             desc:'Adds ice cream as a coffee topping',
         },{
-            name:'Stuffing',
+            name:'Lemon Nut Roast',
             list:0,
             customerMult:0.64,
             prereq:['Nut Roast'],
             mutex:[],
             wall:['Flour','Onions'],
-            desc:'Adds stuffing as a nut roast topping',
+            desc:'Adds chopped lemon as a nut roast topping',
         },{
             name:'Mustard',
             list:1,
@@ -2154,7 +3588,7 @@ types={
             wall:['Starter Hob','Meat'],
             desc:'Spaghetti with meat-based sauce',
         },{
-            name:'Cheesy Spaghetti',
+            name:'Cheese Spaghetti',
             list:1,
             customerMult:0.64,
             prereq:['Spaghetti'],
@@ -2162,21 +3596,21 @@ types={
             wall:['Butter','Flour','Milk','Cheese'],
             desc:'Spaghetti with cheese and white sauce',
         },{
+            name:'Lasagne',
+            list:1,
+            customerMult:0.64,
+            prereq:['Bolognese Spaghetti','Cheese Spaghetti'],
+            mutex:[],
+            wall:['Pasta Sheet','Tray'],
+            desc:'Layers of pasta with bolognese and white sauce',
+        },{
             name:'Ramen',
             list:1,
-            customerMult:1,
+            customerMult:0.64,
             prereq:[],
             mutex:[],
             wall:['Spaghetti','Onion','Bonito','Pot Stack'],
             desc:'Noodles served inside soup',
-        },{
-            name:'Lasagne',
-            list:1,
-            customerMult:0.64,
-            prereq:['Bolognese Spaghetti','Cheesy Spaghetti'],
-            mutex:[],
-            wall:['Lasagne','Tray'],
-            desc:'Layers of pasta with bolognese and white sauce',
         },{
             name:'Butter Waffles',
             list:1,
