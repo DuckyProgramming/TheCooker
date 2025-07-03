@@ -1,0 +1,40 @@
+class entity{
+    constructor(layer,fade){
+        this.layer=layer
+        this.timer={main:0}
+        this.fade=fade
+        this.remove=false
+    }
+    update(){
+        this.timer.main++
+        this.fade.main=smoothAnim(this.fade.main,this.fade.trigger,0,1,this.fade.speed)
+    }
+}
+class located extends entity{
+    constructor(layer,x,y,fade){
+        super(layer,fade)
+        this.position={x:x,y:y}
+    }
+}
+class partisan extends located{
+    constructor(layer,x,y,fade){
+        super(layer,x,y,fade)
+        this.previous={
+            position:{x:this.position.x,y:this.position.y}
+        }
+        this.base={
+            position:{x:this.position.x,y:this.position.y}
+        }
+        this.offset={
+            position:{x:0,y:0}
+        }
+        this.velocity={x:0,y:0}
+    }
+    update(){
+        this.previous.position.x=this.position.x
+        this.previous.position.y=this.position.y
+        this.position.x+=this.velocity.x
+        this.position.y+=this.velocity.y
+        super.update()
+    }
+}
