@@ -225,5 +225,66 @@ function mergeColor(color1,color2,value){
 }
 //main
 function checkValid(){
+    for(let a=0,la=types.wall.length;a<la;a++){
+        if(types.wall[a].spec.includes(2)&&findName(types.wall[a].provide,types.item)<0){
+            print(types.wall[a].name,'-',types.wall[a].provide)
+        }
+    }
+    for(let a=0,la=types.item.length;a<la;a++){
+        for(let b=0,lb=types.item[a].process.length;b<lb;b++){
+            switch(types.item[a].process[b][0]){
+                case 0:
+                    if(findName(types.item[a].process[b][1],types.item)<0){
+                        print(types.item[a].name,'-',types.item[a].process[b][1])
+                    }
+                    if(findName(types.item[a].process[b][2],types.item)<0){
+                        print(types.item[a].name,'-',types.item[a].process[b][2])
+                    }
+                break
+                case 1: case 2: case 3: case 4: case 5:
+                    if(findName(types.item[a].process[b][2],types.item)<0){
+                        print(types.item[a].name,'-',types.item[a].process[b][2])
+                    }
+                break
+                case 6:
+                    if(findName(types.item[a].process[b][2],types.item)<0){
+                        print(types.item[a].name,'-',types.item[a].process[b][2])
+                    }
+                    if(findName(types.item[a].process[b][3],types.item)<0){
+                        print(types.item[a].name,'-',types.item[a].process[b][3])
+                    }
+                break
+                case 7:
+                    if(findName(types.item[a].process[b][1],types.item)<0){
+                        print(types.item[a].name,'-',types.item[a].process[b][1])
+                    }
+                break
+            }
+        }
+    }
+    for(let a=0,la=types.dish.length;a<la;a++){
+        for(let b=0,lb=types.dish[a].obj.length;b<lb;b++){
+            if(findName(types.dish[a].obj[b][0],types.item)<0){
+                print(types.dish[a].name,'-',types.dish[a].obj[b][0])
+            }
+        }
+    }
+    for(let a=0,la=types.card.length;a<la;a++){
+        for(let b=0,lb=types.card[a].prereq.length;b<lb;b++){
+            if(findName(types.card[a].prereq[b],types.card)<0){
+                print(types.card[a].name,'-',types.card[a].prereq[b])
+            }
+        }
+        for(let b=0,lb=types.card[a].mutex.length;b<lb;b++){
+            if(findName(types.card[a].mutex[b],types.card)<0){
+                print(types.card[a].name,'-',types.card[a].mutex[b])
+            }
+        }
+        for(let b=0,lb=types.card[a].wall.length;b<lb;b++){
+            if(findName(types.card[a].wall[b],types.wall)<0){
+                print(types.card[a].name,'-',types.card[a].wall[b])
+            }
+        }
+    }
 }
 //dev
