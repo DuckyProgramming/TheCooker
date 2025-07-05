@@ -40,4 +40,12 @@ class cardManager{
             }
         }
     }
+    addCard(card){
+        this.active.push(card)
+        for(let a=0,la=types.card[card].wall.length;a<la;a++){
+            this.operation.entityManager.sendPackage(types.card[card].wall[a])
+        }
+        this.operation.customer.internal*=types.card[card].customerMult
+        this.operation.customer.group=round(this.operation.customer.internal/(this.operation.customer.groupSizeMin+this.operation.customer.groupSizeMax)*2)
+    }
 }

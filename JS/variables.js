@@ -21,24 +21,31 @@ inputs={
 types={
     level:[
         {
-            map:[
-                ` _ _ _ _ _ _ _ _ `,
-                `|       |       |`,
-                `                 `,
-                `|       [       |`,
-                `                 `,
-                `|       |       |`,
-                ` _ ] _ _         `,
-                `|     i. .      |`,
-                `                 `,
-                `|     i. .      |`,
-                `       - - _ ] _ `,
-                `|               |`,
-                `                 `,
-                `|       1       |`,
-                `                 `,
-                `|               |`,
-                ` _ _ _ _ _ _ _ _ `,
+            floor:[
+                [[0,-2]],
+                [[4,-5]],
+            ],map:[
+                ` _ _ _ _ _ _ _ _ _ _ `,
+                `|       |           |`,
+                `                     `,
+                `|       [           |`,
+                `                     `,
+                `|       |           |`,
+                ` ] _ _ _             `,
+                `|     i.            |`,
+                `                     `,
+                `|     i. . .        |`,
+                `       - - - _ _ ] _ `,
+                `|                   |`,
+                `                     `,
+                `|       1           |`,
+                `                     `,
+                `|                   |`,
+                ` _ ] _ _ _ _ _ _ _ _ `,
+                `                     `,
+                `                     `,
+                `                   T `,
+                `                     `,
             ],
         },
     ],wall:[
@@ -52,25 +59,64 @@ types={
             height:0,
             effect:[-1,0],
             spec:[],
+            edit:false,
             desc:'',
             upgrade:[],
         },
         
         {
-            name:'High Wall',
-            width:6,
-            height:6,
+            name:'Sidewalk',
+            width:0,
+            height:0,
             effect:[-1,0],
             spec:[],
+            edit:false,
+            desc:'Blocks you',
+            upgrade:[],
+        },{
+            name:'Floor',
+            width:0,
+            height:0,
+            effect:[-1,0],
+            spec:[],
+            edit:false,
+            desc:'Blocks you',
+            upgrade:[],
+        },{
+            name:'Kitchen Floor',
+            width:0,
+            height:0,
+            effect:[-1,0],
+            spec:[],
+            edit:false,
+            desc:'Blocks you',
+            upgrade:[],
+        },{
+            name:'High Wall',
+            width:8,
+            height:8,
+            effect:[-1,0],
+            spec:[],
+            edit:false,
             desc:'Blocks you',
             upgrade:[],
         },{
             name:'Wall',
-            width:6,
-            height:6,
+            width:12,
+            height:12,
             effect:[-1,0],
             spec:[],
+            edit:false,
             desc:'Blocks you but not your hands',
+            upgrade:[],
+        },{
+            name:'Trash Can',
+            width:36,
+            height:36,
+            effect:[-1,0],
+            spec:[],
+            edit:false,
+            desc:'Infinite compression',
             upgrade:[],
         },
         
@@ -80,6 +126,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds anything',
             upgrade:['Freezer','Cutting Board','Rolling Board','Climb Counter'],
         },{
@@ -88,6 +135,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds anything and keeps it overnight',
             upgrade:['Cutting Board','Rolling Board','Climb Counter'],
         },{
@@ -96,6 +144,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Cut things 3x faster here',
             upgrade:['Freezer','Rolling Board','Climb Counter'],
         },{
@@ -104,6 +153,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Roll things 3x faster here',
             upgrade:['Freezer','Cutting Board','Climb Counter'],
         },{
@@ -112,6 +162,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Can be jumped over while empty',
             upgrade:['Freezer','Cutting Board','Rolling Board'],
         },{
@@ -120,6 +171,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 4 identical pieces of food',
             upgrade:[],
         },{
@@ -128,6 +180,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 4 identical pieces of food and keeps them overnight',
             upgrade:['Stack Station'],
         },{
@@ -136,6 +189,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 4 pieces of food in a pile',
             upgrade:['Frozen Prep Station'],
         },
@@ -146,6 +200,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[1],
+            edit:true,
             desc:'Wash plates and get water, but slowly',
             upgrade:['Sink'],
         },{
@@ -154,6 +209,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[1],
+            edit:true,
             desc:'Wash plates and get water',
             upgrade:['Soaking Sink','Power Sink'],
         },{
@@ -162,6 +218,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[1],
+            edit:true,
             desc:'Wash plates automatically and get water',
             upgrade:['Power Sink','Wash Basin'],
         },{
@@ -170,6 +227,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[1],
+            edit:true,
             desc:'Wash 4 plates at a time and get water',
             upgrade:['Soaking Sink','Power Sink'],
         },{
@@ -178,6 +236,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[1],
+            edit:true,
             desc:'Wash plates quickly and get water',
             upgrade:['Soaking Sink','Wash Basin'],
         },{
@@ -186,6 +245,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 4 plates at a time',
             upgrade:[],
         },
@@ -196,6 +256,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[0],
+            edit:true,
             desc:'Cook things, but slowly',
             upgrade:['Hob'],
         },{
@@ -204,6 +265,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[0],
+            edit:true,
             desc:'Cook things',
             upgrade:['Safe Hob','Fast Hob','Manual Hob'],
         },{
@@ -212,6 +274,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[0],
+            edit:true,
             desc:'Cooks things slowly but never burns',
             upgrade:['Fast Hob','Manual Hob'],
         },{
@@ -220,6 +283,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[0],
+            edit:true,
             desc:'Cooks things fast',
             upgrade:['Safe Hob','Manual Hob'],
         },{
@@ -228,6 +292,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[0],
+            edit:true,
             desc:'Cooks things very fast, but manually',
             upgrade:['Safe Hob','Fast Hob'],
         },{
@@ -236,6 +301,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[0],
+            edit:true,
             desc:'Cooks things fast, but the inside is invisible',
             upgrade:['Microwave'],
         },{
@@ -244,6 +310,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[0],
+            edit:true,
             desc:'Cooks everything in the same amount of time',
             upgrade:[''],
         },{
@@ -252,6 +319,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Makes waffles',
             upgrade:[''],
         },
@@ -262,6 +330,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 4 plates',
             upgrade:['Plates'],
         },{
@@ -270,6 +339,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 8 plates',
             upgrade:['Large Plates'],
         },{
@@ -278,6 +348,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 12 plates',
             upgrade:[],
         },{
@@ -286,6 +357,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 3 pots',
             upgrade:[],
         },{
@@ -294,6 +366,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Counter with a tray on it',
             upgrade:[],
         },{
@@ -302,6 +375,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Counter with a tin on it',
             upgrade:[],
         },{
@@ -310,6 +384,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Counter with a donut tray on it',
             upgrade:[],
         },
@@ -320,6 +395,7 @@ types={
             height:20,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Turns up to 3 things into a trash bag',
             upgrade:['Trash Bin'],
         },{
@@ -328,6 +404,7 @@ types={
             height:24,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Turns up to 5 things into a trash bag',
             upgrade:['Large Trash Bin','Composter Bin'],
         },{
@@ -336,6 +413,7 @@ types={
             height:30,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Turns up to 10 things into a trash bag',
             upgrade:['Composter Bin'],
         },{
@@ -344,6 +422,7 @@ types={
             height:24,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Turns up to 5 things into a trash bag that can be burnt',
             upgrade:['Large Trash Bin'],
         },
@@ -354,6 +433,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Produces coffee',
             upgrade:[],
         },{
@@ -362,6 +442,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 3 ketchup bottles',
             upgrade:[],
         },{
@@ -370,6 +451,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[],
+            edit:true,
             desc:'Holds 3 mustard bottles',
             upgrade:[],
         },
@@ -380,6 +462,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Onion',
+            edit:true,
             desc:'Provides Onion',
             upgrade:[],
         },{
@@ -388,6 +471,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Meat',
+            edit:true,
             desc:'Provides Meat',
             upgrade:[],
         },{
@@ -396,6 +480,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Tomato',
+            edit:true,
             desc:'Provides Tomatoes',
             upgrade:[],
         },{
@@ -404,6 +489,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Broccoli',
+            edit:true,
             desc:'Provides Broccoli',
             upgrade:[],
         },{
@@ -412,6 +498,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Cheese',
+            edit:true,
             desc:'Provides Cheese',
             upgrade:[],
         },{
@@ -420,6 +507,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Flour',
+            edit:true,
             desc:'Provides Flour',
             upgrade:[],
         },{
@@ -428,6 +516,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Butter',
+            edit:true,
             desc:'Provides Butter',
             upgrade:[],
         },{
@@ -436,6 +525,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Garlic',
+            edit:true,
             desc:'Provides Garlic',
             upgrade:[],
         },{
@@ -444,6 +534,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Soybean',
+            edit:true,
             desc:'Provides Soybeans',
             upgrade:[],
         },{
@@ -452,6 +543,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Miso',
+            edit:true,
             desc:'Provides Miso',
             upgrade:[],
         },{
@@ -460,6 +552,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Lettuce',
+            edit:true,
             desc:'Provides Lettuce',
             upgrade:[],
         },{
@@ -468,6 +561,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Potato',
+            edit:true,
             desc:'Provides Potato',
             upgrade:[],
         },{
@@ -476,6 +570,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Macaroni',
+            edit:true,
             desc:'Provides Macaroni',
             upgrade:[],
         },{
@@ -484,6 +579,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Egg',
+            edit:true,
             desc:'Provides Eggs',
             upgrade:[],
         },{
@@ -492,6 +588,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Apple',
+            edit:true,
             desc:'Provides Apples',
             upgrade:[],
         },{
@@ -500,6 +597,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Cherry',
+            edit:true,
             desc:'Provides Cherries',
             upgrade:[],
         },{
@@ -508,6 +606,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Sugar',
+            edit:true,
             desc:'Provides Sugar',
             upgrade:[],
         },{
@@ -516,6 +615,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Lemon',
+            edit:true,
             desc:'Provides Lemons',
             upgrade:[],
         },{
@@ -524,6 +624,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Chocolate',
+            edit:true,
             desc:'Provides Chocolate',
             upgrade:[],
         },{
@@ -532,6 +633,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Ice Cream C',
+            edit:true,
             desc:'Provides Ice Cream',
             upgrade:[],
         },{
@@ -540,6 +642,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Raw Fish',
+            edit:true,
             desc:'Provides Fish',
             upgrade:[],
         },{
@@ -548,6 +651,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Raw Fish Fillet',
+            edit:true,
             desc:'Provides Fish Fillet',
             upgrade:[],
         },{
@@ -556,6 +660,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Raw Spiny Fish',
+            edit:true,
             desc:'Provides Spiny Fish',
             upgrade:[],
         },{
@@ -564,6 +669,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Crab',
+            edit:true,
             desc:'Provides Crab',
             upgrade:[],
         },{
@@ -572,6 +678,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Bone Meat',
+            edit:true,
             desc:'Provides Bone Meat',
             upgrade:[],
         },{
@@ -580,6 +687,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Thick Meat',
+            edit:true,
             desc:'Provides Thick Meat',
             upgrade:[],
         },{
@@ -588,6 +696,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Nuts',
+            edit:true,
             desc:'Provides Nuts',
             upgrade:[],
         },{
@@ -596,6 +705,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Oil',
+            edit:true,
             desc:'Provides Oil',
             upgrade:[],
         },{
@@ -604,6 +714,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Hot Dog',
+            edit:true,
             desc:'Provides Hot Dogs',
             upgrade:[],
         },{
@@ -612,6 +723,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Hot Dog Bun',
+            edit:true,
             desc:'Provides Hot Dog Buns',
             upgrade:[],
         },{
@@ -620,6 +732,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Noodles',
+            edit:true,
             desc:'Provides Noodles',
             upgrade:[],
         },{
@@ -628,6 +741,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Milk',
+            edit:true,
             desc:'Provides Milk',
             upgrade:[],
         },{
@@ -636,6 +750,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Pasta Sheet',
+            edit:true,
             desc:'Provides Pasta Sheet',
             upgrade:[],
         },{
@@ -644,6 +759,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Bonito',
+            edit:true,
             desc:'Provides Bonito',
             upgrade:[],
         },{
@@ -652,6 +768,7 @@ types={
             height:48,
             effect:[-1,0],
             spec:[2],provide:'Cocoa Powder',
+            edit:true,
             desc:'Provides Cocoa Powder',
             upgrade:[],
         },
@@ -723,6 +840,7 @@ types={
                 [0,'Macaroni','Raw Macaroni'],
                 [0,'Chopped Potato','Chopped Potato in Pot'],
                 [0,'Noodles','Raw Noodles'],
+                [5,'Water','Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -2475,7 +2593,6 @@ types={
             ],
         },{
             name:'Bolognese Sauce',
-            portions:2,
             process:[
                 [0,'Plate','Plated Bolognese Sauce'],
             ],
@@ -2531,7 +2648,6 @@ types={
             ],
         },{
             name:'White Sauce',
-            portions:2,
             process:[
                 [0,'Plate','Plated White Sauce'],
             ],
@@ -2922,6 +3038,7 @@ types={
             obj:[
                 ['Plated Fish',4],
             ],
+            edit:true,
             desc:'Cook fish and serve.',
         },{
             name:'Fish Fillet',
@@ -2929,6 +3046,7 @@ types={
             obj:[
                 ['Plated Fish Fillet',5],
             ],
+            edit:true,
             desc:'Chop fish to create fillet.\nCook fillet and serve.',
         },{
             name:'Spiny Fish',
@@ -2936,6 +3054,7 @@ types={
             obj:[
                 ['Plated Spiny Fish',5],
             ],
+            edit:true,
             desc:'Removed spines from fish and discard.\nCook fish and serve.',
         },{
             name:'Crab Cake',
@@ -2943,6 +3062,7 @@ types={
             obj:[
                 ['Plated Crab Cake',6],
             ],
+            edit:true,
             desc:'Chop crab, combined with cracked egg and flour.\nCook and serve.',
         },
 
@@ -2954,6 +3074,7 @@ types={
                 ['Plated Medium Steak',4],
                 ['Plated Well Done Steak',4],
             ],
+            edit:true,
             desc:'Cook meat to desired level and serve.',
         },{
             name:'Bone Steak',
@@ -2963,6 +3084,7 @@ types={
                 ['Plated Medium Bone Steak',4],
                 ['Plated Well Done Bone Steak',4],
             ],
+            edit:true,
             desc:'Cook meat to desired level and serve.\nLeaves a bone on the plate afterward.',
         },{
             name:'Thick Steak',
@@ -2972,6 +3094,7 @@ types={
                 ['Plated Medium Thick Steak',5],
                 ['Plated Well Done Thick Steak',5],
             ],
+            edit:true,
             desc:'Cook meat to desired level and serve.\nTakes a while to cook.',
         },{
             name:'Tomato Steak',
@@ -2987,6 +3110,7 @@ types={
                 ['Plated Medium Thick Steak','Plated Medium Thick Steak With Tomato',5],
                 ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Tomato',5],
             ],
+            edit:true,
             desc:'Add chopped tomato to plated steak and serve.',
         },
 
@@ -2997,6 +3121,7 @@ types={
                 ['Plated Lettuce',3],
                 ['Plated Lettuce and Tomato',4],
             ],
+            edit:true,
             desc:'Chop and serve lettuce.\nOptionally add chopped tomato.',
         },{
             name:'Onion Salad',
@@ -3005,6 +3130,7 @@ types={
                 ['Plated Lettuce and Onion',4],
                 ['Plated Lettuce, Tomato, and Onion',5],
             ],
+            edit:true,
             desc:'Add chopped onion to plated salad and serve.',
         },{
             name:'Apple Salad',
@@ -3012,6 +3138,7 @@ types={
             obj:[
                 ['Plated Apple, Nuts, and Mayo',6],
             ],
+            edit:true,
             desc:'Combine cracked egg and oil to make mayo.\nCombine with chopped apple and nuts and serve.',
         },{
             name:'Potato Salad',
@@ -3019,6 +3146,7 @@ types={
             obj:[
                 ['Plated Boiled Potato, Onion, and Mayo',7],
             ],
+            edit:true,
             desc:'Combine cracked egg and oil to make mayo.\nBoil chopped potato in a pot.\nCombine boiled potato, chopped onion, and mayo, and serve.',
         },{
             name:'Caesar Salad',
@@ -3026,6 +3154,7 @@ types={
             obj:[
                 ['Plated Lettuce, Garlic, and Breadcrumbs',6],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nCook to make bread, portion bread slices, cook, and chop to make breadcrumbs.\nCombine chopped lettuce, chopped garlic, and breadcrumbs, and serve.',
         },
 
@@ -3035,6 +3164,7 @@ types={
             obj:[
                 ['Plated Toast',4],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slices.\nCook bread slice again and serve.',
         },{
             name:'Egg Toast',
@@ -3042,6 +3172,7 @@ types={
             obj:[
                 ['Plated Egg Toast',5],
             ],
+            edit:true,
             desc:'Crack egg and cook to make fried egg.\nAdd to plated toast and serve.',
         },{
             name:'Tomato Toast',
@@ -3050,6 +3181,7 @@ types={
                 ['Plated Tomato Toast',5],
                 ['Plated Egg Toast','Plated Egg and Tomato Toast',6],
             ],
+            edit:true,
             desc:'Chop tomato, add to plated toast, and serve.',
         },
 
@@ -3059,6 +3191,7 @@ types={
             obj:[
                 ['Plated Cheese Pizza Slice',5],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nAdd oil to make pizza base.\nChop tomato twice and cheese once, and combine with pizza base.\nCook, portion, and serve.',
         },{
             name:'Onion Pizza',
@@ -3066,6 +3199,7 @@ types={
             obj:[
                 ['Plated Onion Pizza Slice',6],
             ],
+            edit:true,
             desc:'Add chopped onion to pizza before cooking.',
         },{
             name:'Meat Pizza',
@@ -3074,6 +3208,7 @@ types={
                 ['Plated Meat Pizza Slice',6],
                 ['Plated Onion Pizza Slice','Plated Onion and Meat Pizza Slice',7],
             ],
+            edit:true,
             desc:'Add chopped meat to pizza before cooking.',
         },
 
@@ -3083,6 +3218,7 @@ types={
             obj:[
                 ['Plated Meat Pie',6],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nKnead dough to make pie crust, optionally cook.\nAdd meat to pastry and cook again, then serve.',
         },{
             name:'Vegetable Pie',
@@ -3090,6 +3226,7 @@ types={
             obj:[
                 ['Plated Vegetable Pie',6],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nKnead dough to make pie crust, optionally cook.\nAdd broccoli and potato to pastry and cook again, then serve.',
         },
 
@@ -3099,6 +3236,7 @@ types={
             obj:[
                 ['Coffee',1],
             ],
+            edit:true,
             desc:'Activate coffee machine, then take the cup and serve.',
         },{
             name:'Affogato',
@@ -3106,6 +3244,7 @@ types={
             obj:[
                 ['Affogato',2],
             ],
+            edit:true,
             desc:'Take vanilla ice cream, add to coffee cup, and serve.',
         },
 
@@ -3115,6 +3254,7 @@ types={
             obj:[
                 ['Plated Nut Roast Slice',4],
             ],
+            edit:true,
             desc:'Slice nuts and onions.\nCombine and cook to make nut roast.\nPortion and serve.',
         },{
             name:'Stuffing',
@@ -3122,6 +3262,7 @@ types={
             obj:[
                 ['Plated Stuffing Nut Roast Slice',7],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nCook to make bread, then portion a slice.\nCook the slice then chop to make breadcrumbs.\nCombine breadcrumbs and chopped onion, then cook.\nAdd to Nut Roast portion and serve.',
         },
 
@@ -3131,6 +3272,7 @@ types={
             obj:[
                 ['Plated Hot Dog',5],
             ],
+            edit:true,
             desc:'Cook hot dog.\nAdd to bun and serve.\nDeliver condiments as needed.',
         },{
             name:'Cheese Hot Dog',
@@ -3138,6 +3280,7 @@ types={
             obj:[
                 ['Plated Cheese Hot Dog',6],
             ],
+            edit:true,
             desc:'Add chopped cheese to a plated hot dog.',
         },
 
@@ -3147,6 +3290,7 @@ types={
             obj:[
                 ['Plated Spaghetti',5],
             ],
+            edit:true,
             desc:'Boil noodles in water, then remove water, and portion noodles out.\nPlate noodles and add tomato sauce, then serve.',
         },{
             name:'Bolognese Spaghetti',
@@ -3154,6 +3298,7 @@ types={
             obj:[
                 ['Plated Bolognese Spaghetti',7],
             ],
+            edit:true,
             desc:'Chop and cook meat to make mince.\nAdd mince to tomato sauce in pot and cook to make bolognese sauce.\nAdd to plated noodles, then serve.',
         },{
             name:'Bolognese Spaghetti',
@@ -3161,6 +3306,7 @@ types={
             obj:[
                 ['Plated Bolognese Spaghetti',7],
             ],
+            edit:true,
             desc:'Add butter and flour to pot, then cook to make roux.\nAdd milk and knead to make white sauce.\nCombine plated noodles, white sauce, and chopped cheese, then serve.',
         },{
             name:'Lasagne',
@@ -3168,6 +3314,7 @@ types={
             obj:[
                 ['Plated Lasagne Slice',9],
             ],
+            edit:true,
             desc:'Add bolognese sauce, pasta sheet, and white sauce to tray, in order, two times.\nCook tray, portion, and serve.',
         },{
             name:'Ramen',
@@ -3175,6 +3322,7 @@ types={
             obj:[
                 ['Ramen',6],
             ],
+            edit:true,
             desc:'Boil water with onion to make broth.\nAdd bonito to broth and cook again.\nPortion soup and add noodles to make ramen, then serve.',
         },
 
@@ -3184,6 +3332,7 @@ types={
             obj:[
                 ['Plated Waffle',5],
             ],
+            edit:true,
             desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd batter to waffle iron and activate.\nWhen done, take waffle, plate and serve.',
         },{
             name:'Butter Waffle',
@@ -3191,6 +3340,7 @@ types={
             obj:[
                 ['Plated Butter Waffle',6],
             ],
+            edit:true,
             desc:'Add butter to a plated waffle, then serve.',
         },{
             name:'Cherry Waffle',
@@ -3199,6 +3349,7 @@ types={
                 ['Plated Cherry Waffle',6],
                 ['Plated Butter Waffle','Player Butter Cherry Waffle',7],
             ],
+            edit:true,
             desc:'Chop cherries and add to a plated waffle, then serve.',
         },
 
@@ -3208,6 +3359,7 @@ types={
             obj:[
                 ['Chocolate Cake Slice',5],
             ],
+            edit:true,
             desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd milk to batter, then place in cake tin.\nCook, then add melted chocolate as flavoring.\nPortion and serve.',
         },{
             name:'Coffee Cake',
@@ -3215,6 +3367,7 @@ types={
             obj:[
                 ['Coffee Cake Slice',5],
             ],
+            edit:true,
             desc:'After cooking, use coffee from coffee machine as cake flavoring.',
         },{
             name:'Cherry Cake',
@@ -3222,6 +3375,7 @@ types={
             obj:[
                 ['Cherry Cake Slice',5],
             ],
+            edit:true,
             desc:'After cooking, use cherry sauce as cake flavoring.',
         },{
             name:'Lemon Cake',
@@ -3229,6 +3383,7 @@ types={
             obj:[
                 ['Lemon Cake Slice',5],
             ],
+            edit:true,
             desc:'After cooking, use chopped lemon as cake flavoring.',
         },{
             name:'Donut',
@@ -3239,6 +3394,7 @@ types={
                 ['Cherry Cake Slice','Cherry Donut',5],
                 ['Lemon Cake Slice','Lemon Donut',5],
             ],
+            edit:true,
             desc:'Add batter with milk to donut tray.\nPortion a donut out of the tray.\nAdd oil and donut to pot.\nCook, then portion out donut, add flavoring, and serve.',
         },{
             name:'Tiramisu',
@@ -3246,6 +3402,7 @@ types={
             obj:[
                 ['Tiramisu Slice',6],
             ],
+            edit:true,
             desc:'Combine chopped lemon, sugar, and cracked egg, and mix, then add milk to make mascarpone.\nAfter cooking cake, add mascarpone and cocoa powder.\nPortion and serve.',
         },
         
@@ -3255,6 +3412,7 @@ types={
             obj:[
                 ['Meat Soup',2],
             ],
+            edit:true,
             desc:'Boil water with onion to make broth.\nAdd meat to broth and cook again.\nPortion and serve.',
         },{
             name:'Tomato Soup',
@@ -3262,6 +3420,7 @@ types={
             obj:[
                 ['Tomato Soup',2],
             ],
+            edit:true,
             desc:'Boil water with onion to make broth.\nCut tomato two times to make tomato sauce.\nAdd tomato and tomato sauce to broth and cook again.\nPortion and serve.',
         },{
             name:'Broccoli Cheese Soup',
@@ -3269,6 +3428,7 @@ types={
             obj:[
                 ['Broccoli Cheese Soup',2],
             ],
+            edit:true,
             desc:'Boil water with onion to make broth.\nAdd broccoli and cheese to broth and cook again.\nPortion and serve.',
         },{
             name:'Miso Soup',
@@ -3276,6 +3436,7 @@ types={
             obj:[
                 ['Miso Soup',3],
             ],
+            edit:true,
             desc:'Boil water with soybeans, then cut to make tofu.\nAdd water again and miso and cook again.\nPortion and serve.',
         },{
             name:'Bread',
@@ -3283,6 +3444,7 @@ types={
             obj:[
                 ['Bread Slice',1],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and serve.',
         },{
             name:'Garlic Bread',
@@ -3290,6 +3452,7 @@ types={
             obj:[
                 ['Garlic Bread',2],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and add chopped garlic and chopped cheese.\nCook again and serve.',
         },{
             name:'Croissant',
@@ -3297,6 +3460,7 @@ types={
             obj:[
                 ['Croissant',2],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nAdd butter and knead to make a croissant.\nCook and serve.',
         },{
             name:'Spring Roll',
@@ -3304,6 +3468,7 @@ types={
             obj:[
                 ['Spring Roll',2],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nAdd chopped lettuce and onions.\nKnead into rolls and cook.\nPortions and serve.',
         },
 
@@ -3313,6 +3478,7 @@ types={
             obj:[
                 ['Broccoli Portion',1],
             ],
+            edit:true,
             desc:'Boil water with broccoli.\nPortion and serve.',
         },{
             name:'Mashed Potato',
@@ -3320,6 +3486,7 @@ types={
             obj:[
                 ['Mashed Potato',2],
             ],
+            edit:true,
             desc:'Boil water with potato.\nMash when complete.\nPortion and serve.',
         },{
             name:'Roast Potato',
@@ -3327,6 +3494,7 @@ types={
             obj:[
                 ['Roast Potato',1],
             ],
+            edit:true,
             desc:'Cook potato and serve.',
         },{
             name:'Fries',
@@ -3334,6 +3502,7 @@ types={
             obj:[
                 ['Fries',2],
             ],
+            edit:true,
             desc:'Chop potato, then cook and serve.',
         },{
             name:'Onion Rings',
@@ -3341,6 +3510,7 @@ types={
             obj:[
                 ['Onion Rings',2],
             ],
+            edit:true,
             desc:'Chop onions, add flour, then cook and serve.',
         },{
             name:'Cheese Sticks',
@@ -3348,6 +3518,7 @@ types={
             obj:[
                 ['Cheese Sticks',3],
             ],
+            edit:true,
             desc:'Chop cheese, add flour and cook.\nChop tomato twice to make sauce.\nCombine sticks and sauce and serve.',
         },{
             name:'Macaroni and Cheese',
@@ -3355,6 +3526,7 @@ types={
             obj:[
                 ['Macaroni and Cheese',2],
             ],
+            edit:true,
             desc:'Boil water with macaroni.\nRemove water and add chopped cheese and butter.\nPortion and serve.',
         },{
             name:'Scrambled Eggs',
@@ -3362,6 +3534,7 @@ types={
             obj:[
                 ['Scrambled Eggs',1],
             ],
+            edit:true,
             desc:'Crack egg, then mix it.\nPlace in pot and cook.\nPortion and serve.',
         },
 
@@ -3371,6 +3544,7 @@ types={
             obj:[
                 ['Apple Pie Slice',2],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd chopped apple to pastry and cook again.\nPortion and Serve.',
         },{
             name:'Cherry Pie',
@@ -3378,6 +3552,7 @@ types={
             obj:[
                 ['Cherry Pie Slice',2],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd cherry to pastry and cook again.\nPortion and Serve.',
         },{
             name:'Caramel Pie',
@@ -3385,6 +3560,7 @@ types={
             obj:[
                 ['Caramel Pie Slice',2],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook sugar to make caramel.\nAdd caramel to pastry and cook again.\nPortion and Serve.',
         },{
             name:'Lemon Meringue Pie',
@@ -3392,6 +3568,7 @@ types={
             obj:[
                 ['Lemon Meringue Pie Slice',3],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCombine chopped lemon, sugar, and cracked egg, and mix to create meringue.\nAdd meringue to pastry and cook again.\nPortion and Serve.',
         },{
             name:'Apple Crisp',
@@ -3399,6 +3576,7 @@ types={
             obj:[
                 ['Apple Crisp',2],
             ],
+            edit:true,
             desc:'Combine chopped apple, sugar and flour.\nCook and serve.',
         },{
             name:'Cherry Cordial',
@@ -3406,6 +3584,7 @@ types={
             obj:[
                 ['Cherry Cordial',2],
             ],
+            edit:true,
             desc:'Melt chocolate and add cherry.\nCook again and serve.',
         },{
             name:'Ice Cream',
@@ -3419,6 +3598,7 @@ types={
                 ['Ice Cream CVV',3],
                 ['Ice Cream VVV',3],
             ],
+            edit:true,
             desc:'Switch between flavors and grab scoops, then serve.',
         },{
             name:'Zeppole',
@@ -3426,6 +3606,7 @@ types={
             obj:[
                 ['Zeppole',2],
             ],
+            edit:true,
             desc:'Add water to flour to make dough.\nAdd sugar and cook.\nAdd sugar again and serve.',
         },
     ],card:[
@@ -3444,6 +3625,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[],
+            edit:true,
             desc:'',
         },
         
@@ -3454,6 +3636,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Fish'],
+            edit:true,
             desc:'Adds fish as a main dish',
         },{
             name:'Steak',
@@ -3462,6 +3645,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Meat'],
+            edit:true,
             desc:'Adds three types of steak as a main dish',
         },{
             name:'Salad',
@@ -3470,6 +3654,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Lettuce','Tomatoes'],
+            edit:true,
             desc:'Adds salads, with or without tomato, as a main dish',
         },{
             name:'Toast',
@@ -3478,6 +3663,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Oven'],
+            edit:true,
             desc:'Adds toast as a main dish',
         },{
             name:'Pizza',
@@ -3486,6 +3672,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Cheese','Tomatoes','Flour','Oil','Oven'],
+            edit:true,
             desc:'Adds pizza as a main dish',
         },{
             name:'Pies',
@@ -3494,6 +3681,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Meat','Oven'],
+            edit:true,
             desc:'Adds meat pie as a main dish',
         },{
             name:'Coffee',
@@ -3502,6 +3690,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Coffee Machine'],
+            edit:true,
             desc:'Adds coffee as a dessert',
         },{
             name:'Nut Roast',
@@ -3510,6 +3699,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Nuts','Onions','Oven'],
+            edit:true,
             desc:'',
         },{
             name:'Hot Dogs',
@@ -3518,6 +3708,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Hot Dog Buns','Hot Dogs','Ketchup'],
+            edit:true,
             desc:'',
         },{
             name:'Spaghetti',
@@ -3526,6 +3717,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Tomatoes','Noodles','Pots'],
+            edit:true,
             desc:'',
         },{
             name:'Waffles',
@@ -3534,6 +3726,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Waffle Iron','Sugar','Flour','Eggs'],
+            edit:true,
             desc:'',
         },{
             name:'Cakes',
@@ -3542,6 +3735,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Sugar','Flour','Eggs','Milk','Chocolate','Tin','Oven'],
+            edit:true,
             desc:'Adds cakes as a dessert',
         },
 
@@ -3552,6 +3746,7 @@ types={
             prereq:['Fish'],
             mutex:[],
             wall:['Fish Fillet'],
+            edit:true,
             desc:'Needs to be cut before cooking',
         },{
             name:'Spiny Fish',
@@ -3560,6 +3755,7 @@ types={
             prereq:['Fish'],
             mutex:[],
             wall:['Spiny Fish'],
+            edit:true,
             desc:'Contains spines, that must be removed and trashed',
         },{
             name:'Crab Cakes',
@@ -3568,6 +3764,7 @@ types={
             prereq:['Fish'],
             mutex:[],
             wall:['Crab','Eggs','Flour'],
+            edit:true,
             desc:'Combine chopped crab, egg, and flour',
         },{
             name:'Bone Steak',
@@ -3576,6 +3773,7 @@ types={
             prereq:['Steak'],
             mutex:[],
             wall:['Bone Meat'],
+            edit:true,
             desc:'Contains a bone that must be trashed afterward',
         },{
             name:'Thick Steak',
@@ -3584,6 +3782,7 @@ types={
             prereq:['Steak'],
             mutex:[],
             wall:['Thick Meat'],
+            edit:true,
             desc:'Takes longer to cook than regular meat',
         },{
             name:'Tomato Steak',
@@ -3592,6 +3791,7 @@ types={
             prereq:['Steak'],
             mutex:[],
             wall:['Tomatoes'],
+            edit:true,
             desc:'Adds tomato as a steak topping',
         },{
             name:'Onion Salad',
@@ -3600,6 +3800,7 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Onions'],
+            edit:true,
             desc:'Adds onions as a salad topping',
         },{
             name:'Apple Salad',
@@ -3608,6 +3809,7 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Apples','Eggs','Oil','Nuts'],
+            edit:true,
             desc:'Consists of chopped apple, nuts, and mayo',
         },{
             name:'Potato Salad',
@@ -3616,6 +3818,7 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Starter Hob','Potatoes','Pots','Eggs','Oil','Onions'],
+            edit:true,
             desc:'Consists of boiled potato, chopped onion, and mayo',
         },{
             name:'Caesar Salad',
@@ -3624,6 +3827,7 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Garlic','Flour','Oven'],
+            edit:true,
             desc:'Consists of lettuce, garlic, and breadcrumbs',
         },{
             name:'Egg Toast',
@@ -3632,6 +3836,7 @@ types={
             prereq:['Toast'],
             mutex:[],
             wall:['Starter Hob','Eggs'],
+            edit:true,
             desc:'Adds egg as a toast topping',
         },{
             name:'Tomato Toast',
@@ -3640,6 +3845,7 @@ types={
             prereq:['Toast'],
             mutex:[],
             wall:['Tomatoes'],
+            edit:true,
             desc:'Adds tomato as a toast topping',
         },{
             name:'Onion Pizza',
@@ -3648,6 +3854,7 @@ types={
             prereq:['Pizza'],
             mutex:[],
             wall:['Onions'],
+            edit:true,
             desc:'Adds onion as a pizza topping',
         },{
             name:'Meat Pizza',
@@ -3656,6 +3863,7 @@ types={
             prereq:['Pizza'],
             mutex:[],
             wall:['Meat'],
+            edit:true,
             desc:'Adds meat as a pizza topping',
         },{
             name:'Vegetable Pies',
@@ -3664,6 +3872,7 @@ types={
             prereq:['Pies'],
             mutex:[],
             wall:['Broccoli','Potatoes'],
+            edit:true,
             desc:'Pies containing broccoli and potatoes',
         },{
             name:'Affogato',
@@ -3672,6 +3881,7 @@ types={
             prereq:['Coffee'],
             mutex:[],
             wall:['Ice Cream'],
+            edit:true,
             desc:'Adds ice cream as a coffee topping',
         },{
             name:'Stuffing',
@@ -3680,6 +3890,7 @@ types={
             prereq:['Nut Roast'],
             mutex:[],
             wall:['Flour','Onions'],
+            edit:true,
             desc:'Adds stuffing as a nut roast topping',
         },{
             name:'Mustard',
@@ -3688,6 +3899,7 @@ types={
             prereq:['Hot Dogs'],
             mutex:[],
             wall:['Mustard'],
+            edit:true,
             desc:'Adds mustard as a hot dog condiment',
         },{
             name:'Cheese Hot Dogs',
@@ -3696,6 +3908,7 @@ types={
             prereq:['Hot Dogs'],
             mutex:[],
             wall:['Cheese'],
+            edit:true,
             desc:'Adds cheese as a hot dog topping',
         },{
             name:'Bolognese Spaghetti',
@@ -3704,6 +3917,7 @@ types={
             prereq:['Spaghetti'],
             mutex:[],
             wall:['Starter Hob','Meat'],
+            edit:true,
             desc:'Spaghetti with meat-based sauce',
         },{
             name:'Cheese Spaghetti',
@@ -3712,6 +3926,7 @@ types={
             prereq:['Spaghetti'],
             mutex:[],
             wall:['Butter','Flour','Milk','Cheese'],
+            edit:true,
             desc:'Spaghetti with cheese and white sauce',
         },{
             name:'Lasagne',
@@ -3720,6 +3935,7 @@ types={
             prereq:['Bolognese Spaghetti','Cheese Spaghetti'],
             mutex:[],
             wall:['Pasta Sheet','Tray'],
+            edit:true,
             desc:'Layers of pasta with bolognese and white sauce',
         },{
             name:'Ramen',
@@ -3728,6 +3944,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Noodles','Onions','Bonito','Pots'],
+            edit:true,
             desc:'Noodles served inside soup',
         },{
             name:'Butter Waffles',
@@ -3736,6 +3953,7 @@ types={
             prereq:['Waffles'],
             mutex:[],
             wall:['Butter'],
+            edit:true,
             desc:'Adds butter as a waffle topping',
         },{
             name:'Cherry Waffles',
@@ -3744,6 +3962,7 @@ types={
             prereq:['Waffles'],
             mutex:[],
             wall:['Cherries'],
+            edit:true,
             desc:'Adds cherry sauce as a waffle topping',
         },{
             name:'Coffee Cake',
@@ -3752,6 +3971,7 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Coffee Machine'],
+            edit:true,
             desc:'Adds coffee as a cake flavor',
         },{
             name:'Cherry Cake',
@@ -3760,6 +3980,7 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Cherries'],
+            edit:true,
             desc:'Adds cherry as a cake flavor',
         },{
             name:'Lemon Cake',
@@ -3768,6 +3989,7 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Lemons'],
+            edit:true,
             desc:'Adds lemon as a cake flavor',
         },{
             name:'Donuts',
@@ -3776,6 +3998,7 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Pots','Oil','Donut Tray'],
+            edit:true,
             desc:'Makes 12 donuts that can be individually flavored',
         },{
             name:'Tiramisu',
@@ -3784,6 +4007,7 @@ types={
             prereq:['Coffee Cake'],
             mutex:[],
             wall:['Cocoa Powder'],
+            edit:true,
             desc:'Layers of cake, cream, and cocoa powder',
         },
         
@@ -3794,6 +4018,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Meat','Onions'],
+            edit:true,
             desc:'Adds meat soup as a starter',
         },{
             name:'Tomato Soup',
@@ -3802,6 +4027,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Tomatoes','Onions'],
+            edit:true,
             desc:'Adds tomato soup as a starter',
         },{
             name:'Broccoli Cheese Soup',
@@ -3810,6 +4036,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Broccoli','Cheese','Onions'],
+            edit:true,
             desc:'Adds broccoli cheese soup as a starter',
         },{
             name:'Miso Soup',
@@ -3818,6 +4045,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Miso','Soybeans'],
+            edit:true,
             desc:'Adds miso soup as a starter',
         },{
             name:'Bread',
@@ -3826,6 +4054,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Oven'],
+            edit:true,
             desc:'Adds bread as a starter',
         },{
             name:'Garlic Bread',
@@ -3834,6 +4063,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Cheese','Garlic','Oven'],
+            edit:true,
             desc:'Adds garlic bread as a starter',
         },{
             name:'Croissant',
@@ -3842,6 +4072,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Butter','Oven'],
+            edit:true,
             desc:'Adds croissant as a starter',
         },{
             name:'Spring Rolls',
@@ -3850,6 +4081,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Flour','Lettuce','Onions'],
+            edit:true,
             desc:'Adds spring rolls as a starter',
         },
 
@@ -3860,6 +4092,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Broccoli'],
+            edit:true,
             desc:'Adds broccoli as a side',
         },{
             name:'Mashed Potato',
@@ -3868,6 +4101,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Potatoes'],
+            edit:true,
             desc:'Adds mashed potato as a side',
         },{
             name:'Roast Potato',
@@ -3876,6 +4110,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Potatoes'],
+            edit:true,
             desc:'Adds roast potato as a side',
         },{
             name:'Fries',
@@ -3884,6 +4119,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Potatoes'],
+            edit:true,
             desc:'Adds fries as a side',
         },{
             name:'Onion Rings',
@@ -3892,6 +4128,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Onions','Flour'],
+            edit:true,
             desc:'Adds onion rings as a side',
         },{
             name:'Cheese Sticks',
@@ -3900,6 +4137,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Cheese','Flour'],
+            edit:true,
             desc:'Adds cheese sticks as a side',
         },{
             name:'Macaroni and Cheese',
@@ -3908,6 +4146,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Macaroni','Cheese','Butter'],
+            edit:true,
             desc:'Adds macaroni and cheese as a side',
         },{
             name:'Scrambled Eggs',
@@ -3916,6 +4155,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Eggs'],
+            edit:true,
             desc:'Adds scrambled eggs as a side',
         },
 
@@ -3926,6 +4166,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Apples'],
+            edit:true,
             desc:'Adds apple pie as a dessert',
         },{
             name:'Cherry Pie',
@@ -3934,6 +4175,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Cherries'],
+            edit:true,
             desc:'Adds cherry pie as a dessert',
         },{
             name:'Caramel Pie',
@@ -3942,6 +4184,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Sugar'],
+            edit:true,
             desc:'Adds caramel pie as a dessert',
         },{
             name:'Lemon Meringue Pie',
@@ -3950,6 +4193,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Lemons','Eggs','Sugar'],
+            edit:true,
             desc:'Adds lemon meringue pie as a dessert',
         },{
             name:'Apple Crisp',
@@ -3958,6 +4202,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Sugar','Apples'],
+            edit:true,
             desc:'Adds apple crisp as a dessert',
         },{
             name:'Cherry Cordial',
@@ -3966,6 +4211,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Chocolate','Cherries'],
+            edit:true,
             desc:'Adds cherry cordial as a dessert',
         },{
             name:'Ice Cream',
@@ -3974,6 +4220,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Ice Cream'],
+            edit:true,
             desc:'Adds ice cream as a dessert',
         },{
             name:'Zeppole',
@@ -3982,6 +4229,7 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Sugar'],
+            edit:true,
             desc:'Adds zeppole as a dessert',
         },
         
@@ -3992,6 +4240,7 @@ types={
             prereq:[],
             mutex:['Large Groups'],
             wall:[''],
+            edit:true,
             desc:'Customers come on their own',
         },{
             name:'Large Groups',
@@ -4000,6 +4249,7 @@ types={
             prereq:[],
             mutex:['Individuals'],
             wall:[''],
+            edit:true,
             desc:'Groups can be twice as big',
         },{
             name:'Advertising',
@@ -4008,6 +4258,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'More customers will appear',
         },{
             name:'Morning Rush',
@@ -4016,6 +4267,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'More customers at the start of day',
         },{
             name:'Lunch Rush',
@@ -4024,6 +4276,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'More customers at the middle of day',
         },{
             name:'Dinner Rush',
@@ -4032,6 +4285,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'More customers at the end of day',
         },{
             name:'Herd Mentality',
@@ -4040,6 +4294,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Groups of customers come in waves',
         },{
             name:'Open Late',
@@ -4048,6 +4303,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Customers can arrive after closing time',
         },{
             name:'Double Helpings',
@@ -4056,6 +4312,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Customers may order an extra course',
         },{
             name:'Discount',
@@ -4064,6 +4321,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Reduce all prices above 1 by 1',
         },{
             name:'Slow Worker',
@@ -4072,6 +4330,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'All processes 20% slower',
         },{
             name:'Leisurely Eating',
@@ -4080,6 +4339,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Customers eat for more time',
         },{
             name:'Picky Eating',
@@ -4088,6 +4348,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Customers can leave food for you to throw away',
         },{
             name:'No Tips',
@@ -4096,6 +4357,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:`Customers don't tip for fast service`,
         },{
             name:'Changing Orders',
@@ -4104,6 +4366,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Customers sometimes change their orders',
         },{
             name:'Splash Zone',
@@ -4112,6 +4375,7 @@ types={
             prereq:[],
             mutex:[],
             wall:[''],
+            edit:true,
             desc:'Customers create a wider mess',
         },
     ],cosmetic:{

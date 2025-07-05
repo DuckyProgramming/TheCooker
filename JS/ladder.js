@@ -17,8 +17,9 @@ class located extends entity{
     }
 }
 class partisan extends located{
-    constructor(layer,x,y,fade){
+    constructor(layer,index,x,y,fade){
         super(layer,x,y,fade)
+        this.index=index
         this.previous={
             position:{x:this.position.x,y:this.position.y}
         }

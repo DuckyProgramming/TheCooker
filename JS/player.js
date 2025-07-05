@@ -1,24 +1,25 @@
 class player extends partisan{
-    constructor(layer,parent,x,y,id,cosmetic){
-        super(layer,x,y,{main:1,trigger:true,speed:5})
+    constructor(layer,parent,index,x,y,id,cosmetic){
+        super(layer,index,x,y,{main:1,trigger:true,speed:5})
         this.parent=parent
         this.id=id
         this.cosmetic=cosmetic
         this.active=true
+        this.colliders={main:[[parent.entities.players,0]]}
         this.setupGraphics()
         this.setupValues()
     }
     setupValues(){
         this.size=1
-        this.speed=0.6
+        this.speed=0.4
         this.radius=12.5
         this.timer.dizzy=0
-        this.timer.dizzySafe=0
         this.timer.interact=0
         this.infoAnim={dizzy:0}
         this.controlDirection={x:0,y:0}
         this.animSet.hold=0
         this.item=-1
+        this.handLen=0
     }
     scale(value){
         this.size*=value
@@ -165,7 +166,7 @@ class player extends partisan{
                                     case 2:
                                         layer.strokeWeight(1)
                                         layer.arc(-4+a*8,7,5,5,-165+a*90,-105+a*90)
-                                    break
+                                    breaks
                                 }
                             break
                         }
@@ -184,6 +185,8 @@ class player extends partisan{
     }
     update(){
         super.update()
+        this.position.x=constrain(this.position.x,this.parent.edge.outer.x[0]+this.radius,this.parent.edge.outer.x[1]-this.radius)
+        this.position.y=constrain(this.position.y,this.parent.edge.outer.y[0]+this.radius,this.parent.edge.outer.y[1]-this.radius)
         this.position.x+=this.velocity.x
         this.position.y+=this.velocity.y
         let inputKeys=inputs.keys[this.id]
@@ -217,23 +220,47 @@ class player extends partisan{
             let attack=false
             if(this.timer.interact>0){
                 this.timer.interact--
-            }else if(inputKeys.main[4]){
-                for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
-                    let result=this.collide(2,this.parent.entities.walls[a],this.parent)
-                    if(result){
-                        process=true
+            }else{
+                if(inputKeys.main[4]){
+                    for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                        for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                            if(this.collide(3,this.parent.entities.walls[a][b])){
+                                process=true
+                            }
+                        }
                     }
                 }
-            }
-            if(inputKeys.tap[4]&&!process){
-                for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
-                    if(this.collide(1,this.parent.entities.walls[a],this.parent)){
-                        process=true
-                        interact=true
+                if(inputKeys.tap[4]&&!process){
+                    this.handLen=30
+                    let hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                    for(let a=0,la=this.parent.entities.walls[0].length;a<la;a++){
+                        if(this.parent.entities.walls[0][a].name=='High Wall'){
+                            let obj=this.parent.entities.walls[0][a]
+                            for(let b=0,lb=obj.boundary.length;b<lb;b++){
+                                if(intersect(this.position,hand.position,obj.boundary[b][0],obj.boundary[b][1])){
+                                    let point=intersectKey(this.position,hand.position,obj.boundary[b][0],obj.boundary[b][1])
+                                    if(dist(this.position.x,this.position.y,point.x,point.y)<this.handLen){
+                                        this.handLen=dist(this.position.x,this.position.y,point.x,point.y)
+                                        hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
-                if(!interact){
-                    attack=true
+                    for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                        for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                            if(this.collide(2,this.parent.entities.walls[a][b])){
+                                interact=true
+                            }
+                        }
+                    }
+                    if(!interact){
+                        attack=true
+                        this.timer.interact=15
+                        for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                            this.collide(1,this.parent.entities.players[a])
+                        }
+                    }
                 }
             }
             if(this.controlDirection.x!=0||this.controlDirection.y!=0){
@@ -270,25 +297,33 @@ class player extends partisan{
         if(this.timer.dizzy>0){
             this.timer.dizzy--
         }
-        if(this.timer.dizzySafe>0){
-            this.timer.dizzySafe--
-        }
         this.infoAnim.dizzy=smoothAnim(this.infoAnim.dizzy,this.timer.dizzy>0,0,1,5)
         this.animSet.hold=smoothAnim(this.animSet.hold,this.item!=-1,0,1,5)
         if(this.item!=-1){
             this.item.update()
         }
+        for(let a=0,la=this.colliders.main.length;a<la;a++){
+            for(let b=0,lb=this.colliders.main[a][0].length;b<lb;b++){
+                this.collide(this.colliders.main[a][1],this.colliders.main[a][0][b])
+            }
+        }
     }
     collide(type,obj){
         switch(type){
             case 0:
-                if(distPos(this,obj)<this.radius+obj.radius&&this.active&&obj.active){
+                if(distPos(this,obj)<this.radius+obj.radius&&this.active&&obj.active&&obj.id!=this.id){
                     let dir=dirPos(this,obj)
                     let magnitude=[max(0.01,magVec(this.velocity)),max(0.01,magVec(obj.velocity))]
                     obj.velocity.x=magnitude[0]*lsin(dir)
                     obj.velocity.y=magnitude[0]*lcos(dir)
                     this.velocity.x=-magnitude[1]*lsin(dir)
                     this.velocity.y=-magnitude[1]*lcos(dir)
+                    let over=this.radius+obj.radius-distPos(this,obj)
+                    let proportion=magnitude[0]/(magnitude[0]+magnitude[1])
+                    obj.position.x+=proportion*over*lsin(dir)
+                    obj.position.y+=proportion*over*lcos(dir)
+                    this.position.x-=(1-proportion)*over*lsin(dir)
+                    this.position.y-=(1-proportion)*over*lcos(dir)
                     if(this.id==-1){
                         this.moving=[0,0]
                     }
@@ -310,68 +345,30 @@ class player extends partisan{
                 }
             break
             case 1:
-                if(this.active){
-                    let hand={position:{x:this.position.x+lsin(this.direction.main)*40,y:this.position.y+lcos(this.direction.main)*40},radius:1}
-                    if(inCircleBox(hand,obj)){
-                        if(obj.type==21&&this.item==-1){
-                            this.item=new projectile(this.layer,0,0,16,{variant:1})
-                            return true
-                        }else if(obj.type==22&&this.item==-1){
-                            this.item=new projectile(this.layer,0,0,16,{variant:2})
-                            return true
-                        }else if(obj.type==22&&this.item!=-1&&this.item.variant==3){
-                            this.item.setupValues({variant:4})
-                            return true
-                        }else if(obj.projectile!=-1&&obj.projectile!=undefined&&this.item==-1){
-                            this.item=obj.projectile
-                            obj.projectile=-1
-                            return true
-                        }else if(obj.projectile==-1&&this.item!=-1){
-                            obj.projectile=this.item
-                            this.item=-1
-                            return true
-                        }else if(obj.projectile!=-1&&obj.projectile!=undefined&&this.item!=-1){
-                            if(
-                                obj.projectile.variant==2&&this.item.variant==3||
-                                obj.projectile.variant==3&&this.item.variant==2
-                            ){
-                                this.item=-1
-                                obj.projectile.setupValues({variant:4})
-                                return true
-                            }else if(
-                                obj.projectile.variant==0&&this.item.variant==5||
-                                obj.projectile.variant==5&&this.item.variant==0
-                            ){
-                                this.item=-1
-                                obj.projectile.setupValues({variant:7})
-                                return true
-                            }
-                        }
+                if(obj.id!=this.id&&this.active&&obj.active){
+                    let hand={position:{x:this.position.x+lsin(this.direction.main)*30,y:this.position.y+lcos(this.direction.main)*30},radius:15}
+                    if(distPos(hand,obj)<hand.radius+obj.radius){
+                        let dir=dirPos(this,obj)
+                        obj.timer.dizzy=60
+                        obj.velocity.x=4*lsin(dir)
+                        obj.velocity.y=4*lcos(dir)
                     }
                 }
             break
             case 2:
                 if(this.active){
-                    let hand={position:{x:this.position.x+lsin(this.direction.main)*40,y:this.position.y+lcos(this.direction.main)*40},radius:1}
-                    if(inCircleBox(hand,obj)){
-                        if(obj.type==24&&obj.projectile!=-1&&obj.projectile.variant==1){
-                            obj.projectile.process.main++
-                            if(obj.projectile.process.main>=obj.projectile.process.goal){
-                                return true
-                            }else{
-                                return false
-                            }
-                        }else if(obj.type==23&&obj.projectile!=-1&&obj.projectile.variant==8){
-                            obj.projectile.process.main++
-                            if(obj.projectile.process.main>=obj.projectile.process.goal){
-                                return true
-                            }else{
-                                return false
-                            }
-                        }
+                    let hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                    if(obj.checkIn(0,hand)){
                     }
                 }
-                return [false,0]
+                return false
+            case 3:
+                if(this.active){
+                    let hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                    if(obj.checkIn(0,hand)){
+                    }
+                }
+                return false
         }
     }
 }

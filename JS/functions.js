@@ -55,6 +55,9 @@ function elementArray(base,number){
 function range(start,end){
     return [...Array(end-start).keys()].map(a=>a+start)
 }
+function even(pos,total){
+    return pos-total*0.5+0.5
+}
 function formatTime(frames){
     return `${floor(frames/3600)%60}:${floor(frames/60)%60<10?`0`:``}${floor(frames/60)%60}`
 }
@@ -98,6 +101,11 @@ function intersect(p1,q1,p2,q2){
     o2==0&&onSegment(p1,q2,q1)||
     o3==0&&onSegment(p2,p1,q2)||
     o4==0&&onSegment(p2,q1,q2)
+}
+function intersectKey(p1,q1,p2,q2){
+    let ud=((q2.y-p2.y)*(q1.x-p1.x)-(q2.x-p2.x)*(q1.y-p1.y))
+    let ua=((q2.x-p2.x)*(p1.y-p2.y)-(q2.y-p2.y)*(p1.x-p2.x))/ud
+    return {x:p1.x+ua*(q1.x-p1.x),y:p1.y+ua*(q1.y-p1.y)}
 }
 function inPointBox(point,box){
     return point.position.x>box.position.x-box.width/2&&point.position.x<box.position.x+box.width/2&&point.position.y>box.position.y-box.height/2&&point.position.y<box.position.y+box.height/2

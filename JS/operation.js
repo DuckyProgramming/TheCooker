@@ -2,7 +2,7 @@ class operation{
     constructor(layer){
         this.layer=layer
         this.scene=''
-        this.player=[{color:1}]
+        this.player=[{color:1},{color:2}]
         this.initialManagers()
     }
     transition(scene,args){
@@ -16,12 +16,13 @@ class operation{
     initialManagers(){
         this.cardManager=new cardManager(this.layer,this)
         this.entityManager=new entityManager(this.layer,this)
+        //this.overlayManager=new overlayManager(this.layer,this)
         this.transitionManager=new transitionManager(this.layer,this)
     }
     display(){
         switch(this.scene){
             case 'main':
-                this.layer.background(50)
+                this.layer.background(40)
                 this.entityManager.display(this.scene)
             break
         }

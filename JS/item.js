@@ -22,14 +22,14 @@ class item extends entity{
                 layer.rotate(this.direction)
                 layer.noStroke()
                 switch(this.name){
-                }
-                /*switch(this.type){
-                    case 0:
+                    case 'Plate':
                         layer.fill(220,this.fade.main)
                         layer.ellipse(0,0,24)
                         layer.fill(200,this.fade.main)
                         layer.ellipse(0,0,20)
                     break
+                }
+                /*switch(this.type){
                     case 1:
                         layer.fill(220,220,160,this.fade.main)
                         layer.ellipse(0,0,12)
