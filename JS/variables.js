@@ -16,7 +16,10 @@ inputs={
             main:[false,false,false,false,false],
             tap:[false,false,false,false,false],
         },
-    ],
+    ],mouse:{
+        base:{x:0,y:0},
+        rel:{x:0,y:0}
+    }
 }
 types={
     level:[
@@ -117,6 +120,17 @@ types={
             spec:[],
             edit:false,
             desc:'Infinite compression',
+            upgrade:[],
+        },
+
+        {
+            name:'Crate',
+            width:30,
+            height:30,
+            effect:[-1,0],
+            spec:[],
+            edit:false,
+            desc:'Activated packager',
             upgrade:[],
         },
         
@@ -789,6 +803,9 @@ types={
         },
         
         {
+            name:'Crate',
+            process:[],
+        },{
             name:'Plate',
             process:[],
         },{
@@ -3024,6 +3041,16 @@ types={
         },{
             name:'Tiramisu Slice',
             process:[],
+        },{
+            name:'Ketchup',
+            process:[
+                [7,'Ketchup'],
+            ],
+        },{
+            name:'Mustard',
+            process:[
+                [7,'Mustard'],
+            ],
         },
     ],dish:[
         /*
@@ -3031,6 +3058,7 @@ types={
         1-starter
         2-side
         3-dessert
+        4-condiment
         */
         {
             name:'Fish',
@@ -3275,6 +3303,22 @@ types={
             edit:true,
             desc:'Cook hot dog.\nAdd to bun and serve.\nDeliver condiments as needed.',
         },{
+            name:'Ketchup',
+            type:4,
+            obj:[
+                ['Ketchup',0],
+            ],
+            edit:true,
+            desc:'Take and deliver ketchup bottle',
+        },{
+            name:'Mustard',
+            type:4,
+            obj:[
+                ['Mustard',0],
+            ],
+            edit:true,
+            desc:'Take and deliver mustard bottle',
+        },{
             name:'Cheese Hot Dog',
             type:0,
             obj:[
@@ -3301,10 +3345,10 @@ types={
             edit:true,
             desc:'Chop and cook meat to make mince.\nAdd mince to tomato sauce in pot and cook to make bolognese sauce.\nAdd to plated noodles, then serve.',
         },{
-            name:'Bolognese Spaghetti',
+            name:'Cheese Spaghetti',
             type:0,
             obj:[
-                ['Plated Bolognese Spaghetti',7],
+                ['Plated Cheese Spaghetti',7],
             ],
             edit:true,
             desc:'Add butter and flour to pot, then cook to make roux.\nAdd milk and knead to make white sauce.\nCombine plated noodles, white sauce, and chopped cheese, then serve.',
@@ -3631,6 +3675,7 @@ types={
         
         {
             name:'Fish',
+            dish:['Fish'],
             list:0,
             customerMult:1.25,
             prereq:[],
@@ -3640,6 +3685,7 @@ types={
             desc:'Adds fish as a main dish',
         },{
             name:'Steak',
+            dish:['Steak'],
             list:0,
             customerMult:1,
             prereq:[],
@@ -3649,6 +3695,7 @@ types={
             desc:'Adds three types of steak as a main dish',
         },{
             name:'Salad',
+            dish:['Salad'],
             list:0,
             customerMult:1.25,
             prereq:[],
@@ -3658,6 +3705,7 @@ types={
             desc:'Adds salads, with or without tomato, as a main dish',
         },{
             name:'Toast',
+            dish:['Toast'],
             list:0,
             customerMult:1.25,
             prereq:[],
@@ -3667,6 +3715,7 @@ types={
             desc:'Adds toast as a main dish',
         },{
             name:'Pizza',
+            dish:['Pizza'],
             list:0,
             customerMult:1,
             prereq:[],
@@ -3676,6 +3725,7 @@ types={
             desc:'Adds pizza as a main dish',
         },{
             name:'Pies',
+            dish:['Meat Pie'],
             list:0,
             customerMult:1,
             prereq:[],
@@ -3685,8 +3735,9 @@ types={
             desc:'Adds meat pie as a main dish',
         },{
             name:'Coffee',
+            dish:['Coffee'],
             list:0,
-            customerMult:0.8,
+            customerMult:1.25,
             prereq:[],
             mutex:[],
             wall:['Coffee Machine'],
@@ -3694,42 +3745,47 @@ types={
             desc:'Adds coffee as a dessert',
         },{
             name:'Nut Roast',
+            dish:['Nut Roast'],
             list:0,
-            customerMult:1.2,
+            customerMult:1.25,
             prereq:[],
             mutex:[],
             wall:['Nuts','Onions','Oven'],
             edit:true,
-            desc:'',
+            desc:'Adds nut roast as a main dish',
         },{
             name:'Hot Dogs',
+            dish:['Hot Dog','Ketchup'],
             list:0,
             customerMult:1,
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Hot Dog Buns','Hot Dogs','Ketchup'],
             edit:true,
-            desc:'',
+            desc:'Adds hot dogs as a main dish and ketchup as a condiment',
         },{
             name:'Spaghetti',
+            dish:['Spaghetti'],
             list:0,
             customerMult:1,
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Tomatoes','Noodles','Pots'],
             edit:true,
-            desc:'',
+            desc:'Adds spaghetti as a main dish',
         },{
             name:'Waffles',
+            dish:['Waffle'],
             list:0,
             customerMult:1,
             prereq:[],
             mutex:[],
             wall:['Waffle Iron','Sugar','Flour','Eggs'],
             edit:true,
-            desc:'',
+            desc:'Adds waffles as a main dish',
         },{
             name:'Cakes',
+            dish:['Cake'],
             list:0,
             customerMult:1,
             prereq:[],
@@ -3741,6 +3797,7 @@ types={
 
         {
             name:'Fish Fillet',
+            dish:['Fish Fillet'],
             list:1,
             customerMult:0.8,
             prereq:['Fish'],
@@ -3750,6 +3807,7 @@ types={
             desc:'Needs to be cut before cooking',
         },{
             name:'Spiny Fish',
+            dish:['Spiny Fish'],
             list:1,
             customerMult:0.8,
             prereq:['Fish'],
@@ -3759,6 +3817,7 @@ types={
             desc:'Contains spines, that must be removed and trashed',
         },{
             name:'Crab Cakes',
+            dish:['Crab Cake'],
             list:1,
             customerMult:0.64,
             prereq:['Fish'],
@@ -3768,6 +3827,7 @@ types={
             desc:'Combine chopped crab, egg, and flour',
         },{
             name:'Bone Steak',
+            dish:['Bone Steak'],
             list:1,
             customerMult:0.8,
             prereq:['Steak'],
@@ -3777,6 +3837,7 @@ types={
             desc:'Contains a bone that must be trashed afterward',
         },{
             name:'Thick Steak',
+            dish:['Thick Steak'],
             list:1,
             customerMult:0.8,
             prereq:['Steak'],
@@ -3786,6 +3847,7 @@ types={
             desc:'Takes longer to cook than regular meat',
         },{
             name:'Tomato Steak',
+            dish:['Tomato Steak'],
             list:1,
             customerMult:0.8,
             prereq:['Steak'],
@@ -3795,6 +3857,7 @@ types={
             desc:'Adds tomato as a steak topping',
         },{
             name:'Onion Salad',
+            dish:['Onion Salad'],
             list:1,
             customerMult:1,
             prereq:['Salad'],
@@ -3804,6 +3867,7 @@ types={
             desc:'Adds onions as a salad topping',
         },{
             name:'Apple Salad',
+            dish:['Apple Salad'],
             list:1,
             customerMult:0.8,
             prereq:['Salad'],
@@ -3813,6 +3877,7 @@ types={
             desc:'Consists of chopped apple, nuts, and mayo',
         },{
             name:'Potato Salad',
+            dish:['Potato Salad'],
             list:1,
             customerMult:0.64,
             prereq:['Salad'],
@@ -3822,6 +3887,7 @@ types={
             desc:'Consists of boiled potato, chopped onion, and mayo',
         },{
             name:'Caesar Salad',
+            dish:['Caesar Salad'],
             list:1,
             customerMult:0.8,
             prereq:['Salad'],
@@ -3831,6 +3897,7 @@ types={
             desc:'Consists of lettuce, garlic, and breadcrumbs',
         },{
             name:'Egg Toast',
+            dish:['Egg Toast'],
             list:1,
             customerMult:0.8,
             prereq:['Toast'],
@@ -3840,6 +3907,7 @@ types={
             desc:'Adds egg as a toast topping',
         },{
             name:'Tomato Toast',
+            dish:['Tomato Toast'],
             list:1,
             customerMult:1,
             prereq:['Toast'],
@@ -3849,6 +3917,7 @@ types={
             desc:'Adds tomato as a toast topping',
         },{
             name:'Onion Pizza',
+            dish:['Onion Pizza'],
             list:1,
             customerMult:0.8,
             prereq:['Pizza'],
@@ -3858,6 +3927,7 @@ types={
             desc:'Adds onion as a pizza topping',
         },{
             name:'Meat Pizza',
+            dish:['Meat Pizza'],
             list:1,
             customerMult:0.8,
             prereq:['Pizza'],
@@ -3867,6 +3937,7 @@ types={
             desc:'Adds meat as a pizza topping',
         },{
             name:'Vegetable Pies',
+            dish:['Vegetable Pie'],
             list:1,
             customerMult:0.8,
             prereq:['Pies'],
@@ -3876,6 +3947,7 @@ types={
             desc:'Pies containing broccoli and potatoes',
         },{
             name:'Affogato',
+            dish:['Affogato'],
             list:1,
             customerMult:0.8,
             prereq:['Coffee'],
@@ -3885,6 +3957,7 @@ types={
             desc:'Adds ice cream as a coffee topping',
         },{
             name:'Stuffing',
+            dish:['Stuffing'],
             list:0,
             customerMult:0.64,
             prereq:['Nut Roast'],
@@ -3894,6 +3967,7 @@ types={
             desc:'Adds stuffing as a nut roast topping',
         },{
             name:'Mustard',
+            dish:['Mustard'],
             list:1,
             customerMult:1,
             prereq:['Hot Dogs'],
@@ -3903,6 +3977,7 @@ types={
             desc:'Adds mustard as a hot dog condiment',
         },{
             name:'Cheese Hot Dogs',
+            dish:['Cheese Hot Dog'],
             list:1,
             customerMult:0.8,
             prereq:['Hot Dogs'],
@@ -3912,6 +3987,7 @@ types={
             desc:'Adds cheese as a hot dog topping',
         },{
             name:'Bolognese Spaghetti',
+            dish:['Bolognese Spaghetti'],
             list:1,
             customerMult:0.64,
             prereq:['Spaghetti'],
@@ -3921,6 +3997,7 @@ types={
             desc:'Spaghetti with meat-based sauce',
         },{
             name:'Cheese Spaghetti',
+            dish:['Cheese Spaghetti'],
             list:1,
             customerMult:0.64,
             prereq:['Spaghetti'],
@@ -3930,6 +4007,7 @@ types={
             desc:'Spaghetti with cheese and white sauce',
         },{
             name:'Lasagne',
+            dish:['Lasagne'],
             list:1,
             customerMult:0.64,
             prereq:['Bolognese Spaghetti','Cheese Spaghetti'],
@@ -3939,15 +4017,17 @@ types={
             desc:'Layers of pasta with bolognese and white sauce',
         },{
             name:'Ramen',
+            dish:['Ramen'],
             list:1,
             customerMult:0.64,
-            prereq:[],
+            prereq:['Spaghetti'],
             mutex:[],
             wall:['Noodles','Onions','Bonito','Pots'],
             edit:true,
             desc:'Noodles served inside soup',
         },{
             name:'Butter Waffles',
+            dish:['Butter Waffle'],
             list:1,
             customerMult:1,
             prereq:['Waffles'],
@@ -3957,6 +4037,7 @@ types={
             desc:'Adds butter as a waffle topping',
         },{
             name:'Cherry Waffles',
+            dish:['Cherry Waffle'],
             list:1,
             customerMult:1,
             prereq:['Waffles'],
@@ -3966,6 +4047,7 @@ types={
             desc:'Adds cherry sauce as a waffle topping',
         },{
             name:'Coffee Cake',
+            dish:['Coffee Cake'],
             list:1,
             customerMult:0.8,
             prereq:['Cakes'],
@@ -3975,6 +4057,7 @@ types={
             desc:'Adds coffee as a cake flavor',
         },{
             name:'Cherry Cake',
+            dish:['Cherry Cake'],
             list:1,
             customerMult:0.8,
             prereq:['Cakes'],
@@ -3984,6 +4067,7 @@ types={
             desc:'Adds cherry as a cake flavor',
         },{
             name:'Lemon Cake',
+            dish:['Lemon Cake'],
             list:1,
             customerMult:0.8,
             prereq:['Cakes'],
@@ -3993,6 +4077,7 @@ types={
             desc:'Adds lemon as a cake flavor',
         },{
             name:'Donuts',
+            dish:['Donut'],
             list:1,
             customerMult:0.64,
             prereq:['Cakes'],
@@ -4002,9 +4087,10 @@ types={
             desc:'Makes 12 donuts that can be individually flavored',
         },{
             name:'Tiramisu',
+            dish:['Tiramisu'],
             list:1,
             customerMult:0.8,
-            prereq:['Coffee Cake'],
+            prereq:['Cakes'],
             mutex:[],
             wall:['Cocoa Powder'],
             edit:true,
@@ -4013,6 +4099,7 @@ types={
         
         {
             name:'Meat Soup',
+            dish:['Meat Soup'],
             list:2,
             customerMult:0.8,
             prereq:[],
@@ -4022,6 +4109,7 @@ types={
             desc:'Adds meat soup as a starter',
         },{
             name:'Tomato Soup',
+            dish:['Tomato Soup'],
             list:2,
             customerMult:0.8,
             prereq:[],
@@ -4031,6 +4119,7 @@ types={
             desc:'Adds tomato soup as a starter',
         },{
             name:'Broccoli Cheese Soup',
+            dish:['Broccoli Cheese Soup'],
             list:2,
             customerMult:0.8,
             prereq:[],
@@ -4040,6 +4129,7 @@ types={
             desc:'Adds broccoli cheese soup as a starter',
         },{
             name:'Miso Soup',
+            dish:['Miso Soup'],
             list:2,
             customerMult:0.8,
             prereq:[],
@@ -4049,6 +4139,7 @@ types={
             desc:'Adds miso soup as a starter',
         },{
             name:'Bread',
+            dish:['Bread'],
             list:2,
             customerMult:0.8,
             prereq:[],
@@ -4058,6 +4149,7 @@ types={
             desc:'Adds bread as a starter',
         },{
             name:'Garlic Bread',
+            dish:['Garlic Bread'],
             list:2,
             customerMult:0.64,
             prereq:[],
@@ -4067,6 +4159,7 @@ types={
             desc:'Adds garlic bread as a starter',
         },{
             name:'Croissant',
+            dish:['Croissant'],
             list:2,
             customerMult:0.8,
             prereq:[],
@@ -4076,6 +4169,7 @@ types={
             desc:'Adds croissant as a starter',
         },{
             name:'Spring Rolls',
+            dish:['Spring Roll'],
             list:2,
             customerMult:0.8,
             prereq:[],
@@ -4087,6 +4181,7 @@ types={
 
         {
             name:'Broccoli',
+            dish:['Broccoli'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4096,6 +4191,7 @@ types={
             desc:'Adds broccoli as a side',
         },{
             name:'Mashed Potato',
+            dish:['Mashed Potato'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4105,6 +4201,7 @@ types={
             desc:'Adds mashed potato as a side',
         },{
             name:'Roast Potato',
+            dish:['Roast Potato'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4114,6 +4211,7 @@ types={
             desc:'Adds roast potato as a side',
         },{
             name:'Fries',
+            dish:['Fries'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4123,6 +4221,7 @@ types={
             desc:'Adds fries as a side',
         },{
             name:'Onion Rings',
+            dish:['Onion Rings'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4132,6 +4231,7 @@ types={
             desc:'Adds onion rings as a side',
         },{
             name:'Cheese Sticks',
+            dish:['Cheese Sticks'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4141,6 +4241,7 @@ types={
             desc:'Adds cheese sticks as a side',
         },{
             name:'Macaroni and Cheese',
+            dish:['Macaroni and Cheese'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4150,6 +4251,7 @@ types={
             desc:'Adds macaroni and cheese as a side',
         },{
             name:'Scrambled Eggs',
+            dish:['Scrambled Eggs'],
             list:3,
             customerMult:0.8,
             prereq:[],
@@ -4161,6 +4263,7 @@ types={
 
         {
             name:'Apple Pie',
+            dish:['Apple Pie'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4170,6 +4273,7 @@ types={
             desc:'Adds apple pie as a dessert',
         },{
             name:'Cherry Pie',
+            dish:['Cherry Pie'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4179,6 +4283,7 @@ types={
             desc:'Adds cherry pie as a dessert',
         },{
             name:'Caramel Pie',
+            dish:['Caramel Pie'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4188,6 +4293,7 @@ types={
             desc:'Adds caramel pie as a dessert',
         },{
             name:'Lemon Meringue Pie',
+            dish:['Lemon Meringue Pie'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4197,6 +4303,7 @@ types={
             desc:'Adds lemon meringue pie as a dessert',
         },{
             name:'Apple Crisp',
+            dish:['Apple Crisp'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4206,6 +4313,7 @@ types={
             desc:'Adds apple crisp as a dessert',
         },{
             name:'Cherry Cordial',
+            dish:['Cherry Cordial'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4215,6 +4323,7 @@ types={
             desc:'Adds cherry cordial as a dessert',
         },{
             name:'Ice Cream',
+            dish:['Ice Cream'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4224,6 +4333,7 @@ types={
             desc:'Adds ice cream as a dessert',
         },{
             name:'Zeppole',
+            dish:['Zeppole'],
             list:4,
             customerMult:0.8,
             prereq:[],
@@ -4369,14 +4479,14 @@ types={
             edit:true,
             desc:'Customers sometimes change their orders',
         },{
-            name:'Splash Zone',
+            name:'Violence',
             list:5,
             customerMult:1,
             prereq:[],
             mutex:[],
             wall:[''],
             edit:true,
-            desc:'Customers create a wider mess',
+            desc:'Customers randomly punch in front of them',
         },
     ],cosmetic:{
         color:[

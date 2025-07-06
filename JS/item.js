@@ -2,9 +2,9 @@ class item extends entity{
     constructor(layer,x,y,type){
         super(layer,x,y,{main:1,trigger:true,speed:15})
         this.type=type
-        this.setupValues()
+        this.initialValues()
     }
-    setupValues(){
+    initialValues(){
         this.direction=random(0,360)
         this.process={main:0}
         this.held=false
@@ -13,6 +13,11 @@ class item extends entity{
             this.process.push({type:types.item[type].process[a][0],main:0,goal:types.item[type].process[a][1]})
         }
         this.name=types.wall[this.type].name
+        switch(this.name){
+            case 'Crate':
+                this.contain=0
+            break
+        }
     }
     display(level,layer=this.layer){
         switch(level){

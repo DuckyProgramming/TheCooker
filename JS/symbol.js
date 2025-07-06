@@ -11,8 +11,6 @@ function displaySymbol(layer,x,y,type,direction,size,color,fade){
             regTriangle(layer,2,0,6,6,90)
             layer.rect(-4,0,8,4)
         break
-
-
     }
     layer.pop()
 }

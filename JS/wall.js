@@ -1,7 +1,8 @@
 class wall extends partisan{
-    constructor(layer,parent,index,x,y,width,height,type){
+    constructor(layer,parent,index,x,y,gridPos,width,height,type){
         super(layer,index,x,y,{main:1,trigger:true,speed:5})
         this.parent=parent
+        this.gridPos=gridPos
         this.width=width
         this.height=height
         this.type=type
@@ -35,6 +36,10 @@ class wall extends partisan{
             break
             case 'Trash Can':
                 this.radius=(this.width+this.height)/4
+            break
+            case 'Crate':
+                this.contain=0
+                this.animSet={contain:0}
             break
         }
     }
@@ -152,9 +157,32 @@ class wall extends partisan{
                         layer.fill(120,this.fade.main)
                         layer.rect(0,0,this.radius*0.75,this.radius*0.15,2)
                     break
+                    case 'Crate':
+                        layer.fill(180,120,60,this.fade.main)
+                        layer.rect(0,0,this.width,this.height)
+                        layer.fill(190,135,80,this.fade.main)
+                        layer.rect(0,0,this.width*0.8,this.height*0.8)
+                        layer.fill(160,100,40,this.fade.main)
+                        layer.quad(-this.width*0.4,this.height*0.1,-this.width*0.4,this.height*0.25,this.width*0.4,-this.height*0.1,this.width*0.4,-this.height*0.25)
+                    break
                 }
                 if(this.item!=-1){
                     this.item.display()
+                }
+                layer.pop()
+            break
+            case 1:
+                layer.push()
+                layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y)
+                layer.noStroke()
+                switch(this.name){
+                    case 'Crate':
+                        layer.fill(225,this.fade.main*this.animSet.contain)
+                        layer.rect(0,-24,5*types.wall[this.contain].name.length+7.5,12,4)
+                        layer.fill(0,this.fade.main*this.animSet.contain)
+                        layer.textSize(10)
+                        layer.text(types.wall[this.contain].name,0,-24)
+                    break
                 }
                 layer.pop()
             break
@@ -180,6 +208,17 @@ class wall extends partisan{
         super.update()
         this.velocity.x=0
         this.velocity.y=0
+        switch(this.name){
+            case 'Crate':
+                let visible=false
+                for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                    if(dist(this.position.x,this.position.y,this.parent.entities.players[a].position.x,this.parent.entities.players[a].position.y)<80){
+                        visible=true
+                    }
+                }
+                this.animSet.contain=smoothAnim(this.animSet.contain,visible,0,1,5)
+            break
+        }
         for(let a=0,la=this.colliders.main.length;a<la;a++){
             for(let b=0,lb=this.colliders.main[a][0].length;b<lb;b++){
                 this.collide(this.colliders.main[a][1],this.colliders.main[a][0][b])
@@ -202,7 +241,7 @@ class wall extends partisan{
             case 0:
                 switch(this.name){
                     case 'Trash Can':
-                        if(distPos(this,obj)<this.radius+obj.radius&&obj.active){
+                        if(distPos(this,obj)<this.radius+obj.radius){
                             let dir=dirPos(this,obj)
                             let over=this.radius+obj.radius-distPos(this,obj)
                             obj.position.x+=over*lsin(dir)
@@ -210,7 +249,7 @@ class wall extends partisan{
                         }
                     break
                     default:
-                        if(inCircleBox(obj,this)&&obj.active){
+                        if(inCircleBox(obj,this)){
                             switch(this.type){
                                 default:
                                     let basis={x:constrain(obj.position.x,this.position.x-this.width/2-(this.redundant[3]?obj.radius:0),this.position.x+this.width/2+(this.redundant[2]?obj.radius:0)),y:constrain(obj.position.y,this.position.y-this.height/2-(this.redundant[1]?obj.radius:0),this.position.y+this.height/2+(this.redundant[0]?obj.radius:0))}

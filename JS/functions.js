@@ -83,6 +83,12 @@ function findName(name,list){
 	}
 	return -1
 }
+function updateMouse(layer,scale){
+	inputs.mouse.base.x=mouseX
+	inputs.mouse.base.y=mouseY
+	inputs.mouse.rel.x=(inputs.mouse.base.x-width/2)/scale+layer.width/2
+	inputs.mouse.rel.y=(inputs.mouse.base.y-height/2)/scale+layer.height/2
+}
 //operational
 function onSegment(p,q,r){ 
     return q.x<=max(p.x,r.x)&&q.x>=min(p.x, r.x)&&q.y<=max(p.y,r.y)&&q.y>=min(p.y, r.y)
@@ -278,6 +284,13 @@ function checkValid(){
         }
     }
     for(let a=0,la=types.card.length;a<la;a++){
+        if(types.card[a].list>=0&&types.card[a].list<=4){
+            for(let b=0,lb=types.card[a].dish.length;b<lb;b++){
+                if(findName(types.card[a].dish[b],types.dish)<0){
+                    print(types.card[a].name,'-',types.card[a].dish[b])
+                }
+            }
+        }
         for(let b=0,lb=types.card[a].prereq.length;b<lb;b++){
             if(findName(types.card[a].prereq[b],types.card)<0){
                 print(types.card[a].name,'-',types.card[a].prereq[b])

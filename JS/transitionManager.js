@@ -1,7 +1,6 @@
-class transitionManager{
+class transitionManager extends manager{
     constructor(layer,operation){
-        this.layer=layer
-        this.operation=operation
+        super(layer,operation)
         this.trigger=false
         this.anim=0
         this.scene=''

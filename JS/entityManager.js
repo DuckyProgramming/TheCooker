@@ -1,7 +1,6 @@
-class entityManager{
+class entityManager extends manager{
     constructor(layer,operation){
-        this.layer=layer
-        this.operation=operation
+        super(layer,operation)
         this.tileset=[48,48,8]
         this.edge={main:{x:0,y:0},outer:{x:[0,0],y:[0,0]}}
         this.constants={gravity:1.25}
@@ -34,18 +33,25 @@ class entityManager{
         let layerer=[
             [[],[],[]]
         ]
+        this.grid=[]
         this.edge.main.x=(level.map[0].length-1)*this.tileset[0]*0.5
         this.edge.main.y=(level.map.length-1)*this.tileset[1]*0.5
         this.view.main.x=this.edge.main.x*0.5
         this.view.main.y=this.edge.main.y*0.5
         this.edge.outer.x=[-this.tileset[2],this.edge.main.x+this.tileset[2]]
         this.edge.outer.y=[-this.tileset[2],this.edge.main.y+this.tileset[2]]
-        this.entities.walls[0].push(new wall(this.layer,this,this.index,this.edge.main.x*0.5,this.edge.main.y*0.5,this.edge.main.x+this.tileset[2],this.edge.main.y+this.tileset[2],findName('Sidewalk',types.wall)))
+        this.entities.walls[0].push(new wall(this.layer,this,this.index,this.edge.main.x*0.5,this.edge.main.y*0.5,[0,0],this.edge.main.x+this.tileset[2],this.edge.main.y+this.tileset[2],findName('Sidewalk',types.wall)))
         for(let a=0,la=level.floor[0].length;a<la;a++){
-            this.entities.walls[0].push(new wall(this.layer,this,this.index,this.edge.main.x*0.5+level.floor[0][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[0][a][1]*this.tileset[1]*0.5,this.edge.main.x+this.tileset[2]-abs(level.floor[0][a][0])*this.tileset[0],this.edge.main.y+this.tileset[2]-abs(level.floor[0][a][1])*this.tileset[1],findName('Floor',types.wall)))
+            this.entities.walls[0].push(new wall(this.layer,this,this.index,this.edge.main.x*0.5+level.floor[0][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[0][a][1]*this.tileset[1]*0.5,[0,0],this.edge.main.x+this.tileset[2]-abs(level.floor[0][a][0])*this.tileset[0],this.edge.main.y+this.tileset[2]-abs(level.floor[0][a][1])*this.tileset[1],findName('Floor',types.wall)))
         }
         for(let a=0,la=level.floor[1].length;a<la;a++){
-            this.entities.walls[0].push(new wall(this.layer,this,this.index,this.edge.main.x*0.5+level.floor[1][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[1][a][1]*this.tileset[1]*0.5,this.edge.main.x-abs(level.floor[1][a][0])*this.tileset[0],this.edge.main.y-abs(level.floor[1][a][1])*this.tileset[1],findName('Kitchen Floor',types.wall)))
+            this.entities.walls[0].push(new wall(this.layer,this,this.index,this.edge.main.x*0.5+level.floor[1][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[1][a][1]*this.tileset[1]*0.5,[0,0],this.edge.main.x-abs(level.floor[1][a][0])*this.tileset[0],this.edge.main.y-abs(level.floor[1][a][1])*this.tileset[1],findName('Kitchen Floor',types.wall)))
+        }
+        for(let a=0,la=(level.map.length-1)/2;a<la;a++){
+            this.grid.push([])
+            for(let b=0,lb=(level.map[a].length-1)/2;b<lb;b++){
+                this.grid[a].push(0)
+            }
         }
         for(let a=0,la=level.map.length;a<la;a++){
             for(let b=0,lb=level.map[a].length;b<lb;b++){
@@ -54,13 +60,14 @@ class entityManager{
                     let shift
                     switch(level.map[a][b]){
                         case '.':
-                            layerer[0][2].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,-1,-1,findName('Counter',types.wall)))
+                            this.grid[floor(a/2)][floor(b/2)]=1
+                            layerer[0][2].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[floor(a/2),floor(b/2)],-1,-1,findName('Counter',types.wall)))
                         break
                         case '_':
-                            layerer[0][1].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,this.tileset[0]+this.tileset[2],this.tileset[2],findName('High Wall',types.wall)))
+                            layerer[0][1].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[0,0],this.tileset[0]+this.tileset[2],this.tileset[2],findName('High Wall',types.wall)))
                         break
                         case '|':
-                            layerer[0][1].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,this.tileset[2],this.tileset[1]+this.tileset[2],findName('High Wall',types.wall)))
+                            layerer[0][1].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[0,0],this.tileset[2],this.tileset[1]+this.tileset[2],findName('High Wall',types.wall)))
                         break
                         case '-':
                             shift=[0,0]
@@ -70,7 +77,7 @@ class entityManager{
                             if(level.map[a-1][b+1]=='|'&&level.map[a+1][b+1]=='|'){
                                 shift[0]++
                             }
-                            layerer[0][0].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5-shift[0]*2+shift[1]*2,this.tileset[1]*a*0.5,this.tileset[0]+this.tileset[2]-shift[0]*4-shift[1]*4,this.tileset[2],findName('Wall',types.wall)))
+                            layerer[0][0].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5-shift[0]*2+shift[1]*2,this.tileset[1]*a*0.5,[0,0],this.tileset[0]+this.tileset[2]-shift[0]*4-shift[1]*4,this.tileset[2],findName('Wall',types.wall)))
                         break
                         case 'i':
                             shift=[0,0]
@@ -80,10 +87,11 @@ class entityManager{
                             if(level.map[a+1][b-1]=='_'&&level.map[a+1][b+1]=='_'){
                                 shift[0]++
                             }
-                            layerer[0][0].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5-shift[0]*2+shift[1]*2,this.tileset[2],this.tileset[1]+this.tileset[2]-shift[0]*4-shift[1]*4,findName('Wall',types.wall)))
+                            layerer[0][0].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5-shift[0]*2+shift[1]*2,[0,0],this.tileset[2],this.tileset[1]+this.tileset[2]-shift[0]*4-shift[1]*4,findName('Wall',types.wall)))
                         break
                         case 'T':
-                            layerer[0][2].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,-1,-1,findName('Trash Can',types.wall)))
+                            this.grid[floor(a/2)][floor(b/2)]=1
+                            layerer[0][2].push(new wall(this.layer,this,this.index,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[floor(a/2),floor(b/2)],-1,-1,findName('Trash Can',types.wall)))
                         break
                         case '1':
                             if(entry==0){
@@ -110,7 +118,7 @@ class entityManager{
                 }
             }
         }
-        this.run.fore=[[this.entities.walls[0],0],[this.entities.players,0],[this.entities.walls[1],0]]
+        this.run.fore=[[this.entities.walls[0],0],[this.entities.walls[0],1],[this.entities.players,0],[this.entities.walls[1],0]]
         if(dev.bound){
             this.run.fore.push([this.entities.walls[0],-1],[this.entities.players,-1],[this.entities.walls[1],-1])
         }
@@ -134,7 +142,50 @@ class entityManager{
             }
         }
     }
-    display(scene,args){
+    sendPackages(set){
+        let possible=[]
+        for(let a=0,la=this.grid.length;a<la;a++){
+            for(let b=0,lb=this.grid[a].length;b<lb;b++){
+                if(this.grid[a][b]==0){
+                    let valid=true
+                    for(let c=0,lc=this.entities.players;c<lc;c++){
+                        if(dist(this.tileset[0]*(b+0.5),this.tileset[1]*(a+0.5),this.entities.players[c].position.x,this.entities.players[c].position.y)<100){
+                            valid=false
+                        }
+                    }
+                    if(valid){
+                        possible.push([a,b])
+                    }
+                }
+            }
+        }
+        for(let a=0,la=set.length;a<la;a++){
+            let type=findName(set[a],types.wall)
+            let total=1
+            while(a<la-1&&set[a]==set[a+1]){
+                a++
+                total++
+            }
+            for(let b=0,lb=this.entities.walls.length;b<lb;b++){
+                for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
+                    if(this.entities.walls[b][c].type==type){
+                        total--
+                    }
+                }
+            }
+            while(total>0){
+                let index=floor(random(0,possible.length))
+                this.entities.walls[0].push(new wall(this.layer,this,this.index,this.tileset[0]*(possible[index][1]+0.5),this.tileset[1]*(possible[index][0]+0.5),possible[index],-1,-1,findName('Crate',types.wall)))
+                last(this.entities.walls[0]).contain=type
+                possible.splice(index,1)
+                total--
+            }
+        }
+    }
+    calcCustomer(){
+        this.customer.group=round(this.customer.internal/(this.customer.groupSizeMin+this.customer.groupSizeMax)*2)
+    }
+    display(scene){
         switch(scene){
             case 'main':
                 this.layer.push()
@@ -150,9 +201,12 @@ class entityManager{
             break
         }
     }
-    update(scene,args){
+    update(scene){
         switch(scene){
             case 'main':
+                for(let a=0,la=this.entities.players.length;a<la;a++){
+                    this.entities.players[a].active=!this.operation.overlayManager.anyActive()
+                }
                 for(let a=0,la=this.run.update.length;a<la;a++){
                     for(let b=0,lb=this.run.update[a].length;b<lb;b++){
                         this.run.update[a][b].update()

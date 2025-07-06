@@ -111,6 +111,7 @@ function setupLayer(layer){
 function displayMain(layer){
     let scale=min(width/layer.width,height/layer.height)
     image(layer,width/2,height/2,layer.width*scale,layer.height*scale)
+    updateMouse(graphics.main,scale)
 }
 function setupTrig(){
 	for(let a=0,la=360;a<la;a++){

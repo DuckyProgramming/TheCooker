@@ -37,8 +37,8 @@ class player extends partisan{
                 {fade:1,display:true,anim:{theta:24,phi:90},length:5,points:{set:{x:1.5,y:-7.5,z:0},start:{x:0,y:0,z:0},end:{x:0,y:0,z:0}}},
                 {fade:1,display:true,anim:{theta:24,phi:-90},length:5,points:{set:{x:1.5,y:-7.5,z:0},start:{x:0,y:0,z:0},end:{x:0,y:0,z:0}}}
             ],arms:[
-                {fade:1,display:true,anim:{theta:54,phi:90},length:this.type==0?5:12,points:{set:{x:1.5,y:-12.5,z:0},start:{x:0,y:0,z:0},end:{x:0,y:0,z:0}}},
-                {fade:1,display:true,anim:{theta:54,phi:-90},length:this.type==0?5:12,points:{set:{x:1.5,y:-12.5,z:0},start:{x:0,y:0,z:0},end:{x:0,y:0,z:0}}}
+                {fade:1,display:true,anim:{theta:54,phi:90},length:12,points:{set:{x:1.5,y:-12.5,z:0},start:{x:0,y:0,z:0},end:{x:0,y:0,z:0}}},
+                {fade:1,display:true,anim:{theta:54,phi:-90},length:12,points:{set:{x:1.5,y:-12.5,z:0},start:{x:0,y:0,z:0},end:{x:0,y:0,z:0}}}
             ]
         }
         this.face={
@@ -309,9 +309,10 @@ class player extends partisan{
         }
     }
     collide(type,obj){
+        let hand
         switch(type){
             case 0:
-                if(distPos(this,obj)<this.radius+obj.radius&&this.active&&obj.active&&obj.id!=this.id){
+                if(distPos(this,obj)<this.radius+obj.radius&&obj.id!=this.id){
                     let dir=dirPos(this,obj)
                     let magnitude=[max(0.01,magVec(this.velocity)),max(0.01,magVec(obj.velocity))]
                     obj.velocity.x=magnitude[0]*lsin(dir)
@@ -330,22 +331,10 @@ class player extends partisan{
                     if(obj.id==-1){
                         obj.moving=[0,0]
                     }
-                    switch(this.distinct){
-                        case 17:
-                            if(this.size>2&&obj.size<=2){
-                                obj.active=false
-                                obj.fade.trigger=false
-                            }
-                            if(obj.size>2&&this.size<=2){
-                                this.active=false
-                                this.fade.trigger=false
-                            }
-                        break
-                    }
                 }
             break
             case 1:
-                if(obj.id!=this.id&&this.active&&obj.active){
+                if(obj.id!=this.id){
                     let hand={position:{x:this.position.x+lsin(this.direction.main)*30,y:this.position.y+lcos(this.direction.main)*30},radius:15}
                     if(distPos(hand,obj)<hand.radius+obj.radius){
                         let dir=dirPos(this,obj)
@@ -356,17 +345,13 @@ class player extends partisan{
                 }
             break
             case 2:
-                if(this.active){
-                    let hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
-                    if(obj.checkIn(0,hand)){
-                    }
+                hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                if(obj.checkIn(0,hand)){
                 }
                 return false
             case 3:
-                if(this.active){
-                    let hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
-                    if(obj.checkIn(0,hand)){
-                    }
+                hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                if(obj.checkIn(0,hand)){
                 }
                 return false
         }

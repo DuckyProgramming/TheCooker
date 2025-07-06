@@ -39,3 +39,9 @@ class partisan extends located{
         super.update()
     }
 }
+class manager{
+    constructor(layer,operation){
+        this.layer=layer
+        this.operation=operation
+    }
+}
