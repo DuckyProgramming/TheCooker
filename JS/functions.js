@@ -75,6 +75,15 @@ function shuffleArray(array){
 function last(array){
     return array[array.length-1]
 }
+function numLength(num){
+    let value=num
+    let len=1
+    while(value>=10){
+        value=floor(value/10)
+        len++
+    }
+    return len
+}
 function findName(name,list){
 	for(let a=0,la=list.length;a<la;a++){
 		if(list[a].name==name){
@@ -255,7 +264,7 @@ function checkValid(){
                         print(types.item[a].name,'-',types.item[a].process[b][2])
                     }
                 break
-                case 1: case 2: case 3: case 4: case 5:
+                case 1: case 2: case 3: case 4: case 5: case 7:
                     if(findName(types.item[a].process[b][2],types.item)<0){
                         print(types.item[a].name,'-',types.item[a].process[b][2])
                     }
@@ -266,11 +275,6 @@ function checkValid(){
                     }
                     if(findName(types.item[a].process[b][3],types.item)<0){
                         print(types.item[a].name,'-',types.item[a].process[b][3])
-                    }
-                break
-                case 7:
-                    if(findName(types.item[a].process[b][1],types.item)<0){
-                        print(types.item[a].name,'-',types.item[a].process[b][1])
                     }
                 break
             }

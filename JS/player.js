@@ -95,6 +95,23 @@ class player extends partisan{
             this.skin.arms[a].anim.phi=90*(1-a*2)*(1-this.animSet.hold*0.6)+lsin((this.animSet.main.loop+this.animSet.main.flip*15)*12)*60*(1-this.animSet.hold)+lsin((this.animSet.process.loop+this.animSet.process.flip*15)*12)*48*(1-this.animSet.hold*0.8)+(a==1?abs(lsin(this.animSet.attack.loop*12))*60:0)
         }
     }
+    findHandLen(){
+        this.hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+        for(let a=0,la=this.parent.entities.walls[0].length;a<la;a++){
+            if(this.parent.entities.walls[0][a].name=='High Wall'){
+                let obj=this.parent.entities.walls[0][a]
+                for(let b=0,lb=obj.boundary.length;b<lb;b++){
+                    if(intersect(this.position,this.hand.position,obj.boundary[b][0],obj.boundary[b][1])){
+                        let point=intersectKey(this.position,this.hand.position,obj.boundary[b][0],obj.boundary[b][1])
+                        if(dist(this.position.x,this.position.y,point.x,point.y)<this.handLen){
+                            this.handLen=dist(this.position.x,this.position.y,point.x,point.y)
+                            this.hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                        }
+                    }
+                }
+            }
+        }
+    }
     display(level,layer=this.layer){
         switch(level){
             case -1:
@@ -113,8 +130,7 @@ class player extends partisan{
                     layer.push()
                     layer.rotate(-this.direction.main)
                     layer.translate(0,20)
-                    this.item.held=true
-                    this.item.display()
+                    this.item.display(0)
                     layer.pop()
                 }
                 for(let a=0,la=2;a<la;a++){
@@ -192,28 +208,34 @@ class player extends partisan{
         let inputKeys=inputs.keys[this.id]
         this.direction.main=spinControl(this.direction.main)
         this.direction.goal=spinControl(this.direction.goal)
-        this.direction.main=spinDirection(this.direction.main,this.direction.goal,10)
+        this.direction.main=spinDirection(this.direction.main,this.direction.goal,15)
         this.velocity.x*=0.8
         this.velocity.y*=0.8
         this.controlDirection={x:0,y:0}
         if(this.timer.dizzy<=0){
+            let moveKey={x:0,y:0}
             if(inputKeys.main[0]&&!inputKeys.main[1]&&this.active){
-                this.velocity.x-=this.speed
+                moveKey.x--
                 this.controlDirection.x--
             }else if(inputKeys.main[1]&&!inputKeys.main[0]&&this.active){
-                this.velocity.x+=this.speed
+                moveKey.x++
                 this.controlDirection.x++
             }else if(abs(this.velocity.x)>2&&(inputKeys.main[2]&&!inputKeys.main[3]||inputKeys.main[3]&&!inputKeys.main[2])){
                 this.controlDirection.x+=this.velocity.x>0?1:-1
             }
             if(inputKeys.main[2]&&!inputKeys.main[3]&&this.active){
-                this.velocity.y-=this.speed
+                moveKey.y--
                 this.controlDirection.y--
             }else if(inputKeys.main[3]&&!inputKeys.main[2]&&this.active){
-                this.velocity.y+=this.speed
+                moveKey.y++
                 this.controlDirection.y++
             }else if(abs(this.velocity.y)>2&&(inputKeys.main[0]&&!inputKeys.main[1]||inputKeys.main[1]&&!inputKeys.main[0])){
                 this.controlDirection.y+=this.velocity.y>0?1:-1
+            }
+            if(moveKey.x!=0||moveKey.y!=0){
+                let magnitude=magVec(moveKey)
+                this.velocity.x+=this.speed*moveKey.x/magnitude
+                this.velocity.y+=this.speed*moveKey.y/magnitude
             }
             let process=false
             let interact=false
@@ -221,7 +243,22 @@ class player extends partisan{
             if(this.timer.interact>0){
                 this.timer.interact--
             }else{
-                if(inputKeys.main[4]){
+                this.handLen=30
+                let handLenChecked=false
+                let hand
+                if(inputKeys.main[5]){
+                    hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                    this.findHandLen()
+                    handLenChecked=true
+                    if(inputKeys.tap[5]){
+                        for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                            for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                if(this.collide(4,this.parent.entities.walls[a][b])){
+                                    process=true
+                                }
+                            }
+                        }
+                    }
                     for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                         for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
                             if(this.collide(3,this.parent.entities.walls[a][b])){
@@ -231,21 +268,8 @@ class player extends partisan{
                     }
                 }
                 if(inputKeys.tap[4]&&!process){
-                    this.handLen=30
-                    let hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
-                    for(let a=0,la=this.parent.entities.walls[0].length;a<la;a++){
-                        if(this.parent.entities.walls[0][a].name=='High Wall'){
-                            let obj=this.parent.entities.walls[0][a]
-                            for(let b=0,lb=obj.boundary.length;b<lb;b++){
-                                if(intersect(this.position,hand.position,obj.boundary[b][0],obj.boundary[b][1])){
-                                    let point=intersectKey(this.position,hand.position,obj.boundary[b][0],obj.boundary[b][1])
-                                    if(dist(this.position.x,this.position.y,point.x,point.y)<this.handLen){
-                                        this.handLen=dist(this.position.x,this.position.y,point.x,point.y)
-                                        hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
-                                    }
-                                }
-                            }
-                        }
+                    if(!handLenChecked){
+                        this.findHandLen()
                     }
                     for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                         for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
@@ -255,10 +279,41 @@ class player extends partisan{
                         }
                     }
                     if(!interact){
-                        attack=true
-                        this.timer.interact=15
-                        for(let a=0,la=this.parent.entities.players.length;a<la;a++){
-                            this.collide(1,this.parent.entities.players[a])
+                        if(this.item!=-1){
+                            switch(this.item.name){
+                                case 'Crate':
+                                    this.handLen=40
+                                    this.findHandLen()
+                                    if(this.parent.spawnGridWall(this.hand,this.item.contain,[])){
+                                        this.item=-1
+                                    }else if(this.handLen==40){
+                                        this.handLen=48
+                                        this.findHandLen()
+                                        if(this.parent.spawnGridWall(this.hand,this.item.contain,[])){
+                                            this.item=-1
+                                        }
+                                    }
+                                break
+                                case 'Blueprint':
+                                    this.handLen=40
+                                    this.findHandLen()
+                                    if(this.parent.spawnGridWall(this.hand,findName('Blueprint',types.wall),[[0,this.item.contain]])){
+                                        this.item=-1
+                                    }else if(this.handLen==40){
+                                        this.handLen=48
+                                        this.findHandLen()
+                                        if(this.parent.spawnGridWall(this.hand,findName('Blueprint',types.wall),[[0,this.item.contain]])){
+                                            this.item=-1
+                                        }
+                                    }
+                                break
+                            }
+                        }else{
+                            attack=true
+                            this.timer.interact=15
+                            for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                                this.collide(1,this.parent.entities.players[a])
+                            }
                         }
                     }
                 }
@@ -300,6 +355,8 @@ class player extends partisan{
         this.infoAnim.dizzy=smoothAnim(this.infoAnim.dizzy,this.timer.dizzy>0,0,1,5)
         this.animSet.hold=smoothAnim(this.animSet.hold,this.item!=-1,0,1,5)
         if(this.item!=-1){
+            this.item.parent=this
+            this.item.parentClass=0
             this.item.update()
         }
         for(let a=0,la=this.colliders.main.length;a<la;a++){
@@ -347,11 +404,19 @@ class player extends partisan{
             case 2:
                 hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
                 if(obj.checkIn(0,hand)){
+                    return obj.grabEffect(this)
                 }
                 return false
             case 3:
                 hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
                 if(obj.checkIn(0,hand)){
+                    return obj.processEffect(this)
+                }
+                return false
+            case 4:
+                hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                if(obj.checkIn(0,hand)){
+                    return obj.interactEffect(this)
                 }
                 return false
         }

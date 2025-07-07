@@ -10,6 +10,9 @@ class operation{
             case 'main':
                 this.entityManager.generateLevel(args[0],0)
                 this.overlayManager.activate(0)
+                ////
+                this.entityManager.spawnBlueprints(5)
+                ////
             break
         }
         this.transitionManager.begin(scene)
@@ -18,6 +21,7 @@ class operation{
         this.transitionManager=new transitionManager(this.layer,this)
         this.dishManager=new dishManager(this.layer,this)
         this.cardManager=new cardManager(this.layer,this)
+        this.blueprintManager=new blueprintManager(this.layer,this)
         this.entityManager=new entityManager(this.layer,this)
         this.dayManager=new dayManager(this.layer,this)
         this.overlayManager=new overlayManager(this.layer,this)

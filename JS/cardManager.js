@@ -54,6 +54,16 @@ class cardManager extends manager{
             }
         }
     }
+    outListing(){
+        let result=``
+        for(let a=0,la=this.listing.possible.length;a<la;a++){
+            result+=(a>0?`\n`:``)+[`Main`,`Variant`,`Starter`,`Side`,`Dessert`,`Customer`][a]+` (${this.listing.possible[a].length}): `
+            for(let b=0,lb=this.listing.possible[a].length;b<lb;b++){
+                result+=(b>0?`, `:``)+types.card[this.listing.possible[a][b]].name
+            }
+        }
+        print(result)
+    }
     getOptions(type,args){
         let result=[]
         switch(type){
@@ -100,6 +110,9 @@ class cardManager extends manager{
         this.operation.entityManager.calcCustomer()
         for(let a=0,la=types.card[card].dish.length;a<la;a++){
             this.operation.dishManager.addDish(findName(types.card[card].dish[a],types.dish))
+        }
+        for(let a=0,la=types.card[card].wall.length;a<la;a++){
+            this.operation.blueprintManager.addEnabled(types.card[card].wall[a])
         }
         this.removeFromList(card)
         this.convertedListing()
