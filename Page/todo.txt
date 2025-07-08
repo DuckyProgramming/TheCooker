@@ -1,0 +1,3 @@
+delete walls outside of building when start day
+particle effect for you got paid
+patience system

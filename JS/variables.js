@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15}}
 graphics={main:undefined}
-dev={bound:false}
+dev={bound:false,altControl:true}
 inputs={
     keys:[
         {
@@ -32,6 +32,7 @@ types={
                 [1,1,'Blueprint Cabinet',0],
             ],
             inside:[0,0,0,2],
+            spawn:[21,17,270],
             map:[
                 ` _ _ _ _ _ _ _ _ _ _ `,
                 `|       |           |`,
@@ -46,11 +47,11 @@ types={
                 `       - - - _ _ ] _ `,
                 `|                   |`,
                 `                     `,
-                `|   1      D     D  |`,
+                `|    1     D     D  |`,
                 `                     `,
                 `|                   |`,
                 ` _ ] _ _ _ _ _ _ _ _ `,
-                `                     `,
+                `   e                c`,
                 `                     `,
                 `                   T `,
                 `                     `,
@@ -61,8 +62,7 @@ types={
         SPEC
 
         0-cooker
-        1-waterer
-        2-provider
+        1-provider
         */
         /*
         RARITY
@@ -382,7 +382,7 @@ types={
             width:42,
             height:36,
             effect:[-1,0],
-            spec:[1],
+            spec:[],
             edit:true,
             level:1,
             rarity:-1,
@@ -395,7 +395,7 @@ types={
             width:42,
             height:36,
             effect:[-1,0],
-            spec:[1],
+            spec:[],
             edit:true,
             level:1,
             rarity:0,
@@ -408,7 +408,7 @@ types={
             width:42,
             height:36,
             effect:[-1,0],
-            spec:[1],
+            spec:[],
             edit:true,
             level:1,
             rarity:1,
@@ -421,7 +421,7 @@ types={
             width:42,
             height:36,
             effect:[-1,0],
-            spec:[1],
+            spec:[],
             edit:true,
             level:1,
             rarity:1,
@@ -434,7 +434,7 @@ types={
             width:42,
             height:36,
             effect:[-1,0],
-            spec:[1],
+            spec:[],
             edit:true,
             level:1,
             rarity:1,
@@ -681,7 +681,7 @@ types={
             cost:20,
             prereq:[],
             desc:'Turns up to 5 things into a trash bag',
-            upgrade:['Large Trash Bin','Composter Bin'],
+            upgrade:['Large Trash Bin','Compost Bin'],
         },{
             name:'Large Trash Bin',
             width:30,
@@ -694,9 +694,9 @@ types={
             cost:40,
             prereq:[],
             desc:'Turns up to 10 things into a trash bag',
-            upgrade:['Composter Bin'],
+            upgrade:['Compost Bin'],
         },{
-            name:'Composter Bin',
+            name:'Compost Bin',
             width:24,
             height:24,
             effect:[-1,0],
@@ -756,7 +756,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Onion',
+            spec:[1],provide:'Onion',
             edit:true,
             level:1,
             rarity:1,
@@ -769,7 +769,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Meat',
+            spec:[1],provide:'Meat',
             edit:true,
             level:1,
             rarity:1,
@@ -782,7 +782,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Tomato',
+            spec:[1],provide:'Tomato',
             edit:true,
             level:1,
             rarity:1,
@@ -795,7 +795,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Broccoli',
+            spec:[1],provide:'Broccoli',
             edit:true,
             level:1,
             rarity:1,
@@ -808,7 +808,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Cheese',
+            spec:[1],provide:'Cheese',
             edit:true,
             level:1,
             rarity:1,
@@ -821,7 +821,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Flour',
+            spec:[1],provide:'Flour',
             edit:true,
             level:1,
             rarity:1,
@@ -834,7 +834,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Butter',
+            spec:[1],provide:'Butter',
             edit:true,
             level:1,
             rarity:1,
@@ -847,7 +847,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Garlic',
+            spec:[1],provide:'Garlic',
             edit:true,
             level:1,
             rarity:1,
@@ -860,7 +860,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Soybean',
+            spec:[1],provide:'Soybean',
             edit:true,
             level:1,
             rarity:1,
@@ -873,7 +873,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Miso',
+            spec:[1],provide:'Miso',
             edit:true,
             level:1,
             rarity:1,
@@ -886,7 +886,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Lettuce',
+            spec:[1],provide:'Lettuce',
             edit:true,
             level:1,
             rarity:1,
@@ -899,7 +899,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Potato',
+            spec:[1],provide:'Potato',
             edit:true,
             level:1,
             rarity:1,
@@ -912,7 +912,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Macaroni',
+            spec:[1],provide:'Macaroni',
             edit:true,
             level:1,
             rarity:1,
@@ -925,7 +925,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Egg',
+            spec:[1],provide:'Egg',
             edit:true,
             level:1,
             rarity:1,
@@ -938,7 +938,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Apple',
+            spec:[1],provide:'Apple',
             edit:true,
             level:1,
             rarity:1,
@@ -951,7 +951,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Cherry',
+            spec:[1],provide:'Cherry',
             edit:true,
             level:1,
             rarity:1,
@@ -964,7 +964,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Sugar',
+            spec:[1],provide:'Sugar',
             edit:true,
             level:1,
             rarity:1,
@@ -977,7 +977,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Lemon',
+            spec:[1],provide:'Lemon',
             edit:true,
             level:1,
             rarity:1,
@@ -990,7 +990,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Chocolate',
+            spec:[1],provide:'Chocolate',
             edit:true,
             level:1,
             rarity:1,
@@ -1003,7 +1003,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Ice Cream C',
+            spec:[1],provide:'Ice Cream C',
             edit:true,
             level:1,
             rarity:1,
@@ -1014,9 +1014,9 @@ types={
         },{
             name:'Fish',
             width:48,
-            height:48,
+            height:36,
             effect:[-1,0],
-            spec:[2],provide:'Raw Fish',
+            spec:[1],provide:'Raw Fish',
             edit:true,
             level:1,
             rarity:1,
@@ -1029,7 +1029,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Raw Fish Fillet',
+            spec:[1],provide:'Raw Fish Fillet',
             edit:true,
             level:1,
             rarity:1,
@@ -1042,7 +1042,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Raw Spiny Fish',
+            spec:[1],provide:'Raw Spiny Fish',
             edit:true,
             level:1,
             rarity:1,
@@ -1055,7 +1055,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Crab',
+            spec:[1],provide:'Crab',
             edit:true,
             level:1,
             rarity:1,
@@ -1068,7 +1068,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Bone Meat',
+            spec:[1],provide:'Bone Meat',
             edit:true,
             level:1,
             rarity:1,
@@ -1081,7 +1081,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Thick Meat',
+            spec:[1],provide:'Thick Meat',
             edit:true,
             level:1,
             rarity:1,
@@ -1094,7 +1094,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Nuts',
+            spec:[1],provide:'Nuts',
             edit:true,
             level:1,
             rarity:1,
@@ -1107,7 +1107,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Oil',
+            spec:[1],provide:'Oil',
             edit:true,
             level:1,
             rarity:1,
@@ -1120,7 +1120,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Hot Dog',
+            spec:[1],provide:'Hot Dog',
             edit:true,
             level:1,
             rarity:1,
@@ -1133,7 +1133,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Hot Dog Bun',
+            spec:[1],provide:'Hot Dog Bun',
             edit:true,
             level:1,
             rarity:1,
@@ -1146,7 +1146,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Noodles',
+            spec:[1],provide:'Noodles',
             edit:true,
             level:1,
             rarity:1,
@@ -1159,7 +1159,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Milk',
+            spec:[1],provide:'Milk',
             edit:true,
             level:1,
             rarity:1,
@@ -1172,7 +1172,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Pasta Sheet',
+            spec:[1],provide:'Pasta Sheet',
             edit:true,
             level:1,
             rarity:1,
@@ -1185,7 +1185,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Bonito',
+            spec:[1],provide:'Bonito',
             edit:true,
             level:1,
             rarity:1,
@@ -1198,7 +1198,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[2],provide:'Cocoa Powder',
+            spec:[1],provide:'Cocoa Powder',
             edit:true,
             level:1,
             rarity:1,
@@ -1218,6 +1218,7 @@ types={
         6-portion [6,time,result,leave]
         7-eaten [7,time,left]
         8-buy [8,time]
+        9-burning [9,time,result]
         */
         {
             name:'',
@@ -1502,7 +1503,7 @@ types={
             portions:3,
             process:[
                 [6,60,'Bread Slice','Bread Slice'],
-                [1,1200,'Burnt'],
+                [9,1200,'Burnt'],
             ],
         },{
             name:'Bread Slice',
@@ -1528,7 +1529,7 @@ types={
         },{
             name:'Croissant',
             process:[
-                [1,120,'Burnt'],
+                [9,120,'Burnt'],
                 [7,180,''],
             ],
         },{
@@ -1559,7 +1560,7 @@ types={
         },{
             name:'Garlic Bread',
             process:[
-                [1,120,'Burnt'],
+                [9,120,'Burnt'],
                 [7,180,''],
             ],
         },{
@@ -1663,7 +1664,7 @@ types={
             portions:3,
             process:[
                 [6,30,'Spring Roll','Spring Roll'],
-                [1,60,'Burnt'],
+                [9,60,'Burnt'],
             ],
         },{
             name:'Spring Roll',
@@ -1734,7 +1735,7 @@ types={
         },{
             name:'Roast Potato',
             process:[
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
                 [7,90,''],
             ],
         },{
@@ -1755,7 +1756,7 @@ types={
         },{
             name:'Onion Rings',
             process:[
-                [1,120,'Burnt'],
+                [9,120,'Burnt'],
                 [7,90,''],
             ],
         },{
@@ -1767,7 +1768,7 @@ types={
             name:'Unsauced Cheese Sticks',
             process:[
                 [0,'Tomato Sauce','Cheese Sticks'],
-                [1,180,'Burnt'],
+                [9,180,'Burnt'],
             ],
         },{
             name:'Cheese Sticks',
@@ -1888,7 +1889,7 @@ types={
         },{
             name:'Caramel',
             process:[
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
             ],
         },{
             name:'Pastry Crust',
@@ -1903,7 +1904,7 @@ types={
         },{
             name:'Pastry',
             process:[
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
                 [0,'Chopped Apple','Raw Apple Pie'],
                 [0,'Cherry','Raw Cherry Pie'],
                 [0,'Caramel','Raw Caramel Pie'],
@@ -1924,7 +1925,7 @@ types={
             portions:3,
             process:[
                 [6,60,'Apple Pie Slice','Apple Pie Slice'],
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
             ],
         },{
             name:'Apple Pie Slice',
@@ -1941,7 +1942,7 @@ types={
             portions:3,
             process:[
                 [6,60,'Cherry Pie Slice','Cherry Pie Slice'],
-                [1,420,'Burnt'],
+                [9,420,'Burnt'],
             ],
         },{
             name:'Cherry Pie Slice',
@@ -1958,7 +1959,7 @@ types={
             portions:3,
             process:[
                 [6,60,'Caramel Pie Slice','Caramel Pie Slice'],
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
             ],
         },{
             name:'Caramel Pie Slice',
@@ -2010,7 +2011,7 @@ types={
             portions:3,
             process:[
                 [6,60,'Lemon Meringue Pie Slice','Lemon Meringue Pie Slice'],
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
             ],
         },{
             name:'Lemon Meringue Pie Slice',
@@ -2041,7 +2042,7 @@ types={
         },{
             name:'Apple Crisp',
             process:[
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
                 [7,180,''],
             ],
         },{
@@ -2053,7 +2054,7 @@ types={
             name:'Melted Chocolate',
             process:[
                 [0,'Cherry','Raw Cherry Cordial'],
-                [1,180,'Burnt'],
+                [9,180,'Burnt'],
             ],
         },{
             name:'Raw Cherry Cordial',
@@ -2063,7 +2064,7 @@ types={
         },{
             name:'Cherry Cordial',
             process:[
-                [1,60,'Burnt'],
+                [9,60,'Burnt'],
                 [7,180,''],
             ],
         },{
@@ -2110,7 +2111,7 @@ types={
             name:'Plain Zeppole',
             process:[
                 [0,'Sugar','Zeppole'],
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
             ],
         },{
             name:'Zeppole',
@@ -2145,14 +2146,14 @@ types={
         },{
             name:'Fish',
             process:[
-                [1,420,'Burnt'],
+                [9,420,'Burnt'],
                 [0,'Plate','Plated Fish'],
             ],
         },{
             name:'Plated Fish',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Raw Fish Fillet',
@@ -2167,14 +2168,14 @@ types={
         },{
             name:'Fish Fillet',
             process:[
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
                 [0,'Plate','Plated Fish Fillet'],
             ],
         },{
             name:'Plated Fish Fillet',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Raw Spiny Fish',
@@ -2193,14 +2194,14 @@ types={
         },{
             name:'Spiny Fish',
             process:[
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
                 [0,'Plate','Plated Spiny Fish'],
             ],
         },{
             name:'Plated Spiny Fish',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Crab',
@@ -2225,14 +2226,14 @@ types={
         },{
             name:'Crab Cake',
             process:[
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
                 [0,'Plate','Plated Crab Cake'],
             ],
         },{
             name:'Plated Crab Cake',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Tomato',
@@ -2251,7 +2252,7 @@ types={
                 [0,'Chopped Onion','Plated Tomato and Onion'],
                 [0,'Toast','Plated Tomato Toast'],
                 [0,'Fried Egg','Plated Egg and Tomato'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Rare Steak',
@@ -2268,47 +2269,47 @@ types={
         },{
             name:'Well Done Steak',
             process:[
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
                 [0,'Plate','Plated Well Done Steak'],
             ],
         },{
             name:'Plated Rare Steak',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
                 [0,'Chopped Tomato','Plated Rare Steak With Tomato'],
             ],
         },{
             name:'Plated Medium Steak',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
                 [0,'Chopped Tomato','Plated Medium Steak With Tomato'],
             ],
         },{
             name:'Plated Well Done Steak',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
                 [0,'Chopped Tomato','Plated Well Done Steak With Tomato'],
             ],
         },{
             name:'Plated Rare Steak With Tomato',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Medium Steak With Tomato',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Well Done Steak With Tomato',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Bone Meat',
@@ -2330,7 +2331,7 @@ types={
         },{
             name:'Well Done Bone Steak',
             process:[
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
                 [0,'Plate','Plated Well Done Bone Steak'],
             ],
         },{
@@ -2392,47 +2393,47 @@ types={
         },{
             name:'Well Done Thick Steak',
             process:[
-                [1,600,'Burnt'],
+                [9,600,'Burnt'],
                 [0,'Plate','Plated Well Done Thick Steak'],
             ],
         },{
             name:'Plated Rare Thick Steak',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
                 [0,'Chopped Tomato','Plated Rare Thick Steak With Tomato'],
             ],
         },{
             name:'Plated Medium Thick Steak',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
                 [0,'Chopped Tomato','Plated Medium Thick Steak With Tomato'],
             ],
         },{
             name:'Plated Well Done Thick Steak',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
                 [0,'Chopped Tomato','Plated Well Done Thick Steak With Tomato'],
             ],
         },{
             name:'Plated Rare Thick Steak With Tomato',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Medium Thick Steak With Tomato',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Well Done Thick Steak With Tomato',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lettuce',
@@ -2442,7 +2443,7 @@ types={
                 [0,'Chopped Onion','Plated Lettuce and Onion'],
                 [0,'Breadcrumbs','Plated Lettuce and Breadcrumbs'],
                 [0,'Chopped Garlic','Plated Lettuce and Garlic'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Onion',
@@ -2452,40 +2453,40 @@ types={
                 [0,'Chopped Tomato','Plated Tomato and Onion'],
                 [0,'Boiled Potato','Plated Boiled Potato and Onion'],
                 [0,'Mayo','Plated Onion and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lettuce and Tomato',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Onion','Plated Lettuce, Tomato, and Onion'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lettuce and Onion',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Tomato','Plated Lettuce, Tomato, and Onion'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Tomato and Onion',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Lettuce','Plated Lettuce, Tomato, and Onion'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lettuce, Tomato, and Onion',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Toast',
             process:[
                 [0,'Plate','Plated Toast'],
-                [1,150,'Burnt'],
+                [9,150,'Burnt'],
                 [2,60,'Breadcrumbs'],
             ],
         },{
@@ -2500,7 +2501,7 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Chopped Lettuce','Plated Lettuce and Garlic'],
                 [0,'Breadcrumbs','Plated Garlic and Breadcrumbs'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Breadcrumbs',
@@ -2508,34 +2509,34 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Chopped Lettuce','Plated Lettuce and Breadcrumbs'],
                 [0,'Chopped Garlic','Plated Garlic and Breadcrumbs'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lettuce and Garlic',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Breadcrumbs','Plated Lettuce, Garlic, and Breadcrumbs'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lettuce and Breadcrumbs',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Garlic','Plated Lettuce, Garlic, and Breadcrumbs'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Garlic and Breadcrumbs',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Lettuce','Plated Lettuce, Garlic, and Breadcrumbs'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lettuce, Garlic, and Breadcrumbs',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Nuts',
@@ -2559,7 +2560,7 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Nuts','Plated Apple and Nuts'],
                 [0,'Mayo','Plated Apple and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Nuts',
@@ -2567,7 +2568,7 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Chopped Apple','Plated Apple and Nuts'],
                 [0,'Mayo','Plated Nuts and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Mayo',
@@ -2577,34 +2578,34 @@ types={
                 [0,'Nuts','Plated Nuts and Mayo'],
                 [0,'Boiled Potato','Plated Boiled Potato and Mayo'],
                 [0,'Chopped Onion','Plated Onion and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Apple and Nuts',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Mayo','Plated Apple, Nuts, and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Apple and Mayo',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Nuts','Plated Apple, Nuts, and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Nuts and Mayo',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Apple','Plated Apple, Nuts, and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Apple, Nuts, and Mayo',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Chopped Potato in Pot',
@@ -2636,40 +2637,40 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Chopped Onion','Plated Boiled Potato and Onion'],
                 [0,'Mayo','Plated Boiled Potato and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Boiled Potato and Onion',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Mayo','Plated Boiled Potato, Onion, and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Boiled Potato and Mayo',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Onion','Plated Boiled Potato, Onion, and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Onion and Mayo',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Boiled Potato','Plated Boiled Potato, Onion, and Mayo'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Boiled Potato, Onion, and Mayo',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Fried Egg',
             process:[
                 [0,'Plate','Plated Egg'],
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
             ],
         },{
             name:'Plated Egg',
@@ -2677,7 +2678,7 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Toast','Plated Egg Toast'],
                 [0,'Chopped Tomato','Plated Egg and Tomato'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Toast',
@@ -2685,34 +2686,34 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Fried Egg','Plated Egg Toast'],
                 [0,'Chopped Tomato','Plated Tomato Toast'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Egg and Tomato',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Toast','Plated Egg and Tomato Toast'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Egg Toast',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Chopped Tomato','Plated Egg and Tomato Toast'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Tomato Toast',
             process:[
                 [5,'Trash','Plate'],
                 [0,'Fried Egg','Plated Egg and Tomato Toast'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Egg and Tomato Toast',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Pizza Base',
@@ -2735,7 +2736,7 @@ types={
             name:'Cheese Pizza',
             portions:3,
             process:[
-                [1,480,'Burnt'],
+                [9,480,'Burnt'],
                 [6,60,'Cheese Pizza Slice','Cheese Pizza Slice'],
             ],
         },{
@@ -2748,7 +2749,7 @@ types={
             name:'Plated Cheese Pizza Slice',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Raw Onion Pizza',
@@ -2771,7 +2772,7 @@ types={
             name:'Onion Pizza',
             portions:3,
             process:[
-                [1,480,'Burnt'],
+                [9,480,'Burnt'],
                 [6,60,'Onion Pizza Slice','Onion Pizza Slice'],
             ],
         },{
@@ -2783,13 +2784,13 @@ types={
             name:'Plated Onion Pizza Slice',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Meat Pizza',
             portions:3,
             process:[
-                [1,480,'Burnt'],
+                [9,480,'Burnt'],
                 [6,60,'Meat Pizza Slice','Meat Pizza Slice'],
             ],
         },{
@@ -2801,13 +2802,13 @@ types={
             name:'Plated Meat Pizza Slice',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Onion and Meat Pizza',
             portions:3,
             process:[
-                [1,480,'Burnt'],
+                [9,480,'Burnt'],
                 [6,60,'Onion and Meat Pizza Slice','Onion and Meat Pizza Slice'],
             ],
         },{
@@ -2819,7 +2820,7 @@ types={
             name:'Plated Onion and Meat Pizza Slice',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Raw Uncooked Meat Pie',
@@ -2845,13 +2846,13 @@ types={
             name:'Meat Pie',
             process:[
                 [0,'Plate','Plated Meat Pie'],
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
             ],
         },{
             name:'Plated Meat Pie',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Raw Uncooked Broccoli Pie',
@@ -2909,13 +2910,13 @@ types={
             name:'Vegetable Pie',
             process:[
                 [0,'Plate','Plated Vegetable Pie'],
-                [1,300,'Burnt'],
+                [9,300,'Burnt'],
             ],
         },{
             name:'Plated Vegetable Pie',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Coffee',
@@ -2942,7 +2943,7 @@ types={
             name:'Nut Roast',
             portions:3,
             process:[
-                [1,1200,'Burnt'],
+                [9,1200,'Burnt'],
                 [6,60,'Nut Roast Slice','Nut Roast Slice'],
             ],
         },{
@@ -2962,13 +2963,13 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Chopped Lemon','Plated Lemon Nut Roast Slice'],
                 [0,'Stuffing','Plated Stuffing Nut Roast Slice'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Lemon Nut Roast Slice',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Raw Hot Dog',
@@ -2981,7 +2982,7 @@ types={
         },{
             name:'Unbunned Hot Dog',
             process:[
-                [1,240,'Burnt'],
+                [9,240,'Burnt'],
                 [0,'Plate','Plated Unbunned Hot Dog'],
                 [0,'Hot Dog Bun','Hot Dog'],
             ],
@@ -2989,7 +2990,7 @@ types={
             name:'Plated Unbunned Hot Dog',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
                 [0,'Hot Dog Bun','Plated Hot Dog'],
             ],
         },{
@@ -3007,13 +3008,13 @@ types={
             name:'Plated Hot Dog',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Cheese Hot Dog',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Noodles in Pot',
@@ -3053,25 +3054,25 @@ types={
                 [0,'White Sauce','Plated White Spaghetti'],
                 [0,'Chopped Cheese','Plated Spaghetti With Cheese'],
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Tomato Sauce',
             process:[
                 [0,'Noodles','Plated Spaghetti'],
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Spaghetti',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Cooked Mince',
             process:[
-                [1,120,'Burnt'],
+                [9,120,'Burnt'],
             ],
         },{
             name:'Tomato Sauce in Pot',
@@ -3108,13 +3109,13 @@ types={
             process:[
                 [0,'Noodles','Plated Bolognese Spaghetti'],
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Bolognese Spaghetti',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Butter in Pot',
@@ -3163,27 +3164,27 @@ types={
             process:[
                 [0,'Noodles','Plated White Spaghetti'],
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated White Spaghetti',
             process:[
                 [0,'Chopped Cheese','Plated Cheese Spaghetti'],
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Spaghetti With Cheese',
             process:[
                 [0,'White Sauce','Plated Cheese Spaghetti'],
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Cheese Spaghetti',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Tray',
@@ -3239,7 +3240,7 @@ types={
             name:'Lasagne Tray',
             portions:4,
             process:[
-                [1,1200,'Burnt Tray'],
+                [9,1200,'Burnt Tray'],
                 [6,60,'Lasagne Slice','Tray'],
                 [5,'Trash','Tray'],
             ],
@@ -3257,7 +3258,7 @@ types={
             name:'Plated Lasagne Slice',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Bonito',
@@ -3338,25 +3339,25 @@ types={
             name:'Plated Waffle',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Butter Waffle',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Cherry Waffle',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Plated Butter Cherry Waffle',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Milk Batter',
@@ -3378,7 +3379,7 @@ types={
                 [0,'Cherry Sauce','Cherry Cake Tin'],
                 [0,'Chopped Lemon','Lemon Cake Tin'],
                 [0,'Mascarpone','Tiramisu 2'],
-                [1,720,'Burnt Tin'],
+                [9,720,'Burnt Tin'],
                 [5,'Trash','Tin'],
             ],
         },{
@@ -3505,14 +3506,14 @@ types={
         },{
             name:'Stuffing',
             process:[
-                [1,150,'Burnt'],
+                [9,150,'Burnt'],
                 [0,'Plate','Plated Stuffing'],
             ],
         },{
             name:'Plated Stuffing',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Stuffing Nut Roast Slice',
@@ -3523,7 +3524,7 @@ types={
             name:'Plated Stuffing Nut Roast Slice',
             process:[
                 [5,'Trash','Plate'],
-                [7,180,'Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },{
             name:'Mascarpone',

@@ -2,16 +2,18 @@ class operation{
     constructor(layer){
         this.layer=layer
         this.scene=''
-        this.player=[{color:1},{color:2}]
+        this.player=[{color:1}/*,{color:2}*/]
         this.initialManagers()
     }
     transition(scene,args){
         switch(scene){
             case 'main':
                 this.entityManager.generateLevel(args[0],0)
-                this.overlayManager.activate(0)
+                //this.overlayManager.activate(0)
+                this.cardManager.addCard(1)
                 ////
-                this.entityManager.spawnBlueprints(5)
+                //this.entityManager.spawnBlueprints(5)
+                this.entityManager.spawnOptions()
                 ////
             break
         }

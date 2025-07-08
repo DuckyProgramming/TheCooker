@@ -6,6 +6,7 @@ class item extends located{
     }
     initialValues(){
         this.direction=0
+        this.size=1
         this.parent=-1
         this.parentClass=-1
         /*
@@ -14,8 +15,22 @@ class item extends located{
         */
         this.process=[]
         for(let a=0,la=types.item[this.type].process.length;a<la;a++){
-            if(types.item[this.type].process[a][0]==1||types.item[this.type].process[a][0]==2||types.item[this.type].process[a][0]==3||types.item[this.type].process[a][0]==4||types.item[this.type].process[a][0]==5||types.item[this.type].process[a][0]==6||types.item[this.type].process[a][0]==8){
-                this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],active:false,display:false,anim:0})
+            switch(types.item[this.type].process[a][0]){
+                case 0:
+                    this.process.push({type:types.item[this.type].process[a][0],other:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
+                break
+                case 1: case 9:
+                    this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
+                break
+                case 5:
+                    this.process.push({type:types.item[this.type].process[a][0],utility:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
+                break
+                case 7:
+                    this.process.push({type:types.item[this.type].process[a][0],main:0,timer:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],display:0,anim:0})
+                break
+                case 8:
+                    this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],active:false,display:0,anim:0})
+                break
             }
         }
         this.processVisible=false
@@ -28,12 +43,13 @@ class item extends located{
             break
         }
     }
-    generalProcess(types){
+    generalProcess(types,speed){
         let result=[]
         for(let a=0,la=this.process.length;a<la;a++){
             if(types.includes(this.process[a].type)){
-                this.process[a].main++
+                this.process[a].main+=speed
                 this.process[a].active=true
+                this.process[a].display=15
                 if(this.process[a].main>=this.process[a].goal){
                     this.process[a].main=this.process[a].goal
                     result.push(this.process[a])
@@ -42,12 +58,45 @@ class item extends located{
         }
         return result
     }
+    checkUtility(type){
+        for(let a=0,la=this.process.length;a<la;a++){
+            if(this.process[a].type==5&&this.proces[a].utility==type){
+                this.type=findName(obj.process[a].result,types.item)
+                this.initialValues()
+                a=la
+            }
+        }
+    }
+    attemptCombine(obj){
+        let complete=false
+        for(let a=0,la=this.process.length;a<la;a++){
+            if(this.process[a].type==0&&this.process[a].other==obj.name){
+                this.type=findName(this.process[a].result,types.item)
+                this.initialValues()
+                a=la
+                complete=true
+            }
+        }
+        if(!complete){
+            for(let a=0,la=obj.process.length;a<la;a++){
+                if(obj.process[a].type==0&&obj.process[a].other==this.name){
+                    this.type=findName(obj.process[a].result,types.item)
+                    this.initialValues()
+                    a=la
+                    complete=true
+                }
+            }
+        }
+        return complete
+    }
     display(level,layer=this.layer){
         switch(level){
             case 0:
                 layer.push()
                 layer.translate(this.position.x,this.position.y)
                 layer.rotate(this.direction)
+                layer.scale(this.size)
+                //sprint(this.size)
                 layer.noStroke()
                 switch(this.name){
                     case 'Crate':
@@ -71,11 +120,50 @@ class item extends located{
                         layer.stroke(240,this.fade.main)
                         layer.rect(0,0,this.width-3,this.height-3)
                     break
+                    case 'Trash Bag':
+                        layer.fill(40,this.fade.main)
+                        layer.ellipse(0,0,30)
+                        layer.triangle(0,12,-3,18,3,18)
+                    break
                     case 'Plate':
                         layer.fill(220,this.fade.main)
                         layer.ellipse(0,0,24)
                         layer.fill(200,this.fade.main)
                         layer.ellipse(0,0,20)
+                    break
+                    case 'Burnt':
+                        layer.fill(40,this.fade.main)
+                        regPoly(layer,0,0,10,9,9,0)
+                        layer.fill(20,this.fade.main)
+                        regPoly(layer,0,0,10,6,6,0)
+                    break
+                    case 'Raw Fish':
+                        layer.fill(100,125,200,this.fade.main)
+                        layer.arc(7,0,12,12,15,345)
+                        layer.triangle(7,-6,7,6,-11,0)
+                        layer.quad(-5,0,-14,-5,-11,0,-14,5)
+                        layer.fill(25,50,100,this.fade.main)
+                        layer.ellipse(9,-3,3)
+                    break
+                    case 'Fish':
+                        layer.fill(50,75,125,this.fade.main)
+                        layer.arc(7,0,12,12,15,345)
+                        layer.triangle(7,-6,7,6,-11,0)
+                        layer.quad(-5,0,-14,-5,-11,0,-14,5)
+                        layer.fill(0,25,50,this.fade.main)
+                        layer.ellipse(9,-3,3)
+                    break
+                    case 'Plated Fish':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(50,75,125,this.fade.main)
+                        layer.arc(7,0,12,12,15,345)
+                        layer.triangle(7,-6,7,6,-11,0)
+                        layer.quad(-5,0,-14,-5,-11,0,-14,5)
+                        layer.fill(0,25,50,this.fade.main)
+                        layer.ellipse(9,-3,3)
                     break
                 }
                 /*switch(this.type){
@@ -206,7 +294,7 @@ class item extends located{
                         layer.fill(40,this.fade.main*this.process[a].anim)
                         layer.rect(0,-16,36,8,3)
                         switch(this.process[a].type){
-                            case 5:
+                            case 9:
                                 layer.fill(240,20,20,this.fade.main*this.process[a].anim)
                                 layer.rect(-16.5*(1-this.process[a].main/this.process[a].goal),-16,33*this.process[a].main/this.process[a].goal,5,2)
                             break
@@ -231,11 +319,13 @@ class item extends located{
     update(){
         super.update()
         for(let a=0,la=this.process.length;a<la;a++){
-            this.process[a].anim=smoothAnim(this.process[a].anim,this.process[a].display&&this.process[a].main>0,0,1,10)
-            this.process[a].display=false
+            this.process[a].anim=smoothAnim(this.process[a].anim,this.process[a].display>0&&this.process[a].main>0,0,1,10)
+            if(this.process[a].display>0){
+                this.process[a].display--
+            }
             if(this.process[a].active){
                 this.process[a].active=false
-            }else{
+            }else if(this.parent==-1||!this.parent.removeMark){
                 if(this.process[a].type==8&&this.process[a].main>0){
                     this.process[a].main-=2
                 }

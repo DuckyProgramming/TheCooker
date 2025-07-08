@@ -75,6 +75,9 @@ function shuffleArray(array){
 function last(array){
     return array[array.length-1]
 }
+function lastKey(array,key){
+    return array[array.length-key]
+}
 function numLength(num){
     let value=num
     let len=1
