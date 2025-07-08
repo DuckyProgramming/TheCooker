@@ -130,6 +130,9 @@ class player extends partisan{
         if(this.follow!=-1&&this.follow.id==this.id&&this.follow.mode!=mode){
             this.follow.cascadeMode(mode)
         }
+        if(mode==-1&&this.follow!=-1&&this.follow.id!=this.id){
+            this.follow=-1
+        }
     }
     makeOrder(orderPhase,menu,activate){
         this.order=[]
@@ -324,8 +327,8 @@ class player extends partisan{
                     case 2:
                         let distance=distPos(this,this.follow)
                         let dir=dirPos(this,this.follow)
-                        if(distance>50||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<60&&this.angle!=-1){
-                            if(distance<=50){
+                        if(distance>45||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<30&&this.angle!=-1){
+                            if(distance<=45){
                                 this.timer.angle++
                             }
                             let loc={position:{
@@ -349,7 +352,7 @@ class player extends partisan{
                                     }
                                     this.follow.item=-1
                                     this.order.splice(a,1)
-                                    this.parent.operation.dayManager.currency.main+=this.paying[a]
+                                    this.parent.operation.dayManager.payout(this.paying[a],this.position.x,this.position.y-30)
                                     this.paying.splice(a,1)
                                     interact=true
                                     a=la
@@ -371,7 +374,7 @@ class player extends partisan{
                         this.order[a].update()
                     }
                 }
-                if(!this.fade.trigger&&this.fade<=0){
+                if(!this.fade.trigger&&this.fade.main<=0){
                     this.remove=true
                 }
             }else{
@@ -556,16 +559,15 @@ class player extends partisan{
             break
             case 1:
                 if(obj.id!=this.id){
-                    let hand={position:{x:this.position.x+lsin(this.direction.main)*30,y:this.position.y+lcos(this.direction.main)*30},radius:15}
+                    let hand={position:{x:this.position.x+lsin(this.direction.main)*30,y:this.position.y+lcos(this.direction.main)*30},radius:20}
                     if(distPos(hand,obj)<hand.radius+obj.radius){
                         if(obj.id==-1){
                             if(this.follower!=-1){
                                 if(obj.mode==1){
-                                    obj.follow=-1
                                     obj.cascadeMode(-1)
                                     this.follower=-1
                                 }
-                            }else if(obj.mode==0){
+                            }else if(obj.mode==-1||obj.mode==0){
                                 obj.follow=this
                                 obj.cascadeMode(1)
                                 this.follower=obj

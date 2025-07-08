@@ -12,7 +12,7 @@ class particle extends entity{
     setupValues(control){
     }
     display(layer=this.layer){
-    }
+    }z
     update(){
     }
 }

@@ -1,3 +1,33 @@
-delete walls outside of building when start day
-particle effect for you got paid
-patience system
+meat gaming
+
+assorted appliances
+
+-Freezer
+-Cutting Board, Rolling Board
+-Levitating Counter
+-Prep Station
+-Frozen Prep Station
+-Stack Station
+
+-Soaking Sink
+-Wash Basin
+-Power Sink
+-Dish Rack
+
+-Safe Hob
+-Fast Hob
+-Override Hob
+-Oven
+-Microwave
+-Waffle Iron
+
+-Pots
+-Tray
+-Tin
+-Donut Tray
+
+-Trash Bin
+-Large Trash Bin
+-Compost Bin
+
+...providers

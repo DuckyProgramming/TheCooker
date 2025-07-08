@@ -5,7 +5,7 @@ class entityManager extends manager{
         this.edge={main:{x:0,y:0},outer:{x:[0,0],y:[0,0]},inside:[]}
         this.loc={lineup:{x:0,y:0},spawn:{x:0,y:0,direction:0}}
         this.constants={gravity:1.25}
-        this.entities={walls:[[],[]],players:[]}
+        this.entities={walls:[[],[]],players:[],particles:[]}
         this.run={fore:[],update:[]}
         this.view={
             main:{x:0,y:0,scale:1},
@@ -23,11 +23,12 @@ class entityManager extends manager{
         for(let a=0,la=this.operation.player.length;a<la;a++){
             this.entities.players.push(new player(this.layer,this,this.index.player++,0,0,a,this.operation.player[a]))
         }
-        this.customer.internal=6+3*(this.operation.player.length-1)
+        this.customer.internal=5+2.5*(this.operation.player.length-1)
         this.calcCustomer()
     }
     generateLevel(level,entry){
         this.entities.walls=[[]]
+        this.entities.particles=[]
         let spent=[]
         for(let a=0,la=level.map.length;a<la;a++){
             spent.push([])
@@ -148,11 +149,11 @@ class entityManager extends manager{
                 }
             }
         }
-        this.run.fore=[[this.entities.walls[0],0],[this.entities.players,0],[this.entities.players,1],[this.entities.walls[0],1]]
+        this.run.fore=[[this.entities.walls[0],0],[this.entities.players,0],[this.entities.players,1],[this.entities.walls[0],1],[this.entities.particles,0]]
         if(dev.bound){
             this.run.fore.push([this.entities.walls[0],-1],[this.entities.players,-1])
         }
-        this.run.update=[this.entities.walls[0],this.entities.players]
+        this.run.update=[this.entities.walls[0],this.entities.players,this.entities.particles]
         this.updateLadder()
     }
     updateLadder(){
@@ -209,7 +210,7 @@ class entityManager extends manager{
                                     c=lc
                                 }
                             }
-                            if(valid){
+                            if(valid){w
                                 possible.push([a,b])
                             }
                         }
@@ -278,7 +279,7 @@ class entityManager extends manager{
             }
         }
     }
-    spawnOptions(){
+    spawnOptions(num){
         let ticker=0
         for(let a=(this.grid.length-1)/2-1,la=0;a>=la;a--){
             for(let b=0,lb=(this.grid[a].length-1)/2;b<lb;b++){
@@ -287,7 +288,7 @@ class entityManager extends manager{
                     this.entities.walls[0][pos].contain=ticker
                     this.grid[a*2+1][b*2+1]=1
                     ticker++
-                    if(ticker>=2){
+                    if(ticker>=num){
                         a=la
                         b=lb
                     }
@@ -296,7 +297,7 @@ class entityManager extends manager{
         }
     }
     spawnBlueprints(num){
-        this.spawnOptions()
+        this.spawnOptions(2)
         let possible=this.getEmptyGrid(1)
         let set=this.operation.blueprintManager.getOptions(0,[num])
         for(let a=0,la=set.length;a<la;a++){
@@ -311,7 +312,27 @@ class entityManager extends manager{
         let total=0
         for(let a=0,la=this.entities.walls.length;a<la;a++){
             for(let b=0,lb=this.entities.walls[a].length;b<lb;b++){
-                if(names.includes(this.entities.walls[a][b].name)){
+                if(names.includes(this.entities.walls[a][b].name)&&!this.entities.walls[a][b].removeMark){
+                    total++
+                    this.emptySpot(this.entities.walls[a][b])
+                    this.entities.walls[a][b].removeMark=true
+                }
+            }
+        }
+        return total
+    }
+    clearOuterWalls(){
+        let total=0
+        for(let a=0,la=this.entities.walls.length;a<la;a++){
+            for(let b=0,lb=this.entities.walls[a].length;b<lb;b++){
+                if(
+                    (
+                        this.entities.walls[a][b].gridPos[0]<this.edge.inside[1]||
+                        this.entities.walls[a][b].gridPos[1]<this.edge.inside[0]||
+                        this.entities.walls[a][b].gridPos[0]>=this.grid.length-this.edge.inside[3]*2||
+                        this.entities.walls[a][b].gridPos[1]>=this.grid[0].length-this.edge.inside[2]*2
+                    )&&!this.entities.walls[a][b].removeMark&&this.entities.walls[a][b].name!='Trash Can'
+                ){
                     total++
                     this.emptySpot(this.entities.walls[a][b])
                     this.entities.walls[a][b].removeMark=true
@@ -321,7 +342,8 @@ class entityManager extends manager{
         return total
     }
     rerollBlueprints(){
-        this.spawnBlueprints(this.clearWalls(['Blueprint','Option']))
+        this.spawnBlueprints(this.clearWalls(['Blueprint']))
+        this.clearWalls(['Option'])
     }
     spawnGridWall(loc,type,args){
         for(let a=0,la=(this.grid.length-1)/2;a<la;a++){

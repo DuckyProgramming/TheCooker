@@ -4,10 +4,11 @@ class dayManager extends manager{
         this.day=0
         this.phase=0
         ////
-        this.currency={main:100}
+        this.currency={main:0}
         ////
-        this.time={main:0,end:5400}
+        this.time={main:0,end:7200}
         this.anim={phase:[0,0]}
+        this.fail={num:0}
         this.spawns=[]
     }
     addCurrency(amount){
@@ -22,6 +23,8 @@ class dayManager extends manager{
     beginDay(){
         this.phase=1
         this.operation.entityManager.clearWalls(['Crate','Blueprint','Option'])
+        this.operation.entityManager.clearOuterWalls()
+        this.fail.num=0
         this.spawners=[]
         for(let a=0,la=this.operation.entityManager.customer.group;a<la;a++){
             this.spawners.push([this.time.end*(a+random(0,0.5))/la,floor(random(this.operation.entityManager.customer.groupSizeMin,this.operation.entityManager.customer.groupSizeMax+1))])
@@ -29,8 +32,19 @@ class dayManager extends manager{
     }
     endDay(){
         this.phase=0
+        this.day++
+        this.operation.entityManager.customer.internal*=1.125
+        this.operation.entityManager.calcCustomer()
         this.operation.entityManager.resetWalls()
         this.operation.entityManager.spawnBlueprints(5)
+    }
+    payout(value,x,y){
+        this.addCurrency(value)
+        this.operation.entityManager.entities.particles.push(new particle(this.layer,x,y,0,{value:value}))
+    }
+    failed(num){
+        this.fail.num++
+        this.loseCurrency(5*this.fail.num*num)
     }
     display(scene){
         switch(scene){
@@ -78,12 +92,13 @@ class dayManager extends manager{
                 }
                 switch(this.phase){
                     case 1:
-                        this.time.main++
                         if(this.spawners.length>0&&this.time.main>=this.spawners[0][0]){
                             this.operation.entityManager.sendCustomers(this.spawners[0][1])
                             this.spawners.splice(0,1)
                         }
-                        if(this.time.main>=this.time.end&&this.operation.entityManager.entities.players.length<=this.operation.player.length){
+                        if(this.time.main<this.time.end){
+                            this.time.main++
+                        }else if(this.operation.entityManager.entities.players.length<=this.operation.player.length){
                             this.endDay()
                         }
                     break

@@ -13,7 +13,7 @@ class operation{
                 this.cardManager.addCard(1)
                 ////
                 //this.entityManager.spawnBlueprints(5)
-                this.entityManager.spawnOptions()
+                this.entityManager.spawnOptions(1)
                 ////
             break
         }

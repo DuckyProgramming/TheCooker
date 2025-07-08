@@ -13,13 +13,14 @@ class item extends located{
         0-player
         1-wall
         */
+        this.moved=false
         this.process=[]
         for(let a=0,la=types.item[this.type].process.length;a<la;a++){
             switch(types.item[this.type].process[a][0]){
                 case 0:
                     this.process.push({type:types.item[this.type].process[a][0],other:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
                 break
-                case 1: case 9:
+                case 1: case 2: case 3: case 4: case 9:
                     this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
                 break
                 case 5:
@@ -47,6 +48,7 @@ class item extends located{
         let result=[]
         for(let a=0,la=this.process.length;a<la;a++){
             if(types.includes(this.process[a].type)){
+                this.moved=true
                 this.process[a].main+=speed
                 this.process[a].active=true
                 this.process[a].display=15
@@ -131,6 +133,16 @@ class item extends located{
                         layer.fill(200,this.fade.main)
                         layer.ellipse(0,0,20)
                     break
+                    case 'Dirty Plate':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(100,75,80,this.fade.main)
+                        layer.ellipse(-4,0,5)
+                        layer.ellipse(1,-4,3.5)
+                        layer.ellipse(3.5,2,4)
+                    break
                     case 'Burnt':
                         layer.fill(40,this.fade.main)
                         regPoly(layer,0,0,10,9,9,0)
@@ -164,6 +176,16 @@ class item extends located{
                         layer.quad(-5,0,-14,-5,-11,0,-14,5)
                         layer.fill(0,25,50,this.fade.main)
                         layer.ellipse(9,-3,3)
+                    break
+                    case 'Meat':
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.ellipse(0,-3,18,18)
+                        layer.ellipse(0,6,14,16)
+                        layer.fill(240,80,40,this.fade.main)
+                        layer.ellipse(0,-3,12,12)
+                        layer.ellipse(0,6,8,10)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.ellipse(0,-3,4,4)
                     break
                 }
                 /*switch(this.type){
@@ -268,17 +290,6 @@ class item extends located{
                         layer.line(3.25,-6,3.25,6)
                         layer.line(-6,-3.25,6,-3.25)
                         layer.line(-6,3.25,6,3.25)
-                    break
-                    case 8:
-                        layer.fill(220,this.fade.main)
-                        layer.ellipse(0,0,24)
-                        layer.fill(200,this.fade.main)
-                        layer.ellipse(0,0,20)
-                        layer.fill(200,180,120,this.fade.main)
-                        layer.ellipse(-4,0,5)
-                        layer.ellipse(1,-4,3.5)
-                        layer.fill(160,0,60,this.fade.main)
-                        layer.ellipse(3.5,2,4)
                     break
                 }*/
                layer.pop()

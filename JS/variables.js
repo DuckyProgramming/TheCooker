@@ -30,6 +30,7 @@ types={
             ],wall:[
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
+                [1,3,'Large Plates',0],
             ],
             inside:[0,0,0,2],
             spawn:[21,17,270],
