@@ -9,7 +9,7 @@ class operation{
         switch(scene){
             case 'main':
                 this.entityManager.generateLevel(args[0],0)
-                //this.overlayManager.activate(0)
+                //this.overlayManager.activate(0,[0])
                 this.cardManager.addCard(1)
                 ////
                 //this.entityManager.spawnBlueprints(5)

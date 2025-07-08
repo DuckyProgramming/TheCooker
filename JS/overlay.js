@@ -17,11 +17,11 @@ class overlay extends located{
             break
         }
     }
-    activate(){
+    activate(args){
         switch(this.type){
             case 0:
                 this.cards=[]
-                let result=this.parent.operation.cardManager.getOptions(0,[3])
+                let result=this.parent.operation.cardManager.getOptions(args[0],[3])
                 for(let a=0,la=result.length;a<la;a++){
                     this.cards.push(new card(this.layer,this.parent.operation.cardManager,even(a,la)*200,20,result[a]))
                     this.support.push([])
@@ -95,7 +95,7 @@ class overlay extends located{
         switch(this.type){
             case 0:
                 for(let a=0,la=this.cards.length;a<la;a++){
-                    if(inPointBox(mouse,{position:{x:this.cards[a].position.x+this.layer.width/2,y:this.cards[a].position.x+this.layer.width/2},width:this.cards[a].width,height:this.cards[a].height})){
+                    if(inPointBox(mouse,{position:{x:this.cards[a].position.x+this.layer.width/2,y:this.cards[a].position.y+this.layer.height/2},width:this.cards[a].width,height:this.cards[a].height})){
                         this.active=false
                         this.parent.operation.cardManager.addCard(this.cards[a].type)
                     }

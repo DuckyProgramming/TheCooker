@@ -11,9 +11,9 @@ class overlayManager extends manager{
     anyActive(){
         return this.active.length>0
     }
-    activate(overlay){
+    activate(overlay,args){
         this.overlays[overlay].active=true
-        this.overlays[overlay].activate()
+        this.overlays[overlay].activate(args)
         this.overlays[overlay].remove=false
         this.active.push(overlay)
     }

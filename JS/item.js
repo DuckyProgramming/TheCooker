@@ -14,6 +14,9 @@ class item extends located{
         1-wall
         */
         this.moved=false
+        this.name=types.item[this.type].name
+        this.component=types.item[this.type].component
+        this.trashable=types.item[this.type].trashable
         this.process=[]
         for(let a=0,la=types.item[this.type].process.length;a<la;a++){
             switch(types.item[this.type].process[a][0]){
@@ -26,8 +29,12 @@ class item extends located{
                 case 5:
                     this.process.push({type:types.item[this.type].process[a][0],utility:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
                 break
+                case 6:
+                    this.process.push({type:types.item[this.type].process[a][0],main:0,timer:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],leave:types.item[this.type].process[a][3],active:false,display:0,anim:0})
+                break
                 case 7:
-                    this.process.push({type:types.item[this.type].process[a][0],main:0,timer:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],display:0,anim:0})
+                    this.portions=types.item[this.type].portions
+                    this.process.push({type:types.item[this.type].process[a][0],main:0,timer:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
                 break
                 case 8:
                     this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],active:false,display:0,anim:0})
@@ -35,7 +42,6 @@ class item extends located{
             }
         }
         this.processVisible=false
-        this.name=types.item[this.type].name
         switch(this.name){
             case 'Crate': case 'Blueprint':
                 this.contain=0
@@ -62,9 +68,10 @@ class item extends located{
     }
     checkUtility(type){
         for(let a=0,la=this.process.length;a<la;a++){
-            if(this.process[a].type==5&&this.proces[a].utility==type){
-                this.type=findName(obj.process[a].result,types.item)
+            if(this.process[a].type==5&&this.process[a].utility==type){
+                this.type=findName(this.process[a].result,types.item)
                 this.initialValues()
+                return true
                 a=la
             }
         }
@@ -124,8 +131,15 @@ class item extends located{
                     break
                     case 'Trash Bag':
                         layer.fill(40,this.fade.main)
-                        layer.ellipse(0,0,30)
-                        layer.triangle(0,12,-3,18,3,18)
+                        layer.ellipse(0,0,24)
+                        layer.triangle(0,9,-3,15,3,15)
+                    break
+                    case 'Compost Bag':
+                        layer.fill(40,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.triangle(0,9,-3,15,3,15)
+                        layer.fill(60,50,50,this.fade.main)
+                        layer.quad(-5,0,0,-5,5,0,0,5)
                     break
                     case 'Plate':
                         layer.fill(220,this.fade.main)

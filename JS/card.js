@@ -38,9 +38,9 @@ class card extends located{
         layer.fill(0,this.fade.main)
         layer.noStroke()
         layer.textSize(20)
-        layer.text(this.name,0,-60,150)
+        layer.text(this.name,0,-60,145)
         layer.textSize(12)
-        layer.text(this.desc,0,20,150)
+        layer.text(this.desc,0,20,145)
         if(this.customerMult!=1){
             layer.textSize(8)
             layer.text(this.customerMult<1?`-${round((1-this.customerMult)*100)}%`:`+${round((this.customerMult-1)*100)}%`,34,80)

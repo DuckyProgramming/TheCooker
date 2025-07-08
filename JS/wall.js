@@ -54,24 +54,42 @@ class wall extends partisan{
             case 'Blueprint Cabinet':
                 this.contain=-1
             break
-            case 'Counter':
+            case 'Counter': case 'Freezer':
                 this.speed=[1,1]
             break
+            case 'Cutting Board':
+                this.speed=[3,1]
+            break
+            case 'Rolling Board':
+                this.speed=[1,3]
+            break
+            case 'Levitating Counter':
+                this.speed=[1,1]
+                this.colliders.main=[]
+            break
             case 'Starter Plates': case 'Plates': case 'Large Plates':
-            case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin':
+            case 'Dish Rack':
+            case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin': case 'Compost Bin':
+            case 'Stack Station': case 'Silo':
                 this.animSet={num:0}
             break
             case 'Starter Hob':
-                this.speed=0.75
-            break
-            case 'Hob': case 'Safe Hob':
-                this.speed=1
-            break
             case 'Starter Sink':
                 this.speed=0.75
             break
-            case 'Sink':
+            case 'Hob': case 'Safe Hob': case 'Override Hob':
+            case 'Sink': case 'Soaking Sink':
                 this.speed=1
+            break
+            case 'Fast Hob':
+                this.speed=1.5
+            break
+            case 'Power Sink':
+                this.speed=2
+            break
+            case 'Wash Basin':
+                this.speed=0.375
+                this.animSet={num:0}
             break
             case 'Dining Table':
                 this.occupied=false
@@ -81,11 +99,14 @@ class wall extends partisan{
                 this.animSet={num:0,phase:[0,0,0,0,0,0]}
                 this.patience={main:0,base:0}
             break
+            case 'Frozen Prep Station':
+                this.items=0
+            break
         }
         this.reset()
     }
     reset(){
-        if(this.name!='Blueprint Cabinet'){
+        if(this.name!='Blueprint Cabinet'&&this.name!='Freezer'&&this.name!='Frozen Prep Station'){
             this.item=-1
         }
         switch(this.name){
@@ -107,11 +128,15 @@ class wall extends partisan{
                 this.base.plates=12
                 this.item=this.generateItem('Plate')
             break
+            case 'Dish Rack':
+                this.plates=0
+                this.base.plates=4
+            break
             case 'Starter Trash Bin':
                 this.trash=0
                 this.base.trash=3
             break
-            case 'Trash Bin':
+            case 'Trash Bin': case 'Compost Bin':
                 this.trash=0
                 this.base.trash=5
             break
@@ -121,6 +146,26 @@ class wall extends partisan{
             break
             case 'Dining Table':
                 this.plates=0
+            break
+            case 'Wash Basin':
+                this.plates=0
+                this.base.plates=4
+                this.washed=false
+            break
+            case 'Prep Station':
+                this.items=0
+                this.base.items=4
+            break
+            case 'Frozen Prep Station':
+                this.base.items=4
+            break
+            case 'Stack Station':
+                this.items=[]
+                this.base.items=4
+            break
+            case 'Silo':
+                this.items=0
+                this.base.items=10
             break
         }
     }
@@ -154,7 +199,15 @@ class wall extends partisan{
         }
     }
     generateItem(name){
-        return new item(this.layer,0,0,findName(name,types.item))
+        return name==''?-1:new item(this.layer,0,0,findName(name,types.item))
+    }
+    generateItemType(type){
+        return new item(this.layer,0,0,type)
+    }
+    copySelfItem(){
+        let result=new item(this.layer,0,0,this.item.type)
+        result.portions=this.item.portions
+        return result
     }
     occupy(occupier){
         this.occupants=[]
@@ -282,12 +335,6 @@ class wall extends partisan{
                         layer.endShape(CLOSE)
                         layer.strokeJoin(MITER)
                     break
-                    case 'Counter':
-                        layer.fill(140,95,80,this.fade.main)
-                        layer.rect(0,0,this.base.width+3,this.base.height+3)
-                        layer.fill(180,125,100,this.fade.main)
-                        layer.rect(0,0,this.base.width-3,this.base.height-3)
-                    break
                     case 'Trash Can':
                         for(let a=0,la=4;a<la;a++){
                             layer.fill(140+a*10,this.fade.main)
@@ -347,6 +394,153 @@ class wall extends partisan{
                             layer.rect(0,this.base.height/2-3,this.base.width-12,1.5)
                         }
                     break
+                    case 'Counter':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                    break
+                    case 'Freezer':
+                        layer.fill(180,220,240,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height)
+                        layer.fill(160,200,220,this.fade.main)
+                        layer.rect(0,0,this.base.width-6,this.base.height-6)
+                    break
+                    case 'Cutting Board':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(200,this.fade.main)
+                        layer.rect(0,0,36,28,8)
+                        layer.fill(240,this.fade.main)
+                        layer.triangle(-14,10,-6,10,-10,-18)
+                        layer.fill(80,this.fade.main)
+                        layer.rect(-10,12.5,3,5)
+                    break
+                    case 'Rolling Board':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(200,this.fade.main)
+                        layer.rect(0,0,36,28,8)
+                        layer.fill(170,170,130,this.fade.main)
+                        layer.rect(-10,0,6,24,3)
+                        layer.ellipse(-10,-14,3,8)
+                        layer.ellipse(-10,14,3,8)
+                    break
+                    case 'Levitating Counter':
+                        layer.strokeWeight(2)
+                        layer.noFill()
+                        layer.stroke(140,95,80,this.fade.main*0.5)
+                        layer.quad(-this.base.width*0.3,0,0,-this.base.height*0.3,this.base.width*0.3,0,0,this.base.height*0.3)
+                        layer.stroke(180,125,100,this.fade.main*0.5)
+                        layer.quad(-this.base.width*0.2,0,0,-this.base.height*0.2,this.base.width*0.2,0,0,this.base.height*0.2)
+                    break
+                    case 'Prep Station':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(60,180,240,this.fade.main)
+                        layer.rect(-10,-10,17,17,4)
+                        layer.rect(-10,10,17,17,4)
+                        layer.rect(10,-10,17,17,4)
+                        layer.rect(10,10,17,17,4)
+                        layer.fill(40,140,180,this.fade.main)
+                        layer.rect(-10,-10,14,14,3)
+                        layer.rect(-10,10,14,14,3)
+                        layer.rect(10,-10,14,14,3)
+                        layer.rect(10,10,14,14,3)
+                        if(this.item!=-1){
+                            layer.push()
+                            layer.scale(0.5)
+                            layer.translate(-20,-20)
+                            this.item.display(0)
+                            if(this.items>=2){
+                                layer.translate(40,0)
+                                this.item.display(0)
+                                if(this.items>=3){
+                                    layer.translate(-40,40)
+                                    this.item.display(0)
+                                    if(this.items>=4){
+                                        layer.translate(40,0)
+                                        this.item.display(0)
+                                    }
+                                }
+                            }
+                            layer.pop()
+                        }
+                    break
+                    case 'Frozen Prep Station':
+                        layer.fill(180,220,240,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height)
+                        layer.fill(160,200,220,this.fade.main)
+                        layer.rect(0,0,this.base.width-6,this.base.height-6)
+                        layer.fill(80,200,240,this.fade.main)
+                        layer.rect(-10,-10,17,17,4)
+                        layer.rect(-10,10,17,17,4)
+                        layer.rect(10,-10,17,17,4)
+                        layer.rect(10,10,17,17,4)
+                        layer.fill(60,170,220,this.fade.main)
+                        layer.rect(-10,-10,14,14,3)
+                        layer.rect(-10,10,14,14,3)
+                        layer.rect(10,-10,14,14,3)
+                        layer.rect(10,10,14,14,3)
+                        if(this.item!=-1){
+                            layer.push()
+                            layer.scale(0.5)
+                            layer.translate(-20,-20)
+                            this.item.display(0)
+                            if(this.items>=2){
+                                layer.translate(40,0)
+                                this.item.display(0)
+                                if(this.items>=3){
+                                    layer.translate(-40,40)
+                                    this.item.display(0)
+                                    if(this.items>=4){
+                                        layer.translate(40,0)
+                                        this.item.display(0)
+                                    }
+                                }
+                            }
+                            layer.pop()
+                        }
+                    break
+                    case 'Stack Station':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(60,180,240,this.fade.main)
+                        layer.rect(0,0,31,31,7)
+                        layer.fill(40,140,180,this.fade.main)
+                        layer.rect(0,0,28,28,6)
+                        layer.fill(60,180,240,this.fade.main)
+                        layer.rect(0,0,17,17,4)
+                        layer.fill(40,140,180,this.fade.main)
+                        layer.rect(0,0,14,14,3)
+                        for(let a=0,la=this.items.length;a<la;a++){
+                            this.items[a].display(0)
+                        }
+                    break
+                    case 'Silo':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(120,this.fade.main)
+                        layer.ellipse(0,0,36)
+                        layer.fill(80,this.fade.main)
+                        layer.ellipse(0,0,30)
+                        layer.fill(120,this.fade.main)
+                        layer.rect(0,0,30,3)
+                        for(let a=0,la=8;a<la;a++){
+                            layer.rotate(45)
+                            layer.rect(14,0,2,3)
+                        }
+                    break
                     case 'Dining Table':
                         layer.fill(160,90,60,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height,5)
@@ -362,8 +556,6 @@ class wall extends partisan{
                         layer.rotate(3)
                         layer.fill(180,220,220,this.fade.main)
                         layer.rect(0,0,32,24,6)
-                        layer.fill(220,this.fade.main)
-                        layer.rect(0,-12,4,9,3)
                         layer.fill(180,200,200,this.fade.main)
                         layer.arc(0,2,12,12,-10,200)
                         layer.ellipse(0,2,9)
@@ -373,10 +565,39 @@ class wall extends partisan{
                         layer.rect(0,0,this.base.width,this.base.height,12)
                         layer.fill(180,220,220,this.fade.main)
                         layer.rect(0,0,32,24,6)
-                        layer.fill(220,this.fade.main)
-                        layer.rect(0,-12,5,10,3)
                         layer.fill(180,200,200,this.fade.main)
                         layer.ellipse(0,2,12)
+                    break
+                    case 'Soaking Sink':
+                        layer.fill(200,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,12)
+                        layer.fill(180,220,220,this.fade.main)
+                        layer.rect(0,0,32,24,6)
+                        layer.fill(180,200,200,this.fade.main)
+                        layer.ellipse(0,2,12)
+                        layer.fill(160,200,200,this.fade.main)
+                        layer.rect(-15,0,2,4)
+                        layer.rect(-15,-6,2,4)
+                        layer.rect(-15,6,2,4)
+                        layer.rect(15,0,2,4)
+                        layer.rect(15,-6,2,4)
+                        layer.rect(15,6,2,4)
+                    break
+                    case 'Wash Basin':
+                        layer.fill(200,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,12)
+                        layer.fill(180,220,220,this.fade.main)
+                        layer.rect(0,0,40,32,8)
+                        layer.fill(180,200,200,this.fade.main)
+                        layer.ellipse(0,2,12)
+                    break
+                    case 'Power Sink':
+                        layer.fill(200,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,12)
+                        layer.fill(180,220,220,this.fade.main)
+                        layer.rect(0,0,32,24,6)
+                        layer.fill(180,200,200,this.fade.main)
+                        layer.ellipse(0,3,12)
                     break
                     case 'Starter Plates':
                         layer.fill(140,95,80,this.fade.main)
@@ -429,6 +650,25 @@ class wall extends partisan{
                         layer.line(-10,10,-13.5,8)
                         layer.line(10,10,13.5,8)
                     break
+                    case 'Dish Rack':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.stroke(175,this.fade.main)
+                        layer.strokeWeight(2)
+                        layer.line(0,-8,0,8)
+                        layer.line(-13.5,-8,-13.5,8)
+                        layer.line(13.5,-8,13.5,8)
+                        layer.line(-10,-10,-13.5,-8)
+                        layer.line(10,-10,13.5,-8)
+                        layer.line(-10,10,-13.5,8)
+                        layer.line(10,10,13.5,8)
+                        layer.line(-3.5,-10,0,-8)
+                        layer.line(3.5,-10,0,-8)
+                        layer.line(-3.5,10,0,8)
+                        layer.line(3.5,10,0,8)
+                    break
                     case 'Starter Trash Bin':
                         layer.fill(40,80,40,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height,2)
@@ -441,6 +681,56 @@ class wall extends partisan{
                             if(this.trash>0){
                                 layer.fill(80,75,70,this.fade.main)
                                 layer.rect(0,0,this.base.width-12,this.base.height-12,6)
+                            }
+                        }
+                    break
+                    case 'Trash Bin':
+                        layer.fill(40,80,40,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,2)
+                        if(this.trash>=this.base.trash){
+                            layer.fill(80,75,70,this.fade.main)
+                            layer.rect(0,0,this.base.width-5,this.base.height-5,2)
+                        }else{
+                            layer.fill(30,40,30,this.fade.main)
+                            layer.rect(0,0,this.base.width-5,this.base.height-5,2)
+                            if(this.trash>0){
+                                layer.fill(80,75,70,this.fade.main)
+                                layer.rect(0,0,this.base.width-15,this.base.height-15,6)
+                            }
+                        }
+                    break
+                    case 'Large Trash Bin':
+                        layer.fill(20,60,20,this.fade.main)
+                        layer.rect(0,0,this.base.width+4,this.base.height-8,4)
+                        layer.rect(0,0,this.base.width-8,this.base.height+4,4)
+                        layer.fill(40,80,40,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,2)
+                        if(this.trash>=this.base.trash){
+                            layer.fill(80,75,70,this.fade.main)
+                            layer.rect(0,0,this.base.width-5,this.base.height-5,2)
+                        }else{
+                            layer.fill(30,40,30,this.fade.main)
+                            layer.rect(0,0,this.base.width-5,this.base.height-5,2)
+                            if(this.trash>0){
+                                layer.fill(80,75,70,this.fade.main)
+                                layer.rect(0,0,this.base.width-15,this.base.height-15,6)
+                            }
+                        }
+                    break
+                    case 'Compost Bin':
+                        layer.fill(160,100,40,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3,3)
+                        layer.fill(40,80,40,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,2)
+                        if(this.trash>=this.base.trash){
+                            layer.fill(80,75,70,this.fade.main)
+                            layer.rect(0,0,this.base.width-5,this.base.height-5,2)
+                        }else{
+                            layer.fill(30,40,30,this.fade.main)
+                            layer.rect(0,0,this.base.width-5,this.base.height-5,2)
+                            if(this.trash>0){
+                                layer.fill(80,75,70,this.fade.main)
+                                layer.rect(0,0,this.base.width-15,this.base.height-15,6)
                             }
                         }
                     break
@@ -487,6 +777,92 @@ class wall extends partisan{
                         layer.line(8,-8,10.5,-10.5)
                         layer.line(8,8,10.5,10.5)
                     break
+                    case 'Safe Hob':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(180,this.fade.main)
+                        layer.rect(0,0,32,32,10)
+                        layer.noFill()
+                        layer.stroke(40,this.fade.main)
+                        layer.strokeWeight(2)
+                        layer.ellipse(0,0,22)
+                        layer.ellipse(0,0,12)
+                        layer.line(-8,-8,-10.5,-10.5)
+                        layer.line(-8,8,-10.5,10.5)
+                        layer.line(8,-8,10.5,-10.5)
+                        layer.line(8,8,10.5,10.5)
+                        layer.stroke(80,this.fade.main)
+                        layer.strokeWeight(4)
+                        for(let a=0,la=8;a<la;a++){
+                            layer.point(8.5*lsin(a/la*360),8.5*lcos(a/la*360))
+                        }
+                        layer.stroke(60,240,60,this.fade.main)
+                        layer.strokeWeight(2.5)
+                        for(let a=0,la=8;a<la;a++){
+                            layer.point(8.5*lsin(a/la*360),8.5*lcos(a/la*360))
+                        }
+                    break
+                    case 'Fast Hob':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(180,this.fade.main)
+                        layer.rect(0,0,32,32,10)
+                        layer.noFill()
+                        layer.strokeWeight(2)
+                        layer.stroke(240,60,60,this.fade.main)
+                        layer.line(-11,0,-13,0)
+                        layer.line(11,0,13,0)
+                        layer.line(0,-11,0,-13)
+                        layer.line(0,11,0,13)
+                        layer.ellipse(0,0,2)
+                        layer.stroke(40,this.fade.main)
+                        layer.ellipse(0,0,22)
+                        layer.ellipse(0,0,12)
+                        layer.line(-6,0,-11,0)
+                        layer.line(0,-6,0,-11)
+                        layer.line(6,0,11,0)
+                        layer.line(0,6,0,11)
+                        layer.line(-8,-8,-10.5,-10.5)
+                        layer.line(-8,8,-10.5,10.5)
+                        layer.line(8,-8,10.5,-10.5)
+                        layer.line(8,8,10.5,10.5)
+                    break
+                    case 'Override Hob':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(180,this.fade.main)
+                        layer.rect(0,0,32,32,10)
+                        layer.noFill()
+                        layer.stroke(40,this.fade.main)
+                        layer.strokeWeight(2)
+                        layer.ellipse(0,0,22)
+                        layer.ellipse(0,0,12)
+                        layer.line(-6,0,-11,0)
+                        layer.line(0,-6,0,-11)
+                        layer.line(6,0,11,0)
+                        layer.line(0,6,0,11)
+                        layer.line(-8,-8,-10.5,-10.5)
+                        layer.line(-8,8,-10.5,10.5)
+                        layer.line(8,-8,10.5,-10.5)
+                        layer.line(8,8,10.5,10.5)
+                        layer.stroke(240,200,40,this.fade.main)
+                        layer.strokeWeight(2.5)
+                        layer.line(-16,-6,-16,6)
+                        layer.line(16,-6,16,6)
+                        layer.line(-6,-16,6,-16)
+                        layer.line(-6,16,6,16)
+                        layer.stroke(240,80,40,this.fade.main)
+                        layer.line(-16,-1,-16,1)
+                        layer.line(16,-1,16,1)
+                        layer.line(-1,-16,1,-16)
+                        layer.line(-1,16,1,16)
+                    break
                     case 'Fish':
                         layer.fill(50,150,200,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height)
@@ -502,7 +878,7 @@ class wall extends partisan{
                         layer.ellipse(9,-3,3)
                     break
                 }
-                if(this.item!=-1){
+                if(this.name!='Prep Station'&&this.name!='Frozen Prep Station'&&this.item!=-1){
                     this.item.display(0)
                 }
                 layer.pop()
@@ -561,19 +937,54 @@ class wall extends partisan{
                             this.item.displayProcess(8)
                         }
                     break
-                    case 'Starter Plates': case 'Plates': case 'Large Plates':
+                    case 'Stack Station':
+                        layer.fill(225,this.fade.main*this.animSet.num)
+                        layer.rect(-16,-16,12,12,4)
+                        layer.fill(0,this.fade.main*this.animSet.num)
+                        layer.textSize(10)
+                        layer.text(this.items.length+1,-16,-16)
+                    break
+                    case 'Silo':
+                        layer.fill(225,this.fade.main*this.animSet.num)
+                        layer.rect(-16,-16,12,12,4)
+                        layer.fill(0,this.fade.main*this.animSet.num)
+                        layer.textSize(10)
+                        layer.text(this.items,-16,-16)
+                    break
+                    case 'Starter Plates': case 'Plates': case 'Large Plates': case 'Dish Rack':
                         layer.fill(225,this.fade.main*this.animSet.num)
                         layer.rect(-16,-16,12,12,4)
                         layer.fill(0,this.fade.main*this.animSet.num)
                         layer.textSize(10)
                         layer.text(this.plates,-16,-16)
                     break
-                    case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin':
+                    case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin': case 'Compost Bin':
                         layer.fill(225,this.fade.main*this.animSet.num)
                         layer.rect(-16,-16,12,12,4)
                         layer.fill(0,this.fade.main*this.animSet.num)
                         layer.textSize(10)
                         layer.text(this.trash,-16,-16)
+                    break
+                    case 'Starter Sink':
+                        layer.fill(220,this.fade.main)
+                        layer.rect(0,-12,4,9,3)
+                    break
+                    case 'Sink': case 'Soaking Sink':
+                        layer.fill(220,this.fade.main)
+                        layer.rect(0,-12,5,10,3)
+                    break
+                    case 'Wash Basin':
+                        layer.fill(220,this.fade.main)
+                        layer.rect(0,-15,5,10,3)
+                        layer.fill(225,this.fade.main*this.animSet.num)
+                        layer.rect(-16,-16,12,12,4)
+                        layer.fill(0,this.fade.main*this.animSet.num)
+                        layer.textSize(10)
+                        layer.text(this.plates,-16,-16)
+                    break
+                    case 'Power Sink':
+                        layer.fill(220,this.fade.main)
+                        layer.rect(0,-11,9,12,3)
                     break
                     case 'Dining Table':
                         layer.fill(225,this.fade.main*this.animSet.num)
@@ -620,13 +1031,25 @@ class wall extends partisan{
                 }
                 this.animSet.contain=smoothAnim(this.animSet.contain,visible&&!this.getItemProcessVisible(),0,1,5)
             break
-            case 'Starter Plates': case 'Plates': case 'Large Plates':
+            case 'Stack Station':
+                for(let a=0,la=this.items.length;a<la;a++){
+                    this.items[a].parent=this
+                    this.items[a].parentClass=1
+                    this.items[a].update()
+                }
+                this.animSet.num=smoothAnim(this.animSet.num,this.item!=-1,0,1,5)
+            break
+            case 'Silo':
+                this.animSet.num=smoothAnim(this.animSet.num,this.items>0,0,1,5)
+            break
+            case 'Starter Plates': case 'Plates': case 'Large Plates': case 'Dish Rack':
+            case 'Wash Basin':
                 this.animSet.num=smoothAnim(this.animSet.num,this.plates>0,0,1,5)
             break
-            case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin':
+            case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin': case 'Compost Bin':
                 this.animSet.num=smoothAnim(this.animSet.num,this.trash>0,0,1,5)
             break
-            case 'Starter Hob': case 'Hob': case 'Fast Hob':
+            case 'Starter Hob': case 'Hob': case 'Fast Hob': case 'Override Hob':
                 if(this.item!=-1){
                     let result=this.item.generalProcess([1,9],this.speed)
                     for(let a=0,la=result.length;a<la;a++){
@@ -644,6 +1067,18 @@ class wall extends partisan{
                     for(let a=0,la=result.length;a<la;a++){
                         switch(result[a].type){
                             case 1:
+                                this.item=this.generateItem(result[a].result)
+                            break
+                        }
+                    }
+                }
+            break
+            case 'Soaking Sink':
+                if(this.item!=-1){
+                    let result=this.item.generalProcess([4],0.25)
+                    for(let a=0,la=result.length;a<la;a++){
+                        switch(result[a].type){
+                            case 4:
                                 this.item=this.generateItem(result[a].result)
                             break
                         }
@@ -757,22 +1192,26 @@ class wall extends partisan{
                                 for(let a=0,la=this.occupants.length;a<la;a++){
                                     if(this.occupants[a].item!=-1){
                                         for(let b=0,lb=this.occupants[a].item.process.length;b<lb;b++){
-                                            if(this.occupants[a].item.process[b].result=='Dirty Plate'){
-                                                if(this.item==-1){
-                                                    this.item=this.generateItem('Dirty Plate')
-                                                }
-                                                this.plates++
+                                            switch(this.occupants[a].item.process[b].result){
+                                                case 'Dirty Plate':
+                                                    if(this.item==-1){
+                                                        this.item=this.generateItem('Dirty Plate')
+                                                    }
+                                                    this.plates++
+                                                break
                                             }
                                         }
                                         this.occupants[a].item=-1
                                     }
                                     if(this.occupants[a].side!=-1){
                                         for(let b=0,lb=this.occupants[a].item.process.length;b<lb;b++){
-                                            if(this.occupants[a].item.process[b].result=='Dirty Plate'){
-                                                if(this.item==-1){
-                                                    this.item=this.generateItem('Dirty Plate')
-                                                }
-                                                this.plates++
+                                            switch(this.occupants[a].item.process[b].result){
+                                                case 'Dirty Plate':
+                                                    if(this.item==-1){
+                                                        this.item=this.generateItem('Dirty Plate')
+                                                    }
+                                                    this.plates++
+                                                break
                                             }
                                         }
                                         this.occupants[a].side=-1
@@ -908,8 +1347,32 @@ class wall extends partisan{
                                 return true
                             }
                         break
-                        case 'Counter':
-                        case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob':
+                        case 'Dish Rack':
+                            if(player.item!=-1&&player.item.name=='Dirty Plate'&&this.plates<this.base.plates){
+                                if(this.plates==0){
+                                    this.item=this.generateItem('Dirty Plate')
+                                }
+                                this.plates++
+                                player.item=-1
+                                return true
+                            }else if(this.plates>0){
+                                let temp=this.generateItem('Dirty Plate')
+                                if(player.item==-1){
+                                    player.item=temp
+                                    this.plates--
+                                }else{
+                                    if(player.item.attemptCombine(temp)){
+                                        this.plates--
+                                    }
+                                }
+                                if(this.plates==0){
+                                    this.item=-1
+                                }
+                                return true
+                            }
+                        break
+                        case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Levitating Counter':
+                        case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                             if(player.item!=-1){
                                 if(this.item!=-1){
                                     if(this.item.attemptCombine(player.item)){
@@ -929,7 +1392,66 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Starter Sink': case 'Sink':
+                        case 'Prep Station': case 'Frozen Prep Station': case 'Silo':
+                            if(player.item!=-1){
+                                if(this.item!=-1){
+                                    if(player.item.attemptCombine(this.item)){
+                                        this.items--
+                                        if(this.items==0){
+                                            this.item=-1
+                                        }
+                                        return true
+                                    }else if(player.item.type==this.item.type&&this.items<this.base.items){
+                                        player.item=-1
+                                        this.items++
+                                        return true
+                                    }
+                                }else if(this.item==-1&&player.item.component){
+                                    this.item=player.item
+                                    player.item=-1
+                                    this.items=1
+                                    return true
+                                }
+                            }else if(player.item==-1){
+                                if(this.item!=-1){
+                                    this.items--
+                                    if(this.items==0){
+                                        player.item=this.item
+                                        this.item=-1
+                                    }else{
+                                        player.item=this.copySelfItem()
+                                    }
+                                    return true
+                                }
+                            }
+                        break
+                        case 'Stack Station':
+                            if(player.item!=-1){
+                                if(this.item!=-1){
+                                    if(this.item.attemptCombine(player.item)){
+                                        player.item=-1
+                                        return true
+                                    }else if(this.items.length<this.base.items-1){
+                                        this.items.push(this.item)
+                                        this.item=player.item
+                                        player.item=-1
+                                        return true
+                                    }
+                                }else if(this.item==-1){
+                                    this.item=player.item
+                                    player.item=-1
+                                    return true
+                                }
+                            }else if(player.item==-1){
+                                if(this.item!=-1){
+                                    player.item=this.item
+                                    this.item=last(this.items)
+                                    this.items.splice(this.items.length-1,1)
+                                    return true
+                                }
+                            }
+                        break
+                        case 'Starter Sink': case 'Sink':  case 'Soaking Sink': case 'Power Sink':
                             if(player.item!=-1){
                                 if(!player.item.checkUtility('Water')){
                                     if(this.item!=-1){
@@ -951,8 +1473,53 @@ class wall extends partisan{
                                 }
                             }
                         break
+                        case 'Wash Basin':
+                            if(player.item!=-1){
+                                if(this.item!=-1){
+                                    if(player.item.attemptCombine(this.item)){
+                                        if(this.plates>1){
+                                            this.plates--
+                                        }else{
+                                            this.item=-1
+                                            this.plates=0
+                                        }
+                                        return true
+                                    }else if(player.item.name==this.item.name&&this.item.name=='Dirty Plate'&&this.plates<this.base.plates){
+                                        player.item=-1
+                                        this.plates++
+                                        return true
+                                    }
+                                }else if(this.item==-1){
+                                    this.item=player.item
+                                    player.item=-1
+                                    if(this.item.name=='Dirty Plate'){
+                                        this.plates=1
+                                        this.washed=true
+                                    }
+                                    return true
+                                }
+                            }else{
+                                if(this.plates>1){
+                                    let temp=this.generateItemType(this.item.type)
+                                    if(player.item==-1){
+                                        player.item=temp
+                                        this.plates--
+                                    }else{
+                                        if(player.item.attemptCombine(temp)){
+                                            this.plates--
+                                        }
+                                    }
+                                    return true
+                                }else if(this.item!=-1){
+                                    player.item=this.item
+                                    this.item=-1
+                                    this.plates=0
+                                    return true
+                                }
+                            }
+                        break
                         case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin':
-                            if(player.item!=-1&&this.trash<this.base.trash){
+                            if(player.item!=-1&&this.trash<this.base.trash&&player.item.trashable){
                                 if(!player.item.checkUtility('Trash')){
                                     player.item=-1
                                 }
@@ -960,6 +1527,18 @@ class wall extends partisan{
                                 return true
                             }else if(player.item==-1&&this.trash>0){
                                 player.item=this.generateItem('Trash Bag')
+                                this.trash=0
+                            }
+                        break
+                        case 'Compost Bin':
+                            if(player.item!=-1&&this.trash<this.base.trash&&player.item.trashable){
+                                if(!player.item.checkUtility('Trash')){
+                                    player.item=-1
+                                }
+                                this.trash++
+                                return true
+                            }else if(player.item==-1&&this.trash>0){
+                                player.item=this.generateItem('Compost Bag')
                                 this.trash=0
                             }
                         break
@@ -1012,7 +1591,12 @@ class wall extends partisan{
                             player.item=temp
                             return true
                         }else{
-                            return player.item.attemptCombine(temp)
+                            if(player.item.attemptCombine(temp)){
+                                return true
+                            }else if(player.item.type==temp.type){
+                                player.item=-1
+                                return true
+                            }
                         }
                     }
                 break
@@ -1073,7 +1657,7 @@ class wall extends partisan{
                 break
                 case 1:
                     switch(this.name){
-                        case 'Starter Sink': case 'Sink':
+                        case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Wash Basin': case 'Power Sink':
                             if(this.item!=-1){
                                 this.item.moved=false
                                 let result=this.item.generalProcess([4],this.speed)
@@ -1089,7 +1673,7 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Counter':
+                        case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Levitating Counter':
                             if(this.item!=-1){
                                 this.item.moved=false
                                 let result=this.item.generalProcess([2],this.speed[0])
@@ -1104,6 +1688,22 @@ class wall extends partisan{
                                 for(let a=0,la=result.length;a<la;a++){
                                     switch(result[a].type){
                                         case 2:
+                                            this.item=this.generateItem(result[a].result)
+                                        break
+                                    }
+                                }
+                                if(this.item.moved){
+                                    return true
+                                }
+                            }
+                        break
+                        case 'Override Hob':
+                            if(this.item!=-1){
+                                this.item.moved=false
+                                let result=this.item.generalProcess([1,9],this.speed)
+                                for(let a=0,la=result.length;a<la;a++){
+                                    switch(result[a].type){
+                                        case 1: case 9:
                                             this.item=this.generateItem(result[a].result)
                                         break
                                     }
@@ -1133,6 +1733,18 @@ class wall extends partisan{
                 break
                 case 1:
                     switch(this.name){
+                        case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Wash Basin': case 'Power Sink':
+                            if(player.item!=-1){
+                                player.item.checkUtility('Water')
+                            }
+                        break
+                        case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin': case 'Trash Can': case 'Compost Bin':
+                            if(player.item!=-1&&this.trash<this.base.trash){
+                                if(player.item.checkUtility('Trash')){
+                                    this.trash++
+                                }
+                            }
+                        break
                         case 'Dining Table':
                             if(!this.occupied){
                                 if(this.item==-1&&player.follower!=-1&&!this.occupied){

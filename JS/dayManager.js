@@ -7,6 +7,7 @@ class dayManager extends manager{
         this.currency={main:0}
         ////
         this.time={main:0,end:7200}
+        this.patience={anim:0,main:0,base:3600,fail:false}
         this.anim={phase:[0,0]}
         this.fail={num:0}
         this.spawns=[]
@@ -22,6 +23,8 @@ class dayManager extends manager{
     }
     beginDay(){
         this.phase=1
+        this.patience.main=3600
+        this.patience.fail=false
         this.operation.entityManager.clearWalls(['Crate','Blueprint','Option'])
         this.operation.entityManager.clearOuterWalls()
         this.fail.num=0
@@ -33,7 +36,11 @@ class dayManager extends manager{
     endDay(){
         this.phase=0
         this.day++
+        if(this.day%3==0){
+            this.operation.overlayManager.activate(0,[1])
+        }
         this.operation.entityManager.customer.internal*=1.125
+        this.operation.entityManager.clearCustomer()
         this.operation.entityManager.calcCustomer()
         this.operation.entityManager.resetWalls()
         this.operation.entityManager.spawnBlueprints(5)
@@ -80,6 +87,13 @@ class dayManager extends manager{
                     this.layer.rect(this.layer.width/2,12,304,12,4.5)
                     this.layer.fill(240,160,80,this.anim.phase[1])
                     this.layer.rect(this.layer.width/2-150*(1-this.time.main/this.time.end),12,300*this.time.main/this.time.end,8,3)
+                    if(this.patience.anim>0){
+                        this.layer.noStroke()
+                        this.layer.fill(80,this.anim.phase[1]*this.patience.anim)
+                        this.layer.rect(this.layer.width/2,28,154,10,3)
+                        this.layer.fill(240,20,20,this.anim.phase[1]*this.patience.anim)
+                        this.layer.rect(this.layer.width/2-75*(1-this.patience.main/this.patience.base),28,150*this.patience.main/this.patience.base,6,2)
+                    }
                 }
             break
         }
@@ -90,6 +104,7 @@ class dayManager extends manager{
                 for(let a=0,la=this.anim.phase.length;a<la;a++){
                     this.anim.phase[a]=smoothAnim(this.anim.phase[a],this.phase==a,0,1,5)
                 }
+                this.patience.anim=smoothAnim(this.patience.anim,this.time.main>=this.time.end,0,1,5)
                 switch(this.phase){
                     case 1:
                         if(this.spawners.length>0&&this.time.main>=this.spawners[0][0]){
@@ -98,8 +113,16 @@ class dayManager extends manager{
                         }
                         if(this.time.main<this.time.end){
                             this.time.main++
-                        }else if(this.operation.entityManager.entities.players.length<=this.operation.player.length){
-                            this.endDay()
+                        }else{
+                            if(this.patience.main>0){
+                                this.patience.main--
+                                if(this.operation.entityManager.entities.players.length<=this.operation.player.length){
+                                    this.endDay()
+                                }
+                            }else if(!this.patience.fail){
+                                this.patience.fail=true
+                                this.operation.entityManager.queueFail()
+                            }
                         }
                     break
                 }

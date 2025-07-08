@@ -279,6 +279,38 @@ class entityManager extends manager{
             }
         }
     }
+    queueFail(){
+        let total=0
+        let ticker=0
+        for(let a=0,la=this.entities.players.length;a<la;a++){
+            if(this.entities.players[a].id==-1&&(this.entities.players[a].mode==-1||this.entities.players[a].mode==0)){
+                this.entities.players[a].fade.trigger=false
+                total++
+                ticker++
+                if(this.entities.players[a].follower==-1){
+                    this.operation.dayManager.failed(ticker)
+                    ticker=0
+                }
+            }
+        }
+        for(let a=0,la=this.customer.queue.length;a<la;a++){
+            total++
+            ticker++
+            if(this.customer.queue[a].follower==-1){
+                this.operation.dayManager.failed(ticker)
+                ticker=0
+            }
+        }
+        this.customer.queue=[]
+    }
+    clearCustomer(){
+        for(let a=0,la=this.entities.players.length;a<la;a++){
+            if(this.entities.players[a].id==-1){
+                this.entities.players[a].fade.trigger=false
+            }
+        }
+        this.customer.queue=[]
+    }
     spawnOptions(num){
         let ticker=0
         for(let a=(this.grid.length-1)/2-1,la=0;a>=la;a--){
@@ -360,7 +392,7 @@ class entityManager extends manager{
                     }else if(b<lb-1&&this.grid[a*2+1][b*2+3]==0){
                         shift[0]++
                     }
-                    if(inPointBox(loc,{position:{x:this.tileset[0]*(b+0.5)+shift[0]*4,y:this.tileset[1]*(a+0.5)+shift[1]*4},width:this.tileset[0]+abs(shift[0])*8,height:this.tileset[1]+abs(shift[1])*8})){
+                    if(inPointBox(loc,{position:{x:this.tileset[0]*(b+0.5)+shift[0]*3,y:this.tileset[1]*(a+0.5)+shift[1]*3},width:this.tileset[0]+abs(shift[0])*6,height:this.tileset[1]+abs(shift[1])*6})){
                         for(let c=0,lc=this.entities.players.length;c<lc;c++){
                             if(inCircleBox(this.entities.players[c],{position:{x:this.tileset[0]*(b+0.5),y:this.tileset[1]*(a+0.5)},width:this.tileset[0]-8,height:this.tileset[1]-8})){
                                 return false

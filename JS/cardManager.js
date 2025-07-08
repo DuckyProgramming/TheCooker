@@ -105,16 +105,20 @@ class cardManager extends manager{
     }
     addCard(card){
         this.active.push(card)
-        this.operation.entityManager.sendPackages(types.card[card].wall)
         this.operation.entityManager.customer.internal*=types.card[card].customerMult
         this.operation.entityManager.calcCustomer()
-        for(let a=0,la=types.card[card].dish.length;a<la;a++){
-            this.operation.dishManager.addDish(findName(types.card[card].dish[a],types.dish))
-        }
-        for(let a=0,la=types.card[card].wall.length;a<la;a++){
-            this.operation.blueprintManager.addEnabled(types.card[card].wall[a])
+        if(types.card[card].list!=5){
+            this.operation.entityManager.sendPackages(types.card[card].wall)
+            for(let a=0,la=types.card[card].dish.length;a<la;a++){
+                this.operation.dishManager.addDish(findName(types.card[card].dish[a],types.dish))
+            }
+            for(let a=0,la=types.card[card].wall.length;a<la;a++){
+                this.operation.blueprintManager.addEnabled(types.card[card].wall[a])
+            }
         }
         this.removeFromList(card)
         this.convertedListing()
+        switch(types.card[card].name){
+        }
     }
 }

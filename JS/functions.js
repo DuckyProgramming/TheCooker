@@ -257,6 +257,11 @@ function checkValid(){
         }
     }
     for(let a=0,la=types.item.length;a<la;a++){
+        for(let b=a+1,lb=types.item.length;b<lb;b++){
+            if(types.item[a].name==types.item[b].name){
+                print(types.item[a].name)
+            }
+        }
         for(let b=0,lb=types.item[a].process.length;b<lb;b++){
             switch(types.item[a].process[b][0]){
                 case 0:
@@ -297,6 +302,11 @@ function checkValid(){
                     print(types.card[a].name,'-',types.card[a].dish[b])
                 }
             }
+            for(let b=0,lb=types.card[a].wall.length;b<lb;b++){
+                if(findName(types.card[a].wall[b],types.wall)<0){
+                    print(types.card[a].name,'-',types.card[a].wall[b])
+                }
+            }
         }
         for(let b=0,lb=types.card[a].prereq.length;b<lb;b++){
             if(findName(types.card[a].prereq[b],types.card)<0){
@@ -306,11 +316,6 @@ function checkValid(){
         for(let b=0,lb=types.card[a].mutex.length;b<lb;b++){
             if(findName(types.card[a].mutex[b],types.card)<0){
                 print(types.card[a].name,'-',types.card[a].mutex[b])
-            }
-        }
-        for(let b=0,lb=types.card[a].wall.length;b<lb;b++){
-            if(findName(types.card[a].wall[b],types.wall)<0){
-                print(types.card[a].name,'-',types.card[a].wall[b])
             }
         }
     }

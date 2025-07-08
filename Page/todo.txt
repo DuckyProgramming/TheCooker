@@ -2,32 +2,11 @@ meat gaming
 
 assorted appliances
 
--Freezer
--Cutting Board, Rolling Board
--Levitating Counter
--Prep Station
--Frozen Prep Station
--Stack Station
-
--Soaking Sink
--Wash Basin
--Power Sink
--Dish Rack
-
--Safe Hob
--Fast Hob
--Override Hob
 -Oven
 -Microwave
--Waffle Iron
 
--Pots
--Tray
--Tin
--Donut Tray
+the first few customer cards
 
--Trash Bin
--Large Trash Bin
--Compost Bin
+blueprint descriptions
 
-...providers
+...card-specifics
