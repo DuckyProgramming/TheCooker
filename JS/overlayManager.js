@@ -32,6 +32,7 @@ class overlayManager extends manager{
         }
     }
     update(scene){
+        super.update()
         switch(scene){
             default:
                 for(let a=0,la=this.active.length;a<la;a++){

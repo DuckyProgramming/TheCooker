@@ -1,12 +1,15 @@
-meat gaming
+pizza gaming
 
-assorted appliances
-
--Oven
--Microwave
-
-the first few customer cards
+appliance - fancy table
 
 blueprint descriptions
+
++4 dishes / variant cards
+
++2 variant cards
+
++2 customer cards
+
++8 premiership cards
 
 ...card-specifics

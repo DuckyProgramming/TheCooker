@@ -21,14 +21,17 @@ class player extends partisan{
         this.handLen=0
         this.follower=-1
         this.speed=0.4
+        this.base.speed=this.speed
         if(this.id==-1){
             this.side=-1
             this.follow=-1
+            this.oldFollow=-1
             this.mode=0
             this.order=[]
             this.paying=[]
             this.angle=0
             this.timer.angle=0
+            this.touch=false
         }
     }
     scale(value){
@@ -123,15 +126,13 @@ class player extends partisan{
         }
     }
     cascadeMode(mode){
+        this.touch=true
         this.mode=mode
         if(this.follower!=-1&&this.follower.id==this.id&&this.follower.mode!=mode){
             this.follower.cascadeMode(mode)
         }
         if(this.follow!=-1&&this.follow.id==this.id&&this.follow.mode!=mode){
             this.follow.cascadeMode(mode)
-        }
-        if(mode==-1&&this.follow!=-1&&this.follow.id!=this.id){
-            this.follow=-1
         }
     }
     makeOrder(orderPhase,menu,activate){
@@ -142,7 +143,7 @@ class player extends partisan{
             case 0:
                 if(floor(random(0,menu[1].length+1))!=0||activate){
                     index=floor(random(0,menu[1].length))
-                    this.order.push(new item(this.layer,0,0,findName(menu[1][index][0],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[1][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).size=0.5
                     this.paying.push(menu[1][index][1])
@@ -150,13 +151,13 @@ class player extends partisan{
             break
             case 1:
                 index=floor(random(0,menu[0].length))
-                this.order.push(new item(this.layer,0,0,findName(menu[0][index][0],types.item)))
+                this.order.push(new item(this.layer,this.parent,0,0,findName(menu[0][index][0],types.item)))
                 last(this.order).fade.main=0
                 last(this.order).size=0.6
                 this.paying.push(menu[0][index][1])
                 if(floor(random(0,menu[2].length+1))!=0){
                     index=floor(random(0,menu[2].length))
-                    this.order.push(new item(this.layer,0,0,findName(menu[2][index][0],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[2][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).size=0.6
                     this.paying.push(menu[2][index][1])
@@ -165,7 +166,7 @@ class player extends partisan{
             case 2:
                 if(floor(random(0,menu[3].length+1))!=0||menu[0].length<=0){
                     index=floor(random(0,menu[3].length))
-                    this.order.push(new item(this.layer,0,0,findName(menu[3][index][3],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[3][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).size=0.6
                     this.paying.push(menu[3][index][1])
@@ -190,14 +191,14 @@ class player extends partisan{
                 if(this.item!=-1){
                     layer.push()
                     layer.rotate(-this.direction.main)
-                    layer.translate(0,20)
+                    layer.translate(0,this.item.holdDist)
                     this.item.display(0)
                     layer.pop()
                 }
                 if(this.id==-1&&this.side!=-1){
                     layer.push()
                     layer.rotate(-this.direction.main)
-                    layer.translate(10,20)
+                    layer.translate(10,this.item.holdDist)
                     this.side.display(0)
                     layer.pop()
                 }
@@ -292,8 +293,10 @@ class player extends partisan{
         this.controlDirection={x:0,y:0}
         if(this.timer.dizzy<=0){
             if(this.id==-1){
+                this.touch=false
                 let moving=false
                 let interact=false
+                let attack=false
                 switch(this.mode){
                     case 0:
                         if(this.follow==-1){
@@ -312,6 +315,15 @@ class player extends partisan{
                                 moving=true
                             }
                         }
+                        if(this.timer.interact>0){
+                            this.timer.interact--
+                        }else if(this.parent.operation.cardManager.hasCard('Violence')&&floor(random(0,600))==0){
+                            attack=true
+                            this.timer.interact=15
+                            for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                                this.collide(1,this.parent.entities.players[a])
+                            }
+                        }
                     break
                     case 1:
                         if(distPos(this,this.follow)>40){
@@ -322,6 +334,15 @@ class player extends partisan{
                         }else if(distPos(this,this.follow)>120&&this.follow.id>=0){
                             this.follow.follower=-1
                             this.follow=-1
+                        }
+                        if(this.timer.interact>0){
+                            this.timer.interact--
+                        }else if(this.parent.operation.cardManager.hasCard('Violence')&&floor(random(0,600))==0){
+                            attack=true
+                            this.timer.interact=15
+                            for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                                this.collide(1,this.parent.entities.players[a])
+                            }
                         }
                     break
                     case 2:
@@ -352,7 +373,14 @@ class player extends partisan{
                                     }
                                     this.follow.item=-1
                                     this.order.splice(a,1)
-                                    this.parent.operation.dayManager.payout(this.paying[a],this.position.x,this.position.y-30)
+                                    let value=this.paying[a]>1&&this.parent.operation.cardManager.hasCard('Discount')?this.paying[a]-1:this.paying[a]
+                                    if(this.follow.operation.phase==3){
+                                        this.follow.patience.mem+=this.follow.patience.main/this.follow.patience.base*0.5
+                                    }
+                                    if(this.parent.operation.cardManager.hasCard('Tipping Culture')){
+                                        value=ceil(value*this.follow.patience.mem)
+                                    }
+                                    this.parent.operation.dayManager.payout(value,this.position.x,this.position.y-30)
                                     this.paying.splice(a,1)
                                     interact=true
                                     a=la
@@ -369,6 +397,11 @@ class player extends partisan{
                 }else{
                     this.animSet.interact.loop=0
                 }
+                if(attack||this.animSet.attack.loop>0&&this.animSet.attack.loop%15!=0){
+                    this.runAnim(3,1)
+                }else{
+                    this.animSet.attack.loop=0
+                }
                 if(this.id==-1){
                     for(let a=0,la=this.order.length;a<la;a++){
                         this.order[a].update()
@@ -378,7 +411,7 @@ class player extends partisan{
                     this.remove=true
                 }
             }else{
-                let inputKeys=inputs.keys[this.id+(dev.altControl?1:0)]
+                let inputKeys=inputs.keys[this.id+(dev.altControl&&this.parent.operation.player.length==1?1:0)]
                 let moveKey={x:0,y:0}
                 if(inputKeys.main[0]&&!inputKeys.main[1]&&this.active){
                     moveKey.x--
@@ -450,12 +483,12 @@ class player extends partisan{
                                     case 'Crate':
                                         this.handLen=40
                                         this.findHandLen()
-                                        if(this.parent.spawnGridWall(this.hand,this.item.contain,[])){
+                                        if(this.parent.spawnGridWall(this.hand,this.item.contain,[],round((this.direction.main+random(-5,5))/90)*90+180)){
                                             this.item=-1
                                         }else if(this.handLen==40){
                                             this.handLen=48
                                             this.findHandLen()
-                                            if(this.parent.spawnGridWall(this.hand,this.item.contain,[])){
+                                            if(this.parent.spawnGridWall(this.hand,this.item.contain,[],round((this.direction.main+random(-5,5))/90)*90+180)){
                                                 this.item=-1
                                             }
                                         }
@@ -463,12 +496,12 @@ class player extends partisan{
                                     case 'Blueprint':
                                         this.handLen=40
                                         this.findHandLen()
-                                        if(this.parent.spawnGridWall(this.hand,findName('Blueprint',types.wall),[[0,this.item.contain]])){
+                                        if(this.parent.spawnGridWall(this.hand,findName('Blueprint',types.wall),[[0,this.item.contain,this.item.cost]],0)){
                                             this.item=-1
                                         }else if(this.handLen==40){
                                             this.handLen=48
                                             this.findHandLen()
-                                            if(this.parent.spawnGridWall(this.hand,findName('Blueprint',types.wall),[[0,this.item.contain]])){
+                                            if(this.parent.spawnGridWall(this.hand,findName('Blueprint',types.wall),[[0,this.item.contain,this.item.cost]],0)){
                                                 this.item=-1
                                             }
                                         }
@@ -559,18 +592,23 @@ class player extends partisan{
             break
             case 1:
                 if(obj.id!=this.id){
-                    let hand={position:{x:this.position.x+lsin(this.direction.main)*30,y:this.position.y+lcos(this.direction.main)*30},radius:20}
+                    let hand={position:{x:this.position.x+lsin(this.direction.main)*30,y:this.position.y+lcos(this.direction.main)*30},radius:obj.id==-1?30:20}
                     if(distPos(hand,obj)<hand.radius+obj.radius){
-                        if(obj.id==-1){
-                            if(this.follower!=-1){
-                                if(obj.mode==1){
-                                    obj.cascadeMode(-1)
-                                    this.follower=-1
-                                }
-                            }else if(obj.mode==-1||obj.mode==0){
-                                obj.follow=this
+                        if(obj.id==-1&&this.id!=-1){
+                            if((obj.mode==-1||obj.mode==0)&&!obj.touch){
                                 obj.cascadeMode(1)
-                                this.follower=obj
+                                let top=obj
+                                while(top.follow!=-1&&top.follow!=undefined&&top.follow.id==-1){
+                                    top=top.follow
+                                }
+                                top.follow=this
+                                this.follower=top
+                            }
+                            for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                                if(this.parent.entities.players[a].mode==1&&!this.parent.entities.players[a].touch){
+                                    this.parent.entities.players[a].mode=-1
+                                    this.parent.entities.players[a].touch=true
+                                }
                             }
                         }else{
                             let dir=dirPos(this,obj)

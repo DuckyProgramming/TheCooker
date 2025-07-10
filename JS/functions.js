@@ -72,6 +72,9 @@ function shuffleArray(array){
     }
     return array
 }
+function randin(array){
+    return array[floor(random(0,array.length))]
+}
 function last(array){
     return array[array.length-1]
 }

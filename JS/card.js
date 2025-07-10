@@ -6,6 +6,9 @@ class card extends located{
         this.name=types.card[this.type].name
         this.list=types.card[this.type].list
         this.customerMult=types.card[this.type].customerMult
+        if(this.customerMult.length==2){
+            this.customerMult=this.customerMult[this.parent.operation.dayManager.day==0?1:0]
+        }
         this.desc=types.card[this.type].desc
         this.width=160
         this.height=200

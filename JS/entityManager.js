@@ -23,7 +23,7 @@ class entityManager extends manager{
         for(let a=0,la=this.operation.player.length;a<la;a++){
             this.entities.players.push(new player(this.layer,this,this.index.player++,0,0,a,this.operation.player[a]))
         }
-        this.customer.internal=5+2.5*(this.operation.player.length-1)
+        this.customer.internal=5+3*(this.operation.player.length-1)
         this.calcCustomer()
     }
     generateLevel(level,entry){
@@ -288,7 +288,7 @@ class entityManager extends manager{
                 total++
                 ticker++
                 if(this.entities.players[a].follower==-1){
-                    this.operation.dayManager.failed(ticker)
+                    this.operation.dayManager.failed(ticker,this.entities.players[a].position.x,this.entities.players[a].position.y-30)
                     ticker=0
                 }
             }
@@ -303,10 +303,27 @@ class entityManager extends manager{
         }
         this.customer.queue=[]
     }
+    queuing(){
+        let total=0
+        for(let a=0,la=this.entities.players.length;a<la;a++){
+            if(this.entities.players[a].id==-1&&(this.entities.players[a].mode==-1||this.entities.players[a].mode==0)&&this.entities.players[a].timer.main>180&&this.entities.players[a].follower==-1){
+                total++
+            }
+        }
+        return total>=2
+    }
     clearCustomer(){
         for(let a=0,la=this.entities.players.length;a<la;a++){
             if(this.entities.players[a].id==-1){
                 this.entities.players[a].fade.trigger=false
+            }
+        }
+        this.customer.queue=[]
+    }
+    clearPlayerItem(){
+        for(let a=0,la=this.entities.players.length;a<la;a++){
+            if(this.entities.players[a].id>=0){
+                this.entities.players[a].item=-1
             }
         }
         this.customer.queue=[]
@@ -328,14 +345,15 @@ class entityManager extends manager{
             }
         }
     }
-    spawnBlueprints(num){
+    spawnBlueprints(num,plus){
         this.spawnOptions(2)
         let possible=this.getEmptyGrid(1)
-        let set=this.operation.blueprintManager.getOptions(0,[num])
+        let set=this.operation.blueprintManager.getOptions(0,[this.operation.dayManager.day+plus,num])
         for(let a=0,la=set.length;a<la;a++){
             let index=floor(random(0,possible.length))
             let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(possible[index][1]+0.5),this.tileset[1]*(possible[index][0]+0.5),[possible[index][0]*2+1,possible[index][1]*2+1],-1,-1,findName('Blueprint',types.wall)),0)
             this.entities.walls[0][pos].contain=set[a]
+            this.entities.walls[0][pos].cost=types.wall[set[a]].cost
             this.grid[possible[index][0]*2+1][possible[index][1]*2+1]=1
             possible.splice(index,1)
         }
@@ -374,10 +392,10 @@ class entityManager extends manager{
         return total
     }
     rerollBlueprints(){
-        this.spawnBlueprints(this.clearWalls(['Blueprint']))
         this.clearWalls(['Option'])
+        this.spawnBlueprints(this.clearWalls(['Blueprint']),3)
     }
-    spawnGridWall(loc,type,args){
+    spawnGridWall(loc,type,args,direction){
         for(let a=0,la=(this.grid.length-1)/2;a<la;a++){
             for(let b=0,lb=(this.grid[a].length-1)/2;b<lb;b++){
                 if(this.grid[a*2+1][b*2+1]==0){
@@ -399,10 +417,14 @@ class entityManager extends manager{
                             }
                         }
                         let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(b+0.5),this.tileset[1]*(a+0.5),[a*2+1,b*2+1],-1,-1,type),0)
+                        for(let a=0,la=round(((360-direction)%360)/90);a<la;a++){
+                            this.entities.walls[0][pos].rotateFast()
+                        }
                         for(let a=0,la=args.length;a<la;a++){
                             switch(args[a][0]){
                                 case 0:
                                     this.entities.walls[0][pos].contain=args[a][1]
+                                    this.entities.walls[0][pos].cost=args[a][2]
                                 break
                             }
                         }
@@ -448,6 +470,7 @@ class entityManager extends manager{
         }
     }
     update(scene){
+        super.update()
         switch(scene){
             case 'main':
                 for(let a=0,la=this.entities.players.length;a<la;a++){

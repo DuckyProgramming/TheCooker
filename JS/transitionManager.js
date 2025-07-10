@@ -22,6 +22,7 @@ class transitionManager extends manager{
         }
     }
     update(scene){
+        super.update()
         switch(scene){
             default:
                 if(this.trigger){

@@ -33,7 +33,7 @@ class particle extends located{
                         layer.strokeWeight(0.6)
                         layer.textAlign(LEFT,CENTER)
                         layer.textSize(15)
-                        layer.text(`+${this.value}`,-3,1.5)
+                        layer.text(`${this.value>0?`+`:``}${this.value}`,-3,1.5)
                         layer.noFill()
                         layer.strokeWeight(1.35)
                         layer.ellipse(-12,0,12)

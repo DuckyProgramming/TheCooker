@@ -61,3 +61,10 @@ function staticKeys(){
         }
     }
 }
+function staticMainKeys(){
+    for(let a=0,la=inputs.keys.length;a<la;a++){
+        for(let b=0,lb=inputs.keys[a].tap.length;b<lb;b++){
+            inputs.keys[a].main[b]=false
+        }
+    }
+}

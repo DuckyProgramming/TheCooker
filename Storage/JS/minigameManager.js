@@ -130,7 +130,7 @@ class minigameManager{
                 while(remain.length>0){
                     let sizing=size[set]
                     let loc=[]
-                    loc.push(remain[floor(random(0,remain.length))])
+                    loc.push(randin(remain))
                     while(sizing>0){
                         grid[loc[0][0]][loc[0][1]]=set
                         for(let a=0,la=remain.length;a<la;a++){

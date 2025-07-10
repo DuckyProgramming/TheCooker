@@ -9,6 +9,7 @@ class overlay extends located{
         this.initial()
     }
     initial(){
+        this.timer.active=0
         switch(this.type){
             case 0:
                 this.cards=[]
@@ -18,9 +19,12 @@ class overlay extends located{
         }
     }
     activate(args){
+        this.timer.active=0
         switch(this.type){
             case 0:
                 this.cards=[]
+                this.support=[]
+                this.anim=[]
                 let result=this.parent.operation.cardManager.getOptions(args[0],[3])
                 for(let a=0,la=result.length;a<la;a++){
                     this.cards.push(new card(this.layer,this.parent.operation.cardManager,even(a,la)*200,20,result[a]))
@@ -62,6 +66,7 @@ class overlay extends located{
     update(first){
         this.fade.trigger=first&&this.active
         super.update()
+        this.timer.active++
         switch(this.type){
             case 0:
                 for(let a=0,la=this.cards.length;a<la;a++){
@@ -74,7 +79,7 @@ class overlay extends located{
                             this.parent.operation.cardManager.addCard(this.cards[a].type)
                         }
                         for(let b=0,lb=this.parent.operation.player.length;b<lb;b++){
-                            if(inputs.keys[b].tap[a]){
+                            if(inputs.keys[b+(dev.altControl&&lb==1?1:0)].tap[a]&&this.timer.active>15){
                                 for(let c=0,lc=this.support.length;c<lc;c++){
                                     if(this.support[c].includes(b)){
                                         this.support[c].splice(this.support[c].indexOf(b),1)

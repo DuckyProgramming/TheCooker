@@ -1,6 +1,7 @@
 class item extends located{
-    constructor(layer,x,y,type){
+    constructor(layer,manager,x,y,type){
         super(layer,x,y,{main:1,trigger:true,speed:15})
+        this.manager=manager
         this.type=type
         this.initialValues()
     }
@@ -15,6 +16,7 @@ class item extends located{
         */
         this.moved=false
         this.name=types.item[this.type].name
+        this.holdDist=types.item[this.type].holdDist
         this.component=types.item[this.type].component
         this.trashable=types.item[this.type].trashable
         this.process=[]
@@ -30,10 +32,10 @@ class item extends located{
                     this.process.push({type:types.item[this.type].process[a][0],utility:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
                 break
                 case 6:
-                    this.process.push({type:types.item[this.type].process[a][0],main:0,timer:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],leave:types.item[this.type].process[a][3],active:false,display:0,anim:0})
+                    this.portions=types.item[this.type].portions
+                    this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],leave:types.item[this.type].process[a][3],active:false,display:0,anim:0})
                 break
                 case 7:
-                    this.portions=types.item[this.type].portions
                     this.process.push({type:types.item[this.type].process[a][0],main:0,timer:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
                 break
                 case 8:
@@ -41,12 +43,21 @@ class item extends located{
                 break
             }
         }
+        for(let a=0,la=this.process.length;a<la;a++){
+            this.process[a].mult=(this.manager.operation.cardManager.hasCard('Slow Worker')&&this.process[a].type!=8?0.8:1)*(this.manager.operation.cardManager.hasCard('Reckless')&&this.process[a].type==9?2:1)
+        }
         this.processVisible=false
         switch(this.name){
-            case 'Crate': case 'Blueprint':
+            case 'Crate':
                 this.contain=0
                 this.width=25
                 this.height=25
+            break
+            case 'Blueprint':
+                this.contain=0
+                this.width=25
+                this.height=25
+                this.cost=0
             break
         }
     }
@@ -55,7 +66,23 @@ class item extends located{
         for(let a=0,la=this.process.length;a<la;a++){
             if(types.includes(this.process[a].type)){
                 this.moved=true
-                this.process[a].main+=speed
+                this.process[a].main+=speed*this.process[a].mult
+                this.process[a].active=true
+                this.process[a].display=15
+                if(this.process[a].main>=this.process[a].goal){
+                    this.process[a].main=this.process[a].type==6?0:this.process[a].goal
+                    result.push(this.process[a])
+                }
+            }
+        }
+        return result
+    }
+    generalProcessConstant(types,speed){
+        let result=[]
+        for(let a=0,la=this.process.length;a<la;a++){
+            if(types.includes(this.process[a].type)){
+                this.moved=true
+                this.process[a].main+=speed*this.process[a].mult*this.process[a].goal
                 this.process[a].active=true
                 this.process[a].display=15
                 if(this.process[a].main>=this.process[a].goal){
@@ -105,7 +132,6 @@ class item extends located{
                 layer.translate(this.position.x,this.position.y)
                 layer.rotate(this.direction)
                 layer.scale(this.size)
-                //sprint(this.size)
                 layer.noStroke()
                 switch(this.name){
                     case 'Crate':
@@ -157,6 +183,20 @@ class item extends located{
                         layer.ellipse(1,-4,3.5)
                         layer.ellipse(3.5,2,4)
                     break
+                    case 'Food Plate':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(100,75,80,this.fade.main)
+                        layer.ellipse(-4,0,5)
+                        layer.ellipse(1,-4,3.5)
+                        layer.ellipse(3.5,2,4)
+                        layer.fill(150,110,120,this.fade.main)
+                        layer.ellipse(-3.5,-3.5,5.5)
+                        layer.ellipse(-2,4.5,4)
+                        layer.ellipse(5,-0.5,5)
+                    break
                     case 'Burnt':
                         layer.fill(40,this.fade.main)
                         regPoly(layer,0,0,10,9,9,0)
@@ -193,34 +233,442 @@ class item extends located{
                     break
                     case 'Meat':
                         layer.fill(240,220,200,this.fade.main)
-                        layer.ellipse(0,-3,18,18)
-                        layer.ellipse(0,6,14,16)
+                        layer.ellipse(-1.5,0,16,16)
+                        layer.ellipse(3,0,13.5,11)
                         layer.fill(240,80,40,this.fade.main)
-                        layer.ellipse(0,-3,12,12)
-                        layer.ellipse(0,6,8,10)
+                        layer.ellipse(-1.5,0,11.5,11.5)
+                        layer.ellipse(3,0,9,6.5)
                         layer.fill(240,220,200,this.fade.main)
-                        layer.ellipse(0,-3,4,4)
+                        layer.ellipse(-1.5,0,4,4)
                     break
-                }
-                /*switch(this.type){
-                    case 1:
+                    case 'Rare Steak':
+                        layer.fill(240,200,160,this.fade.main)
+                        layer.ellipse(-1.5,0,16,16)
+                        layer.ellipse(3,0,13.5,11)
+                        layer.fill(240,120,40,this.fade.main)
+                        layer.ellipse(-1.5,0,11.5,11.5)
+                        layer.ellipse(3,0,9,6.5)
+                        layer.fill(240,180,130,this.fade.main)
+                        layer.ellipse(-1.5,0,4,4)
+                    break
+                    case 'Medium Steak':
+                        layer.fill(200,120,120,this.fade.main)
+                        layer.ellipse(-1.5,0,16,16)
+                        layer.ellipse(3,0,13.5,11)
+                        layer.fill(180,60,60,this.fade.main)
+                        layer.ellipse(-1.5,0,11.5,11.5)
+                        layer.ellipse(3,0,9,6.5)
+                        layer.fill(190,90,90,this.fade.main)
+                        layer.ellipse(-1.5,0,4,4)
+                    break
+                    case 'Well Done Steak':
+                        layer.fill(120,60,20,this.fade.main)
+                        layer.ellipse(-1.5,0,16,16)
+                        layer.ellipse(3,0,13.5,11)
+                        layer.fill(160,100,40,this.fade.main)
+                        layer.ellipse(-1.5,0,11.5,11.5)
+                        layer.ellipse(3,0,9,6.5)
+                        layer.fill(150,90,35,this.fade.main)
+                        layer.ellipse(-1.5,0,4,4)
+                    break
+                    case 'Plated Rare Steak':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(240,200,160,this.fade.main)
+                        layer.ellipse(-1.5,0,16,16)
+                        layer.ellipse(3,0,13.5,11)
+                        layer.fill(240,120,40,this.fade.main)
+                        layer.ellipse(-1.5,0,11.5,11.5)
+                        layer.ellipse(3,0,9,6.5)
+                        layer.fill(240,180,130,this.fade.main)
+                        layer.ellipse(-1.5,0,4,4)
+                    break
+                    case 'Plated Medium Steak':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(200,120,120,this.fade.main)
+                        layer.ellipse(-1.5,0,16,16)
+                        layer.ellipse(3,0,13.5,11)
+                        layer.fill(180,60,60,this.fade.main)
+                        layer.ellipse(-1.5,0,11.5,11.5)
+                        layer.ellipse(3,0,9,6.5)
+                        layer.fill(190,90,90,this.fade.main)
+                        layer.ellipse(-1.5,0,4,4)
+                    break
+                    case 'Plated Well Done Steak':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(120,60,20,this.fade.main)
+                        layer.ellipse(-1.5,0,16,16)
+                        layer.ellipse(3,0,13.5,11)
+                        layer.fill(160,100,40,this.fade.main)
+                        layer.ellipse(-1.5,0,11.5,11.5)
+                        layer.ellipse(3,0,9,6.5)
+                        layer.fill(150,90,35,this.fade.main)
+                        layer.ellipse(-1.5,0,4,4)
+                    break
+                    case 'Lettuce':
+                        layer.fill(80,200,40,this.fade.main)
+                        layer.ellipse(0,0,12)
+                        layer.fill(80,180,40,this.fade.main)
+                        layer.ellipse(-5.5,0,3,6)
+                        layer.ellipse(5.5,0,3,6)
+                        layer.ellipse(0,-5.5,6,3)
+                        layer.ellipse(0,5.5,6,3)
+                        layer.fill(80,160,40,this.fade.main)
+                        layer.rotate(45)
+                        layer.ellipse(-6,0,3,6)
+                        layer.ellipse(6,0,3,6)
+                        layer.ellipse(0,-6,6,3)
+                        layer.ellipse(0,6,6,3)
+                    break
+                    case 'Chopped Lettuce':
+                        layer.fill(80,200,40,this.fade.main)
+                        layer.ellipse(0,0,6,3)
+                        layer.rotate(10)
+                        layer.ellipse(-1,-5,3,6)
+                        layer.ellipse(2,5,3,6)
+                        layer.rotate(20)
+                        layer.fill(80,180,40,this.fade.main)
+                        layer.ellipse(-6,2,3,6)
+                        layer.ellipse(6.5,-1,3,6)
+                        layer.ellipse(-4,-4.5,6,3)
+                        layer.ellipse(2.5,6,6,3)
+                        layer.ellipse(-2,1,3,6)
+                        layer.ellipse(3,-1.5,3,6)
+                        layer.fill(80,160,40,this.fade.main)
+                        layer.rotate(40)
+                        layer.ellipse(-5.5,2,3,6)
+                        layer.ellipse(4,-3,3,6)
+                        layer.ellipse(-1.5,-6.5,6,3)
+                        layer.ellipse(2,5,6,3)
+                        layer.ellipse(-0.5,-0.5,6,3)
+                    break
+                    case 'Tomato':
+                        layer.fill(200,40,20,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(20,240,20,this.fade.main)
+                        layer.rotate(18)
+                        for(let a=0,la=3;a<la;a++){
+                            layer.ellipse(0,-2,3,4)
+                            layer.rotate(360/la)
+                        }
+                    break
+                    case 'Chopped Tomato':
+                        layer.fill(200,40,20,this.fade.main)
+                        layer.ellipse(0,0,40/3)
+                        layer.fill(240,140,100,this.fade.main)
+                        layer.ellipse(0,0,10)
+                        layer.fill(200,40,20,this.fade.main)
+                        layer.triangle(-6,-1.5,-6,1.5,-2,0)
+                        layer.triangle(6,-1.5,6,1.5,2,0)
+                        layer.triangle(-1.5,-6,1.5,-6,0,-2)
+                        layer.triangle(-1.5,6,1.5,6,0,2)
+                    break
+                    case 'Plated Lettuce':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(80,200,40,this.fade.main)
+                        layer.ellipse(0,0,6,3)
+                        layer.rotate(10)
+                        layer.ellipse(-1,-5,3,6)
+                        layer.ellipse(2,5,3,6)
+                        layer.rotate(20)
+                        layer.fill(80,180,40,this.fade.main)
+                        layer.ellipse(-6,2,3,6)
+                        layer.ellipse(6.5,-1,3,6)
+                        layer.ellipse(-4,-4.5,6,3)
+                        layer.ellipse(2.5,6,6,3)
+                        layer.ellipse(-2,1,3,6)
+                        layer.ellipse(3,-1.5,3,6)
+                        layer.fill(80,160,40,this.fade.main)
+                        layer.rotate(40)
+                        layer.ellipse(-5.5,2,3,6)
+                        layer.ellipse(4,-3,3,6)
+                        layer.ellipse(-1.5,-6.5,6,3)
+                        layer.ellipse(2,5,6,3)
+                        layer.ellipse(-0.5,-0.5,6,3)
+                    break
+                    case 'Plated Tomato':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(200,40,20,this.fade.main)
+                        layer.ellipse(0,0,40/3)
+                        layer.fill(240,140,100,this.fade.main)
+                        layer.ellipse(0,0,10)
+                        layer.fill(200,40,20,this.fade.main)
+                        layer.triangle(-6,-1.5,-6,1.5,-2,0)
+                        layer.triangle(6,-1.5,6,1.5,2,0)
+                        layer.triangle(-1.5,-6,1.5,-6,0,-2)
+                        layer.triangle(-1.5,6,1.5,6,0,2)
+                    break
+                    case 'Plated Lettuce and Tomato':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(80,200,40,this.fade.main)
+                        layer.ellipse(0,0,6,3)
+                        layer.rotate(10)
+                        layer.ellipse(-1,-5,3,6)
+                        layer.ellipse(2,5,3,6)
+                        layer.rotate(20)
+                        layer.fill(80,180,40,this.fade.main)
+                        layer.ellipse(-6,2,3,6)
+                        layer.ellipse(6.5,-1,3,6)
+                        layer.ellipse(-4,-4.5,6,3)
+                        layer.ellipse(2.5,6,6,3)
+                        layer.ellipse(-2,1,3,6)
+                        layer.ellipse(3,-1.5,3,6)
+                        layer.fill(80,160,40,this.fade.main)
+                        layer.rotate(40)
+                        layer.ellipse(-5.5,2,3,6)
+                        layer.ellipse(4,-3,3,6)
+                        layer.ellipse(-1.5,-6.5,6,3)
+                        layer.ellipse(2,5,6,3)
+                        layer.ellipse(-0.5,-0.5,6,3)
+                        layer.fill(200,40,20,this.fade.main)
+                        layer.ellipse(0,0,9)
+                        layer.fill(240,140,100,this.fade.main)
+                        layer.ellipse(0,0,20/3)
+                        layer.fill(200,40,20,this.fade.main)
+                        layer.triangle(-4,-1,-4,1,-4/3,0)
+                        layer.triangle(4,-1,4,1,4/3,0)
+                        layer.triangle(-1,-4,1,-4,0,-4/3)
+                        layer.triangle(-1,4,1,4,0,4/3)
+                    break
+                    case 'Flour':
+                        layer.fill(160,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(200,180,160,this.fade.main)
+                        layer.ellipse(0,0,12)
+                    break
+                    case 'Dough':
                         layer.fill(220,220,160,this.fade.main)
                         layer.ellipse(0,0,12)
                     break
-                    case 2:
-                        layer.stroke(180,100,80,this.fade.main)
-                        layer.strokeWeight(1)
-                        layer.line(-3,-1,0,-4)
-                        layer.line(3,-1,0,-4)
-                        layer.noStroke()
-                        layer.fill(200,0,80,this.fade.main)
-                        layer.ellipse(-3.5,1,6)
-                        layer.ellipse(3.5,1,6)
-                        layer.fill(240,80,120,this.fade.main)
-                        layer.ellipse(-3.5,1,4)
-                        layer.ellipse(3.5,1,4)
+                    case 'Bread':
+                        layer.fill(220,140,60,this.fade.main)
+                        layer.rect(-1-(this.portions+1)*1.25,0,7.5,15,2)
+                        layer.ellipse(2.5-(this.portions+1)*1.25,0,4,18)
+                        layer.rect(2.5,0,2*(this.portions+1)*1.25,18)
+                        layer.ellipse(2.5+(this.portions+1)*1.25,0,4,18)
+                        layer.fill(240,this.fade.main)
+                        layer.rect(-1-(this.portions+1)*1.25,0,6.375,12.75,1)
+                        layer.ellipse(2.5-(this.portions+1)*1.25,0,2.875,15.75)
                     break
-                    case 3:
+                    case 'Bread Slice':
+                        layer.fill(220,140,60,this.fade.main)
+                        layer.rect(-2,0,15,15,2)
+                        layer.ellipse(5,0,8,18)
+                        layer.fill(240,this.fade.main)
+                        layer.rect(-2,0,12.75,12.75,1)
+                        layer.ellipse(5,0,5.75,15.75)
+                    break
+                    case 'Toast':
+                        layer.fill(125,80,35,this.fade.main)
+                        layer.rect(-2,0,15,15,2)
+                        layer.ellipse(5,0,8,18)
+                        layer.fill(220,170,120,this.fade.main)
+                        layer.rect(-2,0,12.75,12.75,1)
+                        layer.ellipse(5,0,5.75,15.75)
+                    break
+                    case 'Plated Toast':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(125,80,35,this.fade.main)
+                        layer.rect(-2,0,15,15,2)
+                        layer.ellipse(5,0,8,18)
+                        layer.fill(220,170,120,this.fade.main)
+                        layer.rect(-2,0,12.75,12.75,1)
+                        layer.ellipse(5,0,5.75,15.75)
+                    break
+                    case 'Oil':
+                        layer.fill(160,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(140,160,40,this.fade.main)
+                        layer.ellipse(0,0,12)
+                    break
+                    case 'Tomato Sauce':
+                        layer.fill(160,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(160,40,20,this.fade.main)
+                        layer.ellipse(0,0,12)
+                    break
+                    case 'Pizza Base':
+                        layer.fill(220,220,160,this.fade.main)
+                        layer.ellipse(0,0,32)
+                        layer.fill(210,210,150,this.fade.main)
+                        layer.ellipse(0,0,26)
+                        layer.fill(220,220,160,this.fade.main)
+                        layer.ellipse(0,0,24)
+                    break
+                    case 'Sauce Pizza Base':
+                        layer.fill(220,220,160,this.fade.main)
+                        layer.ellipse(0,0,32)
+                        layer.fill(160,40,20,this.fade.main)
+                        layer.ellipse(0,0,28)
+                    break
+                    case 'Cheese':
+                        layer.fill(220,220,60,this.fade.main)
+                        layer.arc(8,8,36,36,-160,-110)
+                        layer.fill(200,200,50,this.fade.main)
+                        layer.ellipse(-2,-3,4)
+                        layer.ellipse(2.5,1.5,3)
+                    break
+                    case 'Chopped Cheese':
+                        layer.fill(220,220,60,this.fade.main)
+                        layer.rect(0,0,6,3)
+                        layer.rotate(10)
+                        layer.rect(-1,-5,2,5)
+                        layer.rect(2,5,2,5)
+                        layer.rotate(20)
+                        layer.rect(-5,2,2,5)
+                        layer.rect(6.5,-1,2,5)
+                        layer.rect(-4,-4.5,5,2)
+                        layer.rect(2.5,6,5,2)
+                        layer.fill(200,200,50,this.fade.main)
+                        layer.rect(-2,1,2,5)
+                        layer.rect(3,-1.5,2,5)
+                        layer.rotate(40)
+                        layer.rect(-5.5,2,2,5)
+                        layer.rect(4,-3,2,5)
+                        layer.rect(-1.5,-6.5,5,2)
+                        layer.rect(2,5,5,2)
+                        layer.rect(-0.5,-0.5,5,2)
+                    break
+                    case 'Raw Cheese Pizza':
+                        layer.fill(220,220,160,this.fade.main)
+                        layer.ellipse(0,0,32)
+                        layer.fill(160,40,20,this.fade.main)
+                        layer.ellipse(0,0,28)
+                        layer.fill(220,220,60,this.fade.main)
+                        layer.arc(-1,-1,21,21,-180,-90)
+                        layer.arc(1,-1,21,21,-90,0)
+                        layer.arc(-1,1,21,21,90,180)
+                        layer.arc(1,1,21,21,0,90)
+                        layer.fill(160,40,20,this.fade.main)
+                        for(let a=0,la=4;a<la;a++){
+                            layer.ellipse(-4,-2,3)
+                            layer.ellipse(-2,-5,2.5)
+                            layer.ellipse(-7,-5,2.75)
+                            layer.ellipse(-9,-1.5,3)
+                            layer.ellipse(-11,-4,2.5)
+                            layer.ellipse(-2.5,-8,3)
+                            layer.ellipse(-6,-9,2.5)
+                            layer.rotate(360/la)
+                        }
+                    break
+                    case 'Cheese Pizza':
+                        layer.fill(200,180,100,this.fade.main)
+                        if(this.portions>=3){
+                            layer.ellipse(0,0,32)
+                            layer.fill(120,50,30,this.fade.main)
+                            layer.ellipse(0,0,28)
+                        }else{
+                            layer.arc(0,0,32,32,-90-this.portions*90,0)
+                            layer.fill(120,50,30,this.fade.main)
+                            layer.arc(0,0,28,28,-90-this.portions*90,0)
+                        }
+                        layer.fill(200,140,60,this.fade.main)
+                        layer.arc(-1,-1,21,21,-180,-90)
+                        layer.arc(1,-1,21,21,-90,0)
+                        if(this.portions>=2){
+                            layer.arc(-1,1,21,21,90,180)
+                        }
+                        if(this.portions>=3){
+                            layer.arc(1,1,21,21,0,90)
+                        }
+                        layer.fill(120,50,30,this.fade.main)
+                        for(let a=0,la=4;a<la;a++){
+                            if(!(a==3&&this.portions<2)&&!(a==2&&this.portions<3)){
+                                layer.ellipse(-4,-2,3)
+                                layer.ellipse(-2,-5,2.5)
+                                layer.ellipse(-7,-5,2.75)
+                                layer.ellipse(-9,-1.5,3)
+                                layer.ellipse(-11,-4,2.5)
+                                layer.ellipse(-2.5,-8,3)
+                                layer.ellipse(-6,-9,2.5)
+                            }
+                            layer.rotate(360/la)
+                        }
+                    break
+                    case 'Cheese Pizza Slice':
+                        layer.fill(200,180,100,this.fade.main)
+                        layer.arc(6.5,6.5,32,32,-180,-90)
+                        layer.fill(120,50,30,this.fade.main)
+                        layer.arc(6.5,6.5,28,28,-180,-90)
+                        layer.fill(200,140,60,this.fade.main)
+                        layer.arc(5.5,5.5,21,21,-180,-90)
+                        layer.fill(120,50,30,this.fade.main)
+                        layer.ellipse(2.5,4.5,3)
+                        layer.ellipse(4.5,1.5,2.5)
+                        layer.ellipse(-0.5,1.5,2.75)
+                        layer.ellipse(-2.5,5,3)
+                        layer.ellipse(-4.5,2.5,2.5)
+                        layer.ellipse(4,-1.5,3)
+                        layer.ellipse(0.5,-2.5,2.5)
+                    break
+                    case 'Plated Cheese Pizza Slice':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(200,180,100,this.fade.main)
+                        layer.arc(6.5,6.5,32,32,-180,-90)
+                        layer.fill(120,50,30,this.fade.main)
+                        layer.arc(6.5,6.5,28,28,-180,-90)
+                        layer.fill(200,140,60,this.fade.main)
+                        layer.arc(5.5,5.5,21,21,-180,-90)
+                        layer.fill(120,50,30,this.fade.main)
+                        layer.ellipse(2.5,4.5,3)
+                        layer.ellipse(4.5,1.5,2.5)
+                        layer.ellipse(-0.5,1.5,2.75)
+                        layer.ellipse(-2.5,5,3)
+                        layer.ellipse(-4.5,2.5,2.5)
+                        layer.ellipse(4,-1.5,3)
+                        layer.ellipse(0.5,-2.5,2.5)
+                    break
+                    case 'Chopped Meat':
+                        layer.fill(240,80,40,this.fade.main)
+                        layer.rect(0,0,4,3)
+                        layer.rotate(30)
+                        layer.rect(-5,0,3,4)
+                        layer.rect(5,0,3,4)
+                        layer.rect(0,-4,4,3)
+                        layer.rect(0,4,4,3)
+                        layer.rotate(30)
+                        layer.rect(-8,-2,3,4)
+                        layer.rect(8,2,3,4)
+                        layer.rect(3,-7.5,4,3)
+                        layer.rect(-3,7.5,4,3)
+                        layer.rotate(-60)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.rect(1.25,0,1.5,3)
+                        layer.rotate(30)
+                        layer.rect(-5,-1.25,3,1.5)
+                        layer.rect(5,-1.25,3,1.5)
+                        layer.rect(-1.25,-4,1.5,3)
+                        layer.rect(1.25,4,1.5,3)
+                        layer.rotate(30)
+                        layer.rect(-8,-3.25,3,1.5)
+                        layer.rect(8,3.25,3,1.5)
+                        layer.rect(1.75,-7.5,1.5,3)
+                        layer.rect(-4.25,7.5,1.5,3)
+                    break
+                    case 'Pastry Crust':
                         layer.fill(220,220,160,this.fade.main)
                         layer.ellipse(0,0,16)
                         layer.fill(200,180,120,this.fade.main)
@@ -233,6 +681,186 @@ class item extends located{
                         layer.line(3.25,-6,3.25,6)
                         layer.line(-6,-3.25,6,-3.25)
                         layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Pastry':
+                        layer.fill(220,180,60,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(160,120,60,this.fade.main)
+                        layer.ellipse(0,0,13)
+                        layer.stroke(220,180,60,this.fade.main)
+                        layer.strokeWeight(1.5)
+                        layer.line(0,-7.25,0,7.25)
+                        layer.line(-7.25,0,7.25,0)
+                        layer.line(-3.25,-6,-3.25,6)
+                        layer.line(3.25,-6,3.25,6)
+                        layer.line(-6,-3.25,6,-3.25)
+                        layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Raw Uncooked Meat Pie':
+                        layer.fill(220,220,160,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(200,180,120,this.fade.main)
+                        layer.ellipse(0,0,13)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.ellipse(-0.9,0,9.6,9.6)
+                        layer.ellipse(1.8,0,8.1,6.6)
+                        layer.fill(240,80,40,this.fade.main)
+                        layer.ellipse(-0.9,0,6.0,6.9)
+                        layer.ellipse(1.8,0,5.4,5.2)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.ellipse(-1.2,0,2.4,2.4)
+                        layer.stroke(220,220,160,this.fade.main)
+                        layer.strokeWeight(1.5)
+                        layer.line(0,-7.25,0,7.25)
+                        layer.line(-7.25,0,7.25,0)
+                        layer.line(-3.25,-6,-3.25,6)
+                        layer.line(3.25,-6,3.25,6)
+                        layer.line(-6,-3.25,6,-3.25)
+                        layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Raw Meat Pie':
+                        layer.fill(220,180,60,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(160,120,60,this.fade.main)
+                        layer.ellipse(0,0,13)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.ellipse(-0.9,0,9.6,9.6)
+                        layer.ellipse(1.8,0,8.1,6.6)
+                        layer.fill(240,80,40,this.fade.main)
+                        layer.ellipse(-0.9,0,6.0,6.9)
+                        layer.ellipse(1.8,0,5.4,5.2)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.ellipse(-1.2,0,2.4,2.4)
+                        layer.stroke(220,180,60,this.fade.main)
+                        layer.strokeWeight(1.5)
+                        layer.line(0,-7.25,0,7.25)
+                        layer.line(-7.25,0,7.25,0)
+                        layer.line(-3.25,-6,-3.25,6)
+                        layer.line(3.25,-6,3.25,6)
+                        layer.line(-6,-3.25,6,-3.25)
+                        layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Raw Uncooked Chopped Meat Pie':
+                        layer.fill(220,220,160,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(200,180,120,this.fade.main)
+                        layer.ellipse(0,0,13)
+                        layer.fill(240,80,40,this.fade.main)
+                        layer.rect(0,0,4,3)
+                        layer.rotate(30)
+                        layer.rect(-5,0,3,4)
+                        layer.rect(5,0,3,4)
+                        layer.rect(0,-4,4,3)
+                        layer.rect(0,4,4,3)
+                        layer.rotate(-30)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.rect(1.25,0,1.5,3)
+                        layer.rotate(30)
+                        layer.rect(-5,-1.25,3,1.5)
+                        layer.rect(5,-1.25,3,1.5)
+                        layer.rect(-1.25,-4,1.5,3)
+                        layer.rect(1.25,4,1.5,3)
+                        layer.rotate(-30)
+                        layer.stroke(220,220,160,this.fade.main)
+                        layer.strokeWeight(1.5)
+                        layer.line(0,-7.25,0,7.25)
+                        layer.line(-7.25,0,7.25,0)
+                        layer.line(-3.25,-6,-3.25,6)
+                        layer.line(3.25,-6,3.25,6)
+                        layer.line(-6,-3.25,6,-3.25)
+                        layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Raw Chopped Meat Pie':
+                        layer.fill(220,180,60,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(160,120,60,this.fade.main)
+                        layer.ellipse(0,0,13)
+                        layer.fill(240,80,40,this.fade.main)
+                        layer.rect(0,0,4,3)
+                        layer.rotate(30)
+                        layer.rect(-5,0,3,4)
+                        layer.rect(5,0,3,4)
+                        layer.rect(0,-4,4,3)
+                        layer.rect(0,4,4,3)
+                        layer.rotate(-30)
+                        layer.fill(240,220,200,this.fade.main)
+                        layer.rect(1.25,0,1.5,3)
+                        layer.rotate(30)
+                        layer.rect(-5,-1.25,3,1.5)
+                        layer.rect(5,-1.25,3,1.5)
+                        layer.rect(-1.25,-4,1.5,3)
+                        layer.rect(1.25,4,1.5,3)
+                        layer.rotate(-30)
+                        layer.stroke(220,180,60,this.fade.main)
+                        layer.strokeWeight(1.5)
+                        layer.line(0,-7.25,0,7.25)
+                        layer.line(-7.25,0,7.25,0)
+                        layer.line(-3.25,-6,-3.25,6)
+                        layer.line(3.25,-6,3.25,6)
+                        layer.line(-6,-3.25,6,-3.25)
+                        layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Meat Pie':
+                        layer.fill(220,180,60,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(140,80,40,this.fade.main)
+                        layer.ellipse(0,0,13)
+                        layer.stroke(220,180,60,this.fade.main)
+                        layer.strokeWeight(1.5)
+                        layer.line(0,-7.25,0,7.25)
+                        layer.line(-7.25,0,7.25,0)
+                        layer.line(-3.25,-6,-3.25,6)
+                        layer.line(3.25,-6,3.25,6)
+                        layer.line(-6,-3.25,6,-3.25)
+                        layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Plated Meat Pie':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.fill(220,180,60,this.fade.main)
+                        layer.ellipse(0,0,16)
+                        layer.fill(140,80,40,this.fade.main)
+                        layer.ellipse(0,0,13)
+                        layer.stroke(220,180,60,this.fade.main)
+                        layer.strokeWeight(1.5)
+                        layer.line(0,-7.25,0,7.25)
+                        layer.line(-7.25,0,7.25,0)
+                        layer.line(-3.25,-6,-3.25,6)
+                        layer.line(3.25,-6,3.25,6)
+                        layer.line(-6,-3.25,6,-3.25)
+                        layer.line(-6,3.25,6,3.25)
+                    break
+                    case 'Coffee':
+                        layer.fill(250,this.fade.main)
+                        layer.ellipse(0,0,10.5)
+                        layer.ellipse(5,0,4)
+                        layer.fill(80,45,10,this.fade.main)
+                        layer.ellipse(0,0,7.5)
+                    break
+                    /*
+                    case 'Plate':
+                        layer.fill(220,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(200,this.fade.main)
+                        layer.ellipse(0,0,20)
+                    break
+                    */
+                }
+                /*switch(this.type){
+                    case 2:
+                        layer.stroke(180,100,80,this.fade.main)
+                        layer.strokeWeight(1)
+                        layer.line(-3,-1,0,-4)
+                        layer.line(3,-1,0,-4)
+                        layer.noStroke()
+                        layer.fill(200,0,80,this.fade.main)
+                        layer.ellipse(-3.5,1,6)
+                        layer.ellipse(3.5,1,6)
+                        layer.fill(240,80,120,this.fade.main)
+                        layer.ellipse(-3.5,1,4)
+                        layer.ellipse(3.5,1,4)
                     break
                     case 4:
                         layer.fill(220,220,160,this.fade.main)
@@ -332,12 +960,38 @@ class item extends located{
                 }
                 layer.pop()
             break
+            case 2:
+                layer.push()
+                layer.translate(this.position.x,this.position.y)
+                layer.noStroke()
+                for(let a=0,la=this.process.length;a<la;a++){
+                    if(this.process[a].anim>0){
+                        this.processVisible=true
+                        layer.noStroke()
+                        layer.fill(40,this.fade.main*this.process[a].anim)
+                        layer.rect(0,-16,36,8,3)
+                        switch(this.process[a].type){
+                            case 9:
+                                layer.fill(240,20,20,this.fade.main*this.process[a].anim)
+                                layer.rect(0,-17.7,33,2,1.6)
+                                layer.rect(0,-14.3,33,2,1.6)
+                            break
+                            default:
+                                layer.fill(20,240,20,this.fade.main*this.process[a].anim)
+                                layer.rect(0,-17.7,33,2,1.6)
+                                layer.rect(0,-14.3,33,2,1.6)
+                            break
+                        }
+                    }
+                }
+                layer.pop()
+            break
         }
     }
-    displayProcess(type){
+    displayProcess(types){
         for(let a=0,la=this.process.length;a<la;a++){
-            if(this.process[a].type==type){
-                this.process[a].display=true
+            if(types.includes(this.process[a].type)){
+                this.process[a].display=15
             }
         }
     }

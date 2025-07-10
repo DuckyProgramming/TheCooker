@@ -77,7 +77,7 @@ class cardManager extends manager{
             break
             case 1:
                 if(this.listing.possible[5].length>0){
-                    result.push(this.listing.possible[5][floor(random(0,this.listing.possible.length))])
+                    result.push(randin(this.listing.possible[5]))
                 }
                 let possible=[]
                 for(let a=0,la=2;a<la;a++){
@@ -88,7 +88,7 @@ class cardManager extends manager{
                     }
                 }
                 if(possible.length>0){
-                    result.push(possible[floor(random(0,possible.length))])
+                    result.push(randin(possible))
                 }
                 possible=[]
                 for(let a=this.operation.dishManager.active[0].length<=0?4:2,la=5;a<la;a++){
@@ -97,7 +97,7 @@ class cardManager extends manager{
                     }
                 }
                 if(possible.length>0){
-                    result.push(possible[floor(random(0,possible.length))])
+                    result.push(randin(possible))
                 }
             break
         }
@@ -105,8 +105,11 @@ class cardManager extends manager{
     }
     addCard(card){
         this.active.push(card)
-        this.operation.entityManager.customer.internal*=types.card[card].customerMult
-        this.operation.entityManager.calcCustomer()
+        let customerMult=types.card[card].customerMult
+        if(customerMult.length==2){
+            customerMult=customerMult[this.operation.dayManager.day==0?1:0]
+        }
+        this.operation.entityManager.customer.internal*=customerMult
         if(types.card[card].list!=5){
             this.operation.entityManager.sendPackages(types.card[card].wall)
             for(let a=0,la=types.card[card].dish.length;a<la;a++){
@@ -119,6 +122,21 @@ class cardManager extends manager{
         this.removeFromList(card)
         this.convertedListing()
         switch(types.card[card].name){
+            case 'Individuals':
+                this.operation.entityManager.customer.groupSizeMax--
+            break
+            case 'Large Groups':
+                this.operation.entityManager.customer.groupSizeMin++
+                this.operation.entityManager.customer.groupSizeMax+=2
+            break
+            case 'Flexible Groups':
+                this.operation.entityManager.customer.groupSizeMin--
+                this.operation.entityManager.customer.groupSizeMax++
+            break
         }
+        this.operation.entityManager.calcCustomer()
+    }
+    hasCard(name){
+        return this.active.includes(findName(name,types.card))
     }
 }

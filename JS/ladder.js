@@ -43,5 +43,9 @@ class manager{
     constructor(layer,operation){
         this.layer=layer
         this.operation=operation
+        this.timer={main:0}
+    }
+    update(){
+        this.timer.main++
     }
 }
