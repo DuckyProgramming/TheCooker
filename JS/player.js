@@ -27,11 +27,13 @@ class player extends partisan{
             this.follow=-1
             this.oldFollow=-1
             this.mode=0
+            this.orderPhase=0
             this.order=[]
             this.paying=[]
             this.angle=0
             this.timer.angle=0
             this.touch=false
+            this.groupIndex=0
         }
     }
     scale(value){
@@ -136,6 +138,7 @@ class player extends partisan{
         }
     }
     makeOrder(orderPhase,menu,activate){
+        this.orderPhase=orderPhase
         this.order=[]
         this.paying=[]
         let index
@@ -172,6 +175,15 @@ class player extends partisan{
                     this.paying.push(menu[3][index][1])
                 }
             break
+            case 3:
+                if(floor(random(0,menu[4].length+1))!=0){
+                    index=floor(random(0,menu[4].length))
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[4][index][0],types.item)))
+                    last(this.order).fade.main=0
+                    last(this.order).size=0.6
+                    this.paying.push(menu[4][index][1])
+                }
+            break
         }
     }
     display(level,layer=this.layer){
@@ -192,6 +204,7 @@ class player extends partisan{
                     layer.push()
                     layer.rotate(-this.direction.main)
                     layer.translate(0,this.item.holdDist)
+                    layer.rotate(this.item.holdDir)
                     this.item.display(0)
                     layer.pop()
                 }
@@ -326,7 +339,7 @@ class player extends partisan{
                         }
                     break
                     case 1:
-                        if(distPos(this,this.follow)>40){
+                        if(distPos(this,this.follow)>30){
                             this.direction.goal=dirPos(this,this.follow)
                             this.velocity.x+=this.speed*lsin(this.direction.main)
                             this.velocity.y+=this.speed*lcos(this.direction.main)
@@ -366,12 +379,14 @@ class player extends partisan{
                         if(this.follow.item!=-1){
                             for(let a=0,la=this.order.length;a<la;a++){
                                 if(this.order[a].type==this.follow.item.type){
-                                    if(a==1||this.item!=-1){
-                                        this.side=this.follow.item
-                                    }else{
-                                        this.item=this.follow.item
+                                    if(this.orderPhase!=3){
+                                        if(a==1||this.item!=-1){
+                                            this.side=this.follow.item
+                                        }else{
+                                            this.item=this.follow.item
+                                        }
+                                        this.follow.item=-1
                                     }
-                                    this.follow.item=-1
                                     this.order.splice(a,1)
                                     let value=this.paying[a]>1&&this.parent.operation.cardManager.hasCard('Discount')?this.paying[a]-1:this.paying[a]
                                     if(this.follow.operation.phase==3){
@@ -380,7 +395,10 @@ class player extends partisan{
                                     if(this.parent.operation.cardManager.hasCard('Tipping Culture')){
                                         value=ceil(value*this.follow.patience.mem)
                                     }
-                                    this.parent.operation.dayManager.payout(value,this.position.x,this.position.y-30)
+                                    if(value>0){
+                                        this.parent.operation.dayManager.payout(value,this.position.x,this.position.y-30)
+                                    }
+                                    this.follow.patience.restore+=30
                                     this.paying.splice(a,1)
                                     interact=true
                                     a=la

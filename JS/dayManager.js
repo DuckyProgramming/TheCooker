@@ -82,7 +82,7 @@ class dayManager extends manager{
     endDay(){
         this.phase=0
         this.day++
-        if(this.day%3==0){
+        if(this.day%3==1){
             this.operation.overlayManager.activate(0,[1])
         }
         this.operation.entityManager.customer.internal*=1.125

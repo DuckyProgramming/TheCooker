@@ -14,7 +14,7 @@ class entityManager extends manager{
             anim:0
         }
         this.customer={internal:0,groupSizeMin:1,groupSizeMax:2,group:0,queue:[],cooldown:0}
-        this.index={player:0,wall:0}
+        this.index={player:0,wall:0,group:0}
         this.reroll={cost:10}
         this.updateLadderTrigger=false
         this.initial()
@@ -193,6 +193,7 @@ class entityManager extends manager{
             }
         }
         this.entities.walls[set].push(wall)
+        this.updateLadder()
         return this.entities.walls[set].length-1
     }
     getEmptyGrid(type){
@@ -273,11 +274,13 @@ class entityManager extends manager{
             this.customer.queue.push(new player(this.layer,this,this.index.player++,this.loc.spawn.x,this.loc.spawn.y,-1,{color:0}))
             last(this.customer.queue).direction.main=this.loc.spawn.direction
             last(this.customer.queue).direction.goal=this.loc.spawn.direction
+            last(this.customer.queue).groupIndex=this.index.group
             if(a>0){
                 last(this.customer.queue).follow=lastKey(this.customer.queue,2)
                 lastKey(this.customer.queue,2).follower=last(this.customer.queue)
             }
         }
+        this.index.group++
     }
     queueFail(){
         let total=0
