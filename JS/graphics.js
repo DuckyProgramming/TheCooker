@@ -86,6 +86,7 @@ p5.prototype.backgroundPattern=function(pattern){
 }
 function setupGraphics(){
     setupBase()
+	setupConstants()
     setupTrig()
 	graphics.main=createGraphics(960,600)
 	setupLayer(graphics.main)
@@ -112,6 +113,10 @@ function displayMain(layer){
     let scale=min(width/layer.width,height/layer.height)
     image(layer,width/2,height/2,layer.width*scale,layer.height*scale)
     updateMouse(graphics.main,scale)
+}
+function setupConstants(){
+	constants.sqrt2=sqrt(2)
+	constants.sqrt3=sqrt(3)
 }
 function setupTrig(){
 	for(let a=0,la=360;a<la;a++){

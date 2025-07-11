@@ -23,7 +23,7 @@ class entityManager extends manager{
         for(let a=0,la=this.operation.player.length;a<la;a++){
             this.entities.players.push(new player(this.layer,this,this.index.player++,0,0,a,this.operation.player[a]))
         }
-        this.customer.internal=5+3*(this.operation.player.length-1)
+        this.customer.internal=(5+3*(this.operation.player.length-1))*1.5
         this.calcCustomer()
     }
     generateLevel(level,entry){

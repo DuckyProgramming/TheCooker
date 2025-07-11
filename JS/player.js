@@ -148,7 +148,7 @@ class player extends partisan{
                     index=floor(random(0,menu[1].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[1][index][0],types.item)))
                     last(this.order).fade.main=0
-                    last(this.order).size=0.5
+                    last(this.order).size=0.8
                     this.paying.push(menu[1][index][1])
                 }
             break
@@ -156,13 +156,13 @@ class player extends partisan{
                 index=floor(random(0,menu[0].length))
                 this.order.push(new item(this.layer,this.parent,0,0,findName(menu[0][index][0],types.item)))
                 last(this.order).fade.main=0
-                last(this.order).size=0.6
+                last(this.order).size=0.8
                 this.paying.push(menu[0][index][1])
                 if(floor(random(0,menu[2].length+1))!=0){
                     index=floor(random(0,menu[2].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[2][index][0],types.item)))
                     last(this.order).fade.main=0
-                    last(this.order).size=0.6
+                    last(this.order).size=0.8
                     this.paying.push(menu[2][index][1])
                 }
             break
@@ -171,7 +171,7 @@ class player extends partisan{
                     index=floor(random(0,menu[3].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[3][index][0],types.item)))
                     last(this.order).fade.main=0
-                    last(this.order).size=0.6
+                    last(this.order).size=0.8
                     this.paying.push(menu[3][index][1])
                 }
             break
@@ -180,7 +180,7 @@ class player extends partisan{
                     index=floor(random(0,menu[4].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[4][index][0],types.item)))
                     last(this.order).fade.main=0
-                    last(this.order).size=0.6
+                    last(this.order).size=0.8
                     this.paying.push(menu[4][index][1])
                 }
             break
@@ -283,7 +283,7 @@ class player extends partisan{
                 layer.push()
                 layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y)
                 if(this.id==-1){
-                    layer.translate(0,-27)
+                    layer.translate(0,-30)
                     for(let a=0,la=this.order.length;a<la;a++){
                         this.order[a].display(0)
                     }
@@ -361,8 +361,8 @@ class player extends partisan{
                     case 2:
                         let distance=distPos(this,this.follow)
                         let dir=dirPos(this,this.follow)
-                        if(distance>45||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<30&&this.angle!=-1){
-                            if(distance<=45){
+                        if(distance>48||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<30&&this.angle!=-1){
+                            if(distance<=48){
                                 this.timer.angle++
                             }
                             let loc={position:{

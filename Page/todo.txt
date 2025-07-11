@@ -4,9 +4,9 @@ appliance - fancy table
 
 blueprint descriptions
 
-+4 dishes / variant cards
-
-+2 variant cards
++6 variant cards
+-wine jus
+-sugar coffee
 
 +2 customer cards
 

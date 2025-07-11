@@ -1,4 +1,4 @@
-constants={trig:[[],[]],graphics:{detail:15}}
+constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined}
 dev={bound:false,altControl:true}
 inputs={
@@ -30,8 +30,9 @@ types={
             ],wall:[
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
-                //[1,3,'Crabs',0],
-                //[3,3,'Spiny Fish',0],
+                //[1,3,'Garlic',0],
+                //[3,3,'Bone Meat',0],
+                //[5,3,'Thick Meat',0],
                 //[5,3,'Tin',0],
                 //[7,3,'Waffle Iron',0],
             ],
@@ -875,7 +876,7 @@ types={
         },{
             name:'Garlic',
             width:48,
-            height:48,
+            height:36,
             effect:[-1,0],
             spec:[1],provide:'Garlic',
             edit:true,
@@ -966,7 +967,7 @@ types={
         },{
             name:'Apples',
             width:48,
-            height:48,
+            height:36,
             effect:[-1,0],
             spec:[1],provide:'Apple',
             edit:true,
@@ -1095,8 +1096,8 @@ types={
             upgrade:[],
         },{
             name:'Bone Meat',
-            width:48,
-            height:48,
+            width:40,
+            height:40,
             effect:[-1,0],
             spec:[1],provide:'Bone Meat',
             edit:true,
@@ -1108,8 +1109,8 @@ types={
             upgrade:[],
         },{
             name:'Thick Meat',
-            width:48,
-            height:48,
+            width:40,
+            height:40,
             effect:[-1,0],
             spec:[1],provide:'Thick Meat',
             edit:true,
@@ -1383,7 +1384,7 @@ types={
                 [0,'Broccoli','Raw Broccoli'],
                 [0,'Potato','Raw Potato'],
                 [0,'Macaroni','Raw Macaroni'],
-                [0,'Chopped Potato','Chopped Potato in Pot'],
+                [0,'Chopped Potato','Raw Boiled Potato'],
                 [0,'Uncooked Noodles','Raw Noodles'],
                 [5,'Water','Pot'],
                 [5,'Trash','Pot'],
@@ -1782,8 +1783,8 @@ types={
             ],
         },{
             name:'Garlic',
-            holdDist:20,
-            holdDir:0,
+            holdDist:18,
+            holdDir:180,
             component:true,
             trashable:true,
             process:[
@@ -1965,7 +1966,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [0,'Plate','Chopped Onion'],
+                [0,'Plate','Plated Onion'],
             ],
         },{
             name:'Lettuce Dough',
@@ -3097,7 +3098,7 @@ types={
             ],
         },{
             name:'Bone Meat',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -3106,7 +3107,7 @@ types={
             ],
         },{
             name:'Rare Bone Steak',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -3116,7 +3117,7 @@ types={
             ],
         },{
             name:'Medium Bone Steak',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -3126,7 +3127,7 @@ types={
             ],
         },{
             name:'Well Done Bone Steak',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -3589,13 +3590,23 @@ types={
             ],
         },{
             name:'Boiled Potato Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Boiled Potato in Pot'],
+                [5,'Water','Boiled Potato in Pot'],
+            ],
+        },{
+            name:'Boiled Potato in Pot',
             portions:1,
             holdDist:20,
             holdDir:0,
             component:false,
             trashable:true,
             process:[
-                [6,60,'Boiled Potato','Water Pot'],
+                [6,60,'Boiled Potato','Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -3649,7 +3660,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
-                [0,'Boiled Potato','Plated Boiled Potato, Onion, and Mayo'],
+                [0,'Boiled Potato','Plated Boiled Potato, Onion, and Mayfo'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -4191,7 +4202,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [0,'Plate','Plated Hog Dog Bun']
+                [0,'Plate','Plated Hot Dog Bun'],
             ],
         },{
             name:'Unbunned Hot Dog',
@@ -4213,7 +4224,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
-                [0,'Unbunned Hot Bun','Plated Hot Dog'],
+                [0,'Unbunned Hot Dog','Plated Hot Dog'],
             ],
         },{
             name:'Plated Unbunned Hot Dog',
@@ -5198,7 +5209,7 @@ types={
             ],
         },{
             name:'Bone',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5265,9 +5276,9 @@ types={
             name:'Bone Steak',
             type:0,
             obj:[
-                ['Plated Rare Bone Steak',4],
-                ['Plated Medium Bone Steak',4],
-                ['Plated Well Done Bone Steak',4],
+                ['Plated Rare Bone Steak',5],
+                ['Plated Medium Bone Steak',5],
+                ['Plated Well Done Bone Steak',5],
             ],
             edit:true,
             level:1,
@@ -5287,15 +5298,15 @@ types={
             name:'Tomato Steak',
             type:0,
             obj:[
-                ['Plated Rare Steak With Tomato',4],
-                ['Plated Medium Steak With Tomato',4],
-                ['Plated Well Done Steak With Tomato',4],
-                ['Plated Rare Bone Steak','Plated Rare Bone Steak With Tomato',4],
-                ['Plated Medium Bone Steak','Plated Medium Bone Steak With Tomato',4],
-                ['Plated Well Done Bone Steak','Plated Well Done Bone Steak With Tomato',4],
-                ['Plated Rare Thick Steak','Plated Rare Thick Steak With Tomato',5],
-                ['Plated Medium Thick Steak','Plated Medium Thick Steak With Tomato',5],
-                ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Tomato',5],
+                ['Plated Rare Steak With Tomato',5],
+                ['Plated Medium Steak With Tomato',5],
+                ['Plated Well Done Steak With Tomato',5],
+                ['Plated Rare Bone Steak','Plated Rare Bone Steak With Tomato',6],
+                ['Plated Medium Bone Steak','Plated Medium Bone Steak With Tomato',6],
+                ['Plated Well Done Bone Steak','Plated Well Done Bone Steak With Tomato',6],
+                ['Plated Rare Thick Steak','Plated Rare Thick Steak With Tomato',6],
+                ['Plated Medium Thick Steak','Plated Medium Thick Steak With Tomato',6],
+                ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Tomato',6],
             ],
             edit:true,
             level:1,
@@ -5344,7 +5355,7 @@ types={
             name:'Caesar Salad',
             type:0,
             obj:[
-                ['Plated Lettuce, Garlic, and Breadcrumbs',6],
+                ['Plated Lettuce, Garlic, and Breadcrumbs',7],
             ],
             edit:true,
             level:1,
@@ -5588,7 +5599,7 @@ types={
 
         {
             name:'Cake',
-            type:0,
+            type:3,
             obj:[
                 ['Chocolate Cake Slice',4],
             ],
@@ -5597,7 +5608,7 @@ types={
             desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd milk to batter, then place in cake tin.\nCook, then add melted chocolate as flavoring.\nPortion and serve.',
         },{
             name:'Coffee Cake',
-            type:0,
+            type:3,
             obj:[
                 ['Coffee Cake Slice',4],
             ],
@@ -5606,7 +5617,7 @@ types={
             desc:'After cooking, use coffee from coffee machine as cake flavoring.',
         },{
             name:'Cherry Cake',
-            type:0,
+            type:3,
             obj:[
                 ['Cherry Cake Slice',4],
             ],
@@ -5615,7 +5626,7 @@ types={
             desc:'After cooking, use cherry sauce as cake flavoring.',
         },{
             name:'Lemon Cake',
-            type:0,
+            type:3,
             obj:[
                 ['Lemon Cake Slice',4],
             ],
@@ -5624,7 +5635,7 @@ types={
             desc:'After cooking, use chopped lemon as cake flavoring.',
         },{
             name:'Donut',
-            type:0,
+            type:3,
             obj:[
                 ['Chocolate Donut',5],
                 ['Coffee Cake Slice','Coffee Donut',5],
@@ -5636,7 +5647,7 @@ types={
             desc:'Add batter with milk to donut tray.\nPortion a donut out of the tray.\nAdd oil and donut to pot.\nCook, then portion out donut, add flavoring, and serve.',
         },{
             name:'Tiramisu',
-            type:0,
+            type:3,
             obj:[
                 ['Tiramisu Slice',5],
             ],
@@ -6060,7 +6071,7 @@ types={
             edit:true,
             level:1,
             desc:'Combine chopped crab, egg, and flour',
-        },/*{
+        },{
             name:'Bone Steak',
             dish:['Bone Steak'],
             list:1,
@@ -6130,7 +6141,7 @@ types={
             name:'Caesar Salad',
             dish:['Caesar Salad'],
             list:1,
-            customerMult:0.8,
+            customerMult:0.64,
             prereq:['Salad'],
             mutex:[],
             wall:['Garlic','Flour','Oven'],
@@ -6627,7 +6638,7 @@ types={
             edit:true,
             level:1,
             desc:'Adds zeppole as a dessert',
-        },*/
+        },
         
         {
             name:'Individuals',
