@@ -323,4 +323,7 @@ function checkValid(){
         }
     }
 }
+function summon(item){
+    current.entityManager.entities.players[0].item=current.entityManager.entities.walls[0][0].generateItem(item)
+}
 //dev

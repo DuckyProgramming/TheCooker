@@ -148,6 +148,7 @@ class player extends partisan{
                     index=floor(random(0,menu[1].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[1][index][0],types.item)))
                     last(this.order).fade.main=0
+                    last(this.order).fade.trigger=false
                     last(this.order).size=0.8
                     this.paying.push(menu[1][index][1])
                 }
@@ -156,12 +157,14 @@ class player extends partisan{
                 index=floor(random(0,menu[0].length))
                 this.order.push(new item(this.layer,this.parent,0,0,findName(menu[0][index][0],types.item)))
                 last(this.order).fade.main=0
+                last(this.order).fade.trigger=false
                 last(this.order).size=0.8
                 this.paying.push(menu[0][index][1])
                 if(floor(random(0,menu[2].length+1))!=0){
                     index=floor(random(0,menu[2].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[2][index][0],types.item)))
                     last(this.order).fade.main=0
+                    last(this.order).fade.trigger=false
                     last(this.order).size=0.8
                     this.paying.push(menu[2][index][1])
                 }
@@ -171,6 +174,7 @@ class player extends partisan{
                     index=floor(random(0,menu[3].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[3][index][0],types.item)))
                     last(this.order).fade.main=0
+                    last(this.order).fade.trigger=false
                     last(this.order).size=0.8
                     this.paying.push(menu[3][index][1])
                 }
@@ -180,10 +184,16 @@ class player extends partisan{
                     index=floor(random(0,menu[4].length))
                     this.order.push(new item(this.layer,this.parent,0,0,findName(menu[4][index][0],types.item)))
                     last(this.order).fade.main=0
+                    last(this.order).fade.trigger=false
                     last(this.order).size=0.8
                     this.paying.push(menu[4][index][1])
                 }
             break
+        }
+    }
+    revealOrder(){
+        for(let a=0,la=this.order.length;a<la;a++){
+            this.order[a].fade.trigger=true
         }
     }
     display(level,layer=this.layer){
@@ -378,7 +388,7 @@ class player extends partisan{
                         }
                         if(this.follow.item!=-1){
                             for(let a=0,la=this.order.length;a<la;a++){
-                                if(this.order[a].type==this.follow.item.type){
+                                if(this.order[a].fade.trigger&&this.order[a].type==this.follow.item.type){
                                     if(this.orderPhase!=3){
                                         if(a==1||this.item!=-1){
                                             this.side=this.follow.item
@@ -394,6 +404,9 @@ class player extends partisan{
                                     }
                                     if(this.parent.operation.cardManager.hasCard('Tipping Culture')){
                                         value=ceil(value*this.follow.patience.mem)
+                                    }
+                                    if(this.follow.name=='Fancy Table'){
+                                        value=round(value*1.5+random(-0.5,0.5))
                                     }
                                     if(value>0){
                                         this.parent.operation.dayManager.payout(value,this.position.x,this.position.y-30)

@@ -31,7 +31,7 @@ types={
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
                 //[1,3,'Displayer',0],
-                //[3,3,'Cocoa Powder',0],
+                //[3,3,'Soybeans',0],
                 //[5,3,'Counter',0],
                 //[5,3,'Tin',0],
                 //[7,3,'Waffle Iron',0],
@@ -902,7 +902,7 @@ types={
         },{
             name:'Soybeans',
             width:48,
-            height:48,
+            height:36,
             effect:[-1,0],
             spec:[1],provide:'Soybean',
             edit:true,
@@ -1582,7 +1582,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [1,480,'Meat Soup Pot'],
+                [1,480,'Tomato Soup Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -1723,7 +1723,7 @@ types={
             ],
         },{
             name:'Dough',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -1768,7 +1768,7 @@ types={
             process:[],
         },{
             name:'Butter Dough',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -1777,8 +1777,8 @@ types={
             ],
         },{
             name:'Raw Croissant',
-            holdDist:20,
-            holdDir:0,
+            holdDist:18,
+            holdDir:90,
             component:true,
             trashable:true,
             process:[
@@ -1786,8 +1786,8 @@ types={
             ],
         },{
             name:'Croissant',
-            holdDist:20,
-            holdDir:0,
+            holdDist:18,
+            holdDir:90,
             component:true,
             trashable:true,
             process:[
@@ -1837,7 +1837,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [1,60,'Garlic Bread'],
+                [1,90,'Garlic Bread'],
             ],
         },{
             name:'Garlic Bread',
@@ -1846,7 +1846,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [9,120,'Burnt'],
+                [9,150,'Burnt'],
                 [7,180,''],
             ],
         },{
@@ -1931,7 +1931,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [1,540,'Miso Soup Pot'],
+                [1,420,'Miso Soup Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -2026,12 +2026,12 @@ types={
             trashable:true,
             process:[
                 [6,30,'Spring Roll','Spring Roll'],
-                [9,60,'Burnt'],
+                [9,90,'Burnt'],
             ],
         },{
             name:'Spring Roll',
-            holdDist:20,
-            holdDir:0,
+            holdDist:16,
+            holdDir:90,
             component:true,
             trashable:true,
             process:[
@@ -5697,7 +5697,7 @@ types={
             name:'Miso Soup',
             type:1,
             obj:[
-                ['Miso Soup',3],
+                ['Miso Soup',2],
             ],
             edit:true,
             level:1,
@@ -5733,7 +5733,7 @@ types={
             name:'Spring Roll',
             type:1,
             obj:[
-                ['Spring Roll',2],
+                ['Spring Roll',1],
             ],
             edit:true,
             level:1,

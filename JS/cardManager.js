@@ -35,14 +35,14 @@ class cardManager extends manager{
             for(let b=0,lb=this.listing.available[a].length;b<lb;b++){
                 let valid=true
                 for(let c=0,lc=types.card[this.listing.available[a][b]].prereq.length;c<lc;c++){
-                    if(!this.active.includes(types.card[this.listing.available[a][b]].prereq[c])){
+                    if(!this.active.includes(findName(types.card[this.listing.available[a][b]].prereq[c],types.card))){
                         valid=false
                         c=lc
                     }
                 }
                 if(valid){
                     for(let c=0,lc=types.card[this.listing.available[a][b]].mutex.length;c<lc;c++){
-                        if(this.active.includes(types.card[this.listing.available[a][b]].mutex[c])){
+                        if(this.active.includes(findName(types.card[this.listing.available[a][b]].mutex[c],types.card))){
                             valid=false
                             c=lc
                         }
@@ -82,7 +82,7 @@ class cardManager extends manager{
                 let possible=[]
                 for(let a=0,la=2;a<la;a++){
                     for(let b=0,lb=this.listing.possible[a].length;b<lb;b++){
-                        for(let c=0,lc=1+a*2;c<lc;c++){
+                        for(let c=0,lc=1+a*7;c<lc;c++){
                             possible.push(this.listing.possible[a][b])
                         }
                     }
