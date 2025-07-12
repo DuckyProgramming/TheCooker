@@ -30,9 +30,9 @@ types={
             ],wall:[
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
-                //[1,3,'Garlic',0],
-                //[3,3,'Bone Meat',0],
-                //[5,3,'Thick Meat',0],
+                //[1,3,'Displayer',0],
+                //[3,3,'Cocoa Powder',0],
+                //[5,3,'Counter',0],
                 //[5,3,'Tin',0],
                 //[7,3,'Waffle Iron',0],
             ],
@@ -207,6 +207,19 @@ types={
             upgrade:[],
         },{
             name:'Option',
+            width:36,
+            height:36,
+            effect:[-1,0],
+            spec:[],
+            edit:false,
+            level:1,
+            rarity:-1,
+            cost:0,
+            prereq:[],
+            desc:'Pressing your buttons',
+            upgrade:[],
+        },{
+            name:'Displayer',
             width:36,
             height:36,
             effect:[-1,0],
@@ -770,7 +783,7 @@ types={
         },{
             name:'Mustard',
             width:48,
-            height:16,
+            height:24,
             effect:[-1,0],
             spec:[],
             edit:true,
@@ -824,7 +837,7 @@ types={
         },{
             name:'Broccoli',
             width:48,
-            height:48,
+            height:36,
             effect:[-1,0],
             spec:[1],provide:'Broccoli',
             edit:true,
@@ -862,8 +875,8 @@ types={
             upgrade:[],
         },{
             name:'Butter',
-            width:48,
-            height:48,
+            width:30,
+            height:30,
             effect:[-1,0],
             spec:[1],provide:'Butter',
             edit:true,
@@ -980,7 +993,7 @@ types={
         },{
             name:'Cherries',
             width:48,
-            height:48,
+            height:36,
             effect:[-1,0],
             spec:[1],provide:'Cherry',
             edit:true,
@@ -1006,7 +1019,7 @@ types={
         },{
             name:'Lemons',
             width:48,
-            height:48,
+            height:36,
             effect:[-1,0],
             spec:[1],provide:'Lemon',
             edit:true,
@@ -1031,8 +1044,8 @@ types={
             upgrade:[],
         },{
             name:'Ice Cream',
-            width:48,
-            height:48,
+            width:40,
+            height:40,
             effect:[-1,0],
             spec:[1],provide:'Ice Cream C',
             edit:true,
@@ -1200,8 +1213,8 @@ types={
             upgrade:[],
         },{
             name:'Pasta Sheet',
-            width:48,
-            height:48,
+            width:30,
+            height:30,
             effect:[-1,0],
             spec:[1],provide:'Pasta Sheet',
             edit:true,
@@ -1748,7 +1761,7 @@ types={
             ],
         },{
             name:'Butter',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -2373,7 +2386,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [1,60,'Cherry Sauce'],
+                [2,60,'Cherry Sauce'],
             ],
         },{
             name:'Sugar',
@@ -2383,8 +2396,8 @@ types={
             trashable:true,
             process:[
                 [1,180,'Caramel'],
-                [0,'Cracked Egg','Cracked Egg With Sugar'],
-                [0,'Chopped Lemon','Cracked Egg With Chopped Lemon'],
+                [0,'Cracked Egg','Sugar Egg'],
+                [0,'Chopped Lemon','Chopped Lemon With Sugar'],
                 [0,'Flour','Flour With Sugar'],
             ],
         },{
@@ -2541,15 +2554,6 @@ types={
             trashable:true,
             process:[
                 [0,'Sugar','Unmixed Lemon Meringue'],
-            ],
-        },{
-            name:'Cracked Egg With Sugar',
-            holdDist:20,
-            holdDir:0,
-            component:true,
-            trashable:true,
-            process:[
-                [0,'Chopped Lemon','Unmixed Lemon Meringue'],
             ],
         },{
             name:'Chopped Lemon With Sugar',
@@ -4109,7 +4113,7 @@ types={
             ],
         },{
             name:'Affogato',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -4265,6 +4269,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [0,'Chopped Cheese','Plated Cheese Hot Dog'],
             ],
         },{
             name:'Plated Cheese Hot Dog',
@@ -4743,6 +4748,7 @@ types={
             trashable:true,
             process:[
                 [0,'Flour','Sugar Flour Egg'],
+                [0,'Chopped Lemon','Unmixed Lemon Meringue'],
             ],
         },{
             name:'Flour Egg',
@@ -4815,7 +4821,7 @@ types={
             trashable:true,
             process:[
                 [0,'Plate','Plated Cherry Waffle'],
-                [0,'Butter','Butter Cherry Waffle'],
+                [0,'Butter Waffle','Butter Cherry Waffle'],
             ],
         },{
             name:'Butter Cherry Waffle',
@@ -4835,6 +4841,8 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [0,'Butter','Plated Butter Waffle'],
+                [0,'Cherry Sauce','Plated Cherry Waffle'],
             ],
         },{
             name:'Plated Butter Waffle',
@@ -4845,6 +4853,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [0,'Cherry Sauce','Plated Butter Cherry Waffle'],
             ],
         },{
             name:'Plated Cherry Waffle',
@@ -4855,6 +4864,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [0,'Butter','Plated Butter Cherry Waffle'],
             ],
         },{
             name:'Plated Butter Cherry Waffle',
@@ -5003,7 +5013,7 @@ types={
             ],
         },{
             name:'Raw Donut',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5047,11 +5057,11 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Pot'],
-                [6,60,'Donut','Oil in Pot'],
+                [6,30,'Donut','Oil in Pot'],
             ],
         },{
             name:'Donut',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5063,7 +5073,7 @@ types={
             ],
         },{
             name:'Chocolate Donut',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5072,7 +5082,7 @@ types={
             ],
         },{
             name:'Coffee Donut',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5081,7 +5091,7 @@ types={
             ],
         },{
             name:'Cherry Donut',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5090,7 +5100,7 @@ types={
             ],
         },{
             name:'Lemon Donut',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5182,7 +5192,7 @@ types={
             ],
         },{
             name:'Tiramisu Slice',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -5435,7 +5445,7 @@ types={
             name:'Vegetable Pie',
             type:0,
             obj:[
-                ['Plated Vegetable Pie',6],
+                ['Plated Vegetable Pie',7],
             ],
             edit:true,
             level:1,
@@ -5542,7 +5552,7 @@ types={
             name:'Cheese Spaghetti',
             type:0,
             obj:[
-                ['Plated Cheese Spaghetti',7],
+                ['Plated Cheese Spaghetti',8],
             ],
             edit:true,
             level:1,
@@ -5590,7 +5600,7 @@ types={
             type:0,
             obj:[
                 ['Plated Cherry Waffle',6],
-                ['Plated Butter Waffle','Player Butter Cherry Waffle',7],
+                ['Plated Butter Waffle','Plated Butter Cherry Waffle',7],
             ],
             edit:true,
             level:1,
@@ -6254,7 +6264,7 @@ types={
             customerMult:0.64,
             prereq:['Spaghetti'],
             mutex:[],
-            wall:['Starter Hob','Meat'],
+            wall:['Meat'],
             edit:true,
             level:1,
             desc:'Spaghetti with meat-based sauce',
@@ -6284,7 +6294,7 @@ types={
             name:'Ramen',
             dish:['Ramen'],
             list:1,
-            customerMult:0.64,
+            customerMult:0.8,
             prereq:['Spaghetti'],
             mutex:[],
             wall:['Onions','Bonito'],
@@ -6320,7 +6330,7 @@ types={
             customerMult:0.8,
             prereq:['Cakes'],
             mutex:[],
-            wall:['Coffee Machine'],
+            wall:['Coffee Machine','Tin'],
             edit:true,
             level:1,
             desc:'Adds coffee as a cake flavor',
@@ -6331,7 +6341,7 @@ types={
             customerMult:0.8,
             prereq:['Cakes'],
             mutex:[],
-            wall:['Cherries'],
+            wall:['Cherries','Tin'],
             edit:true,
             level:1,
             desc:'Adds cherry as a cake flavor',
@@ -6342,7 +6352,7 @@ types={
             customerMult:0.8,
             prereq:['Cakes'],
             mutex:[],
-            wall:['Lemons'],
+            wall:['Lemons','Tin'],
             edit:true,
             level:1,
             desc:'Adds lemon as a cake flavor',
@@ -6364,7 +6374,7 @@ types={
             customerMult:0.8,
             prereq:['Cakes'],
             mutex:[],
-            wall:['Cocoa Powder'],
+            wall:['Cocoa Powder','Lemons','Tin'],
             edit:true,
             level:1,
             desc:'Layers of cake, cream, and cocoa powder',

@@ -248,10 +248,12 @@ class entityManager extends manager{
                 a++
                 total++
             }
-            for(let b=0,lb=this.entities.walls.length;b<lb;b++){
-                for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
-                    if(this.entities.walls[b][c].type==inside){
-                        total--
+            if(set[a]!='Tin'){
+                for(let b=0,lb=this.entities.walls.length;b<lb;b++){
+                    for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
+                        if(this.entities.walls[b][c].type==inside){
+                            total--
+                        }
                     }
                 }
             }

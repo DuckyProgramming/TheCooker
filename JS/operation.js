@@ -10,8 +10,7 @@ class operation{
             case 'main':
                 this.entityManager.generateLevel(args[0],0)
                 //this.overlayManager.activate(0,[0])
-                this.cardManager.addCard(6)
-                this.cardManager.addCard(27)
+                this.cardManager.addCard(43)
                 ////
                 //this.entityManager.spawnBlueprints(5)
                 this.entityManager.spawnOptions(1)
