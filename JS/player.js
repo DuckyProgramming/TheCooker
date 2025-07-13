@@ -214,14 +214,15 @@ class player extends partisan{
                     layer.push()
                     layer.rotate(-this.direction.main)
                     layer.translate(0,this.item.holdDist)
-                    layer.rotate(this.item.holdDir)
+                    layer.rotate(this.item.holdDir+180)
                     this.item.display(0)
                     layer.pop()
                 }
                 if(this.id==-1&&this.side!=-1){
                     layer.push()
                     layer.rotate(-this.direction.main)
-                    layer.translate(10,this.item.holdDist)
+                    layer.translate(6,this.item.holdDist+6)
+                    layer.rotate(this.side.holdDir+180)
                     this.side.display(0)
                     layer.pop()
                 }
@@ -293,8 +294,9 @@ class player extends partisan{
                 layer.push()
                 layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y)
                 if(this.id==-1){
-                    layer.translate(0,-30)
                     for(let a=0,la=this.order.length;a<la;a++){
+                        this.order[a].position.x=even(a,la)*15
+                        this.order[a].position.y=-30
                         this.order[a].display(0)
                     }
                 }

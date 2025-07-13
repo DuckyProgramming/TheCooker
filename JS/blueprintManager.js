@@ -81,7 +81,7 @@ class blueprintManager extends manager{
         switch(type){
             case 0:
                 for(let a=0,la=this.listing.possible[3].length;a<la;a++){
-                    this.listing.possible[this.operation.entityManager.hasWall(this.listing.possible[3][a])?0:1].push(this.listing.possible[3][a])
+                    this.listing.possible[this.operation.entityManager.hasWall(this.listing.possible[3][a])?1:0].push(this.listing.possible[3][a])
                 }
                 let set=[]
                 for(let a=0,la=min(3,floor((args[0]+1)/3)+floor(random(0,2.25)));a<la;a++){

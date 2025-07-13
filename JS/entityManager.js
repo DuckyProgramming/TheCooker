@@ -23,7 +23,7 @@ class entityManager extends manager{
         for(let a=0,la=this.operation.player.length;a<la;a++){
             this.entities.players.push(new player(this.layer,this,this.index.player++,0,0,a,this.operation.player[a]))
         }
-        this.customer.internal=(5+3*(this.operation.player.length-1))*1.5
+        this.customer.internal=(5+3*(this.operation.player.length-1))
         this.calcCustomer()
     }
     generateLevel(level,entry){
@@ -251,7 +251,7 @@ class entityManager extends manager{
             if(set[a]!='Tin'){
                 for(let b=0,lb=this.entities.walls.length;b<lb;b++){
                     for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
-                        if(this.entities.walls[b][c].type==inside){
+                        if(this.entities.walls[b][c].type==inside||this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside){
                             total--
                         }
                     }

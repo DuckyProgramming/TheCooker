@@ -31,8 +31,14 @@ types={
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
                 //[1,3,'Displayer',0],
-                //[3,3,'Soybeans',0],
-                //[5,3,'Counter',0],
+                //[1,5,'Starter Hob',0],
+                /*[19,1,'Fish',1],
+                [19,3,'Starter Hob',1],
+                [19,5,'Starter Hob',1],
+                [19,7,'Starter Plates',1],*/
+                [19,9,'Starter Sink',1],
+                //[3,3,'Rice',0],
+                //[5,3,'Cinnamon',0],
                 //[5,3,'Tin',0],
                 //[7,3,'Waffle Iron',0],
             ],
@@ -254,7 +260,7 @@ types={
             spec:[],
             edit:true,
             level:1,
-            rarity:3,
+            rarity:2,
             cost:40,
             prereq:[],
             desc:'Store and possibly upgrade a blueprint',
@@ -267,7 +273,7 @@ types={
             spec:[],
             edit:true,
             level:1,
-            rarity:3,
+            rarity:2,
             cost:60,
             prereq:[],
             desc:'Store and cheapen a blueprint',
@@ -953,8 +959,8 @@ types={
             upgrade:[],
         },{
             name:'Macaroni',
-            width:48,
-            height:48,
+            width:30,
+            height:30,
             effect:[-1,0],
             spec:[1],provide:'Macaroni',
             edit:true,
@@ -1250,6 +1256,45 @@ types={
             prereq:[0],
             desc:'Provides Cocoa Powder',
             upgrade:[],
+        },{
+            name:'Rice',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[1],provide:'Rice',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Rice',
+            upgrade:[],
+        },{
+            name:'Flour',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[1],provide:'Flour',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Flour',
+            upgrade:[],
+        },{
+            name:'Cinnamon',
+            width:30,
+            height:30,
+            effect:[-1,0],
+            spec:[1],provide:'Cinnamon',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Cinnamon',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -1383,6 +1428,9 @@ types={
                 [0,'Flour','Flour in Pot'],
                 [0,'Oil','Oil in Pot'],
                 [0,'Raw Donut','Donut in Pot'],
+                [0,'Rice','Rice in Pot'],
+                [0,'Cinnamon','Cinnamon in Pot'],
+                [0,'Milk','Milk in Pot'],
                 [0,'Chopped Potato','Chopped Potato in Pot'],
             ],
         },{
@@ -1410,7 +1458,6 @@ types={
             trashable:true,
             process:[
                 [2,60,'Chopped Onion'],
-                [0,'Flour','Raw Onion Rings'],
             ],
         },{
             name:'Onion in Pot',
@@ -1631,7 +1678,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [0,'Flour','Raw Onion Rings'],
+                [0,'Flour','Raw Cheese Sticks'],
             ],
         },{
             name:'Broccoli',
@@ -1980,6 +2027,7 @@ types={
             trashable:true,
             process:[
                 [0,'Plate','Plated Onion'],
+                [0,'Flour','Raw Onion Rings'],
             ],
         },{
             name:'Lettuce Dough',
@@ -2070,7 +2118,7 @@ types={
             ],
         },{
             name:'Broccoli Portion',
-            holdDist:20,
+            holdDist:16,
             holdDir:0,
             component:true,
             trashable:true,
@@ -2165,6 +2213,7 @@ types={
             trashable:true,
             process:[
                 [7,90,''],
+                [9,120,'Burnt'],
             ],
         },{
             name:'Raw Onion Rings',
@@ -2187,7 +2236,7 @@ types={
             ],
         },{
             name:'Raw Cheese Sticks',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -2196,7 +2245,7 @@ types={
             ],
         },{
             name:'Unsauced Cheese Sticks',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -2206,7 +2255,7 @@ types={
             ],
         },{
             name:'Cheese Sticks',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -2268,7 +2317,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [0,'Butter','Macaroni and Cheese Pot'],
+                [0,'Butter','Unmixed Macaroni and Cheese Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -2278,7 +2327,17 @@ types={
             component:false,
             trashable:true,
             process:[
-                [0,'Chopped Cheese','Macaroni and Cheese Pot'],
+                [0,'Chopped Cheese','Unmixed Macaroni and Cheese Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Unmixed Macaroni and Cheese Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [3,120,'Macaroni and Cheese Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -2452,22 +2511,12 @@ types={
             ],
         },{
             name:'Apple Pie',
-            portions:3,
             holdDist:20,
             holdDir:0,
             component:true,
             trashable:true,
             process:[
-                [6,60,'Apple Pie Slice','Apple Pie Slice'],
                 [9,240,'Burnt'],
-            ],
-        },{
-            name:'Apple Pie Slice',
-            holdDist:20,
-            holdDir:0,
-            component:true,
-            trashable:true,
-            process:[
                 [7,180,''],
             ],
         },{
@@ -2481,22 +2530,12 @@ types={
             ],
         },{
             name:'Cherry Pie',
-            portions:3,
             holdDist:20,
             holdDir:0,
             component:true,
             trashable:true,
             process:[
-                [6,60,'Cherry Pie Slice','Cherry Pie Slice'],
                 [9,420,'Burnt'],
-            ],
-        },{
-            name:'Cherry Pie Slice',
-            holdDist:20,
-            holdDir:0,
-            component:true,
-            trashable:true,
-            process:[
                 [7,180,''],
             ],
         },{
@@ -2510,22 +2549,12 @@ types={
             ],
         },{
             name:'Caramel Pie',
-            portions:3,
             holdDist:20,
             holdDir:0,
             component:true,
             trashable:true,
             process:[
-                [6,60,'Caramel Pie Slice','Caramel Pie Slice'],
                 [9,240,'Burnt'],
-            ],
-        },{
-            name:'Caramel Pie Slice',
-            holdDist:20,
-            holdDir:0,
-            component:true,
-            trashable:true,
-            process:[
                 [7,180,''],
             ],
         },{
@@ -2593,22 +2622,12 @@ types={
             ],
         },{
             name:'Lemon Meringue Pie',
-            portions:3,
             holdDist:20,
             holdDir:0,
             component:true,
             trashable:true,
             process:[
-                [6,60,'Lemon Meringue Pie Slice','Lemon Meringue Pie Slice'],
                 [9,300,'Burnt'],
-            ],
-        },{
-            name:'Lemon Meringue Pie Slice',
-            holdDist:20,
-            holdDir:0,
-            component:true,
-            trashable:true,
-            process:[
                 [7,180,''],
             ],
         },{
@@ -2715,7 +2734,7 @@ types={
             trashable:true,
             process:[
                 [0,'Ice Cream C','Ice Cream CV'],
-                [0,'Ice Cream V','Ice Cream CV'],
+                [0,'Ice Cream V','Ice Cream VV'],
                 [7,180,''],
             ],
         },{
@@ -2753,6 +2772,15 @@ types={
             ],
         },{
             name:'Sugar Dough',
+            holdDist:18,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [2,60,'Raw Zeppole'],
+            ],
+        },{
+            name:'Raw Zeppole',
             holdDist:20,
             holdDir:0,
             component:true,
@@ -5224,6 +5252,113 @@ types={
             component:true,
             trashable:true,
             process:[],
+        },{
+            name:'Rice',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Cinnamon',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Rice in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Cinnamon','Rice Cinnamon Pot'],
+                [0,'Milk','Rice Milk Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Cinnamon in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Rice','Rice Cinnamon Pot'],
+                [0,'Milk','Cinnamon Milk Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Milk in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Rice','Rice Milk Pot'],
+                [0,'Cinnamon','Cinnamon Milk Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Rice Cinnamon Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Milk','Raw Rice Pudding'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Cinnamon Milk Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Rice','Raw Rice Pudding'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Rice Milk Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Cinnamon','Raw Rice Pudding'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Raw Rice Pudding',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,480,'Rice Pudding Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Rice Pudding Pot',
+            portions:4,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [6,60,'Rice Pudding','Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Rice Pudding',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
         },
     ],dish:[
         /*
@@ -5818,38 +5953,38 @@ types={
             name:'Apple Pie',
             type:3,
             obj:[
-                ['Apple Pie Slice',2],
+                ['Apple Pie',3],
             ],
             edit:true,
             level:1,
-            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd chopped apple to pastry and cook again.\nPortion and Serve.',
+            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd chopped apple to pastry and cook again.',
         },{
             name:'Cherry Pie',
             type:3,
             obj:[
-                ['Cherry Pie Slice',2],
+                ['Cherry Pie',3],
             ],
             edit:true,
             level:1,
-            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd cherry to pastry and cook again.\nPortion and Serve.',
+            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd cherry to pastry and cook again.',
         },{
             name:'Caramel Pie',
             type:3,
             obj:[
-                ['Caramel Pie Slice',2],
+                ['Caramel Pie',3],
             ],
             edit:true,
             level:1,
-            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook sugar to make caramel.\nAdd caramel to pastry and cook again.\nPortion and Serve.',
+            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook sugar to make caramel.\nAdd caramel to pastry and cook again.',
         },{
             name:'Lemon Meringue Pie',
             type:3,
             obj:[
-                ['Lemon Meringue Pie Slice',3],
+                ['Lemon Meringue Pie',4],
             ],
             edit:true,
             level:1,
-            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCombine chopped lemon, sugar, and cracked egg, and mix to create meringue.\nAdd meringue to pastry and cook again.\nPortion and Serve.',
+            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCombine chopped lemon, sugar, and cracked egg, and mix to create meringue.\nAdd meringue to pastry and cook again.',
         },{
             name:'Apple Crisp',
             type:3,
@@ -5860,14 +5995,14 @@ types={
             level:1,
             desc:'Combine chopped apple, sugar and flour.\nCook and serve.',
         },{
-            name:'Cherry Cordial',
+            name:'Rice Pudding',
             type:3,
             obj:[
-                ['Cherry Cordial',2],
+                ['Rice Pudding',2],
             ],
             edit:true,
             level:1,
-            desc:'Melt chocolate and add cherry.\nCook again and serve.',
+            desc:'Combine rice, milk, and cinnamon in a pot.\nCook, portion, and serve.',
         },{
             name:'Ice Cream',
             type:3,
@@ -6532,7 +6667,7 @@ types={
             customerMult:0.8,
             prereq:[],
             mutex:[],
-            wall:['Starter Hob','Cheese','Flour'],
+            wall:['Starter Hob','Cheese','Flour','Tomatoes'],
             edit:true,
             level:1,
             desc:'Adds cheese sticks as a side',
@@ -6616,16 +6751,16 @@ types={
             level:1,
             desc:'Adds apple crisp as a dessert',
         },{
-            name:'Cherry Cordial',
-            dish:['Cherry Cordial'],
+            name:'Rice Pudding',
+            dish:['Rice Pudding'],
             list:4,
             customerMult:0.8,
             prereq:[],
             mutex:[],
-            wall:['Oven','Chocolate','Cherries'],
+            wall:['Starter Hob','Pots','Milk','Cinnamon','Rice'],
             edit:true,
             level:1,
-            desc:'Adds cherry cordial as a dessert',
+            desc:'Adds rice pudding as a dessert',
         },{
             name:'Ice Cream',
             dish:['Ice Cream'],
@@ -6739,7 +6874,7 @@ types={
             mutex:[],
             edit:true,
             level:1,
-            desc:'Customers may order an extra course',
+            desc:'Customers may order a course twice',
         },{
             name:'Discount',
             list:5,
