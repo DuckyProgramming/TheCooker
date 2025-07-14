@@ -189,6 +189,16 @@ class player extends partisan{
                     this.paying.push(menu[4][index][1])
                 }
             break
+            case 4:
+                if(floor(random(0,menu[5].length+1))!=0){
+                    index=floor(random(0,menu[5].length))
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[5][index][0],types.item)))
+                    last(this.order).fade.main=0
+                    last(this.order).fade.trigger=false
+                    last(this.order).size=0.8
+                    this.paying.push(menu[5][index][1])
+                }
+            break
         }
     }
     revealOrder(){
@@ -391,12 +401,14 @@ class player extends partisan{
                         if(this.follow.item!=-1){
                             for(let a=0,la=this.order.length;a<la;a++){
                                 if(this.order[a].fade.trigger&&this.order[a].type==this.follow.item.type){
-                                    if(this.orderPhase!=3){
+                                    if(this.orderPhase!=3&&this.orderPhase!=4){
                                         if(a==1||this.item!=-1){
                                             this.side=this.follow.item
                                         }else{
                                             this.item=this.follow.item
                                         }
+                                    }
+                                    if(this.orderPhase!=3){
                                         this.follow.item=-1
                                     }
                                     this.order.splice(a,1)

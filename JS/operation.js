@@ -2,16 +2,17 @@ class operation{
     constructor(layer){
         this.layer=layer
         this.scene=''
-        this.player=[{color:1},/*{color:2},{color:3}*/]
+        this.level=floor(random(0,types.level.length))
+        this.player=[{color:1}/*,{color:2},{color:3}*/]
         this.initialManagers()
     }
     transition(scene,args){
         switch(scene){
             case 'main':
-                this.entityManager.generateLevel(args[0],0)
-                //this.overlayManager.activate(0,[0])
-                //this.cardManager.addCard(1)
-                this.cardManager.addCard(64)
+                this.entityManager.generateLevel(types.level[this.level],0)
+                this.overlayManager.activate(0,[0])
+                //this.cardManager.addCard(findName('Pizza',types.card))
+                //this.cardManager.addCard(findName('Calzones',types.card))
                 ////
                 //this.entityManager.spawnBlueprints(5)
                 this.entityManager.spawnOptions(1)

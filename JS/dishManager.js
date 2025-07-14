@@ -1,28 +1,34 @@
 class dishManager extends manager{
     constructor(layer,operation){
         super(layer,operation)
-        this.active=[[],[],[],[],[]]
-        this.obj=[[],[],[],[],[]]
+        this.active=[[],[],[],[],[],[]]
+        this.obj=[[],[],[],[],[],[]]
+        this.disabled=[[],[],[],[],[],[]]
     }
     addDish(dish){
         this.active[types.dish[dish].type].push(dish)
+        for(let a=0,la=types.dish[dish].obj.length;a<la;a++){
+            switch(types.dish[dish].obj[a].length){
+                case 2:
+                    this.obj[types.dish[dish].type].push(types.dish[dish].obj[a])
+                break
+                case 3:
+                    this.disabled[types.dish[dish].type].push(types.dish[dish].obj[a])
+                break
+            }
+        }
         this.updateObj()
     }
     updateObj(){
-        this.obj=[[],[],[],[],[]]
-        for(let a=0,la=this.active.length;a<la;a++){
-            for(let b=0,lb=this.active[a].length;b<lb;b++){
-                for(let c=0,lc=types.dish[this.active[a][b]].obj.length;c<lc;c++){
-                    let obj=types.dish[this.active[a][b]].obj[c]
-                    if(obj.length==2){
-                        this.obj[a].push(obj)
-                    }else{
-                        for(let d=0,ld=this.obj[a].length;d<ld;d++){
-                            if(this.obj[a][d][0]==obj[0]){
-                                this.obj[a].push([obj[1],obj[2]])
-                                d=ld
-                            }
-                        }
+        for(let a=0,la=this.disabled.length;a<la;a++){
+            for(let b=0,lb=this.disabled[a].length;b<lb;b++){
+                for(let c=0,lc=this.obj[a].length;c<lc;c++){
+                    if(this.obj[a][c][0]==this.disabled[a][b][0]){
+                        this.obj[a].push([this.disabled[a][b][1],this.disabled[a][b][2]])
+                        this.disabled[a].splice(b,1)
+                        b--
+                        lb--
+                        c=lc
                     }
                 }
             }

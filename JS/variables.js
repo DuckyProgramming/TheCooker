@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined}
-dev={bound:false,altControl:true}
+dev={bound:false,altControl:true,customerMult:1}
 inputs={
     keys:[
         {
@@ -36,14 +36,16 @@ types={
                 [19,3,'Starter Hob',1],
                 [19,5,'Starter Hob',1],
                 [19,7,'Starter Plates',1],*/
-                [19,9,'Starter Sink',1],
+                //[19,9,'Starter Sink',1],
+                //[1,5,'Counter',0],
+                //[1,7,'Counter',0],
                 //[3,3,'Rice',0],
                 //[5,3,'Cinnamon',0],
                 //[5,3,'Tin',0],
                 //[7,3,'Waffle Iron',0],
             ],
             inside:[0,0,0,2],
-            spawn:[21,17,270],
+            spawn:[270],
             map:[
                 ` _ _ _ _ _ _ _ _ _ _ `,
                 `|       |           |`,
@@ -62,10 +64,359 @@ types={
                 `                     `,
                 `|                   |`,
                 ` _ ] _ _ _ _ _ _ _ _ `,
-                `   e                c`,
+                `   e                 `,
                 `                     `,
                 `                   T `,
                 `                     `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[3,-5,0,0]],
+            ],wall:[
+                [19,7,'Starter Trash Bin',0],
+                [19,13,'Blueprint Cabinet',2],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ `,
+                `|     |             |`,
+                `                     `,
+                `|  D  i.            |`,
+                `                     `,
+                `|     i.            |`,
+                `                     `,
+                `|     |. . .        |`,
+                `       _ - - _ _ ] _ `,
+                `|             |     |`,
+                `                     `,
+                `|  1       D  [     |`,
+                `                     `,
+                `|             |     |`,
+                ` _ _ _ ] _ _ _ _ _ _ `,
+                `       e             `,
+                `                     `,
+                `                   T `,
+                `                     `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[7,-5,0,0],[4,-2,6,0],[0,-7,0,0]],
+            ],wall:[
+                [23,1,'Starter Trash Bin',0],
+                [23,9,'Blueprint Cabinet',1],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ _ `,
+                `|             |         |`,
+                `                         `,
+                `|             ]         |`,
+                ` _ - - _ - - _           `,
+                `|. . . . . . .|         |`,
+                `                         `,
+                `|             |         |`,
+                `                   _ _ _ `,
+                `|  D   1   D  |   |     |`,
+                `                         `,
+                `|             [   [     |`,
+                `                         `,
+                `|             |   |     |`,
+                ` _ ] _ _ _ _ _ _ _ _ _ _ `,
+                `   e                     `,
+                `                         `,
+                `                       T `,
+                `                         `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[0,-6,0,0],[-5,-5,0,0]],
+            ],wall:[
+                [19,1,'Starter Trash Bin',0],
+                [1,11,'Blueprint Cabinet',3],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ `,
+                `|.                  |`,
+                `                     `,
+                `|.                  |`,
+                `           - - - - - `,
+                `|.        |  D   D  |`,
+                ` _ ] _ _ _           `,
+                `|     |             |`,
+                `                     `,
+                `|     [  1          |`,
+                `                     `,
+                `|     |             |`,
+                ` _ _ _ _ ] _ _ _ _ _ `,
+                `         e           `,
+                `                     `,
+                `                   T `,
+                `                     `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[11,-2,0,0],[8,-5,0,0]],
+            ],wall:[
+                [15,1,'Starter Trash Bin',0],
+                [7,1,'Blueprint Cabinet',0],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ _ _ _ `,
+                `|     |         |           |`,
+                `                             `,
+                `|     [         [           |`,
+                `       _ _ ] _ _             `,
+                `|. . .|         |           |`,
+                ` - - -           _ _ _       `,
+                `|                     i.    |`,
+                `                             `,
+                `|  D       1       D  i.    |`,
+                `                             `,
+                `|                     i.    |`,
+                ` _ _ _ _ _ ] _ _ _ _ _ _ _ _ `,
+                `           e                 `,
+                `                             `,
+                `                           T `,
+                `                             `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[-2,-7,0,0],[1,-6,4,0]],
+            ],wall:[
+                [5,3,'Starter Trash Bin',0],
+                [5,7,'Blueprint Cabinet',1],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ `,
+                `|              .i   |`,
+                `                     `,
+                `|              .i   |`,
+                ` _ ] _               `,
+                `|     |        .i   |`,
+                `       _ _ _ _ _     `,
+                `|     |             |`,
+                `                     `,
+                `|     |  D     D    |`,
+                ` _ ] _               `,
+                `|                   |`,
+                `   1                 `,
+                `|                   |`,
+                ` _ _ _ _ ] _ _ _ _ _ `,
+                `         e           `,
+                `                     `,
+                `                   T `,
+                `                     `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[5,-2,0,4]],
+            ],wall:[
+                [23,9,'Starter Trash Bin',0],
+                [23,11,'Blueprint Cabinet',0],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ _ `,
+                `|             [         |`,
+                `                         `,
+                `|             |         |`,
+                `           - _ _ _ ] _ _ `,
+                `|    D    i.            |`,
+                `                         `,
+                `|         i.       1    |`,
+                `                         `,
+                `|    D    i.            |`,
+                `           - _ _ _ ] _ _ `,
+                `|             |         |`,
+                `                         `,
+                `|             [         |`,
+                ` _ _ ] _ _ _ _ _ _ _ _ _ `,
+                `     e                   `,
+                `                         `,
+                `                       T `,
+                `                         `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[8,-5,0,0],[3,-3,0,4]],
+            ],wall:[
+                [21,1,'Starter Trash Bin',0],
+                [21,15,'Blueprint Cabinet',1],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ `,
+                `|               |     |`,
+                `                       `,
+                `|               |     |`,
+                `       _ - - - _       `,
+                `|     |. . . . .      |`,
+                `                       `,
+                `|  D  |               |`,
+                `                       `,
+                `|     |               |`,
+                `       _ _ _ _ _ _ ] _ `,
+                `|           |         |`,
+                `                       `,
+                `|  1     D  [         |`,
+                `                       `,
+                `|           |         |`,
+                ` _ ] _ _ _ _ _ _ _ _ _ `,
+                `   e                   `,
+                `                       `,
+                `                     T `,
+                `                       `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[-11,-2,0,0],[-6,-5,0,0]],
+            ],wall:[
+                [15,1,'Starter Trash Bin',0],
+                [27,1,'Blueprint Cabinet',1],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ _ _ _ `,
+                `|               |     |     |`,
+                `                             `,
+                `|               |     [     |`,
+                `                             `,
+                `|              .i     |     |`,
+                ` _ ] _                 _ _ _ `,
+                `|     |        .i           |`,
+                `                             `,
+                `|     |    . . .i     1     |`,
+                `       _ _ - - -             `,
+                `|     |                     |`,
+                `                             `,
+                `|     [            D     D  |`,
+                `                             `,
+                `|     |                     |`,
+                ` _ _ _ _ _ ] _ _ _ _ _ _ _ _ `,
+                `           e                 `,
+                `                             `,
+                `                           T `,
+                `                             `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[-8,-5,0,0],[0,1,6,4],[-3,-2,0,6]],
+            ],wall:[
+                [1,9,'Starter Trash Bin',0],
+                [1,11,'Blueprint Cabinet',3],
+            ],
+            inside:[0,0,0,2],
+            spawn:[90],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ `,
+                `|   |               |`,
+                `                     `,
+                `|   [               |`,
+                `                     `,
+                `|   |    D          |`,
+                `     _ - - - _       `,
+                `|             |     |`,
+                `                     `,
+                `|             i     |`,
+                ` _ ] _               `,
+                `|     |       iD    |`,
+                `                     `,
+                `|     |       i     |`,
+                `                     `,
+                `|     |       |     |`,
+                ` _ _ _ _ _ _ _ _ ] _ `,
+                `                 e   `,
+                `                     `,
+                `                   T `,
+                `                     `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[0,-8,0,0],[8,-5,0,0]],
+            ],wall:[
+                [1,5,'Starter Trash Bin',0],
+                [21,17,'Blueprint Cabinet',1],
+            ],
+            inside:[0,0,0,2],
+            spawn:[90],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ `,
+                `|     |               |`,
+                `                       `,
+                `|     [               |`,
+                `                       `,
+                `|. . .|               |`,
+                ` - - - _ _ _ _ _       `,
+                `|               i.    |`,
+                `                       `,
+                `|  D         D  i.    |`,
+                `                       `,
+                `|               i.    |`,
+                `     _ ] _       _ ] _ `,
+                `|   |     |     |     |`,
+                `                       `,
+                `|   |     [     [     |`,
+                `                       `,
+                `|   |     |     |     |`,
+                ` _ _ _ _ _ _ ] _ _ _ _ `,
+                `             e         `,
+                `                       `,
+                `                     T `,
+                `                       `,
+            ],
+        },{
+            floor:[
+                [[0,-2,0,0]],
+                [[-3,-5,0,0]],
+            ],wall:[
+                [1,1,'Starter Trash Bin',0],
+                [23,1,'Blueprint Cabinet',0],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ _ `,
+                `|     |     |     |     |`,
+                `                         `,
+                `|     |     |     [     |`,
+                ` _ [ _ _ [ _             `,
+                `|                 |     |`,
+                `                   _ ] _ `,
+                `|                 |     |`,
+                `                         `,
+                `|. . .       . . .|     |`,
+                ` - - - _ _ _ - - -       `,
+                `|                       |`,
+                `                         `,
+                `|  D           D        |`,
+                `                         `,
+                `|                       |`,
+                ` _ _ _ _ ] _ _ _ _ _ _ _ `,
+                `         e               `,
+                `                         `,
+                `                       T `,
+                `                         `,
             ],
         },
     ],wall:[
@@ -1295,6 +1646,32 @@ types={
             prereq:[0],
             desc:'Provides Cinnamon',
             upgrade:[],
+        },{
+            name:'Wine',
+            width:36,
+            height:30,
+            effect:[-1,0],
+            spec:[1],provide:'Wine',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Wine',
+            upgrade:[],
+        },{
+            name:'Peppers',
+            width:48,
+            height:36,
+            effect:[-1,0],
+            spec:[1],provide:'Pepper',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Peppers',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -1431,7 +1808,9 @@ types={
                 [0,'Rice','Rice in Pot'],
                 [0,'Cinnamon','Cinnamon in Pot'],
                 [0,'Milk','Milk in Pot'],
+                [0,'Pepper','Pepper in Pot'],
                 [0,'Chopped Potato','Chopped Potato in Pot'],
+                [0,'Chopped Onion','Chopped Onion in Pot'],
             ],
         },{
             name:'Water Pot',
@@ -1495,6 +1874,7 @@ types={
                 [0,'Cheese','Cheese in Broth'],
                 [0,'Chopped Cheese','Chopped Cheese in Broth'],
                 [0,'Bonito','Raw Ramen Soup'],
+                [0,'Wine','Raw Wine Jus'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -2481,6 +2861,7 @@ types={
                 [0,'Broccoli','Raw Uncooked Broccoli Pie'],
                 [0,'Potato','Raw Uncooked Potato Pie'],
                 [0,'Potato','Raw Uncooked Chopped Potato Pie'],
+                [0,'Tomato Sauce','Sauce Pastry Crust'],
             ],
         },{
             name:'Pastry',
@@ -2573,6 +2954,7 @@ types={
             component:true,
             trashable:true,
             process:[
+                [0,'Plate','Plated Lemon'],
                 [0,'Cracked Egg','Cracked Egg With Chopped Lemon'],
             ],
         },{
@@ -3692,7 +4074,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
-                [0,'Boiled Potato','Plated Boiled Potato, Onion, and Mayfo'],
+                [0,'Boiled Potato','Plated Boiled Potato, Onion, and Mayo'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -3824,7 +4206,6 @@ types={
             ],
         },{
             name:'Cheese Pizza Slice',
-            portions:4,
             holdDist:20,
             holdDir:0,
             component:true,
@@ -4216,6 +4597,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Stuffing','Plated Lemon Stuffing Nut Roast Slice'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -4278,6 +4660,7 @@ types={
             process:[
                 [0,'Plate','Plated Hot Dog'],
                 [0,'Chopped Cheese','Cheese Hot Dog'],
+                [0,'Chili','Chili Hot Dog'],
             ],
         },{
             name:'Cheese Hot Dog',
@@ -4287,6 +4670,26 @@ types={
             trashable:true,
             process:[
                 [0,'Plate','Plated Cheese Hot Dog'],
+                [0,'Chili','Chili Cheese Hot Dog'],
+            ],
+        },{
+            name:'Chili Hot Dog',
+            holdDist:16,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Chili Hot Dog'],
+                [0,'Chopped Cheese','Chili Cheese Hot Dog'],
+            ],
+        },{
+            name:'Chili Cheese Hot Dog',
+            holdDist:16,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Chili Cheese Hot Dog'],
             ],
         },{
             name:'Plated Hot Dog',
@@ -4298,9 +4701,32 @@ types={
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
                 [0,'Chopped Cheese','Plated Cheese Hot Dog'],
+                [0,'Chili','Plated Chili Hot Dog'],
             ],
         },{
             name:'Plated Cheese Hot Dog',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chili','Plated Chili Cheese Hot Dog'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Chili Hot Dog',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Cheese','Plated Chili Cheese Hot Dog'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Chili Cheese Hot Dog',
             holdDist:20,
             holdDir:0,
             component:false,
@@ -4419,6 +4845,8 @@ types={
             process:[
                 [5,'Trash','Pot'],
                 [0,'Cooked Mince','Raw Bolognese Sauce Pot'],
+                [0,'Pepper','Tomato Sauce Pepper Pot'],
+                [0,'Chopped Onion','Tomato Sauce Chopped Onion Pot'],
             ],
         },{
             name:'Cooked Mince in Pot',
@@ -4602,6 +5030,7 @@ types={
             trashable:false,
             process:[
                 [0,'Bolognese Sauce','Tray With Lasagne 1'],
+                [0,'Chocolate Batter','Chocolate Batter Tray'],
             ],
         },{
             name:'Tin',
@@ -4812,6 +5241,7 @@ types={
             process:[
                 [10,180,'Waffle'],
                 [0,'Milk','Milk Batter'],
+                [0,'Melted Chocolate','Chocolate Batter'],
             ],
         },{
             name:'Cherry Sauce',
@@ -4921,7 +5351,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [1,2700,'Cake Tin'],
+                [1,2400,'Cake Tin'],
                 [5,'Trash','Tin'],
             ],
         },{
@@ -5162,6 +5592,8 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Lemon','Plated Lemon and Stuffing'],
+                [0,'Nut Roast Slice','Plated Stuffing Nut Roast Slice'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -5171,10 +5603,53 @@ types={
             component:false,
             trashable:true,
             process:[
-                [0,'Plate','Plated Stuffing Nut Roast Slice'],
+                [0,'Plate','Stuffing Nut Roast Slice'],
             ],
         },{
             name:'Plated Stuffing Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lemon','Plated Lemon Stuffing Nut Roast Slice'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Lemon',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Stuffing','Plated Lemon and Stuffing'],
+                [0,'Nut Roast Slice','Plated Lemon Nut Roast Slice'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Lemon and Stuffing',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Nut Roast Slice','Plated Lemon Stuffing Nut Roast Slice'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Lemon Stuffing Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Lemon Stuffing Nut Roast Slice'],
+            ],
+        },{
+            name:'Plated Lemon Stuffing Nut Roast Slice',
             holdDist:20,
             holdDir:0,
             component:false,
@@ -5359,7 +5834,461 @@ types={
             process:[
                 [7,180,''],
             ],
+        },{
+            name:'Chocolate Batter',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Chocolate Batter Tray',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Tray'],
+                [1,540,'Brownie Tray'],
+            ],
+        },{
+            name:'Brownie Tray',
+            portions:4,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Tray'],
+                [6,60,'Brownie','Tray'],
+                [9,540,'Burnt Tray'],
+            ],
+        },{
+            name:'Brownie',
+            holdDist:18,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,360,''],
+            ],
+        },{
+            name:'Wine',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Raw Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [1,300,'Wine Jus Pot'],
+            ],
+        },{
+            name:'Wine Jus Pot',
+            portions:8,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [6,30,'Wine Jus','Pot'],
+            ],
+        },{
+            name:'Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plated Rare Steak','Plated Rare Steak With Wine Jus'],
+                [0,'Plated Medium Steak','Plated Medium Steak With Wine Jus'],
+                [0,'Plated Well Done Steak','Plated Well Done Steak With Wine Jus'],
+                [0,'Plated Rare Bone Steak','Plated Rare Bone Steak With Wine Jus'],
+                [0,'Plated Medium Bone Steak','Plated Medium Bone Steak With Wine Jus'],
+                [0,'Plated Well Done Bone Steak','Plated Well Done Bone Steak With Wine Jus'],
+                [0,'Plated Rare Thick Steak','Plated Rare Thick Steak With Wine Jus'],
+                [0,'Plated Medium Thick Steak','Plated Medium Thick Steak With Wine Jus'],
+                [0,'Plated Well Done Thick Steak','Plated Well Done Thick Steak With Wine Jus'],
+                [0,'Plated Rare Steak With Tomato','Plated Rare Steak With Tomato and Wine Jus'],
+                [0,'Plated Medium Steak With Tomato','Plated Medium Steak With Tomato and Wine Jus'],
+                [0,'Plated Well Done Steak With Tomato','Plated Well Done Steak With Tomato and Wine Jus'],
+                [0,'Plated Rare Bone Steak With Tomato','Plated Rare Bone Steak With Tomato and Wine Jus'],
+                [0,'Plated Medium Bone Steak With Tomato','Plated Medium Bone Steak With Tomato and Wine Jus'],
+                [0,'Plated Well Done Bone Steak With Tomato','Plated Well Done Bone Steak With Tomato and Wine Jus'],
+                [0,'Plated Rare Thick Steak With Tomato','Plated Rare Thick Steak With Tomato and Wine Jus'],
+                [0,'Plated Medium Thick Steak With Tomato','Plated Medium Thick Steak With Tomato and Wine Jus'],
+                [0,'Plated Well Done Thick Steak With Tomato','Plated Well Done Thick Steak With Tomato and Wine Jus'],
+            ],
+        },{
+            name:'Plated Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Rare Steak','Plated Rare Steak With Wine Jus'],
+                [0,'Medium Steak','Plated Medium Steak With Wine Jus'],
+                [0,'Well Done Steak','Plated Well Done Steak With Wine Jus'],
+                [0,'Rare Bone Steak','Plated Rare Bone Steak With Wine Jus'],
+                [0,'Medium Bone Steak','Plated Medium Bone Steak With Wine Jus'],
+                [0,'Well Done Bone Steak','Plated Well Done Bone Steak With Wine Jus'],
+                [0,'Rare Thick Steak','Plated Rare Thick Steak With Wine Jus'],
+                [0,'Medium Thick Steak','Plated Medium Thick Steak With Wine Jus'],
+                [0,'Well Done Thick Steak','Plated Well Done Thick Steak With Wine Jus'],
+                [0,'Chopped Tomato','Plated Tomato and Wine Jus'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Rare Steak','Plated Rare Steak With Tomato and Wine Jus'],
+                [0,'Medium Steak','Plated Medium Steak With Tomato and Wine Jus'],
+                [0,'Well Done Steak','Plated Well Done Steak With Tomato and Wine Jus'],
+                [0,'Rare Bone Steak','Plated Rare Bone Steak With Tomato and Wine Jus'],
+                [0,'Medium Bone Steak','Plated Medium Bone Steak With Tomato and Wine Jus'],
+                [0,'Well Done Bone Steak','Plated Well Done Bone Steak With Tomato and Wine Jus'],
+                [0,'Rare Thick Steak','Plated Rare Thick Steak With Tomato and Wine Jus'],
+                [0,'Medium Thick Steak','Plated Medium Thick Steak With Tomato and Wine Jus'],
+                [0,'Well Done Thick Steak','Plated Well Done Thick Steak With Tomato and Wine Jus'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Bone Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Medium Bone Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Well Done Bone Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Rare Thick Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Thick Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Thick Steak With Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Bone Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Medium Bone Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Well Done Bone Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Rare Thick Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Thick Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Thick Steak With Tomato and Wine Jus',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Pepper',
+            holdDist:16,
+            holdDir:90,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Pepper in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Tomato Sauce','Tomato Sauce Pepper Pot'],
+                [0,'Chopped Onion','Pepper Chopped Onion Pot'],
+            ],
+        },{
+            name:'Chopped Onion in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Tomato Sauce','Tomato Sauce Chopped Onion Pot'],
+                [0,'Pepper','Pepper Chopped Onion Pot'],
+            ],
+        },{
+            name:'Tomato Sauce Pepper Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Chopped Onion','Raw Chili'],
+            ],
+        },{
+            name:'Tomato Sauce Chopped Onion Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Pepper','Raw Chili'],
+            ],
+        },{
+            name:'Pepper Chopped Onion Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Tomato Sauce','Raw Chili'],
+            ],
+        },{
+            name:'Raw Chili',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [1,600,'Chili Pot'],
+            ],
+        },{
+            name:'Chili Pot',
+            portions:8,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [6,60,'Chili','Pot'],
+            ],
+        },{
+            name:'Chili',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Sauce Pastry Crust',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Chopped Cheese','Sauce Cheese Pastry Crust'],
+            ],
+        },{
+            name:'Sauce Cheese Pastry Crust',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Cracked Egg','Sauce Cheese Egg Pastry Crust'],
+            ],
+        },{
+            name:'Sauce Cheese Egg Pastry Crust',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [3,30,'Raw Calzone'],
+            ],
+        },{
+            name:'Raw Calzone',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,240,'Calzone'],
+            ],
+        },{
+            name:'Calzone',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Calzone'],
+            ],
+        },{
+            name:'Plated Calzone',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
         },
+        //mark
     ],dish:[
         /*
         0-main
@@ -5374,8 +6303,6 @@ types={
             obj:[
                 ['Plated Fish',4],
             ],
-            edit:true,
-            level:1,
             desc:'Cook fish and serve.',
         },{
             name:'Fish Fillet',
@@ -5383,8 +6310,6 @@ types={
             obj:[
                 ['Plated Fish Fillet',5],
             ],
-            edit:true,
-            level:1,
             desc:'Chop fish to create fillet.\nCook fillet and serve.',
         },{
             name:'Spiny Fish',
@@ -5392,8 +6317,6 @@ types={
             obj:[
                 ['Plated Spiny Fish',5],
             ],
-            edit:true,
-            level:1,
             desc:'Removed spines from fish and discard.\nCook fish and serve.',
         },{
             name:'Crab Cake',
@@ -5401,8 +6324,6 @@ types={
             obj:[
                 ['Plated Crab Cake',6],
             ],
-            edit:true,
-            level:1,
             desc:'Chop crab, combined with cracked egg and flour.\nCook and serve.',
         },
 
@@ -5414,8 +6335,6 @@ types={
                 ['Plated Medium Steak',4],
                 ['Plated Well Done Steak',4],
             ],
-            edit:true,
-            level:1,
             desc:'Cook meat to desired level and serve.',
         },{
             name:'Bone Steak',
@@ -5425,9 +6344,7 @@ types={
                 ['Plated Medium Bone Steak',5],
                 ['Plated Well Done Bone Steak',5],
             ],
-            edit:true,
-            level:1,
-            desc:'Cook meat to desired level and serve.\nLeaves a bone on the plate afterward.',
+            desc:'Cook meat to desired level and serve.\nLeaves a bone on the Plated afterward.',
         },{
             name:'Thick Steak',
             type:0,
@@ -5436,8 +6353,6 @@ types={
                 ['Plated Medium Thick Steak',5],
                 ['Plated Well Done Thick Steak',5],
             ],
-            edit:true,
-            level:1,
             desc:'Cook meat to desired level and serve.\nTakes a while to cook.',
         },{
             name:'Tomato Steak',
@@ -5453,9 +6368,31 @@ types={
                 ['Plated Medium Thick Steak','Plated Medium Thick Steak With Tomato',6],
                 ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Tomato',6],
             ],
-            edit:true,
-            level:1,
             desc:'Add chopped tomato to plated steak and serve.',
+        },{
+            name:'Wine Jus Steak',
+            type:0,
+            obj:[
+                ['Plated Rare Steak With Wine Jus',5],
+                ['Plated Medium Steak With Wine Jus',5],
+                ['Plated Well Done Steak With Wine Jus',5],
+                ['Plated Rare Bone Steak','Plated Rare Bone Steak With Wine Jus',6],
+                ['Plated Medium Bone Steak','Plated Medium Bone Steak With Wine Jus',6],
+                ['Plated Well Done Bone Steak','Plated Well Done Bone Steak With Wine Jus',6],
+                ['Plated Rare Thick Steak','Plated Rare Thick Steak With Wine Jus',6],
+                ['Plated Medium Thick Steak','Plated Medium Thick Steak With Wine Jus',6],
+                ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Wine Jus',6],
+                ['Plated Rare Steak With Tomato','Plated Rare Steak With Tomato and Wine Jus',6],
+                ['Plated Medium Steak With Tomato','Plated Medium Steak With Tomato and Wine Jus',6],
+                ['Plated Well Done Steak With Tomato','Plated Well Bone Steak With Tomato and Wine Jus',6],
+                ['Plated Rare Bone Steak With Tomato','Plated Rare Bone Steak With Tomato and Wine Jus',7],
+                ['Plated Medium Bone Steak With Tomato','Plated Medium Bone Steak With Tomato and Wine Jus',7],
+                ['Plated Well Done Bone Steak With Tomato','Plated Well Done Bone Steak With Tomato and Wine Jus',7],
+                ['Plated Rare Thick Steak With Tomato','Plated Rare Thick Steak With Tomato and Wine Jus',7],
+                ['Plated Medium Thick Steak With Tomato','Plated Medium Thick Steak With Tomato and Wine Jus',7],
+                ['Plated Well Done Thick Steak With Tomato','Plated Well Done Thick Steak With Tomato and Wine Jus',7],
+            ],
+            desc:'Boil water with onion to make broth.\nAdd wine to broth and cook again.\nPortion wine jus and addd to plated steak.',
         },
 
         {
@@ -5465,8 +6402,6 @@ types={
                 ['Plated Lettuce',3],
                 ['Plated Lettuce and Tomato',4],
             ],
-            edit:true,
-            level:1,
             desc:'Chop and serve lettuce.\nOptionally add chopped tomato.',
         },{
             name:'Onion Salad',
@@ -5475,8 +6410,6 @@ types={
                 ['Plated Lettuce and Onion',4],
                 ['Plated Lettuce, Tomato, and Onion',5],
             ],
-            edit:true,
-            level:1,
             desc:'Add chopped onion to plated salad and serve.',
         },{
             name:'Apple Salad',
@@ -5484,8 +6417,6 @@ types={
             obj:[
                 ['Plated Apple, Nuts, and Mayo',6],
             ],
-            edit:true,
-            level:1,
             desc:'Combine cracked egg and oil to make mayo.\nCombine with chopped apple and nuts and serve.',
         },{
             name:'Potato Salad',
@@ -5493,8 +6424,6 @@ types={
             obj:[
                 ['Plated Boiled Potato, Onion, and Mayo',7],
             ],
-            edit:true,
-            level:1,
             desc:'Combine cracked egg and oil to make mayo.\nBoil chopped potato in a pot.\nCombine boiled potato, chopped onion, and mayo, and serve.',
         },{
             name:'Caesar Salad',
@@ -5502,8 +6431,6 @@ types={
             obj:[
                 ['Plated Lettuce, Garlic, and Breadcrumbs',7],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nCook to make bread, portion bread slices, cook, and chop to make breadcrumbs.\nCombine chopped lettuce, chopped garlic, and breadcrumbs, and serve.',
         },
 
@@ -5513,8 +6440,6 @@ types={
             obj:[
                 ['Plated Toast',4],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slices.\nCook bread slice again and serve.',
         },{
             name:'Egg Toast',
@@ -5522,8 +6447,6 @@ types={
             obj:[
                 ['Plated Egg Toast',5],
             ],
-            edit:true,
-            level:1,
             desc:'Crack egg and cook to make fried egg.\nAdd to plated toast and serve.',
         },{
             name:'Tomato Toast',
@@ -5532,8 +6455,6 @@ types={
                 ['Plated Tomato Toast',5],
                 ['Plated Egg Toast','Plated Egg and Tomato Toast',6],
             ],
-            edit:true,
-            level:1,
             desc:'Chop tomato, add to plated toast, and serve.',
         },
 
@@ -5543,8 +6464,6 @@ types={
             obj:[
                 ['Plated Cheese Pizza Slice',5],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nAdd oil to make pizza base.\nChop tomato twice and cheese once, and combine with pizza base.\nCook, portion, and serve.',
         },{
             name:'Onion Pizza',
@@ -5552,8 +6471,6 @@ types={
             obj:[
                 ['Plated Onion Pizza Slice',6],
             ],
-            edit:true,
-            level:1,
             desc:'Add chopped onion to pizza before cooking.',
         },{
             name:'Meat Pizza',
@@ -5562,9 +6479,14 @@ types={
                 ['Plated Meat Pizza Slice',6],
                 ['Plated Onion Pizza Slice','Plated Onion and Meat Pizza Slice',7],
             ],
-            edit:true,
-            level:1,
             desc:'Add chopped meat to pizza before cooking.',
+        },{
+            name:'Calzone',
+            type:0,
+            obj:[
+                ['Plated Calzone',8],
+            ],
+            desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce, cheese, and a cracked egg.\nKnead to wrap, then cook and serve.',
         },
 
         {
@@ -5573,8 +6495,6 @@ types={
             obj:[
                 ['Plated Meat Pie',6],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nKnead dough to make pie crust, optionally cook.\nAdd meat to pastry and cook again, then serve.',
         },{
             name:'Vegetable Pie',
@@ -5582,8 +6502,6 @@ types={
             obj:[
                 ['Plated Vegetable Pie',7],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nKnead dough to make pie crust, optionally cook.\nAdd broccoli and potato to pastry and cook again, then serve.',
         },
 
@@ -5593,8 +6511,6 @@ types={
             obj:[
                 ['Coffee',1],
             ],
-            edit:true,
-            level:1,
             desc:'Activate coffee machine, then take the cup and serve.',
         },{
             name:'Affogato',
@@ -5602,9 +6518,14 @@ types={
             obj:[
                 ['Affogato',2],
             ],
-            edit:true,
-            level:1,
             desc:'Take vanilla ice cream, add to coffee cup, and serve.',
+        },{
+            name:'Sugar',
+            type:5,
+            obj:[
+                ['Sugar',0],
+            ],
+            desc:'Take and deliver sugar',
         },
 
         {
@@ -5613,18 +6534,22 @@ types={
             obj:[
                 ['Plated Nut Roast Slice',4],
             ],
-            edit:true,
-            level:1,
             desc:'Slice nuts and onions.\nCombine and cook to make nut roast.\nPortion and serve.',
+        },{
+            name:'Lemon Nut Roast',
+            type:0,
+            obj:[
+                ['Plated Lemon Nut Roast Slice',5],
+            ],
+            desc:'Chop lemon.\nAdd to nut roast portion and serve.',
         },{
             name:'Stuffing',
             type:0,
             obj:[
                 ['Plated Stuffing Nut Roast Slice',7],
+                ['Plated Lemon Nut Roast Slice','Plated Lemon Stuffing Nut Roast Slice',8],
             ],
-            edit:true,
-            level:1,
-            desc:'Add water to flour to make dough.\nCook to make bread, then portion a slice.\nCook the slice then chop to make breadcrumbs.\nCombine breadcrumbs and chopped onion, then cook.\nAdd to Nut Roast portion and serve.',
+            desc:'Add water to flour to make dough.\nCook to make bread, then portion a slice.\nCook the slice then chop to make breadcrumbs.\nCombine breadcrumbs and chopped onion, then cook.\nAdd to nut roast portion and serve.',
         },
 
         {
@@ -5633,8 +6558,6 @@ types={
             obj:[
                 ['Plated Hot Dog',5],
             ],
-            edit:true,
-            level:1,
             desc:'Cook hot dog.\nAdd to bun and serve.\nDeliver condiments as needed.',
         },{
             name:'Ketchup',
@@ -5642,8 +6565,6 @@ types={
             obj:[
                 ['Ketchup',0],
             ],
-            edit:true,
-            level:1,
             desc:'Take and deliver ketchup bottle',
         },{
             name:'Mustard',
@@ -5651,8 +6572,6 @@ types={
             obj:[
                 ['Mustard',0],
             ],
-            edit:true,
-            level:1,
             desc:'Take and deliver mustard bottle',
         },{
             name:'Cheese Hot Dog',
@@ -5660,9 +6579,15 @@ types={
             obj:[
                 ['Plated Cheese Hot Dog',6],
             ],
-            edit:true,
-            level:1,
             desc:'Add chopped cheese to a plated hot dog.',
+        },{
+            name:'Chili Hot Dog',
+            type:0,
+            obj:[
+                ['Plated Chili Hot Dog',6],
+                ['Plated Cheese Hot Dog','Plated Chili Cheese Hot Dog',7],
+            ],
+            desc:'Chop tomato twice to make tomato sauce.\nCombine with pepper and onion in pot, then cook to make chili.\nPortion chili and add to hot dog.',
         },
 
         {
@@ -5671,17 +6596,13 @@ types={
             obj:[
                 ['Plated Spaghetti',5],
             ],
-            edit:true,
-            level:1,
-            desc:'Boil noodles in water, then remove water, and portion noodles out.\nPlate noodles and add tomato sauce, then serve.',
+            desc:'Boil noodles in water, then remove water, and portion noodles out.\nPlated noodles and add tomato sauce, then serve.',
         },{
             name:'Bolognese Spaghetti',
             type:0,
             obj:[
                 ['Plated Bolognese Spaghetti',7],
             ],
-            edit:true,
-            level:1,
             desc:'Chop and cook meat to make mince.\nAdd mince to tomato sauce in pot and cook to make bolognese sauce.\nAdd to plated noodles, then serve.',
         },{
             name:'Cheese Spaghetti',
@@ -5689,8 +6610,6 @@ types={
             obj:[
                 ['Plated Cheese Spaghetti',8],
             ],
-            edit:true,
-            level:1,
             desc:'Add butter and flour to pot, then cook to make roux.\nAdd milk and knead to make white sauce.\nCombine plated noodles, white sauce, and chopped cheese, then serve.',
         },{
             name:'Lasagne',
@@ -5698,8 +6617,6 @@ types={
             obj:[
                 ['Plated Lasagne Slice',9],
             ],
-            edit:true,
-            level:1,
             desc:'Add bolognese sauce, pasta sheet, and white sauce to tray, in order, two times.\nCook tray, portion, and serve.',
         },{
             name:'Ramen',
@@ -5707,8 +6624,6 @@ types={
             obj:[
                 ['Ramen',6],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with onion to make broth.\nAdd bonito to broth and cook again.\nPortion soup and add noodles to make ramen, then serve.',
         },
 
@@ -5718,17 +6633,13 @@ types={
             obj:[
                 ['Plated Waffle',5],
             ],
-            edit:true,
-            level:1,
-            desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd batter to waffle iron and activate.\nWhen done, take waffle, plate and serve.',
+            desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd batter to waffle iron and activate.\nWhen done, take waffle, Plated and serve.',
         },{
             name:'Butter Waffle',
             type:0,
             obj:[
                 ['Plated Butter Waffle',6],
             ],
-            edit:true,
-            level:1,
             desc:'Add butter to a plated waffle, then serve.',
         },{
             name:'Cherry Waffle',
@@ -5737,8 +6648,6 @@ types={
                 ['Plated Cherry Waffle',6],
                 ['Plated Butter Waffle','Plated Butter Cherry Waffle',7],
             ],
-            edit:true,
-            level:1,
             desc:'Chop cherries and add to a plated waffle, then serve.',
         },
 
@@ -5748,8 +6657,6 @@ types={
             obj:[
                 ['Chocolate Cake Slice',4],
             ],
-            edit:true,
-            level:1,
             desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd milk to batter, then place in cake tin.\nCook, then add melted chocolate as flavoring.\nPortion and serve.',
         },{
             name:'Coffee Cake',
@@ -5757,8 +6664,6 @@ types={
             obj:[
                 ['Coffee Cake Slice',4],
             ],
-            edit:true,
-            level:1,
             desc:'After cooking, use coffee from coffee machine as cake flavoring.',
         },{
             name:'Cherry Cake',
@@ -5766,8 +6671,6 @@ types={
             obj:[
                 ['Cherry Cake Slice',4],
             ],
-            edit:true,
-            level:1,
             desc:'After cooking, use cherry sauce as cake flavoring.',
         },{
             name:'Lemon Cake',
@@ -5775,8 +6678,6 @@ types={
             obj:[
                 ['Lemon Cake Slice',4],
             ],
-            edit:true,
-            level:1,
             desc:'After cooking, use chopped lemon as cake flavoring.',
         },{
             name:'Donut',
@@ -5787,8 +6688,6 @@ types={
                 ['Cherry Cake Slice','Cherry Donut',5],
                 ['Lemon Cake Slice','Lemon Donut',5],
             ],
-            edit:true,
-            level:1,
             desc:'Add batter with milk to donut tray.\nPortion a donut out of the tray.\nAdd oil and donut to pot.\nCook, then portion out donut, add flavoring, and serve.',
         },{
             name:'Tiramisu',
@@ -5796,9 +6695,14 @@ types={
             obj:[
                 ['Tiramisu Slice',5],
             ],
-            edit:true,
-            level:1,
             desc:'Combine chopped lemon, sugar, and cracked egg, and mix, then add milk to make mascarpone.\nAfter cooking cake, add mascarpone and cocoa powder.\nPortion and serve.',
+        },{
+            name:'Brownies',
+            type:3,
+            obj:[
+                ['Brownie',4],
+            ],
+            desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd melted chocolate to batter, then place in tray.\nCook, portion, and serve.',
         },
         
         {
@@ -5807,8 +6711,6 @@ types={
             obj:[
                 ['Meat Soup',2],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with onion to make broth.\nAdd meat to broth and cook again.\nPortion and serve.',
         },{
             name:'Tomato Soup',
@@ -5816,8 +6718,6 @@ types={
             obj:[
                 ['Tomato Soup',2],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with onion to make broth.\nCut tomato two times to make tomato sauce.\nAdd tomato and tomato sauce to broth and cook again.\nPortion and serve.',
         },{
             name:'Broccoli Cheese Soup',
@@ -5825,8 +6725,6 @@ types={
             obj:[
                 ['Broccoli Cheese Soup',2],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with onion to make broth.\nAdd broccoli and cheese to broth and cook again.\nPortion and serve.',
         },{
             name:'Miso Soup',
@@ -5834,8 +6732,6 @@ types={
             obj:[
                 ['Miso Soup',2],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with soybeans, then cut to make tofu.\nAdd water again and miso and cook again.\nPortion and serve.',
         },{
             name:'Bread',
@@ -5843,8 +6739,6 @@ types={
             obj:[
                 ['Bread Slice',1],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and serve.',
         },{
             name:'Garlic Bread',
@@ -5852,8 +6746,6 @@ types={
             obj:[
                 ['Garlic Bread',2],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and add chopped garlic and chopped cheese.\nCook again and serve.',
         },{
             name:'Croissant',
@@ -5861,8 +6753,6 @@ types={
             obj:[
                 ['Croissant',2],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nAdd butter and knead to make a croissant.\nCook and serve.',
         },{
             name:'Spring Roll',
@@ -5870,8 +6760,6 @@ types={
             obj:[
                 ['Spring Roll',1],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nAdd chopped lettuce and onions.\nKnead into rolls and cook.\nPortions and serve.',
         },
 
@@ -5881,8 +6769,6 @@ types={
             obj:[
                 ['Broccoli Portion',1],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with broccoli.\nPortion and serve.',
         },{
             name:'Mashed Potato',
@@ -5890,8 +6776,6 @@ types={
             obj:[
                 ['Mashed Potato',2],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with potato.\nMash when complete.\nPortion and serve.',
         },{
             name:'Roast Potato',
@@ -5899,8 +6783,6 @@ types={
             obj:[
                 ['Roast Potato',1],
             ],
-            edit:true,
-            level:1,
             desc:'Cook potato and serve.',
         },{
             name:'Fries',
@@ -5908,8 +6790,6 @@ types={
             obj:[
                 ['Fries',2],
             ],
-            edit:true,
-            level:1,
             desc:'Chop potato, then cook and serve.',
         },{
             name:'Onion Rings',
@@ -5917,8 +6797,6 @@ types={
             obj:[
                 ['Onion Rings',2],
             ],
-            edit:true,
-            level:1,
             desc:'Chop onions, add flour, then cook and serve.',
         },{
             name:'Cheese Sticks',
@@ -5926,8 +6804,6 @@ types={
             obj:[
                 ['Cheese Sticks',3],
             ],
-            edit:true,
-            level:1,
             desc:'Chop cheese, add flour and cook.\nChop tomato twice to make sauce.\nCombine sticks and sauce and serve.',
         },{
             name:'Macaroni and Cheese',
@@ -5935,8 +6811,6 @@ types={
             obj:[
                 ['Macaroni and Cheese',2],
             ],
-            edit:true,
-            level:1,
             desc:'Boil water with macaroni.\nRemove water and add chopped cheese and butter.\nPortion and serve.',
         },{
             name:'Scrambled Eggs',
@@ -5944,8 +6818,6 @@ types={
             obj:[
                 ['Scrambled Eggs',1],
             ],
-            edit:true,
-            level:1,
             desc:'Crack egg, then mix it.\nPlace in pot and cook.\nPortion and serve.',
         },
 
@@ -5955,8 +6827,6 @@ types={
             obj:[
                 ['Apple Pie',3],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd chopped apple to pastry and cook again.',
         },{
             name:'Cherry Pie',
@@ -5964,8 +6834,6 @@ types={
             obj:[
                 ['Cherry Pie',3],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd cherry to pastry and cook again.',
         },{
             name:'Caramel Pie',
@@ -5973,8 +6841,6 @@ types={
             obj:[
                 ['Caramel Pie',3],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook sugar to make caramel.\nAdd caramel to pastry and cook again.',
         },{
             name:'Lemon Meringue Pie',
@@ -5982,8 +6848,6 @@ types={
             obj:[
                 ['Lemon Meringue Pie',4],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCombine chopped lemon, sugar, and cracked egg, and mix to create meringue.\nAdd meringue to pastry and cook again.',
         },{
             name:'Apple Crisp',
@@ -5991,8 +6855,6 @@ types={
             obj:[
                 ['Apple Crisp',2],
             ],
-            edit:true,
-            level:1,
             desc:'Combine chopped apple, sugar and flour.\nCook and serve.',
         },{
             name:'Rice Pudding',
@@ -6000,8 +6862,6 @@ types={
             obj:[
                 ['Rice Pudding',2],
             ],
-            edit:true,
-            level:1,
             desc:'Combine rice, milk, and cinnamon in a pot.\nCook, portion, and serve.',
         },{
             name:'Ice Cream',
@@ -6015,8 +6875,6 @@ types={
                 ['Ice Cream CVV',3],
                 ['Ice Cream VVV',3],
             ],
-            edit:true,
-            level:1,
             desc:'Switch between flavors and grab scoops, then serve.',
         },{
             name:'Zeppole',
@@ -6024,8 +6882,6 @@ types={
             obj:[
                 ['Zeppole',2],
             ],
-            edit:true,
-            level:1,
             desc:'Add water to flour to make dough.\nAdd sugar and cook.\nAdd sugar again and serve.',
         },
     ],card:[
@@ -6044,8 +6900,6 @@ types={
             prereq:[],
             mutex:[],
             wall:[],
-            edit:true,
-            level:1,
             desc:'',
         },
         
@@ -6057,8 +6911,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Fish','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds fish as a main dish',
         },{
             name:'Steak',
@@ -6068,8 +6920,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Meat','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds three types of steak as a main dish',
         },{
             name:'Salad',
@@ -6079,8 +6929,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Lettuce','Tomatoes','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds salads, with or without tomato, as a main dish',
         },{
             name:'Toast',
@@ -6090,8 +6938,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Oven','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds toast as a main dish',
         },{
             name:'Pizza',
@@ -6101,8 +6947,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Cheese','Tomatoes','Flour','Oil','Oven','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds pizza as a main dish',
         },{
             name:'Pies',
@@ -6112,8 +6956,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Meat','Oven','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds meat pie as a main dish',
         },{
             name:'Coffee',
@@ -6123,8 +6965,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Coffee Machine'],
-            edit:true,
-            level:1,
             desc:'Adds coffee as a dessert',
         },{
             name:'Nut Roast',
@@ -6134,8 +6974,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Nuts','Onions','Oven','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds nut roast as a main dish',
         },{
             name:'Hot Dogs',
@@ -6145,8 +6983,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Hot Dog Buns','Hot Dogs','Ketchup','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds hot dogs as a main dish and ketchup as a condiment',
         },{
             name:'Spaghetti',
@@ -6156,8 +6992,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Tomatoes','Noodles','Pots','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds spaghetti as a main dish',
         },{
             name:'Waffles',
@@ -6167,8 +7001,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Waffle Iron','Sugar','Flour','Eggs','Starter Sink','Starter Plates'],
-            edit:true,
-            level:1,
             desc:'Adds waffles as a main dish',
         },{
             name:'Cakes',
@@ -6178,8 +7010,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Sugar','Flour','Eggs','Milk','Chocolate','Tin','Oven','Starter Hob'],
-            edit:true,
-            level:1,
             desc:'Adds cakes as a dessert',
         },
 
@@ -6191,8 +7021,6 @@ types={
             prereq:['Fish'],
             mutex:[],
             wall:['Fish Fillet'],
-            edit:true,
-            level:1,
             desc:'Needs to be cut before cooking',
         },{
             name:'Spiny Fish',
@@ -6202,8 +7030,6 @@ types={
             prereq:['Fish'],
             mutex:[],
             wall:['Spiny Fish'],
-            edit:true,
-            level:1,
             desc:'Contains spines, that must be removed and trashed',
         },{
             name:'Crab Cakes',
@@ -6213,8 +7039,6 @@ types={
             prereq:['Fish'],
             mutex:[],
             wall:['Crabs','Eggs','Flour'],
-            edit:true,
-            level:1,
             desc:'Combine chopped crab, egg, and flour',
         },{
             name:'Bone Steak',
@@ -6224,8 +7048,6 @@ types={
             prereq:['Steak'],
             mutex:[],
             wall:['Bone Meat'],
-            edit:true,
-            level:1,
             desc:'Contains a bone that must be trashed afterward',
         },{
             name:'Thick Steak',
@@ -6235,8 +7057,6 @@ types={
             prereq:['Steak'],
             mutex:[],
             wall:['Thick Meat'],
-            edit:true,
-            level:1,
             desc:'Takes longer to cook than regular meat',
         },{
             name:'Tomato Steak',
@@ -6246,9 +7066,16 @@ types={
             prereq:['Steak'],
             mutex:[],
             wall:['Tomatoes'],
-            edit:true,
-            level:1,
             desc:'Adds tomato as a steak topping',
+        },{
+            name:'Wine Jus Steak',
+            dish:['Wine Jus Steak'],
+            list:1,
+            customerMult:0.8,
+            prereq:['Steak'],
+            mutex:[],
+            wall:['Pots','Onions','Wine','Starter Hob'],
+            desc:'Adds wine jus as a steak topping',
         },{
             name:'Onion Salad',
             dish:['Onion Salad'],
@@ -6257,8 +7084,6 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Onions'],
-            edit:true,
-            level:1,
             desc:'Adds onions as a salad topping',
         },{
             name:'Apple Salad',
@@ -6268,8 +7093,6 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Apples','Eggs','Oil','Nuts'],
-            edit:true,
-            level:1,
             desc:'Consists of chopped apple, nuts, and mayo',
         },{
             name:'Potato Salad',
@@ -6279,8 +7102,6 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Starter Hob','Potatoes','Pots','Eggs','Oil','Onions'],
-            edit:true,
-            level:1,
             desc:'Consists of boiled potato, chopped onion, and mayo',
         },{
             name:'Caesar Salad',
@@ -6290,8 +7111,6 @@ types={
             prereq:['Salad'],
             mutex:[],
             wall:['Garlic','Flour','Oven'],
-            edit:true,
-            level:1,
             desc:'Consists of lettuce, garlic, and breadcrumbs',
         },{
             name:'Egg Toast',
@@ -6301,8 +7120,6 @@ types={
             prereq:['Toast'],
             mutex:[],
             wall:['Starter Hob','Eggs'],
-            edit:true,
-            level:1,
             desc:'Adds egg as a toast topping',
         },{
             name:'Tomato Toast',
@@ -6312,8 +7129,6 @@ types={
             prereq:['Toast'],
             mutex:[],
             wall:['Tomatoes'],
-            edit:true,
-            level:1,
             desc:'Adds tomato as a toast topping',
         },{
             name:'Onion Pizza',
@@ -6323,8 +7138,6 @@ types={
             prereq:['Pizza'],
             mutex:[],
             wall:['Onions'],
-            edit:true,
-            level:1,
             desc:'Adds onion as a pizza topping',
         },{
             name:'Meat Pizza',
@@ -6334,9 +7147,16 @@ types={
             prereq:['Pizza'],
             mutex:[],
             wall:['Meat'],
-            edit:true,
-            level:1,
             desc:'Adds meat as a pizza topping',
+        },{
+            name:'Calzones',
+            dish:['Calzone'],
+            list:1,
+            customerMult:0.64,
+            prereq:['Pizza'],
+            mutex:[],
+            wall:['Eggs'],
+            desc:'Like a pizza, but also kinda like a pie',
         },{
             name:'Vegetable Pies',
             dish:['Vegetable Pie'],
@@ -6345,8 +7165,6 @@ types={
             prereq:['Pies'],
             mutex:[],
             wall:['Broccoli','Potatoes'],
-            edit:true,
-            level:1,
             desc:'Pies containing broccoli and potatoes',
         },{
             name:'Affogato',
@@ -6356,9 +7174,25 @@ types={
             prereq:['Coffee'],
             mutex:[],
             wall:['Ice Cream'],
-            edit:true,
-            level:1,
             desc:'Adds ice cream as a coffee topping',
+        },{
+            name:'Extra Sugar',
+            dish:['Sugar'],
+            list:1,
+            customerMult:0.8,
+            prereq:['Coffee'],
+            mutex:[],
+            wall:['Sugar'],
+            desc:'Customers may request sugar after receiving coffee',
+        },{
+            name:'Lemon Nut Roast',
+            dish:['Lemon Nut Roast'],
+            list:1,
+            customerMult:0.8,
+            prereq:['Nut Roast'],
+            mutex:[],
+            wall:['Lemons'],
+            desc:'Adds lemon as a nut roast toppings',
         },{
             name:'Stuffing',
             dish:['Stuffing'],
@@ -6367,8 +7201,6 @@ types={
             prereq:['Nut Roast'],
             mutex:[],
             wall:['Flour','Onions'],
-            edit:true,
-            level:1,
             desc:'Adds stuffing as a nut roast topping',
         },{
             name:'Mustard',
@@ -6378,8 +7210,6 @@ types={
             prereq:['Hot Dogs'],
             mutex:[],
             wall:['Mustard'],
-            edit:true,
-            level:1,
             desc:'Adds mustard as a hot dog condiment',
         },{
             name:'Cheese Hot Dogs',
@@ -6389,9 +7219,16 @@ types={
             prereq:['Hot Dogs'],
             mutex:[],
             wall:['Cheese'],
-            edit:true,
-            level:1,
             desc:'Adds cheese as a hot dog topping',
+        },{
+            name:'Chili Hot Dogs',
+            dish:['Chili Hot Dog'],
+            list:1,
+            customerMult:0.8,
+            prereq:['Hot Dogs'],
+            mutex:[],
+            wall:['Pots','Tomatoes','Peppers','Onions'],
+            desc:'Adds chili as a hot dog topping',
         },{
             name:'Bolognese Spaghetti',
             dish:['Bolognese Spaghetti'],
@@ -6400,8 +7237,6 @@ types={
             prereq:['Spaghetti'],
             mutex:[],
             wall:['Meat'],
-            edit:true,
-            level:1,
             desc:'Spaghetti with meat-based sauce',
         },{
             name:'Cheese Spaghetti',
@@ -6411,8 +7246,6 @@ types={
             prereq:['Spaghetti'],
             mutex:[],
             wall:['Butter','Flour','Milk','Cheese'],
-            edit:true,
-            level:1,
             desc:'Spaghetti with cheese and white sauce',
         },{
             name:'Lasagne',
@@ -6422,8 +7255,6 @@ types={
             prereq:['Bolognese Spaghetti','Cheese Spaghetti'],
             mutex:[],
             wall:['Pasta Sheet','Tray'],
-            edit:true,
-            level:1,
             desc:'Layers of pasta with bolognese and white sauce',
         },{
             name:'Ramen',
@@ -6433,8 +7264,6 @@ types={
             prereq:['Spaghetti'],
             mutex:[],
             wall:['Onions','Bonito'],
-            edit:true,
-            level:1,
             desc:'Noodles served inside soup',
         },{
             name:'Butter Waffles',
@@ -6444,8 +7273,6 @@ types={
             prereq:['Waffles'],
             mutex:[],
             wall:['Butter'],
-            edit:true,
-            level:1,
             desc:'Adds butter as a waffle topping',
         },{
             name:'Cherry Waffles',
@@ -6455,8 +7282,6 @@ types={
             prereq:['Waffles'],
             mutex:[],
             wall:['Cherries'],
-            edit:true,
-            level:1,
             desc:'Adds cherry sauce as a waffle topping',
         },{
             name:'Coffee Cake',
@@ -6466,8 +7291,6 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Coffee Machine','Tin'],
-            edit:true,
-            level:1,
             desc:'Adds coffee as a cake flavor',
         },{
             name:'Cherry Cake',
@@ -6477,8 +7300,6 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Cherries','Tin'],
-            edit:true,
-            level:1,
             desc:'Adds cherry as a cake flavor',
         },{
             name:'Lemon Cake',
@@ -6488,8 +7309,6 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Lemons','Tin'],
-            edit:true,
-            level:1,
             desc:'Adds lemon as a cake flavor',
         },{
             name:'Donuts',
@@ -6499,8 +7318,6 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Pots','Oil','Donut Tray'],
-            edit:true,
-            level:1,
             desc:'Makes 12 donuts that can be individually flavored',
         },{
             name:'Tiramisu',
@@ -6510,9 +7327,16 @@ types={
             prereq:['Cakes'],
             mutex:[],
             wall:['Cocoa Powder','Lemons','Tin'],
-            edit:true,
-            level:1,
             desc:'Layers of cake, cream, and cocoa powder',
+        },{
+            name:'Brownies',
+            dish:['Brownies'],
+            list:1,
+            customerMult:1,
+            prereq:['Cakes'],
+            mutex:[],
+            wall:['Tray'],
+            desc:'Pre-flavor cake with chocolate',
         },
         
         {
@@ -6523,8 +7347,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Meat','Onions'],
-            edit:true,
-            level:1,
             desc:'Adds meat soup as a starter',
         },{
             name:'Tomato Soup',
@@ -6534,8 +7356,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Tomatoes','Onions'],
-            edit:true,
-            level:1,
             desc:'Adds tomato soup as a starter',
         },{
             name:'Broccoli Cheese Soup',
@@ -6545,8 +7365,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Broccoli','Cheese','Onions'],
-            edit:true,
-            level:1,
             desc:'Adds broccoli cheese soup as a starter',
         },{
             name:'Miso Soup',
@@ -6556,8 +7374,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Miso','Soybeans'],
-            edit:true,
-            level:1,
             desc:'Adds miso soup as a starter',
         },{
             name:'Bread',
@@ -6567,8 +7383,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Oven'],
-            edit:true,
-            level:1,
             desc:'Adds bread as a starter',
         },{
             name:'Garlic Bread',
@@ -6578,8 +7392,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Cheese','Garlic','Oven'],
-            edit:true,
-            level:1,
             desc:'Adds garlic bread as a starter',
         },{
             name:'Croissant',
@@ -6589,8 +7401,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Flour','Butter','Oven'],
-            edit:true,
-            level:1,
             desc:'Adds croissant as a starter',
         },{
             name:'Spring Rolls',
@@ -6600,8 +7410,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Flour','Lettuce','Onions'],
-            edit:true,
-            level:1,
             desc:'Adds spring rolls as a starter',
         },
 
@@ -6613,8 +7421,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Broccoli'],
-            edit:true,
-            level:1,
             desc:'Adds broccoli as a side',
         },{
             name:'Mashed Potato',
@@ -6624,8 +7430,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Potatoes'],
-            edit:true,
-            level:1,
             desc:'Adds mashed potato as a side',
         },{
             name:'Roast Potato',
@@ -6635,8 +7439,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Potatoes'],
-            edit:true,
-            level:1,
             desc:'Adds roast potato as a side',
         },{
             name:'Fries',
@@ -6646,8 +7448,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Potatoes'],
-            edit:true,
-            level:1,
             desc:'Adds fries as a side',
         },{
             name:'Onion Rings',
@@ -6657,8 +7457,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Onions','Flour'],
-            edit:true,
-            level:1,
             desc:'Adds onion rings as a side',
         },{
             name:'Cheese Sticks',
@@ -6668,8 +7466,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Cheese','Flour','Tomatoes'],
-            edit:true,
-            level:1,
             desc:'Adds cheese sticks as a side',
         },{
             name:'Macaroni and Cheese',
@@ -6679,8 +7475,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Macaroni','Cheese','Butter'],
-            edit:true,
-            level:1,
             desc:'Adds macaroni and cheese as a side',
         },{
             name:'Scrambled Eggs',
@@ -6690,8 +7484,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Eggs'],
-            edit:true,
-            level:1,
             desc:'Adds scrambled eggs as a side',
         },
 
@@ -6703,8 +7495,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Apples'],
-            edit:true,
-            level:1,
             desc:'Adds apple pie as a dessert',
         },{
             name:'Cherry Pie',
@@ -6714,8 +7504,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Cherries'],
-            edit:true,
-            level:1,
             desc:'Adds cherry pie as a dessert',
         },{
             name:'Caramel Pie',
@@ -6725,8 +7513,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Sugar'],
-            edit:true,
-            level:1,
             desc:'Adds caramel pie as a dessert',
         },{
             name:'Lemon Meringue Pie',
@@ -6736,8 +7522,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Lemons','Eggs','Sugar'],
-            edit:true,
-            level:1,
             desc:'Adds lemon meringue pie as a dessert',
         },{
             name:'Apple Crisp',
@@ -6747,8 +7531,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Sugar','Apples'],
-            edit:true,
-            level:1,
             desc:'Adds apple crisp as a dessert',
         },{
             name:'Rice Pudding',
@@ -6758,8 +7540,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Pots','Milk','Cinnamon','Rice'],
-            edit:true,
-            level:1,
             desc:'Adds rice pudding as a dessert',
         },{
             name:'Ice Cream',
@@ -6769,8 +7549,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Ice Cream'],
-            edit:true,
-            level:1,
             desc:'Adds ice cream as a dessert',
         },{
             name:'Zeppole',
@@ -6780,8 +7558,6 @@ types={
             prereq:[],
             mutex:[],
             wall:['Oven','Flour','Sugar'],
-            edit:true,
-            level:1,
             desc:'Adds zeppole as a dessert',
         },
         
@@ -6791,8 +7567,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:['Large Groups'],
-            edit:true,
-            level:1,
             desc:'Customers come on their own',
         },{
             name:'Large Groups',
@@ -6800,8 +7574,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:['Individuals'],
-            edit:true,
-            level:1,
             desc:'Customers come in larger groups',
         },{
             name:'Flexible Groups',
@@ -6809,8 +7581,6 @@ types={
             customerMult:1,
             prereq:['Large Groups'],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Groups can be very small or very large',
         },{
             name:'Advertising',
@@ -6818,8 +7588,6 @@ types={
             customerMult:1.25,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'More customers will appear',
         },{
             name:'Morning Rush',
@@ -6827,8 +7595,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'More customers at the start of day',
         },{
             name:'Lunch Rush',
@@ -6836,8 +7602,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'More customers at the middle of day',
         },{
             name:'Dinner Rush',
@@ -6845,8 +7609,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'More customers at the end of day',
         },{
             name:'Herd Mentality',
@@ -6854,8 +7616,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Groups of customers come in waves',
         },{
             name:'Open Late',
@@ -6863,8 +7623,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Customers can arrive after closing time',
         },{
             name:'Double Helpings',
@@ -6872,8 +7630,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Customers may order a course twice',
         },{
             name:'Discount',
@@ -6881,8 +7637,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Reduce all dish values above 1 by 1',
         },{
             name:'High Expectations',
@@ -6890,8 +7644,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'All patience 20% less',
         },{
             name:'Slow Worker',
@@ -6899,8 +7651,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'All processes 20% slower',
         },{
             name:'Reckless',
@@ -6908,8 +7658,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Food burns twice as fast',
         },{
             name:'Leisurely Eating',
@@ -6917,8 +7665,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Customers eat for more time',
         },{
             name:'Picky Eating',
@@ -6926,8 +7672,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Customers can leave food for you to throw away',
         },{
             name:'Tipping Culture',
@@ -6935,8 +7679,6 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:`Customers pay less for slow service`,
         },{
             name:'Violence',
@@ -6944,9 +7686,21 @@ types={
             customerMult:1,
             prereq:[],
             mutex:[],
-            edit:true,
-            level:1,
             desc:'Customers randomly punch in front of them',
+        },{
+            name:'Blurry Sight',
+            list:5,
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            desc:'Cannot see process bars',
+        },{
+            name:'Envy',
+            list:5,
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            desc:'When you serve customers, all other groups lose patience',
         },
     ],cosmetic:{
         color:[

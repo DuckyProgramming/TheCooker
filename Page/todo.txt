@@ -1,12 +1,7 @@
-make another map
+
+
 
 blueprint descriptions
-
-+6 variant cards
--wine jus
--sugar coffee
-
-+2 customer cards
 
 +8 premiership cards
 

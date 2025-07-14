@@ -65,17 +65,12 @@ class wall extends partisan{
                 this.colliders.main=[]
                 this.displayItem=[]
                 let set=[
-                    'Rice',
-                    'Cinnamon',
-                    'Rice in Pot',
-                    'Cinnamon in Pot',
-                    'Milk in Pot',
-                    'Rice Cinnamon Pot',
-                    'Cinnamon Milk Pot',
-                    'Rice Milk Pot',
-                    'Raw Rice Pudding',
-                    'Rice Pudding Pot',
-                    'Rice Pudding',
+                    'Sauce Pastry Crust',
+                    'Sauce Cheese Pastry Crust',
+                    'Sauce Cheese Egg Pastry Crust',
+                    'Raw Calzone',
+                    'Calzone',
+                    'Plated Calzone',
                 ]
                 for(let a=0,la=set.length;a<la;a++){
                     this.displayItem.push(this.generateItem(set[a]))
@@ -145,7 +140,7 @@ class wall extends partisan{
             break
             case 'Fish': case 'Meat': case 'Lettuce': case 'Tomatoes': case 'Cheese': case 'Onions': case 'Nuts': case 'Hot Dogs': case 'Hot Dog Buns': case 'Noodles':
             case 'Eggs': case 'Chocolate': case 'Milk': case 'Fish Fillet': case 'Spiny Fish': case 'Crabs': case 'Bone Meat': case 'Thick Meat': case 'Apples': case 'Garlic':
-            case 'Broccoli': case 'Butter': case 'Pasta Sheet': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Macaroni': case 'Cinnamon':
+            case 'Broccoli': case 'Butter': case 'Pasta Sheet': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Macaroni': case 'Cinnamon': case 'Peppers':
                 this.displayItem=this.generateItem(this.provide)
             break
             case 'Coffee Machine':
@@ -274,7 +269,7 @@ class wall extends partisan{
         }
     }
     combiner(){
-        return !this.mover
+        return !this.mover&&this.name!='Sidewalk'&&this.name!='Floor'&&this.name!='Kitchen Floor'
     }
     ladder(step,other){
         switch(step){
@@ -317,7 +312,6 @@ class wall extends partisan{
         this.occupants=[]
         this.operation.phase=0
         this.operation.timer=0
-        this.operation.condiment=false
         this.occupied=true
         for(let a=0,la=this.parent.entities.players.length;a<la;a++){
             if(this.parent.entities.players[a].groupIndex==occupier.groupIndex){
@@ -363,6 +357,7 @@ class wall extends partisan{
                 }
             }
             if(ordered){
+                this.operation.condiment=false
                 this.operation.phase=1
                 this.operation.timer=0
             }else{
@@ -540,6 +535,9 @@ class wall extends partisan{
                             this.displayItem[a].fade.main=this.fade.main
                             this.displayItem[a].display(0)
                             layer.translate(48,0)
+                            if(a%10==9){
+                                layer.translate(-480,48)
+                            }
                         }
                     break
                     case 'Blueprint Cabinet':
@@ -1124,7 +1122,7 @@ class wall extends partisan{
                         layer.rect(0,-10,this.base.width,2)
                         layer.rect(0,10,this.base.width,2)
                     break
-                    case 'Lettuce': case 'Tomatoes': case 'Onions': case 'Apples': case 'Garlic': case 'Broccoli': case 'Cherries': case 'Lemons': case 'Soybeans':
+                    case 'Lettuce': case 'Tomatoes': case 'Onions': case 'Apples': case 'Garlic': case 'Broccoli': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Peppers':
                         layer.fill(160,100,40,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height)
                         layer.fill(130,85,40,this.fade.main)
@@ -1370,6 +1368,15 @@ class wall extends partisan{
                         this.displayItem.fade.main=this.fade.main
                         this.displayItem.display(0)
                     break
+                    case 'Wine':
+                        layer.fill(220,this.fade.main)
+                        layer.rect(-this.base.width*0.5,4,4,6,2)
+                        layer.fill(220,160,100,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,4)
+                        layer.fill(220,this.fade.main)
+                        layer.rect(-10,0,4,this.base.height+2,2)
+                        layer.rect(10,0,4,this.base.height+2,2)
+                    break
                     //mark
                 }
                 if(this.name!='Prep Station'&&this.name!='Frozen Prep Station'&&this.item!=-1){
@@ -1542,7 +1549,12 @@ class wall extends partisan{
                             layer.rect(0,-8,36,8,3)
                             let part=1-this.cycle/180
                             layer.fill(20,240,20,this.fade.main*this.animSet.cycle)
-                            layer.rect(-16.5*(1-part),-8,33*part,5,2)
+                            if(this.parent.operation.cardManager.hasCard('Blurry Sight')){
+                                layer.rect(0,-9.7,33,2,1.6)
+                                layer.rect(0,-6.3,33,2,1.6)
+                            }else{
+                                layer.rect(-16.5*(1-part),-8,33*part,5,2)
+                            }
                         }
                     break
                 }
@@ -1748,6 +1760,16 @@ class wall extends partisan{
                                     this.patience.main=900
                                     this.patience.base=900
                                     a=la
+                                    if(this.parent.operation.cardManager.hasCard('Envy')){
+                                        for(let b=0,lb=this.parent.entities.walls.length;b<lb;b++){
+                                            for(let c=0,lc=this.parent.entities.walls[b].length;c<lc;c++){
+                                                if((this.parent.entities.walls[b][c].name=='Dining Table'||this.parent.entities.walls[b][c].name=='Fancy Table')&&this.parent.entities.walls[b][c].patience.main>0){
+                                                    let bar=this.parent.entities.walls[b][c].patience.base*0.2
+                                                    this.parent.entities.walls[b][c].patience.main=max(this.parent.entities.walls[b][c].patience.main-bar,min(this.parent.entities.walls[b][c].patience.main,bar))
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             if(this.patience.main>0){
@@ -1811,6 +1833,23 @@ class wall extends partisan{
                                 for(let a=0,la=this.occupants.length;a<la;a++){
                                     if(this.occupants[a].item!=-1&&this.occupants[a].item.name.includes('Hot Dog')){
                                         this.occupants[a].makeOrder(3,this.parent.operation.dishManager.obj,a==chosen)
+                                    }
+                                    if(this.occupants[a].order.length>0){
+                                        this.occupants[a].revealOrder()
+                                        this.operation.condiment=true
+                                        this.operation.phase=4
+                                        this.operation.timer=0
+                                        this.operation.timerCap=0
+                                        this.patience.main=900
+                                        this.patience.base=900
+                                    }
+                                }
+                            }
+                            if(this.operation.timer==60&&this.orderPhase==2&&!this.operation.condiment){
+                                let chosen=floor(random(0,this.occupants.length))
+                                for(let a=0,la=this.occupants.length;a<la;a++){
+                                    if(this.occupants[a].item!=-1&&this.occupants[a].item.name.includes('Coffee')){
+                                        this.occupants[a].makeOrder(4,this.parent.operation.dishManager.obj,a==chosen)
                                     }
                                     if(this.occupants[a].order.length>0){
                                         this.occupants[a].revealOrder()

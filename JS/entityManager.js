@@ -23,11 +23,11 @@ class entityManager extends manager{
         for(let a=0,la=this.operation.player.length;a<la;a++){
             this.entities.players.push(new player(this.layer,this,this.index.player++,0,0,a,this.operation.player[a]))
         }
-        this.customer.internal=(5+3*(this.operation.player.length-1))
+        this.customer.internal=(5+2.5*(this.operation.player.length-1))*dev.customerMult
         this.calcCustomer()
     }
     generateLevel(level,entry){
-        this.entities.walls=[[]]
+        this.entities.walls=[[],[]]
         this.entities.particles=[]
         let spent=[]
         for(let a=0,la=level.map.length;a<la;a++){
@@ -46,16 +46,14 @@ class entityManager extends manager{
         this.view.main.y=this.edge.main.y*0.5
         this.edge.outer.x=[-this.tileset[2],this.edge.main.x+this.tileset[2]]
         this.edge.outer.y=[-this.tileset[2],this.edge.main.y+this.tileset[2]]
-        this.loc.spawn.x=this.tileset[0]*level.spawn[0]*0.5
-        this.loc.spawn.y=this.tileset[0]*level.spawn[1]*0.5
-        this.loc.spawn.direction=level.spawn[2]
+        this.loc.spawn.direction=level.spawn[0]
         this.edge.inside=level.inside
-        this.entities.walls[0].push(new wall(this.layer,this,this.index.wall++,this.edge.main.x*0.5,this.edge.main.y*0.5,[0,0],this.edge.main.x+this.tileset[2],this.edge.main.y+this.tileset[2],findName('Sidewalk',types.wall)))
+        this.entities.walls[1].push(new wall(this.layer,this,this.index.wall++,this.edge.main.x*0.5,this.edge.main.y*0.5,[0,0],this.edge.main.x+this.tileset[2],this.edge.main.y+this.tileset[2],findName('Sidewalk',types.wall)))
         for(let a=0,la=level.floor[0].length;a<la;a++){
-            this.entities.walls[0].push(new wall(this.layer,this,this.index.wall++,this.edge.main.x*0.5+level.floor[0][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[0][a][1]*this.tileset[1]*0.5,[0,0],this.edge.main.x+this.tileset[2]-(abs(level.floor[0][a][0])+level.floor[0][a][2])*this.tileset[0],this.edge.main.y+this.tileset[2]-(abs(level.floor[0][a][1])+level.floor[0][a][3])*this.tileset[1],findName('Floor',types.wall)))
+            this.entities.walls[1].push(new wall(this.layer,this,this.index.wall++,this.edge.main.x*0.5+level.floor[0][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[0][a][1]*this.tileset[1]*0.5,[0,0],this.edge.main.x+this.tileset[2]-(abs(level.floor[0][a][0])+level.floor[0][a][2])*this.tileset[0],this.edge.main.y+this.tileset[2]-(abs(level.floor[0][a][1])+level.floor[0][a][3])*this.tileset[1],findName('Floor',types.wall)))
         }
         for(let a=0,la=level.floor[1].length;a<la;a++){
-            this.entities.walls[0].push(new wall(this.layer,this,this.index.wall++,this.edge.main.x*0.5+level.floor[1][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[1][a][1]*this.tileset[1]*0.5,[0,0],this.edge.main.x-(abs(level.floor[1][a][0])+level.floor[1][a][2])*this.tileset[0],this.edge.main.y-(abs(level.floor[1][a][1])+level.floor[1][a][3])*this.tileset[1],findName('Kitchen Floor',types.wall)))
+            this.entities.walls[1].push(new wall(this.layer,this,this.index.wall++,this.edge.main.x*0.5+level.floor[1][a][0]*this.tileset[0]*0.5,this.edge.main.y*0.5+level.floor[1][a][1]*this.tileset[1]*0.5,[0,0],this.edge.main.x-(abs(level.floor[1][a][0])+level.floor[1][a][2])*this.tileset[0],this.edge.main.y-(abs(level.floor[1][a][1])+level.floor[1][a][3])*this.tileset[1],findName('Kitchen Floor',types.wall)))
         }
         for(let a=0,la=level.map.length;a<la;a++){
             this.grid.push([])
@@ -68,7 +66,7 @@ class entityManager extends manager{
             let type=findName(level.wall[a][2],types.wall)
             layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*level.wall[a][0]*0.5,this.tileset[1]*level.wall[a][1]*0.5,[level.wall[a][1],level.wall[a][0]],-1,-1,type))
             for(let b=0,lb=level.wall[a][3];b<lb;b++){
-                last(layerer[0][types.wall[type].level]).rotate()
+                last(layerer[0][types.wall[type].level]).rotateFast()
             }
         }
         for(let a=0,la=level.map.length;a<la;a++){
@@ -134,6 +132,16 @@ class entityManager extends manager{
                         case 'e':
                             this.loc.lineup.x=this.tileset[0]*b*0.5
                             this.loc.lineup.y=this.tileset[0]*a*0.5
+                            switch(level.spawn[0]){
+                                case 90:
+                                    this.loc.spawn.x=0
+                                    this.loc.spawn.y=this.tileset[0]*a*0.5
+                                break
+                                case 270:
+                                    this.loc.spawn.x=this.edge.main.x
+                                    this.loc.spawn.y=this.tileset[0]*a*0.5
+                                break
+                            }
                         break
                     }
                 }
@@ -149,11 +157,11 @@ class entityManager extends manager{
                 }
             }
         }
-        this.run.fore=[[this.entities.walls[0],0],[this.entities.players,0],[this.entities.players,1],[this.entities.walls[0],1],[this.entities.particles,0]]
+        this.run.fore=[[this.entities.walls[1],0],[this.entities.walls[0],0],[this.entities.players,0],[this.entities.players,1],[this.entities.walls[0],1],[this.entities.particles,0]]
         if(dev.bound){
             this.run.fore.push([this.entities.walls[0],-1],[this.entities.players,-1])
         }
-        this.run.update=[this.entities.walls[0],this.entities.players,this.entities.particles]
+        this.run.update=[this.entities.walls[1],this.entities.walls[0],this.entities.players,this.entities.particles]
         this.updateLadder()
     }
     updateLadder(){
@@ -189,6 +197,7 @@ class entityManager extends manager{
         for(let a=0,la=this.entities.walls[set].length;a<la;a++){
             if(this.entities.walls[set][a].level>wall.level){
                 this.entities.walls[set].splice(a,0,wall)
+                this.updateLadder()
                 return a
             }
         }
