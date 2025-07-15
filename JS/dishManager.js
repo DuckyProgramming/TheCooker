@@ -6,17 +6,18 @@ class dishManager extends manager{
         this.disabled=[[],[],[],[],[],[]]
     }
     addDish(dish){
-        this.active[types.dish[dish].type].push(dish)
+        this.active[types.dish[dish].list].push(dish)
         for(let a=0,la=types.dish[dish].obj.length;a<la;a++){
             switch(types.dish[dish].obj[a].length){
                 case 2:
-                    this.obj[types.dish[dish].type].push(types.dish[dish].obj[a])
+                    this.obj[types.dish[dish].list].push(types.dish[dish].obj[a])
                 break
                 case 3:
-                    this.disabled[types.dish[dish].type].push(types.dish[dish].obj[a])
+                    this.disabled[types.dish[dish].list].push(types.dish[dish].obj[a])
                 break
             }
         }
+        this.operation.overlayManager.overlays[1].execute(0,[dish])
         this.updateObj()
     }
     updateObj(){

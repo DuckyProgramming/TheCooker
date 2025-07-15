@@ -260,7 +260,7 @@ class entityManager extends manager{
             if(set[a]!='Tin'){
                 for(let b=0,lb=this.entities.walls.length;b<lb;b++){
                     for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
-                        if(this.entities.walls[b][c].type==inside||this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside){
+                        if(this.entities.walls[b][c].type==inside||this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside&&dev.overlap){
                             total--
                         }
                     }
@@ -362,7 +362,7 @@ class entityManager extends manager{
     spawnBlueprints(num,plus){
         this.spawnOptions(2)
         let possible=this.getEmptyGrid(1)
-        let set=this.operation.blueprintManager.getOptions(0,[this.operation.dayManager.day+plus,num])
+        let set=this.operation.blueprintManager.getOptions(0,[this.operation.dayManager.day+plus+(this.operation.cardManager.hasCard('Quality Stock')?3:0),num])
         for(let a=0,la=set.length;a<la;a++){
             let index=floor(random(0,possible.length))
             let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(possible[index][1]+0.5),this.tileset[1]*(possible[index][0]+0.5),[possible[index][0]*2+1,possible[index][1]*2+1],-1,-1,findName('Blueprint',types.wall)),0)

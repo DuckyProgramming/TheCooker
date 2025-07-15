@@ -1,6 +1,6 @@
 class overlay extends located{
     constructor(layer,parent,x,y,type,args){
-        super(layer,x,y,{main:0,trigger:false,speed:5})
+        super(layer,x,y,{main:0,trigger:false,speed:10})
         this.parent=parent
         this.type=type
         this.args=args
@@ -16,6 +16,10 @@ class overlay extends located{
                 this.support=[]
                 this.anim=[]
             break
+            case 1:
+                this.dishes=[]
+                this.page=0
+            break
         }
     }
     activate(args){
@@ -30,6 +34,17 @@ class overlay extends located{
                     this.cards.push(new card(this.layer,this.parent.operation.cardManager,even(a,la)*200,20,result[a]))
                     this.support.push([])
                     this.anim.push(0)
+                }
+            break
+        }
+    }
+    execute(type,args){
+        switch(this.type){
+            case 1:
+                switch(type){
+                    case 0:
+                        this.dishes.push(new dish(this.layer,this.parent.operation.dishManager,0,20,args[0]))
+                    break
                 }
             break
         }
@@ -59,6 +74,25 @@ class overlay extends located{
                         layer.ellipse(this.cards[a].position.x-36+b*21,this.cards[a].position.y+130,16)
                     }
                 }
+            break
+            case 1:
+                layer.fill(200,this.fade.main)
+                layer.stroke(0,this.fade.main)
+                layer.strokeWeight(2)
+                layer.textSize(60)
+                layer.text('Recipe Book',0,-120)
+                for(let a=0,la=this.dishes.length;a<la;a++){
+                    this.dishes[a].display()
+                }
+                layer.fill(200,this.fade.main)
+                layer.stroke(150,this.fade.main)
+                layer.strokeWeight(5)
+                layer.rect(0,150,35,35,10)
+                layer.rect(-130,20,35,35,10)
+                layer.rect(130,20,35,35,10)
+                displaySymbol(layer,-130,20,0,-180,1,[0,0,0],this.fade.main)
+                displaySymbol(layer,130,20,0,0,1,[0,0,0],this.fade.main)
+                displaySymbol(layer,0,150,1,0,1.5,[0,0,0],this.fade.main)
             break
         }
         layer.pop()
@@ -91,6 +125,12 @@ class overlay extends located{
                     }
                 }
             break
+            case 1:
+                for(let a=0,la=this.dishes.length;a<la;a++){
+                    this.dishes[a].update()
+                    this.dishes[a].fade.trigger=this.page==a
+                }
+            break
         }
         if(!this.active&&this.fade.main<=0){
             this.remove=true
@@ -104,6 +144,17 @@ class overlay extends located{
                         this.active=false
                         this.parent.operation.cardManager.addCard(this.cards[a].type)
                     }
+                }
+            break
+            case 1:
+                if(inPointBox(mouse,{position:{x:this.layer.width/2-130,y:this.layer.height/2+20},width:40,height:40})){
+                    this.page=(this.page+this.dishes.length-1)%this.dishes.length
+                }
+                if(inPointBox(mouse,{position:{x:this.layer.width/2+130,y:this.layer.height/2+20},width:40,height:40})){
+                    this.page=(this.page+1)%this.dishes.length
+                }
+                if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+150},width:40,height:40})){
+                    this.active=false
                 }
             break
         }

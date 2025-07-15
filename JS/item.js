@@ -94,6 +94,13 @@ class item extends located{
         }
         return result
     }
+    resetProcess(types){
+        for(let a=0,la=this.process.length;a<la;a++){
+            if(types.includes(this.process[a].type)){
+                this.process[a].main=0
+            }
+        }
+    }
     checkUtility(type){
         for(let a=0,la=this.process.length;a<la;a++){
             if(this.process[a].type==5&&this.process[a].utility==type){

@@ -53,7 +53,7 @@ class wall extends partisan{
             case 'Blueprint':
                 this.colliders.main=[]
                 this.contain=0
-                this.animSet={contain:0}
+                this.animSet={contain:0,desc:0}
                 this.cost=types.wall[this.contain].cost
             break
             case 'Option':
@@ -89,6 +89,9 @@ class wall extends partisan{
             break
             case 'Rolling Board':
                 this.speed=[1,3]
+            break
+            case 'Mixer':
+                this.speed=[1,1,0.25]
             break
             case 'Levitating Counter':
                 this.speed=[1,1]
@@ -620,6 +623,23 @@ class wall extends partisan{
                         layer.rect(-10,0,6,24,3)
                         layer.ellipse(-10,-14,3,8)
                         layer.ellipse(-10,14,3,8)
+                    break
+                    case 'Mixer':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(200,50,50,this.fade.main)
+                        layer.ellipse(0,0,30)
+                        layer.fill(100,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(60,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.rotate(this.timer.main*6)
+                        layer.fill(180,this.fade.main)
+                        layer.arc(-4.5,0,9,4,0,180)
+                        layer.arc(4.5,0,9,4,-180,0)
+                        layer.ellipse(0,0,2)
                     break
                     case 'Levitating Counter':
                         layer.strokeWeight(2)
@@ -1473,6 +1493,14 @@ class wall extends partisan{
                             layer.ellipse(2*len+6,-27,9)
                             layer.ellipse(2*len+6,-27,6)
                         }
+                        if(this.animSet.desc>0){
+                            layer.noStroke()
+                            layer.fill(225,this.fade.main*this.animSet.desc)
+                            layer.rect(0,0,90,30,4)
+                            layer.fill(0,this.fade.main*this.animSet.desc)
+                            layer.textSize(8)
+                            layer.text(types.wall[this.contain].desc,0,0,84)
+                        }
                     break
                     case 'Option':
                         if(this.animSet.contain>0){
@@ -1596,7 +1624,24 @@ class wall extends partisan{
                 }
                 this.animSet.contain=smoothAnim(this.animSet.contain,visible,0,1,5)
             break
-            case 'Blueprint': case 'Option':
+            case 'Blueprint':
+                visible=false
+                for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                    if(dist(this.position.x,this.position.y,this.parent.entities.players[a].position.x,this.parent.entities.players[a].position.y)<50){
+                        visible=true
+                    }
+                }
+                this.animSet.desc=smoothAnim(this.animSet.desc,visible&&!this.getItemProcessVisible(),0,1,5)
+                if(!visible){
+                    for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                        if(dist(this.position.x,this.position.y,this.parent.entities.players[a].position.x,this.parent.entities.players[a].position.y)<80){
+                            visible=true
+                        }
+                    }
+                }
+                this.animSet.contain=smoothAnim(this.animSet.contain,visible&&!this.getItemProcessVisible(),0,1,5)
+            break
+            case 'Option':
                 visible=false
                 for(let a=0,la=this.parent.entities.players.length;a<la;a++){
                     if(dist(this.position.x,this.position.y,this.parent.entities.players[a].position.x,this.parent.entities.players[a].position.y)<80){
@@ -1625,6 +1670,18 @@ class wall extends partisan{
             break
             case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin': case 'Compost Bin':
                 this.animSet.num=smoothAnim(this.animSet.num,this.trash>0,0,1,5)
+            break
+            case 'Mixer':
+                if(this.item!=-1){
+                    let result=this.item.generalProcess([2,3],this.speed[2])
+                    for(let a=0,la=result.length;a<la;a++){
+                        switch(result[a].type){
+                            case 2: case 3:
+                                this.item=this.generateItem(result[a].result)
+                            break
+                        }
+                    }
+                }
             break
             case 'Starter Hob': case 'Hob': case 'Fast Hob': case 'Override Hob':
                 if(this.item!=-1){
@@ -2099,7 +2156,7 @@ class wall extends partisan{
                                 return true
                             }
                         break
-                        case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Levitating Counter':
+                        case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Mixer': case 'Levitating Counter':
                         case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                         case 'Tin': case 'Tray': case 'Donut Tray':
                             if(player.item!=-1){
@@ -2423,12 +2480,18 @@ class wall extends partisan{
                                     for(let a=0,la=result.length;a<la;a++){
                                         switch(result[a].type){
                                             case 8:
-                                                let send=this.generateItem('Crate')
-                                                send.contain=this.contain
-                                                player.item=send
-                                                this.parent.emptySpot(this)
-                                                this.remove=true
-                                                this.parent.operation.dayManager.loseCurrency(this.cost)
+                                                if(player.item==-1){
+                                                    let send=this.generateItem('Crate')
+                                                    send.contain=this.contain
+                                                    player.item=send
+                                                    this.parent.emptySpot(this)
+                                                    this.parent.operation.dayManager.loseCurrency(this.cost)
+                                                    if(this.parent.operation.cardManager.hasCard('Extra Stock')){
+                                                        this.item.resetProcess([8])
+                                                    }else{
+                                                        this.remove=true
+                                                    }
+                                                }
                                             break
                                         }
                                     }
@@ -2480,7 +2543,7 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Levitating Counter':
+                        case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Mixer': case 'Levitating Counter':
                         case 'Tin': case 'Tray': case 'Donut Tray':
                             if(this.item!=-1){
                                 this.item.moved=false

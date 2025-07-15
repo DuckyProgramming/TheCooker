@@ -6,9 +6,9 @@ class cardManager extends manager{
     }
     initial(){
         this.listing={
-            full:[[],[],[],[],[],[]],
-            available:[[],[],[],[],[],[]],
-            possible:[[],[],[],[],[],[]],
+            full:[[],[],[],[],[],[],[]],
+            available:[[],[],[],[],[],[],[]],
+            possible:[[],[],[],[],[],[],[]],
         }
         for(let a=0,la=types.card.length;a<la;a++){
             if(types.card[a].list>=0){
@@ -30,7 +30,7 @@ class cardManager extends manager{
         }
     }
     convertedListing(){
-        this.listing.possible=[[],[],[],[],[],[]]
+        this.listing.possible=[[],[],[],[],[],[],[]]
         for(let a=0,la=this.listing.available.length;a<la;a++){
             for(let b=0,lb=this.listing.available[a].length;b<lb;b++){
                 let valid=true
@@ -69,17 +69,26 @@ class cardManager extends manager{
         switch(type){
             case 0:
                 let temp=this.listing.possible[0].slice()
-                for(let a=0,la=args[0];a<la;a++){
+                for(let a=0,la=args[0]+(this.hasCard('Blank Card')?1:0);a<la;a++){
                     let index=floor(random(0,temp.length))
                     result.push(temp[index])
                     temp.splice(index,1)
                 }
             break
             case 1:
-                if(this.listing.possible[5].length>0){
-                    result.push(randin(this.listing.possible[5]))
+                let set=[1,1,1]
+                if(this.hasCard('Blank Card')){
+                    set[floor(random(0,set.length))]++
                 }
-                let possible=[]
+                let possible=this.listing.possible[5].slice()
+                for(let a=0,la=set[0];a<la;a++){
+                    if(possible.length>0){
+                        let index=floor(random(0,possible.length))
+                        result.push(possible[index])
+                        possible.splice(index,1)
+                    }
+                }
+                possible=[]
                 for(let a=0,la=2;a<la;a++){
                     for(let b=0,lb=this.listing.possible[a].length;b<lb;b++){
                         for(let c=0,lc=1+a*7;c<lc;c++){
@@ -87,8 +96,18 @@ class cardManager extends manager{
                         }
                     }
                 }
-                if(possible.length>0){
-                    result.push(randin(possible))
+                for(let a=0,la=set[1];a<la;a++){
+                    if(possible.length>0){
+                        let index=floor(random(0,possible.length))
+                        result.push(possible[index])
+                        for(let b=0,lb=possible.length;b<lb;b++){
+                            if(possible[b]==result){
+                                possible.splice(b,1)
+                                b--
+                                lb--
+                            }
+                        }
+                    }
                 }
                 possible=[]
                 for(let a=this.operation.dishManager.active[0].length<=0?4:2,la=5;a<la;a++){
@@ -96,8 +115,12 @@ class cardManager extends manager{
                         possible.push(this.listing.possible[a][b])
                     }
                 }
-                if(possible.length>0){
-                    result.push(randin(possible))
+                for(let a=0,la=set[2];a<la;a++){
+                    if(possible.length>0){
+                        let index=floor(random(0,possible.length))
+                        result.push(possible[index])
+                        possible.splice(index,1)
+                    }
                 }
             break
         }
@@ -110,7 +133,7 @@ class cardManager extends manager{
             customerMult=customerMult[this.operation.dayManager.day==0?1:0]
         }
         this.operation.entityManager.customer.internal*=customerMult
-        if(types.card[card].list!=5){
+        if(types.card[card].list!=5&&types.card[card].list!=6){
             this.operation.entityManager.sendPackages(types.card[card].wall)
             for(let a=0,la=types.card[card].dish.length;a<la;a++){
                 this.operation.dishManager.addDish(findName(types.card[card].dish[a],types.dish))
@@ -132,6 +155,12 @@ class cardManager extends manager{
             case 'Flexible Groups':
                 this.operation.entityManager.customer.groupSizeMin--
                 this.operation.entityManager.customer.groupSizeMax++
+            break
+            case 'Savings':
+                this.operation.dayManager.addCurrency(50)
+            break
+            case 'Bootstrapping':
+                this.operation.entityManager.sendPackages(this.operation.blueprintManager.generateSet([[1,2],[1,2]]))
             break
         }
         this.operation.entityManager.calcCustomer()

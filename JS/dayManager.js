@@ -44,7 +44,7 @@ class dayManager extends manager{
     }
     beginDay(){
         this.phase=1
-        this.time.main=0
+        this.time.main=this.operation.cardManager.hasCard('Prep Time')?-900:0
         this.patience.main=3600
         this.patience.fail=false
         this.operation.entityManager.clearWalls(['Crate','Blueprint','Option'])
@@ -73,7 +73,18 @@ class dayManager extends manager{
         for(let a=0,la=3;a<la;a++){
             if(rush[a]){
                 for(let b=0,lb=rushGroup[ticker];b<lb;b++){
-                    this.spawners.push([this.time.end*(0.2+0.35*a+random(-0.02,0.02)),floor(random(this.operation.entityManager.customer.groupSizeMin,this.operation.entityManager.customer.groupSizeMax+1))])
+                    let spot=this.time.end*(0.2+0.35*a+random(-0.02,0.02))
+                    let placed=false
+                    for(let c=0,lc=this.spawners.length-1;c<lc;c++){
+                        if(this.spawners[c][0]>spot){
+                            this.spawners.splice(c,0,[spot,floor(random(this.operation.entityManager.customer.groupSizeMin,this.operation.entityManager.customer.groupSizeMax+1))])
+                            c=lc
+                            placed=true
+                        }
+                    }
+                    if(!placed){
+                        this.spawners.push([spot,floor(random(this.operation.entityManager.customer.groupSizeMin,this.operation.entityManager.customer.groupSizeMax+1))])
+                    }
                 }
                 ticker++
             }
@@ -90,7 +101,7 @@ class dayManager extends manager{
         this.operation.entityManager.clearPlayerItem()
         this.operation.entityManager.calcCustomer()
         this.operation.entityManager.resetWalls()
-        this.operation.entityManager.spawnBlueprints(5,0)
+        this.operation.entityManager.spawnBlueprints(5+(this.operation.cardManager.hasCard('Catalogue')?1:0),0)
     }
     fakeDay(){
         this.beginDay()
@@ -140,13 +151,21 @@ class dayManager extends manager{
                 this.layer.strokeWeight(0.9)
                 this.layer.ellipse(13,36.5,12)
                 this.layer.ellipse(13,36.5,8)
+                this.layer.strokeWeight(2)
+                this.layer.quad(this.layer.width-6,21,this.layer.width-21,6,this.layer.width-36,21,this.layer.width-21,36)
+                this.layer.line(this.layer.width-18,19,this.layer.width-14,19)
+                this.layer.line(this.layer.width-18,23,this.layer.width-14,23)
+                this.layer.line(this.layer.width-22,17,this.layer.width-22,25)
+                this.layer.line(this.layer.width-26,17,this.layer.width-26,25)
                 this.layer.textAlign(CENTER,CENTER)
                 if(this.anim.phase[1]>0){
                     this.layer.noStroke()
                     this.layer.fill(80,this.anim.phase[1])
                     this.layer.rect(this.layer.width/2,12,304,12,4.5)
-                    this.layer.fill(240,160,80,this.anim.phase[1])
-                    this.layer.rect(this.layer.width/2-150*(1-min(1,this.time.main/this.time.end)),12,300*min(1,this.time.main/this.time.end),8,3)
+                    if(this.time.main>0){
+                        this.layer.fill(240,160,80,this.anim.phase[1])
+                        this.layer.rect(this.layer.width/2-150*(1-min(1,this.time.main/this.time.end)),12,300*min(1,this.time.main/this.time.end),8,3)
+                    }
                     if(this.patience.anim>0){
                         this.layer.fill(80,this.anim.phase[1]*this.patience.anim)
                         this.layer.rect(this.layer.width/2,28,154,10,3)
@@ -204,6 +223,15 @@ class dayManager extends manager{
                             this.patience.main=this.patience.base
                         }
                     break
+                }
+            break
+        }
+    }
+    onClick(scene,mouse){
+        switch(scene){
+            case 'main':
+                if(distPos(mouse,{position:{x:this.layer.width-21,y:21}})<30){
+                    this.operation.overlayManager.activate(1,[])
                 }
             break
         }

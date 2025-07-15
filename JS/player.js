@@ -412,7 +412,13 @@ class player extends partisan{
                                         this.follow.item=-1
                                     }
                                     this.order.splice(a,1)
-                                    let value=this.paying[a]>1&&this.parent.operation.cardManager.hasCard('Discount')?this.paying[a]-1:this.paying[a]
+                                    let value=this.paying[a]
+                                    if(this.parent.operation.cardManager.hasCard('Discount')&&value>0){
+                                        value--
+                                    }
+                                    if(this.parent.operation.cardManager.hasCard('Profit Margins')&&value>0){
+                                        value=round(value*1.5+random(-0.5,0.5))
+                                    }
                                     if(this.follow.operation.phase==3){
                                         this.follow.patience.mem+=this.follow.patience.main/this.follow.patience.base*0.5
                                     }

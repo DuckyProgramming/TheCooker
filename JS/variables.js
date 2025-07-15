@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined}
-dev={bound:false,altControl:true,customerMult:1}
+dev={bound:false,altControl:true,customerMult:1,overlap:false}
 inputs={
     keys:[
         {
@@ -30,19 +30,6 @@ types={
             ],wall:[
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
-                //[1,3,'Displayer',0],
-                //[1,5,'Starter Hob',0],
-                /*[19,1,'Fish',1],
-                [19,3,'Starter Hob',1],
-                [19,5,'Starter Hob',1],
-                [19,7,'Starter Plates',1],*/
-                //[19,9,'Starter Sink',1],
-                //[1,5,'Counter',0],
-                //[1,7,'Counter',0],
-                //[3,3,'Rice',0],
-                //[5,3,'Cinnamon',0],
-                //[5,3,'Tin',0],
-                //[7,3,'Waffle Iron',0],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -671,7 +658,7 @@ types={
             cost:10,
             prereq:[],
             desc:'Holds anything',
-            upgrade:['Freezer','Cutting Board','Rolling Board','Climb Counter'],
+            upgrade:['Freezer','Cutting Board','Rolling Board','Mixer','Levitating Counter'],
         },{
             name:'Freezer',
             width:48,
@@ -684,7 +671,7 @@ types={
             cost:20,
             prereq:[],
             desc:'Holds anything and keeps it overnight',
-            upgrade:['Cutting Board','Rolling Board','Climb Counter'],
+            upgrade:['Cutting Board','Rolling Board','Mixer','Levitating Counter'],
         },{
             name:'Cutting Board',
             width:48,
@@ -697,7 +684,7 @@ types={
             cost:40,
             prereq:[],
             desc:'Cut things 3x faster here',
-            upgrade:['Freezer','Rolling Board','Climb Counter'],
+            upgrade:['Freezer','Rolling Board','Mixer','Levitating Counter'],
         },{
             name:'Rolling Board',
             width:48,
@@ -710,7 +697,20 @@ types={
             cost:40,
             prereq:[],
             desc:'Roll things 3x faster here',
-            upgrade:['Freezer','Cutting Board','Climb Counter'],
+            upgrade:['Freezer','Cutting Board','Mixer','Levitating Counter'],
+        },{
+            name:'Mixer',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[],
+            desc:'Cuts and rolls things slowly automatically',
+            upgrade:[],
         },{
             name:'Levitating Counter',
             width:48,
@@ -720,10 +720,10 @@ types={
             edit:true,
             level:1,
             rarity:2,
-            cost:120,
+            cost:80,
             prereq:[],
             desc:'Can be moved through',
-            upgrade:['Freezer','Cutting Board','Rolling Board'],
+            upgrade:['Freezer','Cutting Board','Rolling Board','Mixer'],
         },{
             name:'Prep Station',
             width:48,
@@ -954,7 +954,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[],
+            spec:[1],
             edit:true,
             level:1,
             rarity:1,
@@ -1116,7 +1116,7 @@ types={
             width:48,
             height:48,
             effect:[-1,0],
-            spec:[],
+            spec:[1],
             edit:true,
             level:1,
             rarity:1,
@@ -1129,7 +1129,7 @@ types={
             width:48,
             height:24,
             effect:[-1,0],
-            spec:[],
+            spec:[1],
             edit:true,
             level:1,
             rarity:1,
@@ -1142,7 +1142,7 @@ types={
             width:48,
             height:24,
             effect:[-1,0],
-            spec:[],
+            spec:[1],
             edit:true,
             level:1,
             rarity:1,
@@ -6299,28 +6299,32 @@ types={
         */
         {
             name:'Fish',
-            type:0,
+            list:0,
+            value:'4',
             obj:[
                 ['Plated Fish',4],
             ],
             desc:'Cook fish and serve.',
         },{
             name:'Fish Fillet',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Fish Fillet',5],
             ],
             desc:'Chop fish to create fillet.\nCook fillet and serve.',
         },{
             name:'Spiny Fish',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Spiny Fish',5],
             ],
             desc:'Removed spines from fish and discard.\nCook fish and serve.',
         },{
             name:'Crab Cake',
-            type:0,
+            list:0,
+            value:'6',
             obj:[
                 ['Plated Crab Cake',6],
             ],
@@ -6329,7 +6333,8 @@ types={
 
         {
             name:'Steak',
-            type:0,
+            list:0,
+            value:'4',
             obj:[
                 ['Plated Rare Steak',4],
                 ['Plated Medium Steak',4],
@@ -6338,7 +6343,8 @@ types={
             desc:'Cook meat to desired level and serve.',
         },{
             name:'Bone Steak',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Rare Bone Steak',5],
                 ['Plated Medium Bone Steak',5],
@@ -6347,7 +6353,8 @@ types={
             desc:'Cook meat to desired level and serve.\nLeaves a bone on the Plated afterward.',
         },{
             name:'Thick Steak',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Rare Thick Steak',5],
                 ['Plated Medium Thick Steak',5],
@@ -6356,7 +6363,8 @@ types={
             desc:'Cook meat to desired level and serve.\nTakes a while to cook.',
         },{
             name:'Tomato Steak',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Rare Steak With Tomato',5],
                 ['Plated Medium Steak With Tomato',5],
@@ -6371,7 +6379,8 @@ types={
             desc:'Add chopped tomato to plated steak and serve.',
         },{
             name:'Wine Jus Steak',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Rare Steak With Wine Jus',5],
                 ['Plated Medium Steak With Wine Jus',5],
@@ -6397,7 +6406,8 @@ types={
 
         {
             name:'Salad',
-            type:0,
+            list:0,
+            value:'3-4',
             obj:[
                 ['Plated Lettuce',3],
                 ['Plated Lettuce and Tomato',4],
@@ -6405,7 +6415,8 @@ types={
             desc:'Chop and serve lettuce.\nOptionally add chopped tomato.',
         },{
             name:'Onion Salad',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Lettuce and Onion',4],
                 ['Plated Lettuce, Tomato, and Onion',5],
@@ -6413,21 +6424,24 @@ types={
             desc:'Add chopped onion to plated salad and serve.',
         },{
             name:'Apple Salad',
-            type:0,
+            list:0,
+            value:'6',
             obj:[
                 ['Plated Apple, Nuts, and Mayo',6],
             ],
             desc:'Combine cracked egg and oil to make mayo.\nCombine with chopped apple and nuts and serve.',
         },{
             name:'Potato Salad',
-            type:0,
+            list:0,
+            value:'7',
             obj:[
                 ['Plated Boiled Potato, Onion, and Mayo',7],
             ],
             desc:'Combine cracked egg and oil to make mayo.\nBoil chopped potato in a pot.\nCombine boiled potato, chopped onion, and mayo, and serve.',
         },{
             name:'Caesar Salad',
-            type:0,
+            list:0,
+            value:'7',
             obj:[
                 ['Plated Lettuce, Garlic, and Breadcrumbs',7],
             ],
@@ -6436,21 +6450,24 @@ types={
 
         {
             name:'Toast',
-            type:0,
+            list:0,
+            value:'4',
             obj:[
                 ['Plated Toast',4],
             ],
             desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slices.\nCook bread slice again and serve.',
         },{
             name:'Egg Toast',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Egg Toast',5],
             ],
             desc:'Crack egg and cook to make fried egg.\nAdd to plated toast and serve.',
         },{
             name:'Tomato Toast',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Tomato Toast',5],
                 ['Plated Egg Toast','Plated Egg and Tomato Toast',6],
@@ -6460,21 +6477,24 @@ types={
 
         {
             name:'Pizza',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Cheese Pizza Slice',5],
             ],
             desc:'Add water to flour to make dough.\nAdd oil to make pizza base.\nChop tomato twice and cheese once, and combine with pizza base.\nCook, portion, and serve.',
         },{
             name:'Onion Pizza',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Onion Pizza Slice',6],
             ],
             desc:'Add chopped onion to pizza before cooking.',
         },{
             name:'Meat Pizza',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Meat Pizza Slice',6],
                 ['Plated Onion Pizza Slice','Plated Onion and Meat Pizza Slice',7],
@@ -6482,7 +6502,8 @@ types={
             desc:'Add chopped meat to pizza before cooking.',
         },{
             name:'Calzone',
-            type:0,
+            list:0,
+            value:'8',
             obj:[
                 ['Plated Calzone',8],
             ],
@@ -6491,14 +6512,16 @@ types={
 
         {
             name:'Meat Pie',
-            type:0,
+            list:0,
+            value:'6',
             obj:[
                 ['Plated Meat Pie',6],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make pie crust, optionally cook.\nAdd meat to pastry and cook again, then serve.',
         },{
             name:'Vegetable Pie',
-            type:0,
+            list:0,
+            value:'7',
             obj:[
                 ['Plated Vegetable Pie',7],
             ],
@@ -6507,21 +6530,24 @@ types={
 
         {
             name:'Coffee',
-            type:3,
+            list:3,
+            value:'1',
             obj:[
                 ['Coffee',1],
             ],
             desc:'Activate coffee machine, then take the cup and serve.',
         },{
             name:'Affogato',
-            type:3,
+            list:3,
+            value:'2',
             obj:[
                 ['Affogato',2],
             ],
             desc:'Take vanilla ice cream, add to coffee cup, and serve.',
         },{
             name:'Sugar',
-            type:5,
+            list:5,
+            value:'0',
             obj:[
                 ['Sugar',0],
             ],
@@ -6530,21 +6556,24 @@ types={
 
         {
             name:'Nut Roast',
-            type:0,
+            list:0,
+            value:'4',
             obj:[
                 ['Plated Nut Roast Slice',4],
             ],
             desc:'Slice nuts and onions.\nCombine and cook to make nut roast.\nPortion and serve.',
         },{
             name:'Lemon Nut Roast',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Lemon Nut Roast Slice',5],
             ],
             desc:'Chop lemon.\nAdd to nut roast portion and serve.',
         },{
             name:'Stuffing',
-            type:0,
+            list:0,
+            value:'+3',
             obj:[
                 ['Plated Stuffing Nut Roast Slice',7],
                 ['Plated Lemon Nut Roast Slice','Plated Lemon Stuffing Nut Roast Slice',8],
@@ -6554,35 +6583,40 @@ types={
 
         {
             name:'Hot Dog',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Hot Dog',5],
             ],
             desc:'Cook hot dog.\nAdd to bun and serve.\nDeliver condiments as needed.',
         },{
             name:'Ketchup',
-            type:4,
+            list:4,
+            value:'0',
             obj:[
                 ['Ketchup',0],
             ],
             desc:'Take and deliver ketchup bottle',
         },{
             name:'Mustard',
-            type:4,
+            list:4,
+            value:'0',
             obj:[
                 ['Mustard',0],
             ],
             desc:'Take and deliver mustard bottle',
         },{
             name:'Cheese Hot Dog',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Cheese Hot Dog',6],
             ],
             desc:'Add chopped cheese to a plated hot dog.',
         },{
             name:'Chili Hot Dog',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Chili Hot Dog',6],
                 ['Plated Cheese Hot Dog','Plated Chili Cheese Hot Dog',7],
@@ -6592,58 +6626,66 @@ types={
 
         {
             name:'Spaghetti',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Spaghetti',5],
             ],
             desc:'Boil noodles in water, then remove water, and portion noodles out.\nPlated noodles and add tomato sauce, then serve.',
         },{
             name:'Bolognese Spaghetti',
-            type:0,
+            list:0,
+            value:'7',
             obj:[
                 ['Plated Bolognese Spaghetti',7],
             ],
             desc:'Chop and cook meat to make mince.\nAdd mince to tomato sauce in pot and cook to make bolognese sauce.\nAdd to plated noodles, then serve.',
         },{
             name:'Cheese Spaghetti',
-            type:0,
+            list:0,
+            value:'8',
             obj:[
                 ['Plated Cheese Spaghetti',8],
             ],
             desc:'Add butter and flour to pot, then cook to make roux.\nAdd milk and knead to make white sauce.\nCombine plated noodles, white sauce, and chopped cheese, then serve.',
         },{
             name:'Lasagne',
-            type:0,
+            list:0,
+            value:'9',
             obj:[
                 ['Plated Lasagne Slice',9],
             ],
             desc:'Add bolognese sauce, pasta sheet, and white sauce to tray, in order, two times.\nCook tray, portion, and serve.',
         },{
             name:'Ramen',
-            type:0,
+            list:0,
+            value:'7',
             obj:[
-                ['Ramen',6],
+                ['Ramen',7],
             ],
             desc:'Boil water with onion to make broth.\nAdd bonito to broth and cook again.\nPortion soup and add noodles to make ramen, then serve.',
         },
 
         {
             name:'Waffle',
-            type:0,
+            list:0,
+            value:'5',
             obj:[
                 ['Plated Waffle',5],
             ],
             desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd batter to waffle iron and activate.\nWhen done, take waffle, Plated and serve.',
         },{
             name:'Butter Waffle',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Butter Waffle',6],
             ],
             desc:'Add butter to a plated waffle, then serve.',
         },{
             name:'Cherry Waffle',
-            type:0,
+            list:0,
+            value:'+1',
             obj:[
                 ['Plated Cherry Waffle',6],
                 ['Plated Butter Waffle','Plated Butter Cherry Waffle',7],
@@ -6653,35 +6695,40 @@ types={
 
         {
             name:'Cake',
-            type:3,
+            list:3,
+            value:'4',
             obj:[
                 ['Chocolate Cake Slice',4],
             ],
             desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd milk to batter, then place in cake tin.\nCook, then add melted chocolate as flavoring.\nPortion and serve.',
         },{
             name:'Coffee Cake',
-            type:3,
+            list:3,
+            value:'4',
             obj:[
                 ['Coffee Cake Slice',4],
             ],
             desc:'After cooking, use coffee from coffee machine as cake flavoring.',
         },{
             name:'Cherry Cake',
-            type:3,
+            list:3,
+            value:'4',
             obj:[
                 ['Cherry Cake Slice',4],
             ],
             desc:'After cooking, use cherry sauce as cake flavoring.',
         },{
             name:'Lemon Cake',
-            type:3,
+            list:3,
+            value:'4',
             obj:[
                 ['Lemon Cake Slice',4],
             ],
             desc:'After cooking, use chopped lemon as cake flavoring.',
         },{
             name:'Donut',
-            type:3,
+            list:3,
+            value:'5',
             obj:[
                 ['Chocolate Donut',5],
                 ['Coffee Cake Slice','Coffee Donut',5],
@@ -6691,14 +6738,16 @@ types={
             desc:'Add batter with milk to donut tray.\nPortion a donut out of the tray.\nAdd oil and donut to pot.\nCook, then portion out donut, add flavoring, and serve.',
         },{
             name:'Tiramisu',
-            type:3,
+            list:3,
+            value:'5',
             obj:[
                 ['Tiramisu Slice',5],
             ],
             desc:'Combine chopped lemon, sugar, and cracked egg, and mix, then add milk to make mascarpone.\nAfter cooking cake, add mascarpone and cocoa powder.\nPortion and serve.',
         },{
             name:'Brownies',
-            type:3,
+            list:3,
+            value:'4',
             obj:[
                 ['Brownie',4],
             ],
@@ -6707,56 +6756,64 @@ types={
         
         {
             name:'Meat Soup',
-            type:1,
+            list:1,
+            value:'2',
             obj:[
                 ['Meat Soup',2],
             ],
             desc:'Boil water with onion to make broth.\nAdd meat to broth and cook again.\nPortion and serve.',
         },{
             name:'Tomato Soup',
-            type:1,
+            list:1,
+            value:'2',
             obj:[
                 ['Tomato Soup',2],
             ],
             desc:'Boil water with onion to make broth.\nCut tomato two times to make tomato sauce.\nAdd tomato and tomato sauce to broth and cook again.\nPortion and serve.',
         },{
             name:'Broccoli Cheese Soup',
-            type:1,
+            list:1,
+            value:'2',
             obj:[
                 ['Broccoli Cheese Soup',2],
             ],
             desc:'Boil water with onion to make broth.\nAdd broccoli and cheese to broth and cook again.\nPortion and serve.',
         },{
             name:'Miso Soup',
-            type:1,
+            list:1,
+            value:'2',
             obj:[
                 ['Miso Soup',2],
             ],
             desc:'Boil water with soybeans, then cut to make tofu.\nAdd water again and miso and cook again.\nPortion and serve.',
         },{
             name:'Bread',
-            type:1,
+            list:1,
+            value:'1',
             obj:[
                 ['Bread Slice',1],
             ],
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and serve.',
         },{
             name:'Garlic Bread',
-            type:1,
+            list:1,
+            value:'2',
             obj:[
                 ['Garlic Bread',2],
             ],
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and add chopped garlic and chopped cheese.\nCook again and serve.',
         },{
             name:'Croissant',
-            type:1,
+            list:1,
+            value:'2',
             obj:[
                 ['Croissant',2],
             ],
             desc:'Add water to flour to make dough.\nAdd butter and knead to make a croissant.\nCook and serve.',
         },{
             name:'Spring Roll',
-            type:1,
+            list:1,
+            value:'1',
             obj:[
                 ['Spring Roll',1],
             ],
@@ -6765,56 +6822,64 @@ types={
 
         {
             name:'Broccoli',
-            type:2,
+            list:2,
+            value:'1',
             obj:[
                 ['Broccoli Portion',1],
             ],
             desc:'Boil water with broccoli.\nPortion and serve.',
         },{
             name:'Mashed Potato',
-            type:2,
+            list:2,
+            value:'2',
             obj:[
                 ['Mashed Potato',2],
             ],
             desc:'Boil water with potato.\nMash when complete.\nPortion and serve.',
         },{
             name:'Roast Potato',
-            type:2,
+            list:2,
+            value:'1',
             obj:[
                 ['Roast Potato',1],
             ],
             desc:'Cook potato and serve.',
         },{
             name:'Fries',
-            type:2,
+            list:2,
+            value:'2',
             obj:[
                 ['Fries',2],
             ],
             desc:'Chop potato, then cook and serve.',
         },{
             name:'Onion Rings',
-            type:2,
+            list:2,
+            value:'2',
             obj:[
                 ['Onion Rings',2],
             ],
             desc:'Chop onions, add flour, then cook and serve.',
         },{
             name:'Cheese Sticks',
-            type:2,
+            list:2,
+            value:'3',
             obj:[
                 ['Cheese Sticks',3],
             ],
             desc:'Chop cheese, add flour and cook.\nChop tomato twice to make sauce.\nCombine sticks and sauce and serve.',
         },{
             name:'Macaroni and Cheese',
-            type:2,
+            list:2,
+            value:'2',
             obj:[
                 ['Macaroni and Cheese',2],
             ],
             desc:'Boil water with macaroni.\nRemove water and add chopped cheese and butter.\nPortion and serve.',
         },{
             name:'Scrambled Eggs',
-            type:2,
+            list:2,
+            value:'1',
             obj:[
                 ['Scrambled Eggs',1],
             ],
@@ -6823,49 +6888,56 @@ types={
 
         {
             name:'Apple Pie',
-            type:3,
+            list:3,
+            value:'3',
             obj:[
                 ['Apple Pie',3],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd chopped apple to pastry and cook again.',
         },{
             name:'Cherry Pie',
-            type:3,
+            list:3,
+            value:'3',
             obj:[
                 ['Cherry Pie',3],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd cherry to pastry and cook again.',
         },{
             name:'Caramel Pie',
-            type:3,
+            list:3,
+            value:'3',
             obj:[
                 ['Caramel Pie',3],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook sugar to make caramel.\nAdd caramel to pastry and cook again.',
         },{
             name:'Lemon Meringue Pie',
-            type:3,
+            list:3,
+            value:'4',
             obj:[
                 ['Lemon Meringue Pie',4],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCombine chopped lemon, sugar, and cracked egg, and mix to create meringue.\nAdd meringue to pastry and cook again.',
         },{
             name:'Apple Crisp',
-            type:3,
+            list:3,
+            value:'2',
             obj:[
                 ['Apple Crisp',2],
             ],
             desc:'Combine chopped apple, sugar and flour.\nCook and serve.',
         },{
             name:'Rice Pudding',
-            type:3,
+            list:3,
+            value:'2',
             obj:[
                 ['Rice Pudding',2],
             ],
             desc:'Combine rice, milk, and cinnamon in a pot.\nCook, portion, and serve.',
         },{
             name:'Ice Cream',
-            type:3,
+            list:3,
+            value:'2-3',
             obj:[
                 ['Ice Cream CC',2],
                 ['Ice Cream CV',2],
@@ -6878,7 +6950,8 @@ types={
             desc:'Switch between flavors and grab scoops, then serve.',
         },{
             name:'Zeppole',
-            type:3,
+            list:3,
+            value:'2',
             obj:[
                 ['Zeppole',2],
             ],
@@ -6892,6 +6965,7 @@ types={
         3-side
         4-dessert
         5-customer
+        6-franchise
         */
         {
             name:'',
@@ -7701,6 +7775,64 @@ types={
             prereq:[],
             mutex:[],
             desc:'When you serve customers, all other groups lose patience',
+        },
+
+        {
+            name:'Savings',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Start with 50 more currency',
+        },{
+            name:'Bootstrapping',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Start with 2 random appliances',
+        },{
+            name:'Catalogue',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Gain an extra blueprint each day',
+        },{
+            name:'Profit Margins',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Increase currency earned from dishes by 50%',
+        },{
+            name:'Quality Stock',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'More blueprints from the shop will be upgraded',
+        },{
+            name:'Prep Time',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Have 15 extra seconds before customers start coming',
+        },{
+            name:'Extra Stock',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Blueprints can be bought any number of times',
+        },{
+            name:'Blank Card',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Get an extra random option on card choices',
         },
     ],cosmetic:{
         color:[

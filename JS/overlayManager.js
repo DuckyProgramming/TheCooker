@@ -4,8 +4,10 @@ class overlayManager extends manager{
         this.overlays=[]
         this.active=[]
         this.overlays.push(new overlay(this.layer,this,this.layer.width/2,this.layer.height/2,0,[]))
+        this.overlays.push(new overlay(this.layer,this,this.layer.width/2,this.layer.height/2,1,[]))
         /*
         0-card choice
+        1-view recipe
         */
     }
     anyActive(){

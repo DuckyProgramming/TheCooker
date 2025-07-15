@@ -1,8 +1,6 @@
 
 
+you can lose the game
+-franchise system
 
-blueprint descriptions
-
-+8 premiership cards
-
-...card-specifics
+start menu

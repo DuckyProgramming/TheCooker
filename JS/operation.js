@@ -3,20 +3,24 @@ class operation{
         this.layer=layer
         this.scene=''
         this.level=floor(random(0,types.level.length))
-        this.player=[{color:1}/*,{color:2},{color:3}*/]
+        this.player=[]
+        this.generatePlayers(1)
         this.initialManagers()
+    }
+    generatePlayers(num){
+        for(let a=0,la=num;a<la;a++){
+            this.player.push({color:a+1})
+        }
     }
     transition(scene,args){
         switch(scene){
             case 'main':
                 this.entityManager.generateLevel(types.level[this.level],0)
-                this.overlayManager.activate(0,[0])
-                //this.cardManager.addCard(findName('Pizza',types.card))
-                //this.cardManager.addCard(findName('Calzones',types.card))
-                ////
-                //this.entityManager.spawnBlueprints(5)
+                //this.overlayManager.activate(0,[0])
+                this.cardManager.addCard(floor(random(0,72)))
+                this.cardManager.addCard(floor(random(0,72)))
+                this.cardManager.addCard(floor(random(0,72)))
                 this.entityManager.spawnOptions(1)
-                ////
             break
         }
         this.transitionManager.begin(scene)
@@ -52,6 +56,11 @@ class operation{
         this.transitionManager.update(this.scene)
     }
     onClick(mouse){
+        switch(this.scene){
+            case 'main':
+                this.dayManager.onClick(this.scene,mouse)
+            break
+        }
         this.overlayManager.onClick(this.scene,mouse)
     }
 }

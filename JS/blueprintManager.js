@@ -20,6 +20,20 @@ class blueprintManager extends manager{
         this.trigger={heat:false}
         this.convertedListing()
     }
+    generateSet(set){
+        this.priorListing()
+        let result=[]
+        for(let a=0,la=set.length;a<la;a++){
+            let total=[]
+            for(let b=0,lb=set[a].length;b<lb;b++){
+                for(let c=0,lc=this.listing.possible[set[a][b]].length;c<lc;c++){
+                    total.push(this.listing.possible[set[a][b]][c])
+                }
+            }
+            result.push(types.wall[randin(total)].name)
+        }
+        return result
+    }
     addEnabled(wall){
         let type=findName(wall,types.wall)
         if(!this.enabled.includes(type)){
@@ -36,6 +50,16 @@ class blueprintManager extends manager{
                     this.listing.available[a].splice(b,1)
                     b--
                     lb--
+                }
+            }
+        }
+    }
+    priorListing(){
+        this.listing.possible=[[],[],[],[]]
+        for(let a=0,la=this.listing.available.length;a<la;a++){
+            for(let b=0,lb=this.listing.available[a].length;b<lb;b++){
+                if(!types.wall[this.listing.available[a][b]].spec.includes(1)){
+                    this.listing.possible[a].push(this.listing.available[a][b])
                 }
             }
         }
