@@ -30,6 +30,7 @@ class transitionManager extends manager{
                     if(this.anim>=1){
                         this.trigger=false
                         this.operation.scene=this.scene
+                        this.operation.transitionComplete(this.scene)
                     }
                 }
                 else if(this.anim>0){

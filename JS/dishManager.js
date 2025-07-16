@@ -18,6 +18,7 @@ class dishManager extends manager{
             }
         }
         this.operation.overlayManager.overlays[1].execute(0,[dish])
+        this.operation.overlayManager.activate(1,[0])
         this.updateObj()
     }
     updateObj(){

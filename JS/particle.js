@@ -28,7 +28,7 @@ class particle extends located{
                 layer.scale(this.size)
                 switch(this.type){
                     case 0:
-                        layer.fill(200,this.fade.main)
+                        layer.fill(180,this.fade.main)
                         layer.stroke(0,this.fade.main)
                         layer.strokeWeight(0.6)
                         layer.textAlign(LEFT,CENTER)

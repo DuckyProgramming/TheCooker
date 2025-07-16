@@ -66,9 +66,10 @@ class cardManager extends manager{
     }
     getOptions(type,args){
         let result=[]
+        let temp
         switch(type){
             case 0:
-                let temp=this.listing.possible[0].slice()
+                temp=this.listing.possible[0].slice()
                 for(let a=0,la=args[0]+(this.hasCard('Blank Card')?1:0);a<la;a++){
                     let index=floor(random(0,temp.length))
                     result.push(temp[index])
@@ -123,6 +124,22 @@ class cardManager extends manager{
                     }
                 }
             break
+            case 2:
+                temp=this.active.slice()
+                for(let a=0,la=args[0]+(this.hasCard('Blank Card')?1:0);a<la;a++){
+                    let index=floor(random(0,temp.length))
+                    result.push(temp[index])
+                    temp.splice(index,1)
+                }
+            break
+            case 3:
+                temp=this.listing.possible[6].slice()
+                for(let a=0,la=args[0]+(this.hasCard('Blank Card')?1:0);a<la;a++){
+                    let index=floor(random(0,temp.length))
+                    result.push(temp[index])
+                    temp.splice(index,1)
+                }
+            break
         }
         return result
     }
@@ -164,6 +181,18 @@ class cardManager extends manager{
             break
         }
         this.operation.entityManager.calcCustomer()
+    }
+    removeCard(card){
+        if(this.active.includes(card)){
+            this.active.splice(this.active.indexOf(card),1)
+        }
+    }
+    removeFirst(){
+        if(this.active.length>0){
+            let temp=this.active[0]
+            this.active.splice(0,1)
+            return temp
+        }
     }
     hasCard(name){
         return this.active.includes(findName(name,types.card))

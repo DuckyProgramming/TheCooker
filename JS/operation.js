@@ -4,10 +4,12 @@ class operation{
         this.scene=''
         this.level=floor(random(0,types.level.length))
         this.player=[]
-        this.generatePlayers(1)
+        this.franchise={full:[],active:[]}
         this.initialManagers()
+        this.initial()
     }
     generatePlayers(num){
+        this.player=[]
         for(let a=0,la=num;a<la;a++){
             this.player.push({color:a+1})
         }
@@ -15,27 +17,78 @@ class operation{
     transition(scene,args){
         switch(scene){
             case 'main':
+                this.entityManager.generatePlayers()
                 this.entityManager.generateLevel(types.level[this.level],0)
-                //this.overlayManager.activate(0,[0])
-                this.cardManager.addCard(floor(random(0,72)))
-                this.cardManager.addCard(floor(random(0,72)))
-                this.cardManager.addCard(floor(random(0,72)))
-                this.entityManager.spawnOptions(1)
+                this.entityManager.spawnOptions(2,0)
+            break
+            case 'end':
+                this.overlayManager.activate(3,[args[0]])
             break
         }
         this.transitionManager.begin(scene)
     }
+    transitionComplete(scene){
+        switch(scene){
+            case 'menu':
+                this.interiorManagers()
+                this.overlayManager.activate(2,[])
+            break
+        }
+    }
     initialManagers(){
         this.transitionManager=new transitionManager(this.layer,this)
+        this.interiorManagers()
+        this.overlayManager=new overlayManager(this.layer,this)
+    }
+    interiorManagers(){
         this.dishManager=new dishManager(this.layer,this)
         this.cardManager=new cardManager(this.layer,this)
         this.blueprintManager=new blueprintManager(this.layer,this)
         this.entityManager=new entityManager(this.layer,this)
         this.dayManager=new dayManager(this.layer,this)
-        this.overlayManager=new overlayManager(this.layer,this)
+    }
+    initial(){
+        this.scene='menu'
+        this.overlayManager.activate(2,[])
+        let result=getItem('DP_THECOOKER_FRANCHISE')
+        this.franchise.full=result==null?[]:JSON.parse(result)
+        this.getFranchise()
+    }
+    updateFranchise(franchise){
+        this.franchise.full.push(franchise)
+        storeItem('DP_THECOOKER_FRANCHISE',JSON.stringify(this.franchise.full))
+        this.getFranchise()
+    }
+    loadFranchise(franchise){
+        for(let a=0,la=4;a<la;a++){ 
+            this.cardManager.addCard(franchise[a])
+        }
+        this.entityManager.sendPackages([types.wall[franchise[4]].name])
+    }
+    getFranchise(){
+        this.franchise.active=[]
+        let possible=this.franchise.full.slice()
+        for(let a=0,la=3;a<la;a++){
+            if(possible.length>0){
+                let index=floor(random(0,possible.length))
+                this.franchise.active.push(possible[index])
+                possible.splice(index,1)
+            }
+        }
+    }
+    clearFranchise(){
+        this.franchise.full=[]
+        this.franchise.active=[]
+        storeItem('DP_THECOOKER_FRANCHISE',JSON.stringify(this.franchise.full))
     }
     display(){
         switch(this.scene){
+            case 'menu':
+                this.layer.image(graphics.menu[0],this.layer.width/2,this.layer.height/2,this.layer.width,this.layer.height)
+            break
+            case 'end':
+                this.layer.image(graphics.menu[1],this.layer.width/2,this.layer.height/2,this.layer.width,this.layer.height)
+            break
             case 'main':
                 this.layer.background(40)
                 this.entityManager.display(this.scene)

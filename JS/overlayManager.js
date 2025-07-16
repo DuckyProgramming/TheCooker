@@ -3,21 +3,27 @@ class overlayManager extends manager{
         super(layer,operation)
         this.overlays=[]
         this.active=[]
-        this.overlays.push(new overlay(this.layer,this,this.layer.width/2,this.layer.height/2,0,[]))
-        this.overlays.push(new overlay(this.layer,this,this.layer.width/2,this.layer.height/2,1,[]))
+        for(let a=0,la=5;a<la;a++){
+            this.overlays.push(new overlay(this.layer,this,this.layer.width/2,this.layer.height/2,a,[]))
+        }
         /*
         0-card choice
         1-view recipe
+        2-main menu
+        3-end screen
+        4-choose franchise from menu
         */
     }
     anyActive(){
         return this.active.length>0
     }
     activate(overlay,args){
-        this.overlays[overlay].active=true
-        this.overlays[overlay].activate(args)
-        this.overlays[overlay].remove=false
-        this.active.push(overlay)
+        if(overlay<this.overlays.length&&!this.overlays[overlay].active){
+            this.overlays[overlay].active=true
+            this.overlays[overlay].activate(args)
+            this.overlays[overlay].remove=false
+            this.active.push(overlay)
+        }
     }
     closeAll(){
         for(let a=0,la=this.active.length;a<la;a++){

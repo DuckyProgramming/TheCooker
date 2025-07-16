@@ -90,6 +90,12 @@ function setupGraphics(){
     setupTrig()
 	graphics.main=createGraphics(960,600)
 	setupLayer(graphics.main)
+	graphics.menu=[]
+	for(let a=0,la=2;a<la;a++){
+		graphics.menu.push(createGraphics(960,600))
+		setupLayer(graphics.menu[a])
+		displayScene(graphics.menu[a],a)
+	}
 }
 function setupBase(){
     noStroke()
@@ -139,4 +145,66 @@ function lsin(direction){
 }
 function lcos(direction){
 	return constants.trig[1][floor((direction%360+360)%360*2)]
+}
+function displayScene(layer,scene){
+	let tileset
+	let possible
+	switch(scene){
+		case 0:
+			layer.fill(180)
+			layer.rect(layer.width/2,layer.height/2,layer.width,layer.height)
+			layer.fill(150)
+			tileset=30
+			for(let a=0,la=layer.width/tileset;a<la;a++){
+				for(let b=0,lb=layer.height/tileset;b<lb;b++){
+					if((a+b)%2==0){
+						layer.rect(tileset*(a+0.5),tileset*(b+0.5),tileset,tileset)
+					}
+				}
+			}
+			possible=range(0,types.dish.length)
+			for(let a=0,la=8;a<la;a++){
+				for(let b=0,lb=9;b<lb;b++){
+					let index=floor(random(0,possible.length))
+					let dish=types.dish[possible[index]]
+					let obj=dish.obj[floor(random(0,dish.obj.length))]
+					displayItem(layer,(b+0.25+a%2*0.5)/lb*layer.width,(a+0.5)/la*layer.height,obj[obj.length-2],0,0,2.5,1)
+					possible.splice(index,1)
+				}
+			}
+		break
+		case 1:
+			layer.fill(180)
+			layer.rect(layer.width/2,layer.height/2,layer.width,layer.height)
+			layer.fill(150)
+			tileset=30
+			for(let a=0,la=layer.width/tileset;a<la;a++){
+				for(let b=0,lb=layer.height/tileset;b<lb;b++){
+					if((a+b)%2==0){
+						layer.rect(tileset*(a+0.5),tileset*(b+0.5),tileset,tileset)
+					}
+				}
+			}
+			possible=[]
+			for(let a=1,la=types.item.length;a<la;a++){
+				let valid=true
+				for(let b=0,lb=types.item[a].process.length;b<lb;b++){
+					if(types.item[a].process[b][0]==5&&types.item[a].process[b][1]=='Trash'){
+						valid=false
+						b=lb
+					}
+				}
+				if(valid){
+					possible.push(a)
+				}
+			}
+			for(let a=0,la=8;a<la;a++){
+				for(let b=0,lb=9;b<lb;b++){
+					let index=floor(random(0,possible.length))
+					displayItem(layer,(b+0.25+a%2*0.5)/lb*layer.width,(a+0.5)/la*layer.height,types.item[possible[index]].name,types.item[possible[index]].portions,0,2.5,1)
+					possible.splice(index,1)
+				}
+			}
+		break
+	}
 }

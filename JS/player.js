@@ -32,6 +32,7 @@ class player extends partisan{
             this.paying=[]
             this.angle=0
             this.timer.angle=0
+            this.timer.angleCap=random(15,30)
             this.touch=false
             this.groupIndex=0
         }
@@ -335,7 +336,15 @@ class player extends partisan{
                 switch(this.mode){
                     case 0:
                         if(this.follow==-1){
-                            let x=this.parent.getPreviousCustomer(this.index).position.x+50
+                            let x=0
+                            switch(this.parent.loc.spawn.direction){
+                                case 90:
+                                    x=this.parent.getPreviousCustomer(this.index).position.x-50
+                                break
+                                case 270:
+                                    x=this.parent.getPreviousCustomer(this.index).position.x+50
+                                break
+                            }
                             if(dist(this.position.x,this.position.y,x,this.parent.loc.lineup.y)>20){
                                 this.direction.goal=dirPos(this,{position:{x:x,y:this.parent.loc.lineup.y}})
                                 this.velocity.x+=this.speed*lsin(this.direction.main)*0.5
@@ -383,7 +392,7 @@ class player extends partisan{
                     case 2:
                         let distance=distPos(this,this.follow)
                         let dir=dirPos(this,this.follow)
-                        if(distance>48||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<30&&this.angle!=-1){
+                        if(distance>48||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<this.timer.angleCap&&this.angle!=-1){
                             if(distance<=48){
                                 this.timer.angle++
                             }

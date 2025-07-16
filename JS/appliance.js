@@ -1,0 +1,37 @@
+class appliance extends located{
+    constructor(layer,parent,x,y,type){
+        super(layer,x,y,{main:0,trigger:true,speed:10})
+        this.parent=parent
+        this.type=type
+        this.name=types.wall[this.type].name
+        this.desc=types.wall[this.type].desc
+        this.width=160
+        this.height=200
+        this.size=1
+        this.initial()
+    }
+    initial(){
+        this.wall=new wall(this.layer,this.parent,0,0,5,[0,0],-1,-1,this.type)
+        this.wall.fade.main=1
+    }
+    display(layer=this.layer){
+        layer.push()
+        layer.translate(this.position.x,this.position.y)
+        layer.scale(this.size)
+        layer.fill(225,this.fade.main)
+        layer.stroke(150,this.fade.main)
+        layer.strokeWeight(5)
+        layer.rect(0,0,this.width-5,this.height-5,10)
+        layer.fill(0,this.fade.main)
+        layer.noStroke()
+        layer.textSize(20)
+        layer.text(this.name,0,-60,145)
+        layer.textSize(12)
+        layer.text(this.desc,0,70,145)
+        this.wall.display(0)
+        layer.pop()
+    }
+    update(){
+        super.update()
+    }
+}

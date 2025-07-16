@@ -132,4 +132,23 @@ class blueprintManager extends manager{
         }
         return result
     }
+    getCardOptions(type,args){
+        let result=[]
+        switch(type){
+            case 0:
+                let possible=[]
+                for(let a=0,la=types.wall.length;a<la;a++){
+                    if(types.wall[a].rarity==args[1]&&!types.wall[a].prereq.includes(0)){
+                        possible.push(a)
+                    }
+                }
+                for(let a=0,la=args[0];a<la;a++){
+                    let index=floor(random(0,possible.length))
+                    result.push(possible[index])
+                    possible.splice(index,1)
+                }
+            break
+        }
+        return result
+    }
 }

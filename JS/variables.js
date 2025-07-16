@@ -1,5 +1,5 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
-graphics={main:undefined}
+graphics={main:undefined,menu:undefined}
 dev={bound:false,altControl:true,customerMult:1,overlap:false}
 inputs={
     keys:[
@@ -30,6 +30,7 @@ types={
             ],wall:[
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
+                [7,5,'Booking Desk',2],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -63,6 +64,7 @@ types={
             ],wall:[
                 [19,7,'Starter Trash Bin',0],
                 [19,13,'Blueprint Cabinet',2],
+                [1,13,'Booking Desk',2],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -94,6 +96,7 @@ types={
             ],wall:[
                 [23,1,'Starter Trash Bin',0],
                 [23,9,'Blueprint Cabinet',1],
+                [23,13,'Booking Desk',1],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -124,12 +127,15 @@ types={
                 [[0,-6,0,0],[-5,-5,0,0]],
             ],wall:[
                 [19,1,'Starter Trash Bin',0],
-                [1,11,'Blueprint Cabinet',3],
+                [1,13,'Blueprint Cabinet',3],
+                [19,13,'Booking Desk',2],
             ],
             inside:[0,0,0,2],
             spawn:[270],
             map:[
                 ` _ _ _ _ _ _ _ _ _ _ `,
+                `|.                  |`,
+                `                     `,
                 `|.                  |`,
                 `                     `,
                 `|.                  |`,
@@ -152,8 +158,9 @@ types={
                 [[0,-2,0,0]],
                 [[11,-2,0,0],[8,-5,0,0]],
             ],wall:[
-                [15,1,'Starter Trash Bin',0],
+                [17,5,'Starter Trash Bin',0],
                 [7,1,'Blueprint Cabinet',0],
+                [15,1,'Booking Desk',0],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -181,8 +188,9 @@ types={
                 [[0,-2,0,0]],
                 [[-2,-7,0,0],[1,-6,4,0]],
             ],wall:[
-                [5,3,'Starter Trash Bin',0],
-                [5,7,'Blueprint Cabinet',1],
+                [7,5,'Starter Trash Bin',0],
+                [5,9,'Blueprint Cabinet',1],
+                [1,13,'Booking Desk',3],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -212,8 +220,9 @@ types={
                 [[0,-2,0,0]],
                 [[5,-2,0,4]],
             ],wall:[
-                [23,9,'Starter Trash Bin',0],
-                [23,11,'Blueprint Cabinet',0],
+                [23,11,'Starter Trash Bin',0],
+                [23,13,'Blueprint Cabinet',0],
+                [1,15,'Booking Desk',3],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -225,13 +234,15 @@ types={
                 `           - _ _ _ ] _ _ `,
                 `|    D    i.            |`,
                 `                         `,
-                `|         i.       1    |`,
+                `|         i.            |`,
+                `                         `,
+                `|         i.            |`,
                 `                         `,
                 `|    D    i.            |`,
                 `           - _ _ _ ] _ _ `,
                 `|             |         |`,
                 `                         `,
-                `|             [         |`,
+                `|             [    1    |`,
                 ` _ _ ] _ _ _ _ _ _ _ _ _ `,
                 `     e                   `,
                 `                         `,
@@ -245,6 +256,7 @@ types={
             ],wall:[
                 [21,1,'Starter Trash Bin',0],
                 [21,15,'Blueprint Cabinet',1],
+                [15,1,'Booking Desk',1],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -278,6 +290,7 @@ types={
             ],wall:[
                 [15,1,'Starter Trash Bin',0],
                 [27,1,'Blueprint Cabinet',1],
+                [27,7,'Booking Desk',0],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -311,6 +324,7 @@ types={
             ],wall:[
                 [1,9,'Starter Trash Bin',0],
                 [1,11,'Blueprint Cabinet',3],
+                [5,1,'Booking Desk',3],
             ],
             inside:[0,0,0,2],
             spawn:[90],
@@ -344,6 +358,7 @@ types={
             ],wall:[
                 [1,5,'Starter Trash Bin',0],
                 [21,17,'Blueprint Cabinet',1],
+                [3,17,'Booking Desk',2],
             ],
             inside:[0,0,0,2],
             spawn:[90],
@@ -379,6 +394,7 @@ types={
             ],wall:[
                 [1,1,'Starter Trash Bin',0],
                 [23,1,'Blueprint Cabinet',0],
+                [19,7,'Booking Desk',0],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -390,7 +406,7 @@ types={
                 ` _ [ _ _ [ _             `,
                 `|                 |     |`,
                 `                   _ ] _ `,
-                `|                 |     |`,
+                `|        1        |     |`,
                 `                         `,
                 `|. . .       . . .|     |`,
                 ` - - - _ _ _ - - -       `,
@@ -707,10 +723,10 @@ types={
             edit:true,
             level:1,
             rarity:1,
-            cost:60,
+            cost:40,
             prereq:[],
             desc:'Cuts and rolls things slowly automatically',
-            upgrade:[],
+            upgrade:['Heated Mixer'],
         },{
             name:'Levitating Counter',
             width:48,
@@ -724,6 +740,19 @@ types={
             prereq:[],
             desc:'Can be moved through',
             upgrade:['Freezer','Cutting Board','Rolling Board','Mixer'],
+        },{
+            name:'Heated Mixer',
+            width:48,
+            height:48,
+            effect:[-1,0],
+            spec:[],
+            edit:true,
+            level:1,
+            rarity:2,
+            cost:80,
+            prereq:[],
+            desc:'Cuts, rolls, and cooks automatically',
+            upgrade:['Freezer','Cutting Board','Rolling Board','Levitating Counter'],
         },{
             name:'Prep Station',
             width:48,
@@ -962,6 +991,21 @@ types={
             prereq:[0],
             desc:'Makes waffles',
             upgrade:[''],
+        },
+
+        {
+            name:'Booking Desk',
+            width:48,
+            height:24,
+            effect:[-1,0],
+            spec:[1],
+            edit:true,
+            level:0,
+            rarity:-1,
+            cost:20,
+            prereq:[0],
+            desc:'Bring people quicker',
+            upgrade:[],
         },
 
         {
@@ -3075,27 +3119,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [0,'Cherry','Raw Cherry Cordial'],
                 [9,180,'Burnt'],
-            ],
-        },{
-            name:'Raw Cherry Cordial',
-            holdDist:20,
-            holdDir:0,
-            component:true,
-            trashable:true,
-            process:[
-                [1,30,'Cherry Cordial'],
-            ],
-        },{
-            name:'Cherry Cordial',
-            holdDist:20,
-            holdDir:0,
-            component:true,
-            trashable:true,
-            process:[
-                [9,60,'Burnt'],
-                [7,180,''],
             ],
         },{
             name:'Ice Cream C',
@@ -6393,7 +6417,7 @@ types={
                 ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Wine Jus',6],
                 ['Plated Rare Steak With Tomato','Plated Rare Steak With Tomato and Wine Jus',6],
                 ['Plated Medium Steak With Tomato','Plated Medium Steak With Tomato and Wine Jus',6],
-                ['Plated Well Done Steak With Tomato','Plated Well Bone Steak With Tomato and Wine Jus',6],
+                ['Plated Well Done Steak With Tomato','Plated Well Done Bone Steak With Tomato and Wine Jus',6],
                 ['Plated Rare Bone Steak With Tomato','Plated Rare Bone Steak With Tomato and Wine Jus',7],
                 ['Plated Medium Bone Steak With Tomato','Plated Medium Bone Steak With Tomato and Wine Jus',7],
                 ['Plated Well Done Bone Steak With Tomato','Plated Well Done Bone Steak With Tomato and Wine Jus',7],

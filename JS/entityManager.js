@@ -5,7 +5,7 @@ class entityManager extends manager{
         this.edge={main:{x:0,y:0},outer:{x:[0,0],y:[0,0]},inside:[]}
         this.loc={lineup:{x:0,y:0},spawn:{x:0,y:0,direction:0}}
         this.constants={gravity:1.25}
-        this.entities={walls:[[],[]],players:[],particles:[]}
+        this.entities={walls:[[],[]],players:[],particles:[],tempWalls:[[],[]]}
         this.run={fore:[],update:[]}
         this.view={
             main:{x:0,y:0,scale:1},
@@ -17,9 +17,8 @@ class entityManager extends manager{
         this.index={player:0,wall:0,group:0}
         this.reroll={cost:10}
         this.updateLadderTrigger=false
-        this.initial()
     }
-    initial(){
+    generatePlayers(){
         for(let a=0,la=this.operation.player.length;a<la;a++){
             this.entities.players.push(new player(this.layer,this,this.index.player++,0,0,a,this.operation.player[a]))
         }
@@ -342,8 +341,8 @@ class entityManager extends manager{
         }
         this.customer.queue=[]
     }
-    spawnOptions(num){
-        let ticker=0
+    spawnOptions(num,start){
+        let ticker=start
         for(let a=(this.grid.length-1)/2-1,la=0;a>=la;a--){
             for(let b=0,lb=(this.grid[a].length-1)/2;b<lb;b++){
                 if(this.grid[a*2+1][b*2+1]==0){
@@ -360,7 +359,7 @@ class entityManager extends manager{
         }
     }
     spawnBlueprints(num,plus){
-        this.spawnOptions(2)
+        this.spawnOptions(3,0)
         let possible=this.getEmptyGrid(1)
         let set=this.operation.blueprintManager.getOptions(0,[this.operation.dayManager.day+plus+(this.operation.cardManager.hasCard('Quality Stock')?3:0),num])
         for(let a=0,la=set.length;a<la;a++){
@@ -404,6 +403,51 @@ class entityManager extends manager{
             }
         }
         return total
+    }
+    tempClearWalls(names){
+        let total=0
+        for(let a=0,la=this.entities.walls.length;a<la;a++){
+            for(let b=0,lb=this.entities.walls[a].length;b<lb;b++){
+                if(names.includes(this.entities.walls[a][b].name)&&!this.entities.walls[a][b].removeMark){
+                    total++
+                    this.entities.tempWalls[a].push(this.entities.walls[a][b])
+                    this.emptySpot(this.entities.walls[a][b])
+                    this.entities.walls[a][b].removeMark=true
+                }
+            }
+        }
+        return total
+    }
+    tempClearOuterWalls(){
+        let total=0
+        for(let a=0,la=this.entities.walls.length;a<la;a++){
+            for(let b=0,lb=this.entities.walls[a].length;b<lb;b++){
+                if(
+                    (
+                        this.entities.walls[a][b].gridPos[0]<this.edge.inside[1]||
+                        this.entities.walls[a][b].gridPos[1]<this.edge.inside[0]||
+                        this.entities.walls[a][b].gridPos[0]>=this.grid.length-this.edge.inside[3]*2||
+                        this.entities.walls[a][b].gridPos[1]>=this.grid[0].length-this.edge.inside[2]*2
+                    )&&!this.entities.walls[a][b].removeMark&&this.entities.walls[a][b].name!='Trash Can'
+                ){
+                    total++
+                    this.entities.tempWalls[a].push(this.entities.walls[a][b])
+                    this.emptySpot(this.entities.walls[a][b])
+                    this.entities.walls[a][b].removeMark=true
+                }
+            }
+        }
+        return total
+    }
+    returnTempWalls(){
+        for(let a=0,la=this.entities.tempWalls.length;a<la;a++){
+            for(let b=0,lb=this.entities.tempWalls[a].length;b<lb;b++){
+                this.entities.tempWalls[a][b].removeMark=false
+                this.entities.tempWalls[a][b].remove=false
+                this.entities.tempWalls[a][b].fade.trigger=true
+                this.insertWall(this.entities.tempWalls[a][b],a)
+            }
+        }
     }
     rerollBlueprints(){
         this.clearWalls(['Option'])
@@ -465,7 +509,12 @@ class entityManager extends manager{
                 return this.entities.players[a]
             }
         }
-        return {position:{x:this.loc.lineup.x-60,y:this.loc.lineup.y}}
+        switch(this.loc.spawn.direction){
+            case 90:
+                return {position:{x:this.loc.lineup.x+60,y:this.loc.lineup.y}}
+            case 270:
+                return {position:{x:this.loc.lineup.x-60,y:this.loc.lineup.y}}
+        }
     }
     display(scene){
         switch(scene){

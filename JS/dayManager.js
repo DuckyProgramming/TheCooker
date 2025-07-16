@@ -3,14 +3,12 @@ class dayManager extends manager{
         super(layer,operation)
         this.day=0
         this.phase=0
-        ////
         this.currency={main:0}
-        ////
         this.time={main:0,end:7200}
         this.patience={anim:0,main:0,base:3600,restore:0,fail:false,active:false}
         this.anim={phase:[0,0]}
         this.fail={num:0}
-        this.spawns=[]
+        this.spawners=[]
     }
     addCurrency(amount){
         this.currency.main+=amount
@@ -90,6 +88,19 @@ class dayManager extends manager{
             }
         }
     }
+    beginPractice(){
+        this.phase=2
+        this.operation.entityManager.tempClearWalls(['Crate','Blueprint','Option'])
+        this.operation.entityManager.tempClearOuterWalls()
+        this.operation.entityManager.spawnOptions(1,3)
+    }
+    endPractice(){
+        this.phase=0
+        this.operation.entityManager.clearWalls(['Option'])
+        this.operation.entityManager.returnTempWalls()
+        this.operation.entityManager.clearPlayerItem()
+        this.operation.entityManager.resetWalls()
+    }
     endDay(){
         this.phase=0
         this.day++
@@ -99,8 +110,8 @@ class dayManager extends manager{
         this.operation.entityManager.customer.internal*=1.125
         this.operation.entityManager.clearCustomer()
         this.operation.entityManager.clearPlayerItem()
-        this.operation.entityManager.calcCustomer()
         this.operation.entityManager.resetWalls()
+        this.operation.entityManager.calcCustomer()
         this.operation.entityManager.spawnBlueprints(5+(this.operation.cardManager.hasCard('Catalogue')?1:0),0)
     }
     fakeDay(){
@@ -117,6 +128,15 @@ class dayManager extends manager{
         let value=5*this.fail.num*num
         this.loseCurrency(value)
         this.operation.entityManager.entities.particles.push(new particle(this.layer,x,y,0,{value:-value}))
+        if(this.currency.main<=0){
+            this.operation.transition('end',[this.day>=16?1:0])
+        }
+    }
+    booking(x,y){
+        if(this.spawners.length>0){
+            this.payout(ceil((this.spawners[0][0]-this.time.main)/2400*(1+this.operation.player.length)*(3+this.day)),x,y)
+            this.time.main=this.spawners[0][0]
+        }
     }
     display(scene){
         switch(scene){
@@ -231,7 +251,7 @@ class dayManager extends manager{
         switch(scene){
             case 'main':
                 if(distPos(mouse,{position:{x:this.layer.width-21,y:21}})<30){
-                    this.operation.overlayManager.activate(1,[])
+                    this.operation.overlayManager.activate(1,[-1])
                 }
             break
         }

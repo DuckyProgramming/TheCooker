@@ -18,7 +18,7 @@ class card extends located{
         layer.push()
         layer.translate(this.position.x,this.position.y)
         layer.scale(this.size)
-        layer.fill(200,this.fade.main)
+        layer.fill(225,this.fade.main)
         switch(this.list){
             case 0: layer.stroke(75,225,75,this.fade.main); break
             case 1: layer.stroke(75,225,150,this.fade.main); break

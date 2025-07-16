@@ -15,26 +15,62 @@ class overlay extends located{
                 this.cards=[]
                 this.support=[]
                 this.anim=[]
+                this.franchise=[]
+                this.revive=-1
             break
             case 1:
                 this.dishes=[]
                 this.page=0
             break
+            case 2:
+                this.players=1
+            break
         }
     }
     activate(args){
         this.timer.active=0
+        let result
         switch(this.type){
             case 0:
                 this.cards=[]
+                switch(args[0]){
+                    case 2:
+                        if(this.franchise.length==0){
+                            this.franchise.push(this.parent.operation.cardManager.removeFirst())
+                        }
+                    break
+                }
                 this.support=[]
                 this.anim=[]
-                let result=this.parent.operation.cardManager.getOptions(args[0],[3])
-                for(let a=0,la=result.length;a<la;a++){
-                    this.cards.push(new card(this.layer,this.parent.operation.cardManager,even(a,la)*200,20,result[a]))
-                    this.support.push([])
-                    this.anim.push(0)
+                switch(args[0]){
+                    case 4:
+                        result=this.parent.operation.blueprintManager.getCardOptions(0,[3,floor(random(1,2.25))])
+                        for(let a=0,la=result.length;a<la;a++){
+                            this.cards.push(new appliance(this.layer,this.parent.operation.entityManager,even(a,la)*200,20,result[a]))
+                            this.support.push([])
+                            this.anim.push(0)
+                        }
+                    break
+                    default:
+                        result=this.parent.operation.cardManager.getOptions(args[0],[3])
+                        for(let a=0,la=result.length;a<la;a++){
+                            this.cards.push(new card(this.layer,this.parent.operation.cardManager,even(a,la)*200,20,result[a]))
+                            this.support.push([])
+                            this.anim.push(0)
+                        }
+                    break
                 }
+                this.setupArgs=args
+            break
+            case 1:
+                switch(args[0]){
+                    case 0:
+                        this.page=this.dishes.length-1
+                    break
+                }
+            break
+            case 3:
+                this.setupArgs=args
             break
         }
     }
@@ -54,14 +90,14 @@ class overlay extends located{
         layer.translate(this.position.x,this.position.y)
         switch(this.type){
             case 0:
-                layer.fill(200,this.fade.main)
+                layer.fill(225,this.fade.main)
                 layer.stroke(0,this.fade.main)
                 layer.strokeWeight(2)
                 layer.textSize(60)
                 layer.text('Choose Card',0,-120)
                 for(let a=0,la=this.cards.length;a<la;a++){
                     this.cards[a].display()
-                    layer.fill(200,this.fade.main)
+                    layer.fill(225,this.fade.main)
                     layer.stroke(150+this.anim[a]*50,150+this.anim[a]*100,150+this.anim[a]*100,this.fade.main)
                     layer.strokeWeight(5)
                     layer.rect(this.cards[a].position.x,this.cards[a].position.y+130,155,35,10)
@@ -76,7 +112,7 @@ class overlay extends located{
                 }
             break
             case 1:
-                layer.fill(200,this.fade.main)
+                layer.fill(225,this.fade.main)
                 layer.stroke(0,this.fade.main)
                 layer.strokeWeight(2)
                 layer.textSize(60)
@@ -84,7 +120,7 @@ class overlay extends located{
                 for(let a=0,la=this.dishes.length;a<la;a++){
                     this.dishes[a].display()
                 }
-                layer.fill(200,this.fade.main)
+                layer.fill(225,this.fade.main)
                 layer.stroke(150,this.fade.main)
                 layer.strokeWeight(5)
                 layer.rect(0,150,35,35,10)
@@ -93,6 +129,78 @@ class overlay extends located{
                 displaySymbol(layer,-130,20,0,-180,1,[0,0,0],this.fade.main)
                 displaySymbol(layer,130,20,0,0,1,[0,0,0],this.fade.main)
                 displaySymbol(layer,0,150,1,0,1.5,[0,0,0],this.fade.main)
+            break
+            case 2:
+                layer.fill(225,this.fade.main)
+                layer.stroke(0,this.fade.main)
+                layer.strokeWeight(2)
+                layer.textSize(60)
+                layer.text('The Cooker',0,-60)
+                layer.fill(225,this.fade.main)
+                layer.stroke(150,this.fade.main)
+                layer.strokeWeight(5)
+                layer.rect(0,0,200,50,10)
+                layer.rect(-130,0,35,35,10)
+                layer.rect(130,0,35,35,10)
+                layer.rect(0,55,120,35,10)
+                if(this.parent.operation.franchise.active.length>0){
+                    layer.rect(0,102.5,120,35,10)
+                }
+                displaySymbol(layer,-130,0,0,-180,1,[0,0,0],this.fade.main)
+                displaySymbol(layer,130,0,0,0,1,[0,0,0],this.fade.main)
+                layer.noStroke()
+                layer.fill(0,this.fade.main)
+                layer.textSize(30)
+                layer.text(`${this.players} Player${pl(this.players)}`,0,0)
+                layer.textSize(20)
+                layer.text('Begin',0,55)
+                if(this.parent.operation.franchise.active.length>0){
+                    layer.text('Franchises',0,102.5)
+                }
+            break
+            case 3:
+                layer.fill(225,this.fade.main)
+                layer.stroke(0,this.fade.main)
+                layer.strokeWeight(2)
+                layer.textSize(60)
+                layer.text('Game Over',0,-55)
+                layer.strokeWeight(1.5)
+                layer.textSize(20)
+                layer.text(['Your resturant went bankrupt','Your restuarant closed, but another may soon take its place'][this.setupArgs[0]],0,0)
+                layer.fill(225,this.fade.main)
+                layer.stroke(150,this.fade.main)
+                layer.strokeWeight(5)
+                layer.rect(0,55,120,35,10)
+                layer.noStroke()
+                layer.fill(0,this.fade.main)
+                layer.textSize(20)
+                layer.text(['Exit','Franchise'][this.setupArgs[0]],0,55)
+            break
+            case 4:
+                layer.fill(225,this.fade.main)
+                layer.stroke(150,this.fade.main)
+                layer.strokeWeight(5)
+                for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
+                    layer.rect(0,even(a,la)*112.5,480,100,10)
+                    layer.line(-80,even(a,la)*112.5-50,-80,even(a,la)*112.5+50)
+                    layer.line(80,even(a,la)*112.5-50,80,even(a,la)*112.5+50)
+                    layer.line(-80,even(a,la)*112.5,240,even(a,la)*112.5)
+                }
+                layer.noStroke()
+                layer.fill(0,this.fade.main)
+                layer.textSize(20)
+                for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
+                    let obj=this.parent.operation.franchise.active[a]
+                    layer.text(types.card[obj[0]].name,-160,even(a,la)*112.5,145)
+                }
+                layer.textSize(16)
+                for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
+                    let obj=this.parent.operation.franchise.active[a]
+                    layer.text(types.card[obj[1]].name,0,even(a,la)*112.5-25,145)
+                    layer.text(types.card[obj[2]].name,0,even(a,la)*112.5+25,145)
+                    layer.text(types.card[obj[3]].name,160,even(a,la)*112.5-25,145)
+                    layer.text(types.wall[obj[4]].name,160,even(a,la)*112.5+25,145)
+                }
             break
         }
         layer.pop()
@@ -110,7 +218,26 @@ class overlay extends located{
                     if(this.active){
                         if(this.anim[a]>0){
                             this.active=false
-                            this.parent.operation.cardManager.addCard(this.cards[a].type)
+                            this.revive=-1
+                            switch(this.setupArgs[0]){
+                                case 2:
+                                    this.franchise.push(this.cards[a].type)
+                                    this.parent.operation.cardManager.removeCard(this.cards[a].type)
+                                    this.revive=this.franchise.length>=3?3:2
+                                break
+                                case 3:
+                                    this.franchise.push(this.cards[a].type)
+                                    this.revive=4
+                                break
+                                case 4:
+                                    this.franchise.push(this.cards[a].type)
+                                    this.parent.operation.updateFranchise(this.franchise)
+                                    this.parent.operation.transition('menu',[])
+                                break
+                                default:
+                                    this.parent.operation.cardManager.addCard(this.cards[a].type)
+                                break
+                            }
                         }
                         for(let b=0,lb=this.parent.operation.player.length;b<lb;b++){
                             if(inputs.keys[b+(dev.altControl&&lb==1?1:0)].tap[a]&&this.timer.active>15){
@@ -124,11 +251,86 @@ class overlay extends located{
                         }
                     }
                 }
+                if(!this.active&&this.fade.main<=0&&this.revive!=-1){
+                    this.active=true
+                    this.activate([this.revive])
+                    this.revive=-1
+                }
             break
             case 1:
                 for(let a=0,la=this.dishes.length;a<la;a++){
                     this.dishes[a].update()
-                    this.dishes[a].fade.trigger=this.page==a
+                    this.dishes[a].fade.trigger=this.page==a&&this.fade.trigger
+                }
+                if(this.active){
+                    for(let a=0,la=this.parent.operation.player.length;a<la;a++){
+                        for(let b=0,lb=inputs.keys[a].tap.length;b<lb;b++){
+                            if(inputs.keys[a+(dev.altControl&&la==1?1:0)].tap[b]){
+                                switch(b){
+                                    case 0:
+                                        this.page=(this.page+this.dishes.length-1)%this.dishes.length
+                                    break
+                                    case 1:
+                                        this.page=(this.page+1)%this.dishes.length
+                                    break
+                                    case 2: case 3:
+                                        this.active=false
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+            break
+            case 2:
+                if(this.active){
+                    for(let a=0,la=4;a<la;a++){
+                        for(let b=0,lb=inputs.keys[a].tap.length;b<lb;b++){
+                            if(inputs.keys[a].tap[b]){
+                                switch(b){
+                                    case 0:
+                                        this.players=max(1,this.players-1)
+                                    break
+                                    case 1:
+                                        this.players=min(4,this.players+1)
+                                    break
+                                    case 2:
+                                        this.active=false
+                                        this.parent.operation.generatePlayers(this.players)
+                                        this.parent.operation.transition('main',[])
+                                        this.parent.activate(0,[0])
+                                    break
+                                    case 3:
+                                        this.active=false
+                                        if(this.parent.operation.franchise.active.length>0){
+                                            this.parent.active(4,[])
+                                            this.parent.operation.generatePlayers(this.players)
+                                        }else{
+                                            this.parent.operation.transition('main',[])
+                                            this.parent.activate(0,[0])
+                                        }
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+            break
+            case 3:
+                if(this.active){
+                    for(let a=0,la=4;a<la;a++){
+                        if(inputs.keys[a].tap[2]||inputs.keys[a].tap[3]){
+                            this.active=false
+                            switch(this.setupArgs[0]){
+                                case 0:
+                                    this.parent.operation.transition('menu',[])
+                                break
+                                case 1:
+                                    this.parent.activate(0,[2])
+                                break
+                            }
+                        }
+                    }
                 }
             break
         }
@@ -137,26 +339,89 @@ class overlay extends located{
         }
     }
     onClick(mouse){
-        switch(this.type){
-            case 0:
-                for(let a=0,la=this.cards.length;a<la;a++){
-                    if(inPointBox(mouse,{position:{x:this.cards[a].position.x+this.layer.width/2,y:this.cards[a].position.y+this.layer.height/2},width:this.cards[a].width,height:this.cards[a].height})){
-                        this.active=false
-                        this.parent.operation.cardManager.addCard(this.cards[a].type)
+        if(this.active){
+            switch(this.type){
+                case 0:
+                    for(let a=0,la=this.cards.length;a<la;a++){
+                        if(inPointBox(mouse,{position:{x:this.cards[a].position.x+this.layer.width/2,y:this.cards[a].position.y+this.layer.height/2},width:this.cards[a].width,height:this.cards[a].height})&&this.cards[a].fade.trigger){
+                            this.active=false
+                            this.revive=-1
+                            switch(this.setupArgs[0]){
+                                case 2:
+                                    this.franchise.push(this.cards[a].type)
+                                    this.parent.operation.cardManager.removeCard(this.cards[a].type)
+                                    this.revive=this.franchise.length>=3?3:2
+                                break
+                                case 3:
+                                    this.franchise.push(this.cards[a].type)
+                                    this.revive=4
+                                break
+                                case 4:
+                                    this.franchise.push(this.cards[a].type)
+                                    this.parent.operation.updateFranchise(this.franchise)
+                                    this.parent.operation.transition('menu',[])
+                                break
+                                default:
+                                    this.parent.operation.cardManager.addCard(this.cards[a].type)
+                                break
+                            }
+                            a=la
+                        }
                     }
-                }
-            break
-            case 1:
-                if(inPointBox(mouse,{position:{x:this.layer.width/2-130,y:this.layer.height/2+20},width:40,height:40})){
-                    this.page=(this.page+this.dishes.length-1)%this.dishes.length
-                }
-                if(inPointBox(mouse,{position:{x:this.layer.width/2+130,y:this.layer.height/2+20},width:40,height:40})){
-                    this.page=(this.page+1)%this.dishes.length
-                }
-                if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+150},width:40,height:40})){
-                    this.active=false
-                }
-            break
+                break
+                case 1:
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2-130,y:this.layer.height/2+20},width:40,height:40})){
+                        this.page=(this.page+this.dishes.length-1)%this.dishes.length
+                    }
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2+130,y:this.layer.height/2+20},width:40,height:40})){
+                        this.page=(this.page+1)%this.dishes.length
+                    }
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+150},width:40,height:40})){
+                        this.active=false
+                    }
+                break
+                case 2:
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2-130,y:this.layer.height/2},width:40,height:40})){
+                        this.players=max(1,this.players-1)
+                    }
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2+130,y:this.layer.height/2},width:40,height:40})){
+                        this.players=min(4,this.players+1)
+                    }
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+55},width:125,height:40})){
+                        this.active=false
+                        this.parent.operation.generatePlayers(this.players)
+                        this.parent.operation.transition('main',[])
+                        this.parent.activate(0,[0])
+                    }
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+102.5},width:125,height:40})&&this.parent.operation.franchise.active.length>0){
+                        this.active=false
+                        this.parent.activate(4,[])
+                        this.parent.operation.generatePlayers(this.players)
+                    }
+                break
+                case 3:
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+55},width:125,height:40})){
+                        this.active=false
+                        switch(this.setupArgs[0]){
+                            case 0:
+                                this.parent.operation.transition('menu',[])
+                            break
+                            case 1:
+                                this.parent.activate(0,[2])
+                            break
+                        }
+                    }
+                break
+                case 4:
+                    for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
+                        if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+even(a,la)*112.5},width:485,height:105})){
+                            this.active=false
+                            this.parent.operation.transition('main',[])
+                            this.parent.operation.loadFranchise(this.parent.operation.franchise.active[a])
+                        }
+                    }
+                break
+            }
         }
     }
 }

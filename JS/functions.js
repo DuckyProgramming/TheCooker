@@ -11,6 +11,9 @@ function magVec(vec){
 function near(value1,value2){
 	return abs(value1-value2)<1
 }
+function pl(value){
+	return value!=1?`s`:``
+}
 function spinControl(base){
 	return base<-180?base+360:base>180?base-360:base
 }
@@ -296,6 +299,9 @@ function checkValid(){
             if(findName(types.dish[a].obj[b][0],types.item)<0){
                 print(types.dish[a].name,'-',types.dish[a].obj[b][0])
             }
+            if(types.dish[a].obj[b].length==3&&findName(types.dish[a].obj[b][1],types.item)<0){
+                print(types.dish[a].name,'-',types.dish[a].obj[b][1])
+            }
         }
     }
     for(let a=0,la=types.card.length;a<la;a++){
@@ -329,5 +335,15 @@ function summon(item){
 function summonCrate(item){
     summon('Crate')
     current.entityManager.entities.players[0].item.contain=findName(item,types.wall)
+}
+function testFranchise(){
+    current.dayManager.day+=16;
+    current.cardManager.addCard(findName('Tomato Soup',types.card));
+    current.cardManager.addCard(findName('Cheese Sticks',types.card));
+    current.cardManager.addCard(findName('Rice Pudding',types.card));
+    current.cardManager.addCard(findName('Violence',types.card));
+    current.cardManager.addCard(findName('Large Groups',types.card));
+    current.overlayManager.closeAll()
+    current.dayManager.failed(1,0,0)
 }
 //dev
