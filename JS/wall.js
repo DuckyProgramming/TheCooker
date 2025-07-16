@@ -1811,7 +1811,7 @@ class wall extends partisan{
                 if(this.cycle>0){
                     this.cycle--
                     if(this.item!=-1){
-                        let result=this.item.generalProcessConstant([1,9],this.speed)
+                        let result=this.item.generalProcessConstant([1,9],this.speed*(this.cycle==0?5:1))
                         for(let a=0,la=result.length;a<la;a++){
                             switch(result[a].type){
                                 case 1: case 9:

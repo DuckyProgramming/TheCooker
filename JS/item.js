@@ -15,11 +15,7 @@ class item extends located{
         1-wall
         */
         this.moved=false
-        try{
-            this.name=types.item[this.type].name
-        }catch(error){
-            throw error
-        }
+        this.name=types.item[this.type].name
         this.holdDist=types.item[this.type].holdDist
         this.holdDir=types.item[this.type].holdDir
         this.component=types.item[this.type].component
