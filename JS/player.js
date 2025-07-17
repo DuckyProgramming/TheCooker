@@ -33,7 +33,9 @@ class player extends partisan{
             this.angle=0
             this.timer.angle=0
             this.timer.angleCap=random(15,30)
+            this.axis=floor(random(0,2))
             this.touch=false
+            this.stop=false
             this.groupIndex=0
         }
     }
@@ -414,20 +416,23 @@ class player extends partisan{
                     case 2:
                         let distance=distPos(this,this.follow)
                         let dir=dirPos(this,this.follow)
-                        if(distance>48||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<this.timer.angleCap&&this.angle!=-1){
-                            if(distance<=48){
-                                this.timer.angle++
+                        if(!this.stop){
+                            if(distance>48||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<this.timer.angleCap&&this.angle!=-1){
+                                if(distance<=48){
+                                    this.timer.angle++
+                                }
+                                let effectiveDir=dir+(this.timer.angle<this.timer.angleCap?10*(this.axis*2-1):0)
+                                let loc={position:{
+                                    x:this.follow.position.x-lsin(effectiveDir)*40,
+                                    y:this.follow.position.y-lcos(effectiveDir)*40
+                                }}
+                                this.direction.goal=dirPos(this,loc)
+                                this.velocity.x+=this.speed*lsin(this.direction.main)
+                                this.velocity.y+=this.speed*lcos(this.direction.main)
+                                moving=true
+                            }else{
+                                this.direction.goal=dirPos(this,this.follow)
                             }
-                            let loc={position:{
-                                x:this.follow.position.x-lsin(dir+10)*40,
-                                y:this.follow.position.y-lcos(dir+10)*40
-                            }}
-                            this.direction.goal=dirPos(this,loc)
-                            this.velocity.x+=this.speed*lsin(this.direction.main)
-                            this.velocity.y+=this.speed*lcos(this.direction.main)
-                            moving=true
-                        }else{
-                            this.direction.goal=dirPos(this,this.follow)
                         }
                         if(this.follow.item!=-1){
                             for(let a=0,la=this.order.length;a<la;a++){

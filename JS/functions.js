@@ -346,4 +346,7 @@ function testFranchise(){
     current.overlayManager.closeAll()
     current.dayManager.failed(1,0,0)
 }
+function icard(name){
+    current.cardManager.addCard(findName(name,types.card))
+}
 //dev

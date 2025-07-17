@@ -112,6 +112,7 @@ class dayManager extends manager{
         this.operation.entityManager.clearCustomer()
         this.operation.entityManager.clearPlayerItem()
         this.operation.entityManager.resetWalls()
+        this.operation.entityManager.endOfDay()
         this.operation.entityManager.spawnBlueprints(5+(this.operation.cardManager.hasCard('Catalogue')?1:0),0)
     }
     fakeDay(){

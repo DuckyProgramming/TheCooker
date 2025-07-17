@@ -205,12 +205,6 @@ class wall extends partisan{
             case 'Discount Cabinet':
                 this.cost=ceil(this.cost/2)
             break
-            case 'Generator Cabinet':
-                if(this.contain==-1){
-                    this.contain=this.parent.operation.blueprintManager.getOptions(1,[floor(random(0.5,2.25))])
-                    this.cost=types.wall[this.contain].cost
-                }
-            break
             case 'Starter Plates':
                 this.plates=4
                 this.base.plates=4
@@ -296,6 +290,16 @@ class wall extends partisan{
             case 'Booking Desk':
                 this.item=this.generateItem('Purchase Proxy')
                 this.item.position.y=-11
+            break
+        }
+    }
+    endOfDay(){
+        switch(this.name){
+            case 'Generator Cabinet':
+                if(this.contain==-1){
+                    this.contain=this.parent.operation.blueprintManager.getOptions(1,[floor(random(0.5,2.25))])
+                    this.cost=types.wall[this.contain].cost
+                }
             break
         }
     }
@@ -2061,12 +2065,15 @@ class wall extends partisan{
                         case 0:
                             valid=true
                             for(let a=0,la=this.occupants.length;a<la;a++){
-                                if(distPos(this,this.occupants[a])>48){
+                                if(distPos(this,this.occupants[a])>(this.operation.timer>240?72:48)){
                                     valid=false
                                 }
                             }
                             this.operation.timer++
                             if(valid){
+                                for(let a=0,la=this.occupants.length;a<la;a++){
+                                    this.occupants[a].stop=true
+                                }
                                 this.makeOrders()
                                 this.parent.operation.dayManager.patience.restore+=60
                             }else if(this.operation.timer>300){
