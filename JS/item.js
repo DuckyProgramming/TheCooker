@@ -47,6 +47,7 @@ class item extends located{
         for(let a=0,la=this.process.length;a<la;a++){
             this.process[a].mult=(this.manager.operation.cardManager.hasCard('Slow Worker')&&this.process[a].type!=8?0.8:1)*(this.manager.operation.cardManager.hasCard('Reckless')&&this.process[a].type==9?2:1)
         }
+        this.timer.hide=0
         this.processVisible=false
         switch(this.name){
             case 'Crate':
@@ -133,7 +134,9 @@ class item extends located{
         let col
         switch(level){
             case 0:
-                displayItem(this.layer,this.position.x,this.position.y,this.name,this.portions,this.direction,this.size,this.fade.main)
+                if(this.timer.hide<=0){
+                    displayItem(this.layer,this.position.x,this.position.y,this.name,this.portions,this.direction,this.size,this.fade.main)
+                }
             break
             case 1:
                 layer.push()
@@ -233,6 +236,9 @@ class item extends located{
                     this.process[a].main-=2
                 }
             }
+        }
+        if(this.timer.hide>0){
+            this.timer.hide--
         }
         this.processVisible=false
     }

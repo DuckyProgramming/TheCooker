@@ -107,11 +107,11 @@ class dayManager extends manager{
         if(this.day%3==1){
             this.operation.overlayManager.activate(0,[1])
         }
-        this.operation.entityManager.customer.internal*=1.125
+        this.operation.entityManager.customer.internal*=(1.125-min(this.day,15)*0.005)
+        this.operation.entityManager.calcCustomer()
         this.operation.entityManager.clearCustomer()
         this.operation.entityManager.clearPlayerItem()
         this.operation.entityManager.resetWalls()
-        this.operation.entityManager.calcCustomer()
         this.operation.entityManager.spawnBlueprints(5+(this.operation.cardManager.hasCard('Catalogue')?1:0),0)
     }
     fakeDay(){

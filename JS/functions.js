@@ -337,12 +337,12 @@ function summonCrate(item){
     current.entityManager.entities.players[0].item.contain=findName(item,types.wall)
 }
 function testFranchise(){
-    current.dayManager.day+=16;
-    current.cardManager.addCard(findName('Tomato Soup',types.card));
-    current.cardManager.addCard(findName('Cheese Sticks',types.card));
-    current.cardManager.addCard(findName('Rice Pudding',types.card));
-    current.cardManager.addCard(findName('Violence',types.card));
-    current.cardManager.addCard(findName('Large Groups',types.card));
+    current.dayManager.day+=16
+    current.cardManager.addCard(findName('Tomato Soup',types.card))
+    current.cardManager.addCard(findName('Cheese Sticks',types.card))
+    current.cardManager.addCard(findName('Rice Pudding',types.card))
+    current.cardManager.addCard(findName('Violence',types.card))
+    current.cardManager.addCard(findName('Large Groups',types.card))
     current.overlayManager.closeAll()
     current.dayManager.failed(1,0,0)
 }

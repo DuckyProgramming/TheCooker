@@ -2,7 +2,7 @@ class operation{
     constructor(layer){
         this.layer=layer
         this.scene=''
-        this.level=floor(random(0,types.level.length))
+        this.level=0
         this.player=[]
         this.franchise={full:[],active:[]}
         this.initialManagers()
@@ -17,6 +17,7 @@ class operation{
     transition(scene,args){
         switch(scene){
             case 'main':
+                //this.level=floor(random(0,types.level.length))
                 this.entityManager.generatePlayers()
                 this.entityManager.generateLevel(types.level[this.level],0)
                 this.entityManager.spawnOptions(2,0)

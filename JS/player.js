@@ -138,16 +138,16 @@ class player extends partisan{
             this.follow.cascadeMode(mode)
         }
     }
-    makeOrder(orderPhase,menu,activate){
+    makeOrder(orderPhase,menu,activate,tableName,firstOrder){
         this.orderPhase=orderPhase
         this.order=[]
         this.paying=[]
         let index
         switch(orderPhase){
             case 0:
-                if(floor(random(0,menu[1].length+1))!=0||activate){
+                if(floor(random(0,menu[1].length+(tableName=='Metal Table'?3:1)))!=0||activate){
                     index=floor(random(0,menu[1].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[1][index][0],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[1][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
@@ -156,14 +156,14 @@ class player extends partisan{
             break
             case 1:
                 index=floor(random(0,menu[0].length))
-                this.order.push(new item(this.layer,this.parent,0,0,findName(menu[0][index][0],types.item)))
+                this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[0][index][0],types.item)))
                 last(this.order).fade.main=0
                 last(this.order).fade.trigger=false
                 last(this.order).size=0.8
                 this.paying.push(menu[0][index][1])
-                if(floor(random(0,menu[2].length+1))!=0){
+                if(floor(random(0,menu[2].length+(tableName=='Metal Table'?3:1)))!=0){
                     index=floor(random(0,menu[2].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[2][index][0],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1].type:findName(menu[2][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
@@ -171,9 +171,9 @@ class player extends partisan{
                 }
             break
             case 2:
-                if(floor(random(0,menu[3].length+1))!=0||menu[0].length<=0){
+                if(floor(random(0,menu[3].length+(tableName=='Metal Table'?3:1)))!=0||menu[0].length<=0){
                     index=floor(random(0,menu[3].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[3][index][0],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[3][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
@@ -181,9 +181,9 @@ class player extends partisan{
                 }
             break
             case 3:
-                if(floor(random(0,menu[4].length+1))!=0){
+                if(floor(random(0,menu[4].length+(tableName=='Metal Table'?3:1)))!=0){
                     index=floor(random(0,menu[4].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[4][index][0],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[4][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
@@ -191,9 +191,9 @@ class player extends partisan{
                 }
             break
             case 4:
-                if(floor(random(0,menu[5].length+1))!=0){
+                if(floor(random(0,menu[5].length+(tableName=='Metal Table'?3:1)))!=0){
                     index=floor(random(0,menu[5].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,findName(menu[5][index][0],types.item)))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[5][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
@@ -314,6 +314,28 @@ class player extends partisan{
                 layer.pop()
             break
         }
+    }
+    idle(){
+        this.handLen=48
+        let process=false
+        for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+            for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                if(this.parent.entities.walls[a][b].name!='Laborer'&&this.collide(3,this.parent.entities.walls[a][b])){
+                    process=true
+                    a=la
+                    b=lb
+                }
+            }
+        }
+        if(process||this.animSet.process.loop>0&&this.animSet.process.loop%15!=0){
+            this.runAnim(1,1)
+        }else{
+            if(this.animSet.process.loop%30>=15){
+                this.animSet.process.flip=1-this.animSet.process.flip
+            }
+            this.animSet.process.loop=0
+        }
+        this.mainAnim()
     }
     update(){
         super.update()
@@ -514,6 +536,8 @@ class player extends partisan{
                                 for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
                                     if(this.collide(4,this.parent.entities.walls[a][b])){
                                         process=true
+                                        a=la
+                                        b=lb
                                     }
                                 }
                             }
@@ -522,6 +546,8 @@ class player extends partisan{
                             for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
                                 if(this.collide(3,this.parent.entities.walls[a][b])){
                                     process=true
+                                    a=la
+                                    b=lb
                                 }
                             }
                         }
@@ -534,6 +560,8 @@ class player extends partisan{
                             for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
                                 if(this.collide(2,this.parent.entities.walls[a][b])){
                                     interact=true
+                                    a=la
+                                    b=lb
                                 }
                             }
                         }

@@ -36,7 +36,7 @@ class entityManager extends manager{
             }
         }
         let layerer=[
-            [[],[],[],[]]
+            [[],[],[],[],[]]
         ]
         this.grid=[]
         this.edge.main.x=(level.map[0].length-1)*this.tileset[0]*0.5
@@ -81,34 +81,24 @@ class entityManager extends manager{
                             layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[a,b],-1,-1,type))
                         break
                         case '_':
+                            this.grid[a][b]=1
                             type=findName('High Wall',types.wall)
-                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[0,0],this.tileset[0]+this.tileset[2],this.tileset[2],type))
+                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[a,b],this.tileset[0]+this.tileset[2],this.tileset[2],type))
                         break
                         case '|':
+                            this.grid[a][b]=1
                             type=findName('High Wall',types.wall)
-                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[0,0],this.tileset[2],this.tileset[1]+this.tileset[2],type))
+                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[a,b],this.tileset[2],this.tileset[1]+this.tileset[2],type))
                         break
                         case '-':
-                            shift=[0,0]
-                            if(level.map[a-1][b-1]=='|'&&level.map[a+1][b-1]=='|'){
-                                shift[1]++
-                            }
-                            if(level.map[a-1][b+1]=='|'&&level.map[a+1][b+1]=='|'){
-                                shift[0]++
-                            }
+                            this.grid[a][b]=1
                             type=findName('Wall',types.wall)
-                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5-shift[0]*2+shift[1]*2,this.tileset[1]*a*0.5,[0,0],this.tileset[0]+this.tileset[2]-shift[0]*4-shift[1]*4,this.tileset[2],type))
+                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[a,b],this.tileset[0]+this.tileset[2],this.tileset[2],type))
                         break
                         case 'i':
-                            shift=[0,0]
-                            if(level.map[a-1][b-1]=='_'&&level.map[a-1][b+1]=='_'){
-                                shift[1]++
-                            }
-                            if(level.map[a+1][b-1]=='_'&&level.map[a+1][b+1]=='_'){
-                                shift[0]++
-                            }
+                            this.grid[a][b]=1
                             type=findName('Wall',types.wall)
-                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5-shift[0]*2+shift[1]*2,[0,0],this.tileset[2],this.tileset[1]+this.tileset[2]-shift[0]*4-shift[1]*4,type))
+                            layerer[0][types.wall[type].level].push(new wall(this.layer,this,this.index.wall++,this.tileset[0]*b*0.5,this.tileset[1]*a*0.5,[a,b],this.tileset[2],this.tileset[1]+this.tileset[2],type))
                         break
                         case 'D':
                             this.grid[a][b]=1
@@ -203,6 +193,18 @@ class entityManager extends manager{
         this.entities.walls[set].push(wall)
         this.updateLadder()
         return this.entities.walls[set].length-1
+    }
+    reInsertWall(wall){
+        for(let a=0,la=this.entities.walls.length;a<la;a++){
+            for(let b=0,lb=this.entities.walls[a].length;b<lb;b++){
+                if(this.entities.walls[a][b]==wall){
+                    this.entities.walls[a].splice(b,1)
+                    a=la
+                    b=lb
+                }
+            }
+        }
+        this.insertWall(wall,0)
     }
     getEmptyGrid(type){
         let possible

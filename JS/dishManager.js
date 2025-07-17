@@ -4,8 +4,16 @@ class dishManager extends manager{
         this.active=[[],[],[],[],[],[]]
         this.obj=[[],[],[],[],[],[]]
         this.disabled=[[],[],[],[],[],[]]
+        this.total=0
     }
     addDish(dish){
+        if(this.active[types.dish[dish].list].length==0){
+            this.total++
+            if(this.total==2||this.total==3||this.total==4){
+                this.operation.entityManager.customer.internal*=0.9
+                this.operation.entityManager.calcCustomer()
+            }
+        }
         this.active[types.dish[dish].list].push(dish)
         for(let a=0,la=types.dish[dish].obj.length;a<la;a++){
             switch(types.dish[dish].obj[a].length){

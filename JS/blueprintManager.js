@@ -129,6 +129,9 @@ class blueprintManager extends manager{
                     }
                 }
             break
+            case 1:
+                result.push(randin(this.listing.possible[args[0]]))
+            break
         }
         return result
     }
