@@ -599,7 +599,9 @@ class player extends partisan{
                                 attack=true
                                 this.timer.interact=15
                                 for(let a=0,la=this.parent.entities.players.length;a<la;a++){
-                                    this.collide(1,this.parent.entities.players[a])
+                                    if(this.collide(1,this.parent.entities.players[a])){
+                                        a=la
+                                    }
                                 }
                             }
                         }
@@ -683,6 +685,7 @@ class player extends partisan{
                     let hand={position:{x:this.position.x+lsin(this.direction.main)*30,y:this.position.y+lcos(this.direction.main)*30},radius:obj.id==-1?30:20}
                     if(distPos(hand,obj)<hand.radius+obj.radius){
                         if(obj.id==-1&&this.id!=-1){
+                            let result=false
                             if((obj.mode==-1||obj.mode==0)&&!obj.touch){
                                 obj.cascadeMode(1)
                                 let top=obj
@@ -691,12 +694,16 @@ class player extends partisan{
                                 }
                                 top.follow=this
                                 this.follower=top
+                                result=true
                             }
                             for(let a=0,la=this.parent.entities.players.length;a<la;a++){
                                 if(this.parent.entities.players[a].mode==1&&!this.parent.entities.players[a].touch){
                                     this.parent.entities.players[a].mode=-1
                                     this.parent.entities.players[a].touch=true
                                 }
+                            }
+                            if(result){
+                                return true
                             }
                         }else{
                             let dir=dirPos(this,obj)

@@ -2252,6 +2252,7 @@ types={
             trashable:true,
             process:[
                 [0,'Flour','Raw Cheese Sticks'],
+                [0,'Plate','Plated Cheese'],
             ],
         },{
             name:'Broccoli',
@@ -4946,7 +4947,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [6,120,'Noodles','Pot'],
+                [6,60,'Noodles','Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -5160,6 +5161,30 @@ types={
             trashable:true,
             process:[
                 [0,'Noodles','Plated White Spaghetti'],
+                [0,'Chopped Cheese','Plated White Sauce With Cheese'],
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Cheese',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Noodles','Plated Spaghetti With Cheese'],
+                [0,'White Sauce','Plated White Sauce With Cheese'],
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated White Sauce With Cheese',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Noodles','Plated Cheese Spaghetti'],
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
             ],
