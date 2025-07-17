@@ -1231,7 +1231,7 @@ types={
             edit:true,
             level:1,
             rarity:0,
-            cost:10,
+            cost:60,
             prereq:[],
             desc:'Take an order remotely',
             upgrade:[],

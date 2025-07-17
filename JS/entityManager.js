@@ -22,7 +22,7 @@ class entityManager extends manager{
         for(let a=0,la=this.operation.player.length;a<la;a++){
             this.entities.players.push(new player(this.layer,this,this.index.player++,0,0,a,this.operation.player[a]))
         }
-        this.customer.internal=(5+2.5*(this.operation.player.length-1))*dev.customerMult
+        this.customer.internal=(6+3*(this.operation.player.length-1))*dev.customerMult
         this.calcCustomer()
     }
     generateLevel(level,entry){
@@ -319,13 +319,11 @@ class entityManager extends manager{
         this.customer.queue=[]
     }
     queuing(){
-        let total=0
         for(let a=0,la=this.entities.players.length;a<la;a++){
-            if(this.entities.players[a].id==-1&&(this.entities.players[a].mode==-1||this.entities.players[a].mode==0)&&this.entities.players[a].timer.main>180&&this.entities.players[a].follower==-1){
-                total++
+            if(this.entities.players[a].id==-1&&(this.entities.players[a].mode==-1||this.entities.players[a].mode==0)&&this.entities.players[a].timer.main>300&&this.entities.players[a].follower==-1){
+                return true
             }
         }
-        return total>=2
     }
     clearCustomer(){
         for(let a=0,la=this.entities.players.length;a<la;a++){

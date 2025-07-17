@@ -4,8 +4,8 @@ class dayManager extends manager{
         this.day=0
         this.phase=0
         this.currency={main:0}
-        this.time={main:0,end:7200}
-        this.patience={anim:0,main:0,base:3600,restore:0,fail:false,active:false}
+        this.time={main:0,end:9000}
+        this.patience={anim:0,main:0,base:4500,restore:0,fail:false,active:false}
         this.anim={phase:[0,0]}
         this.fail={num:0}
         this.spawners=[]
@@ -43,7 +43,7 @@ class dayManager extends manager{
     beginDay(){
         this.phase=1
         this.time.main=this.operation.cardManager.hasCard('Prep Time')?-900:0
-        this.patience.main=3600
+        this.patience.main=this.patience.base
         this.patience.fail=false
         this.operation.entityManager.clearWalls(['Crate','Blueprint','Option'])
         this.operation.entityManager.clearOuterWalls()
@@ -134,7 +134,7 @@ class dayManager extends manager{
     }
     booking(x,y){
         if(this.spawners.length>0){
-            this.payout(ceil((this.spawners[0][0]-this.time.main)/2400*(1+this.operation.player.length)*(3+this.day)),x,y)
+            this.payout(ceil((this.spawners[0][0]-this.time.main)/3000*(1+this.operation.player.length)*(3+this.day)),x,y)
             this.time.main=this.spawners[0][0]
         }
     }

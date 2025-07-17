@@ -180,9 +180,8 @@ class wall extends partisan{
                 this.speed=1
             break
             case 'Grabber':
-                this.anim=24
-                this.timer.hide=0
-                this.tempItem=this.item
+                this.anim=48
+                this.follower=-1
             break
         }
         this.reset()
@@ -1369,10 +1368,7 @@ class wall extends partisan{
                         regTriangle(layer,0,-12,5,5,0)
                         regTriangle(layer,0,0,5,5,0)
                         regTriangle(layer,0,12,5,5,0)
-                        layer.translate(0,(-24+this.anim)*2)
-                        if(this.timer.hide>0&&this.tempItem!=-1){
-                            this.tempItem.display(0)
-                        }
+                        layer.translate(0,-48+this.anim)
                     break
                     case 'Fish': case 'Fish Fillet': case 'Spiny Fish': case 'Crabs':
                         layer.fill(50,150,200,this.fade.main)
@@ -1767,10 +1763,10 @@ class wall extends partisan{
                         if(this.animSet.desc>0){
                             layer.noStroke()
                             layer.fill(225,this.fade.main*this.animSet.desc)
-                            layer.rect(0,0,90,30,4)
+                            layer.rect(0,0,100,30,4)
                             layer.fill(0,this.fade.main*this.animSet.desc)
                             layer.textSize(8)
-                            layer.text(types.wall[this.contain].desc,0,0,84)
+                            layer.text(types.wall[this.contain].desc,0,0,94)
                         }
                     break
                     case 'Option':
@@ -2263,36 +2259,242 @@ class wall extends partisan{
                 }
             break
             case 'Grabber':
-                if(this.timer.hide>0){
-                    this.timer.hide--
-                }
-                if(this.anim!=24){
-                    if(this.anim>=48){
-                        this.anim=0
-                    }
+                if(this.anim<48){
                     this.anim++
                 }else if(this.parent.operation.dayManager.phase==1||this.parent.operation.dayManager.phase==2){
                     for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                         for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                            let obj=this.parent.entities.walls[a][b]
                             let hand
                             if(this.item==-1){
                                 hand={position:{x:this.position.x+lsin(this.direction.main)*48,y:this.position.y-lcos(this.direction.main)*48}}
                             }else{
                                 hand={position:{x:this.position.x-lsin(this.direction.main)*48,y:this.position.y+lcos(this.direction.main)*48}}
                             }
-                            if(this.parent.entities.walls[a][b].checkIn(0,hand)){
-                                if(this.parent.entities.walls[a][b].grabEffect(this)){
-                                    if(this.item==-1&&this.parent.entities.walls[a][b].item!=-1){
-                                        this.anim=25
-                                        this.timer.hide=24
-                                        this.parent.entities.walls[a][b].item.timer.hide=24
-                                    }else{
-                                        this.anim=0
-                                        this.tempItem=this.copySelfItem()
-                                    }
-                                    a=la
-                                    b=lb
+                            if(obj.checkIn(0,hand)){
+                                switch(obj.name){
+                                    case 'Starter Plates': case 'Plates': case 'Large Plates':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1&&this.item.name=='Plate'&&obj.plates<obj.base.plates){
+                                            this.anim++
+                                            if(this.anim>=96){
+                                                this.anim=48
+                                                obj.grabEffect(this)
+                                            }
+                                        }
+                                    break
+                                    case 'Pots':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1&&this.item.name=='Pots'&&obj.pots<obj.base.pots){
+                                            this.anim++
+                                            if(this.anim>=96){
+                                                this.anim=48
+                                                obj.grabEffect(this)
+                                            }
+                                        }
+                                    break
+                                    case 'Dish Rack': case 'Large Dish Rack':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1&&this.item.name=='Dirty Plate'&&obj.plates<obj.base.plates){
+                                            this.anim++
+                                            if(this.anim>=96){
+                                                this.anim=48
+                                                obj.grabEffect(this)
+                                            }
+                                        }
+                                    break
+                                    case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Levitating Counter': case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
+                                    case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
+                                    case 'Tin': case 'Tray': case 'Donut Tray':
+                                    case 'Grabber':
+                                    case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1&&obj.item==-1){
+                                            this.anim++
+                                            if(this.anim>=96){
+                                                this.anim=48
+                                                obj.grabEffect(this)
+                                            }
+                                        }
+                                    break
+                                    case 'Oven':
+                                        if(!obj.close()){
+                                            if(this.item==-1&&obj.item!=-1){
+                                                this.anim=0
+                                                obj.grabEffect(this)
+                                            }else if(this.item!=-1&&obj.item==-1){
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=48
+                                                    obj.grabEffect(this)
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Microwave': case 'Coffee Machine':
+                                        if(obj.cycle==0){
+                                            if(this.item==-1&&obj.item!=-1){
+                                                this.anim=0
+                                                obj.grabEffect(this)
+                                            }else if(this.item!=-1&&obj.item==-1){
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=48
+                                                    obj.grabEffect(this)
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Prep Station': case 'Frozen Prep Station': case 'Silo':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1){
+                                            if(obj.item==-1&&this.item.component||obj.item!=-1&&obj.item.type==this.item.type&&obj.items<obj.base.items){
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=48
+                                                    obj.grabEffect(this)
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Stack Station':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1){
+                                            if(obj.item==-1||obj.item!=-1&&obj.items.length<obj.base.items-1){
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=48
+                                                    obj.grabEffect(this)
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Starter Sink': case 'Sink':  case 'Soaking Sink': case 'Power Sink':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1){
+                                            if(!this.item.checkUtility('Water')){
+                                                if(obj.item==-1){
+                                                    this.anim++
+                                                    if(this.anim>=96){
+                                                        this.anim=48
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Wash Basin':
+                                        if(this.item==-1&&obj.item!=-1){
+                                            this.anim=0
+                                            obj.grabEffect(this)
+                                        }else if(this.item!=-1){
+                                            if(!this.item.checkUtility('Water')){
+                                                if(obj.item==-1||obj.item!=-1&&obj.item.name==this.obj.name&&obj.item.name=='Dirty Plate'&&obj.plates<obj.base.plates){
+                                                    this.anim++
+                                                    if(this.anim>=96){
+                                                        this.anim=48
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin':
+                                        if(this.item==-1&&obj.trash==obj.base.trash){
+                                            this.anim=0
+                                            this.item=this.generateItem('Trash Bag')
+                                            obj.trash=0
+                                        }else if(this.item!=-1&&obj.trash<obj.base.trash&&this.item.trashable){
+                                            if(this.item.checkUtility('Trash')){
+                                                obj.trash++
+                                            }else{
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=48
+                                                    this.item=-1
+                                                    obj.trash++
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Compost Bin':
+                                        if(this.item==-1&&obj.trash==obj.base.trash){
+                                            this.anim=0
+                                            this.item=this.generateItem('Compost Bag')
+                                            obj.trash=0
+                                        }else if(this.item!=-1&&obj.trash<obj.base.trash&&this.item.trashable){
+                                            if(this.item.checkUtility('Trash')){
+                                                obj.trash++
+                                            }else{
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=48
+                                                    this.item=-1
+                                                    obj.trash++
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Trash Can':
+                                        if(this.item!=-1&&this.item.trashable){
+                                            if(!this.item.checkUtility('Trash')){
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=48
+                                                    this.item=-1
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Ketchup': case 'Mustard':
+                                        if(this.item==-1&&obj.items>0){
+                                            obj.items--
+                                            this.item=this.generateItem(obj.provide)
+                                            this.anim=0
+                                        }else if(this.item!=-1&&this.item.name==obj.provide&&obj.items<obj.base.items){
+                                            this.anim++
+                                            if(this.anim>=96){
+                                                this.anim=48
+                                                obj.grabEffect(this)
+                                            }
+                                        }
+                                    break
+                                    case 'Waffle Iron':
+                                        if(obj.cycle==0){
+                                            if(this.item==-1&&obj.item!=-1){
+                                                this.anim=0
+                                                obj.grabEffect(this)
+                                            }else if(this.item!=-1&&obj.item==-1&&this.item.name=='Batter'){
+                                                this.anim++
+                                                if(this.anim>=96){
+                                                    this.anim=0
+                                                    obj.grabEffect(this)
+                                                }
+                                            }
+                                        }
+                                    break
                                 }
+                                if(obj.spec.includes(1)&&this.item==-1){
+                                    this.item=this.generateItem(obj.provide)
+                                    this.item.fade.main=0
+                                    this.anim=0
+                                }
+                                a=la
+                                b=lb
                             }
                         }
                     }
@@ -2519,6 +2721,7 @@ class wall extends partisan{
                         case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Levitating Counter': case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
                         case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                         case 'Tin': case 'Tray': case 'Donut Tray':
+                        case 'Grabber':
                             if(player.item!=-1){
                                 if(this.item!=-1){
                                     if(this.item.attemptCombine(player.item)){
@@ -2733,7 +2936,7 @@ class wall extends partisan{
                             }
                         break
                         case 'Trash Can':
-                            if(player.item!=-1){
+                            if(player.item!=-1&&player.item.trashable){
                                 if(!player.item.checkUtility('Trash')){
                                     player.item=-1
                                 }
