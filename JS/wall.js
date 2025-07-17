@@ -2838,8 +2838,12 @@ class wall extends partisan{
                             }else if(player.item==-1){
                                 if(this.item!=-1){
                                     player.item=this.item
-                                    this.item=last(this.items)
-                                    this.items.splice(this.items.length-1,1)
+                                    if(this.items.length>0){
+                                        this.item=last(this.items)
+                                        this.items.splice(this.items.length-1,1)
+                                    }else{
+                                        this.item=-1
+                                    }
                                     return true
                                 }
                             }
@@ -2868,28 +2872,30 @@ class wall extends partisan{
                         break
                         case 'Wash Basin':
                             if(player.item!=-1){
-                                if(this.item!=-1){
-                                    if(player.item.attemptCombine(this.item)){
-                                        if(this.plates>1){
-                                            this.plates--
-                                        }else{
-                                            this.item=-1
-                                            this.plates=0
+                                if(!player.item.checkUtility('Water')){
+                                    if(this.item!=-1){
+                                        if(player.item.attemptCombine(this.item)){
+                                            if(this.plates>1){
+                                                this.plates--
+                                            }else{
+                                                this.item=-1
+                                                this.plates=0
+                                            }
+                                            return true
+                                        }else if(player.item.name==this.item.name&&this.item.name=='Dirty Plate'&&this.plates<this.base.plates){
+                                            player.item=-1
+                                            this.plates++
+                                            return true
+                                        }
+                                    }else if(this.item==-1){
+                                        this.item=player.item
+                                        player.item=-1
+                                        if(this.item.name=='Dirty Plate'){
+                                            this.plates=1
+                                            this.washed=true
                                         }
                                         return true
-                                    }else if(player.item.name==this.item.name&&this.item.name=='Dirty Plate'&&this.plates<this.base.plates){
-                                        player.item=-1
-                                        this.plates++
-                                        return true
                                     }
-                                }else if(this.item==-1){
-                                    this.item=player.item
-                                    player.item=-1
-                                    if(this.item.name=='Dirty Plate'){
-                                        this.plates=1
-                                        this.washed=true
-                                    }
-                                    return true
                                 }
                             }else{
                                 if(this.plates>1){

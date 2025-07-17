@@ -1230,7 +1230,7 @@ types={
             spec:[],
             edit:true,
             level:1,
-            rarity:0,
+            rarity:1,
             cost:60,
             prereq:[],
             desc:'Take an order remotely',
@@ -4370,7 +4370,7 @@ types={
             name:'Cheese Pizza',
             portions:3,
             holdDist:20,
-            holdDir:0,
+            holdDir:180,
             component:false,
             trashable:true,
             process:[
@@ -4429,7 +4429,7 @@ types={
             name:'Onion Pizza',
             portions:3,
             holdDist:20,
-            holdDir:0,
+            holdDir:180,
             component:false,
             trashable:true,
             process:[
@@ -4459,7 +4459,7 @@ types={
             name:'Meat Pizza',
             portions:3,
             holdDist:20,
-            holdDir:0,
+            holdDir:180,
             component:false,
             trashable:true,
             process:[
@@ -4489,7 +4489,7 @@ types={
             name:'Onion and Meat Pizza',
             portions:3,
             holdDist:20,
-            holdDir:0,
+            holdDir:180,
             component:false,
             trashable:true,
             process:[
@@ -6449,6 +6449,7 @@ types={
             trashable:true,
             process:[
                 [0,'Plate','Plated Calzone'],
+                [9,240,'Burnt'],
             ],
         },{
             name:'Plated Calzone',
@@ -6678,7 +6679,7 @@ types={
             list:0,
             value:'8',
             obj:[
-                ['Plated Calzone',8],
+                ['Plated Calzone',9],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce, cheese, and a cracked egg.\nKnead to wrap, then cook and serve.',
         },

@@ -175,8 +175,8 @@ class entityManager extends manager{
     hasWall(type){
         for(let a=0,la=this.entities.walls.length;a<la;a++){
             for(let b=0,lb=this.entities.walls[a].length;b<lb;b++){
-                if(this.entities.walls[a][b]==type){
-                    return ture
+                if(this.entities.walls[a][b].type==type||types.wall[type].name=='Plates'&&this.entities.walls[a][b].name=='Large Platess'){
+                    return true
                 }
             }
         }
