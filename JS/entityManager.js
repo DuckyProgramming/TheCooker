@@ -167,8 +167,11 @@ class entityManager extends manager{
     resetWalls(){
         this.entities.walls.forEach(set=>set.forEach(wall=>wall.reset()))
     }
-    endOfDay(){
-        this.entities.walls.forEach(set=>set.forEach(wall=>wall.endOfDay()))
+    beginDay(){
+        this.entities.walls.forEach(set=>set.forEach(wall=>wall.beginDay()))
+    }
+    endDay(){
+        this.entities.walls.forEach(set=>set.forEach(wall=>wall.endDay()))
     }
     hasWall(type){
         for(let a=0,la=this.entities.walls.length;a<la;a++){

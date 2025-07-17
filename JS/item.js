@@ -21,33 +21,39 @@ class item extends located{
         this.component=types.item[this.type].component
         this.trashable=types.item[this.type].trashable
         this.process=[]
-        for(let a=0,la=types.item[this.type].process.length;a<la;a++){
-            switch(types.item[this.type].process[a][0]){
-                case 0:
-                    this.process.push({type:types.item[this.type].process[a][0],other:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
-                break
-                case 1: case 2: case 3: case 4: case 9: case 10:
-                    this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
-                break
-                case 5:
-                    this.process.push({type:types.item[this.type].process[a][0],utility:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
-                break
-                case 6:
-                    this.portions=types.item[this.type].portions
-                    this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],leave:types.item[this.type].process[a][3],active:false,display:0,anim:0})
-                break
-                case 7:
-                    this.process.push({type:types.item[this.type].process[a][0],main:0,timer:types.item[this.type].process[a][1],result:types.item[this.type].process[a][2],active:false,display:0,anim:0})
-                break
-                case 8:
-                    this.process.push({type:types.item[this.type].process[a][0],main:0,goal:types.item[this.type].process[a][1],active:false,display:0,anim:0})
-                break
+        let set=[0,5,7,1,9,2,3,4,6,8]
+        for(let a=0,la=set.length;a<la;a++){
+            for(let b=0,lb=types.item[this.type].process.length;b<lb;b++){
+                if(types.item[this.type].process[b][0]==set[a]){
+                    switch(set[a]){
+                        case 0:
+                            this.process.push({type:types.item[this.type].process[b][0],other:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],active:false,display:0,anim:0})
+                        break
+                        case 1: case 2: case 3: case 4: case 9: case 10:
+                            this.process.push({type:types.item[this.type].process[b][0],main:0,goal:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],active:false,display:0,anim:0})
+                        break
+                        case 5:
+                            this.process.push({type:types.item[this.type].process[b][0],utility:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],active:false,display:0,anim:0})
+                        break
+                        case 6:
+                            this.portions=types.item[this.type].portions
+                            this.process.push({type:types.item[this.type].process[b][0],main:0,goal:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],leave:types.item[this.type].process[b][3],active:false,display:0,anim:0})
+                        break
+                        case 7:
+                            this.process.push({type:types.item[this.type].process[b][0],main:0,timer:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],active:false,display:0,anim:0})
+                        break
+                        case 8:
+                            this.process.push({type:types.item[this.type].process[b][0],main:0,goal:types.item[this.type].process[b][1],active:false,display:0,anim:0})
+                        break
+                    }
+                }
             }
         }
         for(let a=0,la=this.process.length;a<la;a++){
             this.process[a].mult=(this.manager.operation.cardManager.hasCard('Slow Worker')&&this.process[a].type!=8?0.8:1)*(this.manager.operation.cardManager.hasCard('Reckless')&&this.process[a].type==9?2:1)
         }
         this.processVisible=false
+        this.processGood=0
         switch(this.name){
             case 'Crate':
                 this.contain=0
@@ -70,6 +76,9 @@ class item extends located{
                     this.process[a].main=this.process[a].type==6?0:this.process[a].goal
                     result.push(this.process[a])
                 }
+                if(this.process[a].type==1||this.process[a].type==2||this.process[a].type==3){
+                    this.processGood=15
+                }
             }
         }
         return result
@@ -85,6 +94,9 @@ class item extends located{
                 if(this.process[a].main>=this.process[a].goal){
                     this.process[a].main=this.process[a].goal
                     result.push(this.process[a])
+                }
+                if(this.process[a].type==1||this.process[a].type==2||this.process[a].type==3){
+                    this.processGood=15
                 }
             }
         }
@@ -235,5 +247,8 @@ class item extends located{
             }
         }
         this.processVisible=false
+        if(this.processGood>0){
+            this.processGood--
+        }
     }
 }

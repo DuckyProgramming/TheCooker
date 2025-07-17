@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,altControl:true,customerMult:1,overlap:false,test:false}
+dev={bound:false,altControl:true,customerMult:1,overlap:false,test:true}
 inputs={
     keys:[
         {
@@ -2149,7 +2149,7 @@ types={
             name:'Chopped Tomato',
             holdDist:20,
             holdDir:0,
-            component:false,
+            component:true,
             trashable:true,
             process:[
                 [2,60,'Tomato Sauce'],
@@ -2159,7 +2159,7 @@ types={
             name:'Tomato Sauce',
             holdDist:20,
             holdDir:0,
-            component:false,
+            component:true,
             trashable:true,
             process:[
                 [0,'Plate','Plated Tomato Sauce'],
@@ -6009,7 +6009,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [1,480,'Rice Pudding Pot'],
+                [1,960,'Rice Pudding Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -6105,6 +6105,7 @@ types={
             component:true,
             trashable:true,
             process:[
+                [0,'Plate','Plated Wine Jus'],
                 [0,'Plated Rare Steak','Plated Rare Steak With Wine Jus'],
                 [0,'Plated Medium Steak','Plated Medium Steak With Wine Jus'],
                 [0,'Plated Well Done Steak','Plated Well Done Steak With Wine Jus'],
@@ -6171,6 +6172,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Rare Steak With Tomato and Wine Jus'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -6181,6 +6183,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Medium Steak With Tomato and Wine Jus'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -6191,6 +6194,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Well Done Steak With Tomato and Wine Jus'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -6201,6 +6205,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Rare Bone Steak With Tomato and Wine Jus'],
                 [7,180,'Bone Plate'],
             ],
         },{
@@ -6211,6 +6216,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Medium Bone Steak With Tomato and Wine Jus'],
                 [7,180,'Bone Plate'],
             ],
         },{
@@ -6221,6 +6227,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Well Done Bone Steak With Tomato and Wine Jus'],
                 [7,180,'Bone Plate'],
             ],
         },{
@@ -6231,6 +6238,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Rare Thick Steak With Tomato and Wine Jus'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -6241,6 +6249,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Medium Thick Steak With Tomato and Wine Jus'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -6251,6 +6260,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Well Done Thick Steak With Tomato and Wine Jus'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -6592,7 +6602,7 @@ types={
                 ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Wine Jus',6],
                 ['Plated Rare Steak With Tomato','Plated Rare Steak With Tomato and Wine Jus',6],
                 ['Plated Medium Steak With Tomato','Plated Medium Steak With Tomato and Wine Jus',6],
-                ['Plated Well Done Steak With Tomato','Plated Well Done Bone Steak With Tomato and Wine Jus',6],
+                ['Plated Well Done Steak With Tomato','Plated Well Done Steak With Tomato and Wine Jus',6],
                 ['Plated Rare Bone Steak With Tomato','Plated Rare Bone Steak With Tomato and Wine Jus',7],
                 ['Plated Medium Bone Steak With Tomato','Plated Medium Bone Steak With Tomato and Wine Jus',7],
                 ['Plated Well Done Bone Steak With Tomato','Plated Well Done Bone Steak With Tomato and Wine Jus',7],

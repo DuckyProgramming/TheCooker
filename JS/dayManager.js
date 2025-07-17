@@ -47,6 +47,7 @@ class dayManager extends manager{
         this.patience.fail=false
         this.operation.entityManager.clearWalls(['Crate','Blueprint','Option'])
         this.operation.entityManager.clearOuterWalls()
+        this.operation.entityManager.beginDay()
         this.fail.num=0
         this.spawners=[]
         this.generateSpawners(0,1)
@@ -112,7 +113,7 @@ class dayManager extends manager{
         this.operation.entityManager.clearCustomer()
         this.operation.entityManager.clearPlayerItem()
         this.operation.entityManager.resetWalls()
-        this.operation.entityManager.endOfDay()
+        this.operation.entityManager.endDay()
         this.operation.entityManager.spawnBlueprints(5+(this.operation.cardManager.hasCard('Catalogue')?1:0),0)
     }
     fakeDay(){
@@ -135,7 +136,7 @@ class dayManager extends manager{
     }
     booking(x,y){
         if(this.spawners.length>0){
-            this.payout(ceil((this.spawners[0][0]-this.time.main)/3000*(1+this.operation.player.length)*(3+this.day)),x,y)
+            this.payout(ceil((this.spawners[0][0]-this.time.main)/6000*(1+this.operation.player.length)*(6+this.day)),x,y)
             this.time.main=this.spawners[0][0]
         }
     }
