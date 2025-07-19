@@ -6,9 +6,9 @@ class blueprintManager extends manager{
     }
     initial(){
         this.listing={
-            full:[[],[],[],[]],
-            available:[[],[],[],[]],
-            possible:[[],[],[],[]],
+            full:[[],[],[],[],[]],
+            available:[[],[],[],[],[]],
+            possible:[[],[],[],[],[]],
         }
         for(let a=0,la=types.wall.length;a<la;a++){
             if(types.wall[a].rarity>=0){
@@ -55,17 +55,17 @@ class blueprintManager extends manager{
         }
     }
     priorListing(){
-        this.listing.possible=[[],[],[],[]]
+        this.listing.possible=[[],[],[],[],[]]
         for(let a=0,la=this.listing.available.length;a<la;a++){
             for(let b=0,lb=this.listing.available[a].length;b<lb;b++){
-                if(!types.wall[this.listing.available[a][b]].spec.includes(1)){
+                if(!types.wall[this.listing.available[a][b]].prereq.includes(0)){
                     this.listing.possible[a].push(this.listing.available[a][b])
                 }
             }
         }
     }
     convertedListing(){
-        this.listing.possible=[[],[],[],[]]
+        this.listing.possible=[[],[],[],[],[]]
         for(let a=0,la=this.listing.available.length;a<la;a++){
             for(let b=0,lb=this.listing.available[a].length;b<lb;b++){
                 let valid=true
@@ -90,9 +90,10 @@ class blueprintManager extends manager{
         }
     }
     outListing(){
+        this.convertedListing()
         let result=``
         for(let a=0,la=this.listing.possible.length;a<la;a++){
-            result+=(a>0?`\n`:``)+[`Common`,`Uncommon`,`Rare`,`Conditional`][a]+` (${this.listing.possible[a].length}): `
+            result+=(a>0?`\n`:``)+[`Common`,`Uncommon`,`Rare`,`Conditional`,'Starter'][a]+` (${this.listing.possible[a].length}): `
             for(let b=0,lb=this.listing.possible[a].length;b<lb;b++){
                 result+=(b>0?`, `:``)+types.wall[this.listing.possible[a][b]].name
             }

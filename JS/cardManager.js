@@ -55,9 +55,10 @@ class cardManager extends manager{
         }
     }
     outListing(){
+        this.convertedListing()
         let result=``
         for(let a=0,la=this.listing.possible.length;a<la;a++){
-            result+=(a>0?`\n`:``)+[`Main`,`Variant`,`Starter`,`Side`,`Dessert`,`Customer`][a]+` (${this.listing.possible[a].length}): `
+            result+=(a>0?`\n`:``)+[`Main`,`Variant`,`Starter`,`Side`,`Dessert`,`Customer`,`Franchise`][a]+` (${this.listing.possible[a].length}): `
             for(let b=0,lb=this.listing.possible[a].length;b<lb;b++){
                 result+=(b>0?`, `:``)+types.card[this.listing.possible[a][b]].name
             }

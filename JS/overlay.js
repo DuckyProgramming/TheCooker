@@ -36,7 +36,7 @@ class overlay extends located{
                 switch(args[0]){
                     case 2:
                         if(this.franchise.length==0){
-                            this.franchise.push(this.parent.operation.cardManager.removeFirst())
+                            this.franchise.push(types.card[this.parent.operation.cardManager.removeFirst()].name)
                         }
                     break
                 }
@@ -191,15 +191,15 @@ class overlay extends located{
                 layer.textSize(20)
                 for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
                     let obj=this.parent.operation.franchise.active[a]
-                    layer.text(types.card[obj[0]].name,-160,even(a,la)*112.5,145)
+                    layer.text(obj[0],-160,even(a,la)*112.5,145)
                 }
                 layer.textSize(16)
                 for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
                     let obj=this.parent.operation.franchise.active[a]
-                    layer.text(types.card[obj[1]].name,0,even(a,la)*112.5-25,145)
-                    layer.text(types.card[obj[2]].name,0,even(a,la)*112.5+25,145)
-                    layer.text(types.card[obj[3]].name,160,even(a,la)*112.5-25,145)
-                    layer.text(types.wall[obj[4]].name,160,even(a,la)*112.5+25,145)
+                    layer.text(obj[1],0,even(a,la)*112.5-25,145)
+                    layer.text(obj[2],0,even(a,la)*112.5+25,145)
+                    layer.text(obj[3],160,even(a,la)*112.5-25,145)
+                    layer.text(obj[4],160,even(a,la)*112.5+25,145)
                 }
             break
         }
@@ -221,16 +221,16 @@ class overlay extends located{
                             this.revive=-1
                             switch(this.setupArgs[0]){
                                 case 2:
-                                    this.franchise.push(this.cards[a].type)
+                                    this.franchise.push(this.cards[a].name)
                                     this.parent.operation.cardManager.removeCard(this.cards[a].type)
                                     this.revive=this.franchise.length>=3?3:2
                                 break
                                 case 3:
-                                    this.franchise.push(this.cards[a].type)
+                                    this.franchise.push(this.cards[a].name)
                                     this.revive=4
                                 break
                                 case 4:
-                                    this.franchise.push(this.cards[a].type)
+                                    this.franchise.push(this.cards[a].name)
                                     this.parent.operation.updateFranchise(this.franchise)
                                     this.parent.operation.transition('menu',[])
                                 break
@@ -348,16 +348,16 @@ class overlay extends located{
                             this.revive=-1
                             switch(this.setupArgs[0]){
                                 case 2:
-                                    this.franchise.push(this.cards[a].type)
+                                    this.franchise.push(this.cards[a].name)
                                     this.parent.operation.cardManager.removeCard(this.cards[a].type)
                                     this.revive=this.franchise.length>=3?3:2
                                 break
                                 case 3:
-                                    this.franchise.push(this.cards[a].type)
+                                    this.franchise.push(this.cards[a].name)
                                     this.revive=4
                                 break
                                 case 4:
-                                    this.franchise.push(this.cards[a].type)
+                                    this.franchise.push(this.cards[a].name)
                                     this.parent.operation.updateFranchise(this.franchise)
                                     this.parent.operation.transition('menu',[])
                                 break

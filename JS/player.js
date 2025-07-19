@@ -147,59 +147,60 @@ class player extends partisan{
         let index
         switch(orderPhase){
             case 0:
-                if(floor(random(0,menu[1].length+(tableName=='Metal Table'?3:1)))!=0||activate){
-                    index=floor(random(0,menu[1].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[1][index][0],types.item)))
+                if(floor(random(0,menu.obj[1].length+(tableName=='Metal Table'?3:1)))!=0||activate){
+                    index=floor(random(0,menu.obj[1].length))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[1][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu[1][index][1])
+                    this.paying.push(menu.obj[1][index][1])
                 }
             break
             case 1:
-                index=floor(random(0,menu[0].length))
-                this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[0][index][0],types.item)))
+                index=floor(random(0,menu.mains.length))
+                let obj=randin(menu.mains[index].obj)
+                this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(obj[0],types.item)))
                 last(this.order).fade.main=0
                 last(this.order).fade.trigger=false
                 last(this.order).size=0.8
-                this.paying.push(menu[0][index][1])
-                if(floor(random(0,menu[2].length+(tableName=='Metal Table'?3:1)))!=0){
-                    index=floor(random(0,menu[2].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1].type:findName(menu[2][index][0],types.item)))
+                this.paying.push(obj[1])
+                if(floor(random(0,menu.obj[2].length+(tableName=='Metal Table'?3:1)))!=0){
+                    index=floor(random(0,menu.obj[2].length))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1].type:findName(menu.obj[2][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu[2][index][1])
+                    this.paying.push(menu.obj[2][index][1])
                 }
             break
             case 2:
-                if(floor(random(0,menu[3].length+(tableName=='Metal Table'?3:1)))!=0||menu[0].length<=0){
-                    index=floor(random(0,menu[3].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[3][index][0],types.item)))
+                if(floor(random(0,menu.obj[3].length+(tableName=='Metal Table'?3:1)))!=0||menu.obj[0].length<=0){
+                    index=floor(random(0,menu.obj[3].length))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[3][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu[3][index][1])
+                    this.paying.push(menu.obj[3][index][1])
                 }
             break
             case 3:
-                if(floor(random(0,menu[4].length+(tableName=='Metal Table'?3:1)))!=0){
-                    index=floor(random(0,menu[4].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[4][index][0],types.item)))
+                if(floor(random(0,menu.obj[4].length+(tableName=='Metal Table'?3:1)))!=0){
+                    index=floor(random(0,menu.obj[4].length))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[4][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu[4][index][1])
+                    this.paying.push(menu.obj[4][index][1])
                 }
             break
             case 4:
-                if(floor(random(0,menu[5].length+(tableName=='Metal Table'?3:1)))!=0){
-                    index=floor(random(0,menu[5].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu[5][index][0],types.item)))
+                if(floor(random(0,menu.obj[5].length+(tableName=='Metal Table'?3:1)))!=0){
+                    index=floor(random(0,menu.obj[5].length))
+                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[5][index][0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu[5][index][1])
+                    this.paying.push(menu.obj[5][index][1])
                 }
             break
         }
@@ -416,8 +417,8 @@ class player extends partisan{
                     case 2:
                         let distance=distPos(this,this.follow)
                         let dir=dirPos(this,this.follow)
-                        if(distance>(this.stop?72:48)||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<this.timer.angleCap&&this.angle!=-1){
-                            if(distance<=(this.stop?72:48)){
+                        if(distance>(this.stop?60:48)||abs(spinDirection(dir,this.angle,10)-this.angle)>5&&this.timer.angle<this.timer.angleCap&&this.angle!=-1){
+                            if(distance<=(this.stop?60:48)){
                                 this.timer.angle++
                             }
                             let effectiveDir=dir+(this.timer.angle<this.timer.angleCap?10*(this.axis*2-1):0)
@@ -442,7 +443,7 @@ class player extends partisan{
                                             this.item=this.follow.item
                                         }
                                     }
-                                    if(this.orderPhase!=3){
+                                    if(this.order[a].name!='Ketchup'&&this.order[a].name!='Mustard'&&this.order[a].name!='Cupcake Stand'){
                                         this.follow.item=-1
                                     }
                                     this.order.splice(a,1)
@@ -518,8 +519,9 @@ class player extends partisan{
                 }
                 if(moveKey.x!=0||moveKey.y!=0){
                     let magnitude=magVec(moveKey)
-                    this.velocity.x+=this.speed*moveKey.x/magnitude
-                    this.velocity.y+=this.speed*moveKey.y/magnitude
+                    let mult=(this.parent.operation.cardManager.hasCard('Rushed')?1.2:1)
+                    this.velocity.x+=this.speed*moveKey.x/magnitude*mult
+                    this.velocity.y+=this.speed*moveKey.y/magnitude*mult
                 }
                 let process=false
                 let interact=false

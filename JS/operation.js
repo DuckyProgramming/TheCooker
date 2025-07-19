@@ -17,7 +17,7 @@ class operation{
     transition(scene,args){
         switch(scene){
             case 'main':
-                this.level=floor(random(0,types.level.length))
+                this.level=dev.test?0:floor(random(0,types.level.length))
                 this.entityManager.generatePlayers()
                 this.entityManager.generateLevel(types.level[this.level],0)
                 this.entityManager.spawnOptions(2,0)
@@ -62,9 +62,9 @@ class operation{
     }
     loadFranchise(franchise){
         for(let a=0,la=4;a<la;a++){ 
-            this.cardManager.addCard(franchise[a])
+            this.cardManager.addCard(findName(franchise[a],types.card))
         }
-        this.entityManager.sendPackages([types.wall[franchise[4]].name])
+        this.entityManager.sendPackages([franchise[4]])
     }
     getFranchise(){
         this.franchise.active=[]

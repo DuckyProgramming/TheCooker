@@ -5,7 +5,7 @@ class dayManager extends manager{
         this.phase=0
         this.currency={main:0}
         this.time={main:0,end:9000}
-        this.patience={anim:0,main:0,base:4500,restore:0,fail:false,active:false}
+        this.patience={anim:0,main:0,base:5400,restore:0,fail:false,active:false}
         this.anim={phase:[0,0]}
         this.fail={num:0}
         this.spawners=[]
@@ -236,7 +236,7 @@ class dayManager extends manager{
                         }
                         if(this.patience.active){
                             if(this.patience.main>0){
-                                this.patience.main-=this.operation.cardManager.hasCard('High Expectations')?1.25:1
+                                this.patience.main-=(this.operation.cardManager.hasCard('High Expectations')?1.25:1)*(this.operation.cardManager.hasCard('Exclusive')?0.5:1)
                             }else if(!this.patience.fail){
                                 this.patience.fail=true
                                 this.operation.entityManager.queueFail()

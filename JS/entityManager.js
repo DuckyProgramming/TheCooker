@@ -262,7 +262,12 @@ class entityManager extends manager{
             if(set[a]!='Tin'){
                 for(let b=0,lb=this.entities.walls.length;b<lb;b++){
                     for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
-                        if(this.entities.walls[b][c].type==inside||this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside&&dev.overlap){
+                        if(
+                            this.entities.walls[b][c].type==inside||
+                            this.entities.walls[b][c].spec.includes(0)&&set[a]=='Starter Hob'||
+                            this.entities.walls[b][c].spec.includes(2)&&set[a]=='Starter Sink'||
+                            this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside&&dev.overlap
+                        ){
                             total--
                         }
                     }

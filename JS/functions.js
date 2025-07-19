@@ -259,36 +259,36 @@ function mergeColor(color1,color2,value){
 function checkValid(){
     for(let a=0,la=types.wall.length;a<la;a++){
         if(types.wall[a].spec.includes(2)&&findName(types.wall[a].provide,types.item)<0){
-            print(types.wall[a].name,'-',types.wall[a].provide)
+            print('A',types.wall[a].name,'-',types.wall[a].provide)
         }
     }
     for(let a=0,la=types.item.length;a<la;a++){
         for(let b=a+1,lb=types.item.length;b<lb;b++){
             if(types.item[a].name==types.item[b].name){
-                print(types.item[a].name)
+                print('B',types.item[a].name)
             }
         }
         for(let b=0,lb=types.item[a].process.length;b<lb;b++){
             switch(types.item[a].process[b][0]){
                 case 0:
                     if(findName(types.item[a].process[b][1],types.item)<0){
-                        print(types.item[a].name,'-',types.item[a].process[b][1])
+                        print('C',types.item[a].name,'-',types.item[a].process[b][1])
                     }
                     if(findName(types.item[a].process[b][2],types.item)<0){
-                        print(types.item[a].name,'-',types.item[a].process[b][2])
+                        print('D',types.item[a].name,'-',types.item[a].process[b][2])
                     }
                 break
                 case 1: case 2: case 3: case 4: case 5: case 7:
                     if(findName(types.item[a].process[b][2],types.item)<0){
-                        print(types.item[a].name,'-',types.item[a].process[b][2])
+                        print('E',types.item[a].name,'-',types.item[a].process[b][2])
                     }
                 break
                 case 6:
                     if(findName(types.item[a].process[b][2],types.item)<0){
-                        print(types.item[a].name,'-',types.item[a].process[b][2])
+                        print('F',types.item[a].name,'-',types.item[a].process[b][2])
                     }
                     if(findName(types.item[a].process[b][3],types.item)<0){
-                        print(types.item[a].name,'-',types.item[a].process[b][3])
+                        print('G',types.item[a].name,'-',types.item[a].process[b][3])
                     }
                 break
             }
@@ -297,10 +297,10 @@ function checkValid(){
     for(let a=0,la=types.dish.length;a<la;a++){
         for(let b=0,lb=types.dish[a].obj.length;b<lb;b++){
             if(findName(types.dish[a].obj[b][0],types.item)<0){
-                print(types.dish[a].name,'-',types.dish[a].obj[b][0])
+                print('H',types.dish[a].name,'-',types.dish[a].obj[b][0])
             }
             if(types.dish[a].obj[b].length==3&&findName(types.dish[a].obj[b][1],types.item)<0){
-                print(types.dish[a].name,'-',types.dish[a].obj[b][1])
+                print('I',types.dish[a].name,'-',types.dish[a].obj[b][1])
             }
         }
     }
@@ -308,23 +308,23 @@ function checkValid(){
         if(types.card[a].list>=0&&types.card[a].list<=4){
             for(let b=0,lb=types.card[a].dish.length;b<lb;b++){
                 if(findName(types.card[a].dish[b],types.dish)<0){
-                    print(types.card[a].name,'-',types.card[a].dish[b])
+                    print('J',types.card[a].name,'-',types.card[a].dish[b])
                 }
             }
             for(let b=0,lb=types.card[a].wall.length;b<lb;b++){
                 if(findName(types.card[a].wall[b],types.wall)<0){
-                    print(types.card[a].name,'-',types.card[a].wall[b])
+                    print('K',types.card[a].name,'-',types.card[a].wall[b])
                 }
             }
         }
         for(let b=0,lb=types.card[a].prereq.length;b<lb;b++){
             if(findName(types.card[a].prereq[b],types.card)<0){
-                print(types.card[a].name,'-',types.card[a].prereq[b])
+                print('L',types.card[a].name,'-',types.card[a].prereq[b])
             }
         }
         for(let b=0,lb=types.card[a].mutex.length;b<lb;b++){
             if(findName(types.card[a].mutex[b],types.card)<0){
-                print(types.card[a].name,'-',types.card[a].mutex[b])
+                print('M',types.card[a].name,'-',types.card[a].mutex[b])
             }
         }
     }

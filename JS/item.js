@@ -21,7 +21,7 @@ class item extends located{
         this.component=types.item[this.type].component
         this.trashable=types.item[this.type].trashable
         this.process=[]
-        let set=[0,5,7,1,9,2,3,4,6,8]
+        let set=[0,11,5,7,1,9,2,3,4,6,8]
         for(let a=0,la=set.length;a<la;a++){
             for(let b=0,lb=types.item[this.type].process.length;b<lb;b++){
                 if(types.item[this.type].process[b][0]==set[a]){
@@ -44,6 +44,9 @@ class item extends located{
                         break
                         case 8:
                             this.process.push({type:types.item[this.type].process[b][0],main:0,goal:types.item[this.type].process[b][1],active:false,display:0,anim:0})
+                        break
+                        case 11:
+                            this.process.push({type:types.item[this.type].process[b][0],other:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],baseResult:types.item[this.type].process[b][3],active:false,display:0,anim:0})
                         break
                     }
                 }
@@ -119,6 +122,19 @@ class item extends located{
             }
         }
     }
+    checkCombine(obj){
+        for(let a=0,la=this.process.length;a<la;a++){
+            if(this.process[a].type==0&&this.process[a].other==obj.name){
+                return true
+            }
+        }
+        for(let a=0,la=obj.process.length;a<la;a++){
+            if(obj.process[a].type==0&&obj.process[a].other==this.name){
+                return true
+            }
+        }
+        return false
+    }
     attemptCombine(obj){
         let complete=false
         for(let a=0,la=this.process.length;a<la;a++){
@@ -141,6 +157,25 @@ class item extends located{
         }
         return complete
     }
+    attemptDoubleCombine(obj){
+        for(let a=0,la=this.process.length;a<la;a++){
+            if(this.process[a].type==11&&this.process[a].other==obj.name){
+                this.type=findName(this.process[a].result,types.item)
+                let baseResult=this.process[a].baseResult
+                this.initialValues()
+                return [true,baseResult]
+            }
+        }
+        for(let a=0,la=obj.process.length;a<la;a++){
+            if(obj.process[a].type==11&&obj.process[a].other==this.name){
+                this.type=findName(obj.process[a].baseResult,types.item)
+                let result=obj.process[a].result
+                this.initialValues()
+                return [true,result]
+            }
+        }
+        return [false,0]
+    }
     display(level,layer=this.layer){
         let col
         switch(level){
@@ -153,7 +188,7 @@ class item extends located{
                 layer.noStroke()
                 switch(this.name){
                     case 'Bolognese Sauce Pot': case 'White Sauce Pot': case 'Ramen Soup Pot': case 'Meat Soup Pot': case 'Tomato Soup Pot': case 'Broccoli Cheese Soup Pot': case 'Miso Soup Pot': case 'Broccoli Pot': case 'Mashed Potato Pot': case 'Macaroni and Cheese Pot':
-                    case 'Scrambled Eggs Pot': case 'Rice Pudding Pot': case 'Wine Jus Pot': case 'Chili Pot':
+                    case 'Scrambled Eggs Pot': case 'Rice Pudding Pot': case 'Wine Jus Pot': case 'Chili Pot': case 'Chopped Broccoli Pot':
                         layer.fill(225,this.fade.main)
                         layer.rect(-8,-8,12,12,4)
                         layer.fill(0,this.fade.main)
