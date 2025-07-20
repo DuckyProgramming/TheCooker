@@ -9920,6 +9920,14 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(-1.5,0,7.5,6.75)
             layer.ellipse(1.25,0,8,7)
         break
+        case 'Plated Cherry Sauce':
+            layer.fill(220,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(200,fade)
+            layer.ellipse(0,0,20)
+            layer.fill(200,20,80,fade)
+            layer.rect(0,0,17,17,4)
+        break
         default:
             print(name)
         break

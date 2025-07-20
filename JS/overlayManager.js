@@ -3,7 +3,7 @@ class overlayManager extends manager{
         super(layer,operation)
         this.overlays=[]
         this.active=[]
-        for(let a=0,la=5;a<la;a++){
+        for(let a=0,la=6;a<la;a++){
             this.overlays.push(new overlay(this.layer,this,this.layer.width/2,this.layer.height/2,a,[]))
         }
         /*
@@ -12,6 +12,7 @@ class overlayManager extends manager{
         2-main menu
         3-end screen
         4-choose franchise from menu
+        5-controls rebind
         */
     }
     anyActive(){

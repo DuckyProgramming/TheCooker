@@ -497,7 +497,7 @@ class player extends partisan{
                     this.remove=true
                 }
             }else{
-                let inputKeys=inputs.keys[this.id+(dev.altControl&&this.parent.operation.player.length==1?1:0)]
+                let inputKeys=inputs.keys[inputs.layout[this.parent.operation.player.length-1][this.id]]
                 let moveKey={x:0,y:0}
                 if(inputKeys.main[0]&&!inputKeys.main[1]&&this.active){
                     moveKey.x--

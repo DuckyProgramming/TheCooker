@@ -249,6 +249,13 @@ function regPoly(layer,x,y,sides,radiusX,radiusY,direction){
 	}
 	layer.endShape(CLOSE)
 }
+function regStar(layer,x,y,sides,radiusX,radiusY,direction){
+	layer.beginShape()
+	for(a=0,la=sides*2;a<la;a++){
+		layer.vertex(x+lsin(direction+360*a/la)*radiusX[a%2],y+lcos(direction+360*a/la)*radiusY[a%2])
+	}
+	layer.endShape(CLOSE)
+}
 function upColor(color,value,key){
 	return [color[0]+value*key[0],color[1]+value*key[1],color[2]+value*key[2]]
 }
@@ -258,7 +265,7 @@ function mergeColor(color1,color2,value){
 //main
 function checkValid(){
     for(let a=0,la=types.wall.length;a<la;a++){
-        if(types.wall[a].spec.includes(2)&&findName(types.wall[a].provide,types.item)<0){
+        if(types.wall[a].spec.includes(1)&&findName(types.wall[a].provide,types.item)<0){
             print('A',types.wall[a].name,'-',types.wall[a].provide)
         }
     }

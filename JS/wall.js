@@ -2824,7 +2824,7 @@ class wall extends partisan{
                                         }
                                     break
                                     case 'Trash Can':
-                                        if(this.item!=-1&&this.item.trashable){
+                                        if(this.item!=-1&&(this.item.trashable||this.item.name=='Trash Bag'||this.item.name=='Compost Bag')){
                                             if(!this.item.checkUtility('Trash')){
                                                 this.anim++
                                                 if(this.anim>=96){
@@ -3497,7 +3497,7 @@ class wall extends partisan{
                             }
                         break
                         case 'Trash Can':
-                            if(player.item!=-1&&player.item.trashable){
+                            if(player.item!=-1&&(player.item.trashable||player.item.name=='Trash Bag'||player.item.name=='Compost Bag')){
                                 if(!player.item.checkUtility('Trash')){
                                     player.item=-1
                                 }
