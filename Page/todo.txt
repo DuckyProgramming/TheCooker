@@ -1,9 +1,16 @@
 
+
+
+
 august update
 
 1 map
 
-1 wall
+2 walls
+portioning board
+teleporter - if you own two, when an item goes on one it goes to a random other
 
-2 cards
--new stir fry
+3 cards
+-stir fry noodles - separate base, comparable to rice
+[main]
+[variant]

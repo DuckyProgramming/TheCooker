@@ -52,7 +52,7 @@ class overlay extends located{
                         }
                     break
                     default:
-                        result=this.parent.operation.cardManager.getOptions(args[0],[3])
+                        result=this.parent.operation.cardManager.getOptions(args[0],[3,this.franchise])
                         for(let a=0,la=result.length;a<la;a++){
                             this.cards.push(new card(this.layer,this.parent.operation.cardManager,even(a,la)*200,20,result[a]))
                             this.support.push([])

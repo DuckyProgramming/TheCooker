@@ -22,6 +22,7 @@ class dish extends located{
             case 2: layer.stroke(75,225,225,this.fade.main); break
             case 3: layer.stroke(75,75,225,this.fade.main); break
             case 4: layer.stroke(225,225,75,this.fade.main); break
+            case 5: layer.stroke(225,75,225,this.fade.main); break
         }
         layer.strokeWeight(5)
         layer.rect(0,0,this.width-5,this.height-5,10)

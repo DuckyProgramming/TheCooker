@@ -345,9 +345,9 @@ function summonCrate(item){
 }
 function testFranchise(){
     current.dayManager.day+=16
-    current.cardManager.addCard(findName('Tomato Soup',types.card))
-    current.cardManager.addCard(findName('Cheese Sticks',types.card))
-    current.cardManager.addCard(findName('Rice Pudding',types.card))
+    current.cardManager.addCard(findName('Pizza',types.card))
+    current.cardManager.addCard(findName('Onion Pizza',types.card))
+    current.cardManager.addCard(findName('Calzones',types.card))
     current.cardManager.addCard(findName('Violence',types.card))
     current.cardManager.addCard(findName('Large Groups',types.card))
     current.overlayManager.closeAll()

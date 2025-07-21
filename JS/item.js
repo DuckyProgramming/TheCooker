@@ -21,7 +21,7 @@ class item extends located{
         this.component=types.item[this.type].component
         this.trashable=types.item[this.type].trashable
         this.process=[]
-        let set=[0,11,5,7,1,9,2,3,4,6,8]
+        let set=[0,11,5,7,1,10,9,2,3,4,6,8]
         for(let a=0,la=set.length;a<la;a++){
             for(let b=0,lb=types.item[this.type].process.length;b<lb;b++){
                 if(types.item[this.type].process[b][0]==set[a]){

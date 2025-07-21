@@ -127,18 +127,34 @@ class cardManager extends manager{
             break
             case 2:
                 temp=this.active.slice()
+                for(let a=0,la=temp.length;a<la;a++){
+                    if(types.card[temp[a]].prereq!=undefined){
+                        for(let b=0,lb=types.card[temp[a]].prereq.length;b<lb;b++){
+                            if(!args[1].includes(types.card[temp[a]].prereq[b])){
+                                b=lb
+                                temp.splice(a,1)
+                                a--
+                                la--
+                            }
+                        }
+                    }
+                }
                 for(let a=0,la=args[0]+(this.hasCard('Blank Card')?1:0);a<la;a++){
-                    let index=floor(random(0,temp.length))
-                    result.push(temp[index])
-                    temp.splice(index,1)
+                    if(temp.length>0){
+                        let index=floor(random(0,temp.length))
+                        result.push(temp[index])
+                        temp.splice(index,1)
+                    }
                 }
             break
             case 3:
                 temp=this.listing.possible[6].slice()
                 for(let a=0,la=args[0]+(this.hasCard('Blank Card')?1:0);a<la;a++){
-                    let index=floor(random(0,temp.length))
-                    result.push(temp[index])
-                    temp.splice(index,1)
+                    if(temp.length>0){
+                        let index=floor(random(0,temp.length))
+                        result.push(temp[index])
+                        temp.splice(index,1)
+                    }
                 }
             break
         }

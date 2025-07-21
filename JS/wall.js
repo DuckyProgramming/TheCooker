@@ -63,6 +63,29 @@ class wall extends partisan{
                 this.colliders.main=[]
                 this.displayItem=[]
                 let set=[
+                    'Stir Fry r',
+                    'Stir Fry R',
+                    'Stir Fry b',
+                    'Stir Fry B',
+                    'Stir Fry m',
+                    'Stir Fry M',
+                    'Stir Fry Rb',
+                    'Stir Fry Rm',
+                    'Stir Fry Br',
+                    'Stir Fry Mr',
+                    'Stir Fry Bm',
+                    'Stir Fry Mb',
+                    'Stir Fry RB',
+                    'Stir Fry RM',
+                    'Stir Fry BM',
+                    'Stir Fry RBm',
+                    'Stir Fry RMb',
+                    'Stir Fry BMr',
+                    'Stir Fry RBM',
+                    'Plated Stir Fry R',
+                    'Plated Stir Fry RB',
+                    'Plated Stir Fry RM',
+                    'Plated Stir Fry RBM',
                 ]
                 for(let a=0,la=set.length;a<la;a++){
                     this.displayItem.push(this.generateItem(set[a]))
@@ -132,7 +155,7 @@ class wall extends partisan{
                 this.speed=0.4
                 this.animSet={num:0}
             break
-            case 'Dishwasher':
+            case 'Dish Washer':
                 this.speed=0.2
                 this.animSet={num:0,close:0}
             break
@@ -265,7 +288,7 @@ class wall extends partisan{
                 this.base.plates=4
                 this.washed=false
             break
-            case 'Dishwasher':
+            case 'Dish Washer':
                 this.plates=0
                 this.base.plates=4
                 this.washed=false
@@ -1116,7 +1139,7 @@ class wall extends partisan{
                         layer.fill(180,200,200,this.fade.main)
                         layer.ellipse(0,3,12)
                     break
-                    case 'Dishwasher':
+                    case 'Dish Washer':
                         layer.fill(200,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height,8)
                         layer.stroke(180,this.fade.main)
@@ -1884,7 +1907,7 @@ class wall extends partisan{
                         layer.fill(220,this.fade.main)
                         layer.rect(0,-11,9,12,3)
                     break
-                    case 'Dishwasher':
+                    case 'Dish Washer':
                         layer.translate(0,-6.5+14*this.animSet.close)
                         layer.noStroke()
                         layer.fill(220,this.fade.main)
@@ -1992,7 +2015,7 @@ class wall extends partisan{
                     break
                     case 'Starter Plates': case 'Plates': case 'Large Plates':
                     case 'Dish Rack': case 'Large Dish Rack':
-                    case 'Wash Basin': case 'Dishwasher':
+                    case 'Wash Basin': case 'Dish Washer':
                         layer.fill(225,this.fade.main*this.animSet.num)
                         layer.rect(-16,-16,12,12,4)
                         layer.fill(0,this.fade.main*this.animSet.num)
@@ -2145,7 +2168,7 @@ class wall extends partisan{
             case 'Wash Basin':
                 this.animSet.num=smoothAnim(this.animSet.num,this.plates>0,0,1,5)
             break
-            case 'Dishwasher':
+            case 'Dish Washer':
                 this.animSet.num=smoothAnim(this.animSet.num,this.plates>0,0,1,5)
                 this.animSet.close=smoothAnim(this.animSet.close,this.cycle>0,0,1,5)
                 if(this.cycle>0){
@@ -2757,7 +2780,7 @@ class wall extends partisan{
                                             }
                                         }
                                     break
-                                    case 'Dishwasher':
+                                    case 'Dish Washer':
                                         if(obj.cycle==0){
                                             if(this.item==-1&&obj.item!=-1&&obj.item.name=='Plate'){
                                                 this.activating++
@@ -2945,7 +2968,7 @@ class wall extends partisan{
                                             }
                                         }
                                     break
-                                    case 'Dishwasher':
+                                    case 'Dish Washer':
                                         if(obj.cycle==0){
                                             if(this.item!=-1&&obj.item!=-1&&this.item.fade.trigger&&this.item.checkCombine(obj.item)&&obj.plates<=1){
                                                 this.anim+=2
@@ -3423,7 +3446,7 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Dishwasher':
+                        case 'Dish Washer':
                             if(this.cycle==0){
                                 if(player.item!=-1){
                                     if(!player.item.checkUtility('Water')){
@@ -3691,6 +3714,7 @@ class wall extends partisan{
                         break
                         case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Levitating Counter': case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
                         case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
+                        case 'Grabber': case 'Combiner':
                             if(this.item!=-1){
                                 this.item.moved=false
                                 let result=this.item.generalProcess([2],this.speed[0])
@@ -3822,7 +3846,7 @@ class wall extends partisan{
                                 player.item.checkUtility('Water')
                             }
                         break
-                        case 'Dishwasher':
+                        case 'Dish Washer':
                             if(this.cycle<=0){
                                 this.cycle=600
                             }

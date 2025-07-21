@@ -37,7 +37,7 @@ types={
                 [1,1,'Blueprint Cabinet',0],
                 [7,5,'Booking Desk',2],
 
-                [1,3,'Displayer',0],
+                //[1,3,'Displayer',0],
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -1751,7 +1751,7 @@ types={
             desc:'Wash plates quickly and get water',
             upgrade:['Soaking Sink','Wash Basin'],
         },{
-            name:'Dishwasher',
+            name:'Dish Washer',
             width:36,
             height:36,
             spec:[],
@@ -7557,7 +7557,9 @@ types={
             component:false,
             trashable:false,
             process:[
-                [0,'Rice','Raw Stir Fry'],
+                [0,'Rice','Stir Fry r'],
+                [0,'Chopped Broccoli','Stir Fry b'],
+                [0,'Chopped Meat','Stir Fry m'],
             ],
         },{
             name:'Burnt Pan',
@@ -7569,25 +7571,25 @@ types={
                 [5,'Trash','Pan'],
             ],
         },{
-            name:'Raw Stir Fry',
+            name:'Stir Fry r',
             holdDist:20,
             holdDir:90,
             component:false,
             trashable:false,
             process:[
-                [1,180,'Stir Fry'],
+                [1,180,'Stir Fry R'],
             ],
         },{
-            name:'Stir Fry',
+            name:'Stir Fry R',
             holdDist:20,
             holdDir:90,
             component:false,
             trashable:false,
             process:[
-                [9,240,'Burnt Pan'],
-                [0,'Chopped Broccoli','Stir Fry b'],
-                [0,'Chopped Meat','Stir Fry m'],
-                [11,'Plate','Pan','Plated Stir Fry'],
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry Rb'],
+                [0,'Chopped Meat','Stir Fry Rm'],
+                [11,'Plate','Pan','Plated Stir Fry R'],
             ],
         },{
             name:'Stir Fry b',
@@ -7599,6 +7601,17 @@ types={
                 [1,180,'Stir Fry B'],
             ],
         },{
+            name:'Stir Fry B',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Rice','Stir Fry Br'],
+                [0,'Chopped Meat','Stir Fry Bm'],
+            ],
+        },{
             name:'Stir Fry m',
             holdDist:20,
             holdDir:90,
@@ -7608,26 +7621,51 @@ types={
                 [1,180,'Stir Fry M'],
             ],
         },{
-            name:'Stir Fry B',
-            holdDist:20,
-            holdDir:90,
-            component:false,
-            trashable:false,
-            process:[
-                [9,240,'Burnt Pan'],
-                [0,'Chopped Meat','Stir Fry Bm'],
-                [11,'Plate','Pan','Plated Stir Fry B'],
-            ],
-        },{
             name:'Stir Fry M',
             holdDist:20,
             holdDir:90,
             component:false,
             trashable:false,
             process:[
-                [9,240,'Burnt Pan'],
+                [9,300,'Burnt Pan'],
+                [0,'Rice','Stir Fry Mr'],
                 [0,'Chopped Broccoli','Stir Fry Mb'],
-                [11,'Plate','Pan','Plated Stir Fry M'],
+            ],
+        },{
+            name:'Stir Fry Rb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RB'],
+            ],
+        },{
+            name:'Stir Fry Rm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RM'],
+            ],
+        },{
+            name:'Stir Fry Br',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RB'],
+            ],
+        },{
+            name:'Stir Fry Mr',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RM'],
             ],
         },{
             name:'Stir Fry Bm',
@@ -7648,17 +7686,76 @@ types={
                 [1,180,'Stir Fry BM'],
             ],
         },{
+            name:'Stir Fry RB',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Meat','Stir Fry RBm'],
+                [11,'Plate','Pan','Plated Stir Fry RB'],
+            ],
+        },{
+            name:'Stir Fry RM',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry RMb'],
+                [11,'Plate','Pan','Plated Stir Fry RM'],
+            ],
+        },{
             name:'Stir Fry BM',
             holdDist:20,
             holdDir:90,
             component:false,
             trashable:false,
             process:[
-                [9,240,'Burnt Pan'],
-                [11,'Plate','Pan','Plated Stir Fry BM'],
+                [9,300,'Burnt Pan'],
+                [0,'Rice','Stir Fry BMr'],
             ],
         },{
-            name:'Plated Stir Fry',
+            name:'Stir Fry RBm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBM'],
+            ],
+        },{
+            name:'Stir Fry RMb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBM'],
+            ],
+        },{
+            name:'Stir Fry BMr',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBM'],
+            ],
+        },{
+            name:'Stir Fry RBM',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [11,'Plate','Pan','Plated Stir Fry RBM'],
+            ],
+        },{
+            name:'Plated Stir Fry R',
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7668,7 +7765,7 @@ types={
                 [7,180,'Dirty Plate'],
             ],
         },{
-            name:'Plated Stir Fry B',
+            name:'Plated Stir Fry RB',
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7678,7 +7775,7 @@ types={
                 [7,180,'Dirty Plate'],
             ],
         },{
-            name:'Plated Stir Fry M',
+            name:'Plated Stir Fry RM',
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7688,7 +7785,7 @@ types={
                 [7,180,'Dirty Plate'],
             ],
         },{
-            name:'Plated Stir Fry BM',
+            name:'Plated Stir Fry RBM',
             holdDist:20,
             holdDir:0,
             component:false,
@@ -8281,8 +8378,8 @@ types={
             list:0,
             value:'5-7',
             obj:[
-                ['Plated Stir Fry',5],
-                ['Plated Stir Fry B',7],
+                ['Plated Stir Fry R',5],
+                ['Plated Stir Fry RB',7],
             ],
             desc:'Add rice to pan, and cook.\nOptionally add chopped broccoli and cook again.\nMove to plate and serve.',
         },{
@@ -8291,8 +8388,8 @@ types={
             list:0,
             value:'+2',
             obj:[
-                ['Plated Stir Fry M',7],
-                ['Plated Stir Fry BM',9],
+                ['Plated Stir Fry RM',7],
+                ['Plated Stir Fry RBM',9],
             ],
             desc:'While making stir fry, add chopped meat to pan and cook again.',
         },
@@ -8885,7 +8982,7 @@ types={
             prereq:['Nut Roast'],
             mutex:[],
             wall:['Lemons'],
-            desc:'Adds lemon as a nut roast toppings',
+            desc:'Adds lemon as a nut roast topping',
         },{
             name:'Stuffing',
             dish:['Stuffing'],
