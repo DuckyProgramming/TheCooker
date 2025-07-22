@@ -17,7 +17,7 @@ class operation{
     transition(scene,args){
         switch(scene){
             case 'main':
-                this.level=dev.test?0:floor(random(0,types.level.length))
+                this.level=dev.test?(dev.first?0:types.level.length-1):floor(random(0,types.level.length))
                 this.entityManager.generatePlayers()
                 this.entityManager.generateLevel(types.level[this.level],0)
                 this.entityManager.spawnOptions(2,0)

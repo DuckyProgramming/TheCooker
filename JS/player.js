@@ -575,15 +575,51 @@ class player extends partisan{
                             if(this.item!=-1){
                                 switch(this.item.name){
                                     case 'Crate':
-                                        this.handLen=40
+                                        this.handLen=32
                                         this.findHandLen()
-                                        if(this.parent.spawnGridWall(this.hand,this.item.contain,[],round((this.direction.main+random(-5,5))/90)*90+180)){
+                                        let success=false
+                                        let dir=round((this.direction.main+random(-5,5))/90)*90+180
+                                        if(this.parent.spawnGridWall(this.hand,this.item.contain,[],dir)){
                                             this.item=-1
-                                        }else if(this.handLen==40){
-                                            this.handLen=48
+                                            success=true
+                                        }else if(this.handLen==32){
+                                            this.handLen=40
                                             this.findHandLen()
-                                            if(this.parent.spawnGridWall(this.hand,this.item.contain,[],round((this.direction.main+random(-5,5))/90)*90+180)){
+                                            if(this.parent.spawnGridWall(this.hand,this.item.contain,[],dir)){
                                                 this.item=-1
+                                                success=true
+                                            }else if(this.handLen==40){
+                                                this.handLen=48
+                                                this.findHandLen()
+                                                if(this.parent.spawnGridWall(this.hand,this.item.contain,[],dir)){
+                                                    this.item=-1
+                                                    success=true
+                                                }else if(this.handLen==48){
+                                                    this.handLen=56
+                                                    this.findHandLen()
+                                                    if(this.parent.spawnGridWall(this.hand,this.item.contain,[],dir)){
+                                                        this.item=-1
+                                                        success=true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(!success){
+                                            let temp=this.item
+                                            this.item=-1
+                                            this.timer.interact=15
+                                            for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                                                for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                                    if(this.collide(2,this.parent.entities.walls[a][b])){
+                                                        success=true
+                                                        this.parent.spawnGridWall(this.parent.entities.walls[a][b],temp.contain,[],dir)
+                                                        a=la
+                                                        b=lb
+                                                    }
+                                                }
+                                            }
+                                            if(!success){
+                                                this.item=temp
                                             }
                                         }
                                     break

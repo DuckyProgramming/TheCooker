@@ -105,6 +105,20 @@ class item extends located{
         }
         return result
     }
+    generalProcessBar(types,speed){
+        let result=[]
+        for(let a=0,la=this.process.length;a<la;a++){
+            if(types.includes(this.process[a].type)){
+                this.moved=true
+                this.process[a].main=max(this.process[a].main,speed*this.process[a].goal)
+                if(this.process[a].main>=this.process[a].goal){
+                    this.process[a].main=this.process[a].goal
+                    result.push(this.process[a])
+                }
+            }
+        }
+        return result
+    }
     resetProcess(types){
         for(let a=0,la=this.process.length;a<la;a++){
             if(types.includes(this.process[a].type)){
