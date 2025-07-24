@@ -3188,6 +3188,7 @@ class wall extends partisan{
                                 this.level=types.wall[this.type].level
                                 player.item=-1
                                 this.parent.reInsertWall(this)
+                                return true
                             }
                         break
                         case 'Crate':
@@ -3216,6 +3217,7 @@ class wall extends partisan{
                                 this.contain=player.item.contain
                                 this.cost=player.item.cost
                                 player.item=-1
+                                return true
                             }else if(player.item==-1){
                                 if(this.contain!=-1){
                                     let send=this.generateItem('Blueprint')
@@ -3223,6 +3225,7 @@ class wall extends partisan{
                                     send.cost=this.cost
                                     player.item=send
                                     this.contain=-1
+                                    return true
                                 }else if(this.edit){
                                     let send=this.generateItem('Crate')
                                     send.contain=this.type
@@ -3238,10 +3241,12 @@ class wall extends partisan{
                                 this.contain=player.item.contain
                                 this.cost=player.item.cost
                                 player.item=-1
+                                return true
                             }else if(player.item!=-1&&player.item.name=='Blueprint'&&this.contain2==-1&&player.item.contain==this.contain){
                                 this.contain2=player.item.contain
                                 this.cost2=player.item.cost
                                 player.item=-1
+                                return true
                             }else if(player.item==-1){
                                 if(this.contain2!=-1){
                                     let send=this.generateItem('Blueprint')
@@ -3249,12 +3254,14 @@ class wall extends partisan{
                                     send.cost=this.cost2
                                     player.item=send
                                     this.contain2=-1
+                                    return true
                                 }else if(this.contain!=-1){
                                     let send=this.generateItem('Blueprint')
                                     send.contain=this.contain
                                     send.cost=this.cost
                                     player.item=send
                                     this.contain=-1
+                                    return true
                                 }else if(this.edit){
                                     let send=this.generateItem('Crate')
                                     send.contain=this.type
@@ -3288,11 +3295,13 @@ class wall extends partisan{
                             player.item=this.generateItem('Blueprint')
                             player.item.contain=this.type
                             player.item.cost=types.wall[player.item.contain].cost
+                            return true
                         }else if(player.item.contain==findName('Sell Kit',types.wall)){
                             this.parent.emptySpot(this)
                             this.removeMark=true
                             player.item=-1
                             this.parent.operation.dayManager.payout(types.wall[this.type].cost,this.position.x,this.position.y)
+                            return true
                         }
                     }
                 break
@@ -3408,6 +3417,7 @@ class wall extends partisan{
                                         let result=this.item.attemptDoubleCombine(player.item)
                                         if(result[0]){
                                             player.item=this.generateItem(result[1])
+                                            return true
                                         }
                                     }
                                 }else if(this.item==-1){
