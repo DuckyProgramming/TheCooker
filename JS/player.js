@@ -572,6 +572,19 @@ class player extends partisan{
                                 }
                             }
                         }
+                        if(!interact&&this.handLen>8){
+                            this.handLen-=8
+                            for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                                for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                    if(this.collide(2,this.parent.entities.walls[a][b])){
+                                        interact=true
+                                        a=la
+                                        b=lb
+                                    }
+                                }
+                            }
+                            this.handLen+=8
+                        }
                         if(!interact){
                             if(this.item!=-1){
                                 switch(this.item.name){
