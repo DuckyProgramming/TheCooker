@@ -42,7 +42,7 @@ class dishManager extends manager{
             for(let b=0,lb=this.disabled[a].length;b<lb;b++){
                 for(let c=0,lc=this.obj[a].length;c<lc;c++){
                     if(this.obj[a][c][0]==this.disabled[a][b][0]){
-                        this.obj[a].push([this.disabled[a][b][1],this.disabled[a][b][2]])
+                        this.obj[a].push(this.disabled[a][b].slice(1))
                         this.disabled[a].splice(b,1)
                         b--
                         lb--

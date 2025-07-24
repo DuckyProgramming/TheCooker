@@ -63,29 +63,7 @@ class wall extends partisan{
                 this.colliders.main=[]
                 this.displayItem=[]
                 let set=[
-                    'Stir Fry r',
-                    'Stir Fry R',
-                    'Stir Fry b',
-                    'Stir Fry B',
-                    'Stir Fry m',
-                    'Stir Fry M',
-                    'Stir Fry Rb',
-                    'Stir Fry Rm',
-                    'Stir Fry Br',
-                    'Stir Fry Mr',
-                    'Stir Fry Bm',
-                    'Stir Fry Mb',
-                    'Stir Fry RB',
-                    'Stir Fry RM',
-                    'Stir Fry BM',
-                    'Stir Fry RBm',
-                    'Stir Fry RMb',
-                    'Stir Fry BMr',
-                    'Stir Fry RBM',
-                    'Plated Stir Fry R',
-                    'Plated Stir Fry RB',
-                    'Plated Stir Fry RM',
-                    'Plated Stir Fry RBM',
+                    //nothing here rn
                 ]
                 for(let a=0,la=set.length;a<la;a++){
                     this.displayItem.push(this.generateItem(set[a]))
@@ -185,6 +163,7 @@ class wall extends partisan{
             case 'Fish': case 'Meat': case 'Lettuce': case 'Tomatoes': case 'Cheese': case 'Onions': case 'Nuts': case 'Hot Dogs': case 'Hot Dog Buns': case 'Noodles':
             case 'Eggs': case 'Chocolate': case 'Milk': case 'Fish Fillet': case 'Spiny Fish': case 'Crabs': case 'Bone Meat': case 'Thick Meat': case 'Apples': case 'Garlic':
             case 'Broccoli': case 'Butter': case 'Pasta Sheet': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Macaroni': case 'Cinnamon': case 'Peppers': case 'Chicken':
+            case 'Mozzarella': case 'Basil': case 'Patties': case 'Burger Buns':
                 this.displayItem=this.generateItem(this.provide)
             break
             case 'Coffee Machine':
@@ -509,9 +488,11 @@ class wall extends partisan{
                 this.occupants[a].makeOrder(this.orderPhase,this.parent.operation.dishManager,a==chosen,this.name,firstOrder)
                 if(this.occupants[a].order.length>0){
                     if(firstOrder.length==0){
-                        firstOrder=this.occupants[a].order
+                        for(let b=0,lb=this.occupants[a].order.length;b<lb;b++){
+                            firstOrder.push([this.occupants[a].order[b].name,this.occupants[a].paying[b]])
+                        }
                     }else if(firstOrder.length==1&&this.occupants[a].order.length==2){
-                        firstOrder.push(this.occupants[a].order[1])
+                        firstOrder.push([this.occupants[a].order[1].name,this.occupants[a].paying[1]])
                     }
                     ordered=true
                 }
@@ -1670,7 +1651,7 @@ class wall extends partisan{
                         this.displayItem.fade.main=this.fade.main
                         this.displayItem.display(0)
                     break
-                    case 'Meat': case 'Hot Dogs': case 'Milk': case 'Bone Meat': case 'Thick Meat': case 'Chicken':
+                    case 'Meat': case 'Hot Dogs': case 'Milk': case 'Bone Meat': case 'Thick Meat': case 'Chicken': case 'Patties':
                         layer.fill(220,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height)
                         layer.fill(180,180,200,this.fade.main)
@@ -1684,6 +1665,7 @@ class wall extends partisan{
                         layer.rect(0,10,this.base.width,2)
                     break
                     case 'Lettuce': case 'Tomatoes': case 'Onions': case 'Apples': case 'Garlic': case 'Broccoli': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Peppers':
+                    case 'Basil':
                         layer.fill(160,100,40,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height)
                         layer.fill(130,85,40,this.fade.main)
@@ -1771,7 +1753,7 @@ class wall extends partisan{
                         layer.arc(-6,9,5,5,-10,110)
                         layer.arc(-1,14,5,5,-110,10)
                     break
-                    case 'Hot Dog Buns':
+                    case 'Hot Dog Buns': case 'Burger Buns':
                         layer.noFill()
                         layer.stroke(190,this.fade.main)
                         layer.strokeWeight(3)
@@ -1953,6 +1935,17 @@ class wall extends partisan{
                         layer.rect(0,-12,16,4,2)
                         layer.rect(-9,-12,6,5,2)
                         layer.rect(9,-12,6,5,2)
+                    break
+                    case 'Mozzarella':
+                        layer.fill(200,this.fade.main)
+                        layer.rect(0,0,this.base.width,this.base.height,4)
+                        layer.fill(160,this.fade.main)
+                        for(let a=0,la=4;a<la;a++){
+                            layer.rect(0,this.height*(-0.5+(a+1)/(la+1)),this.base.width,1)
+                            layer.rect(this.width*(-0.5+(a+1)/(la+1)),0,1,this.base.height)
+                        }
+                        this.displayItem.fade.main=this.fade.main
+                        this.displayItem.display(0)
                     break
                     //mark
                 }
@@ -2618,6 +2611,12 @@ class wall extends partisan{
                                                     case 'Bone Plate':
                                                         this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
                                                     break
+                                                    case '2 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
+                                                    break
+                                                    case '3 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
+                                                    break
                                                 }
                                             }
                                         }
@@ -2632,6 +2631,12 @@ class wall extends partisan{
                                                     break
                                                     case 'Bone Plate':
                                                         this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
+                                                    break
+                                                    case '2 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
+                                                    break
+                                                    case '3 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
                                                     break
                                                 }
                                             }
@@ -2993,7 +2998,7 @@ class wall extends partisan{
                                                     this.anim=0
                                                     obj.grabEffect(this)
                                                 }
-                                            }else if(this.item!=-1&&obj.item==-1&&this.item.name=='Batter'){
+                                            }else if(this.item!=-1&&obj.item==-1&&(this.item.name=='Batter'||this.item.name=='Chopped Potato')){
                                                 this.anim++
                                                 if(this.anim>=96){
                                                     this.anim=0
@@ -3729,7 +3734,7 @@ class wall extends partisan{
                                             this.item=-1
                                             return true
                                         }
-                                    }else if(this.item==-1&&player.item.name=='Batter'){
+                                    }else if(this.item==-1&&(player.item.name=='Batter'||player.item.name=='Chopped Potato')){
                                         this.item=player.item
                                         player.item=-1
                                         return true

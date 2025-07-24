@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,customerMult:1,overlap:true,test:false,first:true}
+dev={bound:false,customerMult:1,overlap:true,test:false,first:false}
 inputs={
     keys:[
         {
@@ -36,7 +36,6 @@ types={
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
                 [7,5,'Booking Desk',2],
-
                 //[1,3,'Displayer',0],
             ],
             inside:[0,0,0,2],
@@ -2882,6 +2881,54 @@ types={
             prereq:[0],
             desc:'Provides Chicken',
             upgrade:[],
+        },{
+            name:'Mozzarella',
+            width:30,
+            height:30,
+            spec:[1],provide:'Mozzarella',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Mozzarella',
+            upgrade:[],
+        },{
+            name:'Basil',
+            width:48,
+            height:36,
+            spec:[1],provide:'Basil',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Basil',
+            upgrade:[],
+        },{
+            name:'Patties',
+            width:40,
+            height:40,
+            spec:[1],provide:'Patty',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Patties',
+            upgrade:[],
+        },{
+            name:'Burger Buns',
+            width:40,
+            height:30,
+            spec:[1],provide:'Burger Bun',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Burger Buns',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -2982,7 +3029,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Dirty Plate'],
-                [6,60,'Bone','Dirty Plate'],
+                [6,30,'Bone','Dirty Plate'],
             ],
         },{
             name:'Bone Food Plate',
@@ -2993,7 +3040,29 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Dirty Plate'],
-                [6,60,'Bone','Food Plate'],
+                [6,30,'Bone','Food Plate'],
+            ],
+        },{
+            name:'2 Bone Plate',
+            portions:1,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Dirty Plate'],
+                [6,30,'2 Bone','Dirty Plate'],
+            ],
+        },{
+            name:'2 Bone Food Plate',
+            portions:1,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Dirty Plate'],
+                [6,30,'2 Bone','Food Plate'],
             ],
         },{
             name:'Pot',
@@ -3017,11 +3086,14 @@ types={
                 [0,'Flour','Flour in Pot'],
                 [0,'Oil','Oil in Pot'],
                 [0,'Raw Donut','Donut in Pot'],
+                [0,'Breaded Chicken','Chicken in Pot'],
                 [0,'Raw Chicken Nugget','Chicken Nugget in Pot'],
                 [0,'Rice','Rice in Pot'],
                 [0,'Cinnamon','Cinnamon in Pot'],
+                [0,'Chopped Cinnamon','Chopped Cinnamon in Pot'],
                 [0,'Milk','Milk in Pot'],
                 [0,'Pepper','Pepper in Pot'],
+                [0,'Chopped Pepper','Chopped Pepper in Pot'],
                 [0,'Chopped Potato','Chopped Potato in Pot'],
                 [0,'Chopped Onion','Chopped Onion in Pot'],
             ],
@@ -3111,6 +3183,7 @@ types={
             trashable:true,
             process:[
                 [1,120,'Cooked Mince'],
+                [0,'Cracked Egg','Patty'],
             ],
         },{
             name:'Burnt',
@@ -3809,6 +3882,7 @@ types={
             trashable:true,
             process:[
                 [1,120,'Fries'],
+                [10,240,'Hash Brown'],
             ],
         },{
             name:'Fries',
@@ -4039,6 +4113,7 @@ types={
             component:true,
             trashable:true,
             process:[
+                [2,180,'Applesauce'],
                 [0,'Sugar','Chopped Apple With Sugar'],
                 [0,'Flour','Chopped Apple With Flour'],
                 [0,'Plate','Plated Apple'],
@@ -4100,6 +4175,7 @@ types={
                 [0,'Chopped Apple','Raw Apple Pie'],
                 [0,'Cherry','Raw Cherry Pie'],
                 [0,'Caramel','Raw Caramel Pie'],
+                [0,'Melted Chocolate','Chocolate Pie'],
                 [0,'Lemon Meringue','Raw Lemon Meringue Pie'],
                 [0,'Meat','Raw Meat Pie'],
                 [0,'Meat','Raw Chopped Meat Pie'],
@@ -4167,7 +4243,7 @@ types={
             ],
         },{
             name:'Lemon',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
@@ -4176,13 +4252,14 @@ types={
             ],
         },{
             name:'Chopped Lemon',
-            holdDist:20,
+            holdDist:18,
             holdDir:0,
             component:true,
             trashable:true,
             process:[
                 [0,'Plate','Plated Lemon'],
                 [0,'Cracked Egg','Cracked Egg With Chopped Lemon'],
+                [0,'Oil','Lemon Pepper Sauce'],
             ],
         },{
             name:'Cracked Egg With Chopped Lemon',
@@ -5388,6 +5465,7 @@ types={
             trashable:true,
             process:[
                 [0,'Chopped Cheese','Raw Cheese Pizza'],
+                [0,'Chopped Mozzarella','Raw Margherita Pizza'],
             ],
         },{
             name:'Raw Cheese Pizza',
@@ -6129,6 +6207,7 @@ types={
             process:[
                 [5,'Trash','Pot'],
                 [0,'Flour','Raw Roux Pot'],
+                [0,'Chopped Pepper','Raw Buffalo Sauce'],
             ],
         },{
             name:'Flour in Pot',
@@ -6732,6 +6811,7 @@ types={
             process:[
                 [5,'Trash','Pot'],
                 [0,'Raw Donut','Raw Donut Pot'],
+                [0,'Breaded Chicken','Raw Chicken Pot'],
                 [0,'Raw Chicken Nugget','Raw Chicken Nugget Pot'],
             ],
         },{
@@ -6976,6 +7056,13 @@ types={
             trashable:true,
             process:[],
         },{
+            name:'2 Bone',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
             name:'Rice',
             holdDist:20,
             holdDir:0,
@@ -6988,7 +7075,9 @@ types={
             holdDir:0,
             component:true,
             trashable:true,
-            process:[],
+            process:[
+                [2,60,'Chopped Cinnamon'],
+            ],
         },{
             name:'Rice in Pot',
             holdDist:20,
@@ -6997,6 +7086,7 @@ types={
             trashable:true,
             process:[
                 [0,'Cinnamon','Rice Cinnamon Pot'],
+                [0,'Chopped Cinnamon','Rice Chopped Cinnamon Pot'],
                 [0,'Milk','Rice Milk Pot'],
                 [5,'Trash','Pot'],
             ],
@@ -7020,6 +7110,7 @@ types={
             process:[
                 [0,'Rice','Rice Milk Pot'],
                 [0,'Cinnamon','Cinnamon Milk Pot'],
+                [0,'Chopped Cinnamon','Chopped Cinnamon Milk Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -7050,6 +7141,7 @@ types={
             trashable:true,
             process:[
                 [0,'Cinnamon','Raw Rice Pudding'],
+                [0,'Chopped Cinnamon','Raw Chopped Rice Pudding'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -7409,7 +7501,9 @@ types={
             holdDir:90,
             component:true,
             trashable:true,
-            process:[],
+            process:[
+                [2,60,'Chopped Pepper']
+            ],
         },{
             name:'Pepper in Pot',
             holdDist:20,
@@ -7774,8 +7868,10 @@ types={
             trashable:false,
             process:[
                 [0,'Rice','Stir Fry r'],
+                [0,'Uncooked Noodles','Stir Fry n'],
                 [0,'Chopped Broccoli','Stir Fry b'],
                 [0,'Chopped Meat','Stir Fry m'],
+                [0,'Mixed Egg','Stir Fry e'],
             ],
         },{
             name:'Burnt Pan',
@@ -7805,6 +7901,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Chopped Broccoli','Stir Fry Rb'],
                 [0,'Chopped Meat','Stir Fry Rm'],
+                [0,'Mixed Egg','Stir Fry Re'],
                 [11,'Plate','Pan','Plated Stir Fry R'],
             ],
         },{
@@ -7826,6 +7923,8 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Rice','Stir Fry Br'],
                 [0,'Chopped Meat','Stir Fry Bm'],
+                [0,'Uncooked Noodles','Stir Fry Bn'],
+                [0,'Mixed Egg','Stir Fry Be'],
             ],
         },{
             name:'Stir Fry m',
@@ -7846,6 +7945,8 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Rice','Stir Fry Mr'],
                 [0,'Chopped Broccoli','Stir Fry Mb'],
+                [0,'Uncooked Noodles','Stir Fry Mn'],
+                [0,'Mixed Egg','Stir Fry Me'],
             ],
         },{
             name:'Stir Fry Rb',
@@ -7910,6 +8011,7 @@ types={
             process:[
                 [9,300,'Burnt Pan'],
                 [0,'Chopped Meat','Stir Fry RBm'],
+                [0,'Mixed Egg','Stir Fry RBe'],
                 [11,'Plate','Pan','Plated Stir Fry RB'],
             ],
         },{
@@ -7921,6 +8023,7 @@ types={
             process:[
                 [9,300,'Burnt Pan'],
                 [0,'Chopped Broccoli','Stir Fry RMb'],
+                [0,'Mixed Egg','Stir Fry RMe'],
                 [11,'Plate','Pan','Plated Stir Fry RM'],
             ],
         },{
@@ -7932,6 +8035,8 @@ types={
             process:[
                 [9,300,'Burnt Pan'],
                 [0,'Rice','Stir Fry BMr'],
+                [0,'Mixed Egg','Stir Fry BMe'],
+                [0,'Uncooked Noodles','Stir Fry BMn'],
             ],
         },{
             name:'Stir Fry RBm',
@@ -7968,6 +8073,7 @@ types={
             trashable:false,
             process:[
                 [9,300,'Burnt Pan'],
+                [0,'Mixed Egg','Stir Fry RBMe'],
                 [11,'Plate','Pan','Plated Stir Fry RBM'],
             ],
         },{
@@ -8018,8 +8124,16 @@ types={
             component:true,
             trashable:true,
             process:[
+                [0,'Flour','Breaded Chicken'],
                 [6,60,'Bone','Deboned Chicken'],
             ],
+        },{
+            name:'Breaded Chicken',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
         },{
             name:'Deboned Chicken',
             holdDist:16,
@@ -8074,7 +8188,1168 @@ types={
             component:true,
             trashable:true,
             process:[
+                [0,'Plate','Plated Chicken Nugget'],
+            ],
+        },{
+            name:'Stir Fry n',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry N'],
+            ],
+        },{
+            name:'Stir Fry N',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry Nb'],
+                [0,'Chopped Meat','Stir Fry Nm'],
+                [0,'Mixed Egg','Stir Fry Ne'],
+                [11,'Plate','Pan','Plated Stir Fry N'],
+            ],
+        },{
+            name:'Stir Fry Nb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NB'],
+            ],
+        },{
+            name:'Stir Fry Nm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NM'],
+            ],
+        },{
+            name:'Stir Fry Bn',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NB'],
+            ],
+        },{
+            name:'Stir Fry Mn',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NM'],
+            ],
+        },{
+            name:'Stir Fry NB',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Meat','Stir Fry NBm'],
+                [0,'Mixed Egg','Stir Fry NBe'],
+                [11,'Plate','Pan','Plated Stir Fry NB'],
+            ],
+        },{
+            name:'Stir Fry NM',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry NMb'],
+                [0,'Mixed Egg','Stir Fry NMe'],
+                [11,'Plate','Pan','Plated Stir Fry NM'],
+            ],
+        },{
+            name:'Stir Fry NBm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBM'],
+            ],
+        },{
+            name:'Stir Fry NMb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBM'],
+            ],
+        },{
+            name:'Stir Fry BMn',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBM'],
+            ],
+        },{
+            name:'Stir Fry NBM',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Mixed Egg','Stir Fry NBMe'],
+                [11,'Plate','Pan','Plated Stir Fry NBM'],
+            ],
+        },{
+            name:'Plated Stir Fry N',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry NB',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry NM',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry NBM',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Applesauce',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,90,''],
+            ],
+        },{
+            name:'Mozzarella',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [2,120,'Chopped Mozzarella'],
+            ],
+        },{
+            name:'Chopped Mozzarella',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Basil',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Raw Margherita Pizza',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,720,'Unseasoned Margherita Pizza'],
+            ],
+        },{
+            name:'Unseasoned Margherita Pizza',
+            holdDist:20,
+            holdDir:180,
+            component:false,
+            trashable:true,
+            process:[
+                [9,720,'Burnt'],
+                [0,'Basil','Margherita Pizza'],
+            ],
+        },{
+            name:'Margherita Pizza',
+            portions:3,
+            holdDist:20,
+            holdDir:180,
+            component:false,
+            trashable:true,
+            process:[
+                [6,60,'Margherita Pizza Slice','Margherita Pizza Slice'],
+            ],
+        },{
+            name:'Margherita Pizza Slice',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Margherita Pizza Slice'],
+            ],
+        },{
+            name:'Plated Margherita Pizza Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Chicken in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Oil','Raw Chicken Pot'],
+            ],
+        },{
+            name:'Raw Chicken Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [1,150,'Chicken Pot'],
+            ],
+        },{
+            name:'Chicken Pot',
+            portions:1,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [6,30,'Cooked Chicken','Oil in Pot'],
+            ],
+        },{
+            name:'Cooked Chicken',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Chicken'],
+            ],
+        },{
+            name:'Plated Chicken',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+                [0,'Cooked Chicken','Plated 2 Chicken'],
+                [0,'Buffalo Sauce','Plated Buffalo Chicken'],
+                [0,'Lemon Pepper Sauce','Plated Lemon Pepper Chicken'],
+            ],
+        },{
+            name:'Plated 2 Chicken',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'2 Bone Plate'],
+                [0,'Buffalo Sauce','Plated 2 Buffalo Chicken'],
+                [0,'Lemon Pepper Sauce','Plated 2 Lemon Pepper Chicken'],
+            ],
+        },{
+            name:'Chopped Pepper',
+            holdDist:16,
+            holdDir:90,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Chopped Pepper in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [0,'Butter','Raw Buffalo Sauce'],
+            ],
+        },{
+            name:'Raw Buffalo Sauce',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [1,480,'Buffalo Sauce Pot'],
+            ],
+        },{
+            name:'Buffalo Sauce Pot',
+            portions:4,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Pot'],
+                [6,30,'Buffalo Sauce','Pot'],
+            ],
+        },{
+            name:'Buffalo Sauce',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Buffalo Sauce'],
+            ],
+        },{
+            name:'Plated Buffalo Sauce',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Cooked Chicken','Plated Buffalo Chicken'],
+                [5,'Chicken Nugget','Plated Buffalo Chicken Nugget'],
+            ],
+        },{
+            name:'Plated Buffalo Chicken',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+                [0,'Cooked Chicken','Plated 2 Buffalo Chicken'],
+            ],
+        },{
+            name:'Plated 2 Buffalo Chicken',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'2 Bone Plate'],
+            ],
+        },{
+            name:'Plated Chicken Nugget',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+                [0,'Chicken Nugget','Plated 2 Chicken Nugget'],
+                [0,'Buffalo Sauce','Plated Buffalo Chicken Nugget'],
+                [0,'Lemon Pepper Sauce','Plated Lemon Pepper Chicken Nugget'],
+            ],
+        },{
+            name:'Plated 2 Chicken Nugget',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'2 Bone Plate'],
+                [0,'Buffalo Sauce','Plated 2 Buffalo Chicken Nugget'],
+                [0,'Lemon Pepper Sauce','Plated 2 Lemon Pepper Chicken Nugget'],
+            ],
+        },{
+            name:'Plated Buffalo Chicken Nugget',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+                [0,'Chicken Nugget','Plated 2 Buffalo Chicken Nugget'],
+            ],
+        },{
+            name:'Plated 2 Buffalo Chicken Nugget',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'2 Bone Plate'],
+            ],
+        },{
+            name:'Hash Brown',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,90,''],
+            ],
+        },{
+            name:'Chocolate Pie',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [9,240,'Burnt'],
+                [3,120,'Chocolate Pudding Pie'],
+            ],
+        },{
+            name:'Chocolate Pudding Pie',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
                 [7,180,''],
+            ],
+        },{
+            name:'Stir Fry e',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry E'],
+            ],
+        },{
+            name:'Stir Fry E',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Rice','Stir Fry Er'],
+                [0,'Chopped Broccoli','Stir Fry Eb'],
+                [0,'Chopped Meat','Stir Fry Em'],
+                [0,'Uncooked Noodles','Stir Fry En'],
+            ],
+        },{
+            name:'Stir Fry Er',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RE'],
+            ],
+        },{
+            name:'Stir Fry Re',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RE'],
+            ],
+        },{
+            name:'Stir Fry En',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NE'],
+            ],
+        },{
+            name:'Stir Fry Ne',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NE'],
+            ],
+        },{
+            name:'Stir Fry Eb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry BE'],
+            ],
+        },{
+            name:'Stir Fry Be',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry BE'],
+            ],
+        },{
+            name:'Stir Fry Em',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry ME'],
+            ],
+        },{
+            name:'Stir Fry Me',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry ME'],
+            ],
+        },{
+            name:'Stir Fry RE',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry REb'],
+                [0,'Chopped Meat','Stir Fry REm'],
+                [11,'Plate','Pan','Plated Stir Fry RE'],
+            ],
+        },{
+            name:'Stir Fry NE',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry NEb'],
+                [0,'Chopped Meat','Stir Fry NEm'],
+                [11,'Plate','Pan','Plated Stir Fry NE'],
+            ],
+        },{
+            name:'Stir Fry BE',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Rice','Stir Fry BEr'],
+                [0,'Chopped Meat','Stir Fry BEm'],
+                [0,'Uncooked Noodles','Stir Fry BEn'],
+            ],
+        },{
+            name:'Stir Fry ME',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Rice','Stir Fry MEr'],
+                [0,'Chopped Broccoli','Stir Fry MEb'],
+                [0,'Uncooked Noodles','Stir Fry MEn'],
+            ],
+        },{
+            name:'Stir Fry BMe',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry BME'],
+            ],
+        },{
+            name:'Stir Fry BEm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry BME'],
+            ],
+        },{
+            name:'Stir Fry MEb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry BME'],
+            ],
+        },{
+            name:'Stir Fry RBe',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBE'],
+            ],
+        },{
+            name:'Stir Fry REb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBE'],
+            ],
+        },{
+            name:'Stir Fry BEr',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBE'],
+            ],
+        },{
+            name:'Stir Fry RMe',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RME'],
+            ],
+        },{
+            name:'Stir Fry REm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RME'],
+            ],
+        },{
+            name:'Stir Fry MEr',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RME'],
+            ],
+        },{
+            name:'Stir Fry NBe',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBE'],
+            ],
+        },{
+            name:'Stir Fry NEb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBE'],
+            ],
+        },{
+            name:'Stir Fry BEn',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBE'],
+            ],
+        },{
+            name:'Stir Fry NMe',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NME'],
+            ],
+        },{
+            name:'Stir Fry NEm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NME'],
+            ],
+        },{
+            name:'Stir Fry MEn',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NME'],
+            ],
+        },{
+            name:'Stir Fry BME',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Rice','Stir Fry BMEr'],
+                [0,'Uncooked Noodles','Stir Fry BMEn'],
+            ],
+        },{
+            name:'Stir Fry RBE',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Meat','Stir Fry RBEm'],
+                [11,'Plate','Pan','Plated Stir Fry RBE'],
+            ],
+        },{
+            name:'Stir Fry RME',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry RMEb'],
+                [11,'Plate','Pan','Plated Stir Fry RME'],
+            ],
+        },{
+            name:'Stir Fry NBE',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Meat','Stir Fry NBEm'],
+                [11,'Plate','Pan','Plated Stir Fry NBE'],
+            ],
+        },{
+            name:'Stir Fry NME',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [0,'Chopped Broccoli','Stir Fry NMEb'],
+                [11,'Plate','Pan','Plated Stir Fry NME'],
+            ],
+        },{
+            name:'Stir Fry BMEr',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBME'],
+            ],
+        },{
+            name:'Stir Fry BMEn',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBME'],
+            ],
+        },{
+            name:'Stir Fry RBEm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBME'],
+            ],
+        },{
+            name:'Stir Fry RMEb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBME'],
+            ],
+        },{
+            name:'Stir Fry RBMe',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry RBME'],
+            ],
+        },{
+            name:'Stir Fry NBEm',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBME'],
+            ],
+        },{
+            name:'Stir Fry NMEb',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBME'],
+            ],
+        },{
+            name:'Stir Fry NBMe',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [1,180,'Stir Fry NBME'],
+            ],
+        },{
+            name:'Stir Fry RBME',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [11,'Plate','Pan','Plated Stir Fry RBME'],
+            ],
+        },{
+            name:'Stir Fry NBME',
+            holdDist:20,
+            holdDir:90,
+            component:false,
+            trashable:false,
+            process:[
+                [9,300,'Burnt Pan'],
+                [11,'Plate','Pan','Plated Stir Fry NBME'],
+            ],
+        },{
+            name:'Plated Stir Fry RE',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry NE',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry RBE',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry RME',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry NBE',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry NME',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry RBME',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Stir Fry NBME',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Chopped Cinnamon',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Chopped Apple','Raw Apple Rings'],
+            ],
+        },{
+            name:'Raw Apple Rings',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [1,120,'Apple Rings'],
+            ],
+        },{
+            name:'Apple Rings',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [9,180,'Burnt'],
+                [7,180,''],
+            ],
+        },{
+            name:'Chopped Cinnamon in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Rice','Rice Chopped Cinnamon Pot'],
+                [0,'Milk','Chopped Cinnamon Milk Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Rice Chopped Cinnamon Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Milk','Raw Chopped Rice Pudding'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Chopped Cinnamon Milk Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Rice','Raw Chopped Rice Pudding'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Raw Chopped Rice Pudding',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,480,'Rice Pudding Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Patty',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [1,240,'Unbunned Burger'],
+            ],
+        },{
+            name:'Burger Bun',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Burger Bun'],
+            ],
+        },{
+            name:'Unbunned Burger',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [9,240,'Burnt'],
+                [0,'Plate','Plated Unbunned Burger'],
+                [0,'Burger Bun','Burger'],
+            ],
+        },{
+            name:'Plated Burger Bun',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+                [0,'Unbunned Burger','Plated Burger'],
+            ],
+        },{
+            name:'Plated Unbunned Burger',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+                [0,'Burger Bun','Plated Burger'],
+            ],
+        },{
+            name:'Burger',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Burger'],
+            ],
+        },{
+            name:'Plated Burger',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Lemon Pepper Sauce',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Lemon Pepper Sauce'],
+            ],
+        },{
+            name:'Plated Lemon Pepper Sauce',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Cooked Chicken','Plated Lemon Pepper Chicken'],
+                [5,'Chicken Nugget','Plated Lemon Pepper Chicken Nugget'],
+            ],
+        },{
+            name:'Plated Lemon Pepper Chicken',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+                [0,'Cooked Chicken','Plated 2 Lemon Pepper Chicken'],
+            ],
+        },{
+            name:'Plated 2 Lemon Pepper Chicken',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'2 Bone Plate'],
+            ],
+        },{
+            name:'Plated Lemon Pepper Chicken Nugget',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+                [0,'Chicken Nugget','Plated 2 Lemon Pepper Chicken Nugget'],
+            ],
+        },{
+            name:'Plated 2 Lemon Pepper Chicken Nugget',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'2 Bone Plate'],
             ],
         },
         //mark
@@ -8145,7 +9420,7 @@ types={
                 ['Plated Medium Bone Steak',5],
                 ['Plated Well Done Bone Steak',5],
             ],
-            desc:'Cook meat to desired level and serve.\nLeaves a bone on the Plated afterward.',
+            desc:'Cook meat to desired level and serve.\nLeaves a bone on the plate afterward.',
         },{
             name:'Thick Steak',
             group:'Steak',
@@ -8252,6 +9527,24 @@ types={
         },
 
         {
+            name:'Burger',
+            group:'Burger',
+            list:0,
+            value:'4',
+            obj:[
+                ['Plated Burger',4],
+            ],
+            desc:'Cook patty.\nAdd to bun and serve.',
+        },{
+            name:'Patty',
+            group:'Patty',
+            list:0,
+            value:'0',
+            obj:[],
+            desc:'Chop meat, crack egg, combine.\nContinue with making burger.',
+        },
+
+        {
             name:'Toast',
             group:'Toast',
             list:0,
@@ -8310,6 +9603,15 @@ types={
             ],
             desc:'Add chopped meat to pizza before cooking.',
         },{
+            name:'Margherita Pizza',
+            group:'Pizza',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated Margherita Pizza Slice',6],
+            ],
+            desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce and mozzarella.\nCook, add basil, portion, and serve.',
+        },{
             name:'Calzone',
             group:'Pizza',
             list:0,
@@ -8317,7 +9619,7 @@ types={
             obj:[
                 ['Plated Calzone',9],
             ],
-            desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce, cheese, and a cracked egg.\nKnead to wrap, then cook and serve.',
+            desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce, chopped cheese, and a cracked egg.\nKnead to wrap, then cook and serve.',
         },
 
         {
@@ -8600,7 +9902,7 @@ types={
             desc:'Add rice to pan, and cook.\nOptionally add chopped broccoli and cook again.\nMove to plate and serve.',
         },{
             name:'Steak Stir Fry',
-            group:'Steak Stir Fry',
+            group:'Stir Fry',
             list:0,
             value:'+2',
             obj:[
@@ -8608,6 +9910,74 @@ types={
                 ['Plated Stir Fry RBM',9],
             ],
             desc:'While making stir fry, add chopped meat to pan and cook again.',
+        },{
+            name:'Egg Stir Fry',
+            group:'Stir Fry',
+            list:0,
+            value:'+2',
+            obj:[
+                ['Plated Stir Fry RE',7],
+                ['Plated Stir Fry RBE',9],
+                ['Plated Stir Fry RM','Plated Stir Fry RME',9],
+                ['Plated Stir Fry RBM','Plated Stir Fry RBME',11],
+            ],
+            desc:'While making stir fry, add egg mixed twice to pan and cook again.',
+        },{
+            name:'Noodle Stir Fry',
+            group:'Stir Fry',
+            list:0,
+            value:'5-7',
+            obj:[
+                ['Plated Stir Fry N',5],
+                ['Plated Stir Fry NB',7],
+                ['Plated Stir Fry RM','Plated Stir Fry NM',7],
+                ['Plated Stir Fry RBM','Plated Stir Fry NBM',9],
+                ['Plated Stir Fry RE','Plated Stir Fry NE',7],
+                ['Plated Stir Fry RBE','Plated Stir Fry NBE',9],
+                ['Plated Stir Fry RME','Plated Stir Fry NME',9],
+                ['Plated Stir Fry RBME','Plated Stir Fry NBME',11],
+            ],
+            desc:'While making stir fry, add noodles instead of rice.',
+        },
+
+        {
+            name:'Fried Chicken',
+            group:'Fried Chicken',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated 2 Chicken',6],
+            ],
+            desc:'Add oil and chicken to pot.\nCook and portion chicken out, then add to plate.\nRepeat with another piece of chicken, and serve.\nLeaves bones on the plate afterward.',
+        },{
+            name:'Chicken Nuggets',
+            group:'Chicken',
+            list:0,
+            value:'8',
+            obj:[
+                ['Plated 2 Chicken Nugget',8],
+            ],
+            desc:'Portion bone from chicken and discard.\nAdd oil and chicken to pot.\nCook and portion chicken out, then add to plate.\nRepeat with another piece of chicken, and serve.',
+        },{
+            name:'Buffalo Chicken',
+            group:'Chicken',
+            list:0,
+            value:'+1',
+            obj:[
+                ['Plated 2 Buffalo Chicken',7],
+                ['Plated 2 Chicken Nugget','Plated 2 Buffalo Chicken Nugget',9],
+            ],
+            desc:'Add chopped pepper and butter to pot and cook.\nPortion and add to plate.',
+        },{
+            name:'Lemon Pepper Chicken',
+            group:'Chicken',
+            list:0,
+            value:'+1',
+            obj:[
+                ['Plated 2 Lemon Pepper Chicken',7],
+                ['Plated 2 Chicken Nugget','Plated 2 Lemon Pepper Chicken Nugget',9],
+            ],
+            desc:'Combine oil and chopped lemon.\nAdd to plate with chicken.',
         },
         
         {
@@ -8725,6 +10095,14 @@ types={
             ],
             desc:'Chop potato, then cook and serve.',
         },{
+            name:'Hash Brown',
+            list:2,
+            value:'2',
+            obj:[
+                ['Hash Brown',2],
+            ],
+            desc:'Chop potato and cook in waffle iron, then serve.',
+        },{
             name:'Onion Rings',
             list:2,
             value:'2',
@@ -8757,13 +10135,13 @@ types={
             ],
             desc:'Crack egg, then mix it.\nPlace in pot and cook.\nPortion and serve.',
         },{
-            name:'Chicken Nugget',
+            name:'Applesauce',
             list:2,
-            value:'3',
+            value:'1',
             obj:[
-                ['Chicken Nugget',3],
+                ['Applesauce',1],
             ],
-            desc:'Portion bone from chicken and throw away.\nAdd flour to deboned chicken.\nAdd oil and chicken to pot and cook.\nPortion chicken out of pot and serve.',
+            desc:'Chop apple twice and serve.',
         },
 
         {
@@ -8791,6 +10169,14 @@ types={
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook sugar to make caramel.\nAdd caramel to pastry and cook again.',
         },{
+            name:'Chocolate Pudding Pie',
+            list:3,
+            value:'3',
+            obj:[
+                ['Chocolate Pudding Pie',3],
+            ],
+            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook chocolate to melt it.\nAdd melted chocolate to pastry and mix.',
+        },{
             name:'Lemon Meringue Pie',
             list:3,
             value:'4',
@@ -8806,6 +10192,14 @@ types={
                 ['Apple Crisp',2],
             ],
             desc:'Combine chopped apple, sugar and flour.\nCook and serve.',
+        },{
+            name:'Apple Rings',
+            list:3,
+            value:'2',
+            obj:[
+                ['Apple Rings',2],
+            ],
+            desc:'Combine chopped apple and chopped cinnamaon.\nCook and serve.',
         },{
             name:'Rice Pudding',
             list:3,
@@ -8887,6 +10281,16 @@ types={
             mutex:[],
             wall:['Lettuce','Tomatoes','Starter Sink','Starter Plates'],
             desc:'Adds salads, with or without tomato, as a main dish',
+        },{
+            name:'Burgers',
+            dish:['Burger'],
+            list:0,
+            rate:[1,'4'],
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Starter Hob','Burger Buns','Patties','Starter Sink','Starter Plates'],
+            desc:'Adds burgers as a main dish',
         },{
             name:'Toast',
             dish:['Toast'],
@@ -8987,6 +10391,16 @@ types={
             mutex:[],
             wall:['Rice','Broccoli','Pans','Starter Hob','Starter Hob','Starter Sink','Starter Plates'],
             desc:'Adds stir fry as a main dish',
+        },{
+            name:'Fried Chicken',
+            dish:['Fried Chicken'],
+            list:0,
+            rate:[3,'6'],
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Starter Hob','Chicken','Flour','Oil','Pots','Starter Sink','Starter Plates'],
+            desc:'Adds fried chicken as a main dish',
         },
 
         {
@@ -9100,6 +10514,16 @@ types={
             wall:['Garlic','Flour','Oven'],
             desc:'Consists of lettuce, garlic, and breadcrumbs',
         },{
+            name:'Fresh Patties',
+            dish:['Patty'],
+            list:0,
+            rate:[2,'0'],
+            customerMult:0.8,
+            prereq:['Burgers'],
+            mutex:[],
+            wall:['Meat','Eggs','-Patties'],
+            desc:'Make patties yourself',
+        },{
             name:'Egg Toast',
             dish:['Egg Toast'],
             list:1,
@@ -9139,6 +10563,16 @@ types={
             mutex:[],
             wall:['Meat'],
             desc:'Adds meat as a pizza topping',
+        },{
+            name:'Margherita Pizza',
+            dish:['Margherita Pizza'],
+            list:1,
+            rate:[2,'6'],
+            customerMult:0.8,
+            prereq:['Pizza'],
+            mutex:[],
+            wall:['Mozzarella','Basil'],
+            desc:'Pizza with mozzarella and basil',
         },{
             name:'Calzones',
             dish:['Calzone'],
@@ -9369,6 +10803,56 @@ types={
             mutex:[],
             wall:['Meat'],
             desc:'Adds chopped meat as a possible stir fry component',
+        },{
+            name:'Egg Stir Fry',
+            dish:['Egg Stir Fry'],
+            list:1,
+            rate:[1,'+2'],
+            customerMult:0.8,
+            prereq:['Stir Fry'],
+            mutex:[],
+            wall:['Eggs'],
+            desc:'Adds mixed egg as a possible stir fry component',
+        },{
+            name:'Noodle Stir Fry',
+            dish:['Noodle Stir Fry'],
+            list:1,
+            rate:[1,'5-7'],
+            customerMult:0.8,
+            prereq:['Stir Fry'],
+            mutex:[],
+            wall:['Noodles'],
+            desc:'Adds noodles as a stir fry base',
+        },{
+            name:'Chicken Nuggets',
+            dish:['Chicken Nuggets'],
+            list:1,
+            rate:[0,''],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:[],
+            desc:'Adds chicken nuggets as a main dish',
+        },{
+            name:'Buffalo Chicken',
+            dish:['Buffalo Chicken'],
+            list:1,
+            rate:[1,'+1'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Peppers','Butter'],
+            desc:'Adds buffalo sauce as a chicken topping',
+        },{
+            name:'Lemon Pepper Chicken',
+            dish:['Lemon Pepper Chicken'],
+            list:1,
+            rate:[1,'+1'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Lemons'],
+            desc:'Adds lemon pepper sauce as a chicken topping',
         },
         
         {
@@ -9514,6 +10998,16 @@ types={
             wall:['Starter Hob','Potatoes'],
             desc:'Adds fries as a side',
         },{
+            name:'Hash Browns',
+            dish:['Hash Brown'],
+            list:3,
+            rate:[1,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Waffle Iron','Potatoes'],
+            desc:'Adds hash browns as a side',
+        },{
             name:'Onion Rings',
             dish:['Onion Rings'],
             list:3,
@@ -9554,15 +11048,15 @@ types={
             wall:['Starter Hob','Pots','Eggs'],
             desc:'Adds scrambled eggs as a side',
         },{
-            name:'Chicken Nuggets',
-            dish:['Chicken Nugget'],
+            name:'Applesauce',
+            dish:['Applesauce'],
             list:3,
-            rate:[3,'3'],
+            rate:[1,'1'],
             customerMult:0.8,
             prereq:[],
             mutex:[],
-            wall:['Starter Hob','Chicken','Flour','Oil','Pots'],
-            desc:'Adds chicken nuggets as a side',
+            wall:['Apples'],
+            desc:'Adds applesauce as a side',
         },
 
         {
@@ -9596,6 +11090,16 @@ types={
             wall:['Oven','Flour','Sugar'],
             desc:'Adds caramel pie as a dessert',
         },{
+            name:'Chocolate Pudding Pie',
+            dish:['Chocolate Pudding Pie'],
+            list:4,
+            rate:[2,'3'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Oven','Flour','Chocolate','Starter Hob'],
+            desc:'Adds chocolate pudding pie as a dessert',
+        },{
             name:'Lemon Meringue Pie',
             dish:['Lemon Meringue Pie'],
             list:4,
@@ -9615,6 +11119,16 @@ types={
             mutex:[],
             wall:['Oven','Flour','Sugar','Apples'],
             desc:'Adds apple crisp as a dessert',
+        },{
+            name:'Apple Rings',
+            dish:['Apple Rings'],
+            list:4,
+            rate:[2,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Oven','Cinnamon','Apples'],
+            desc:'Adds apple rings as a dessert',
         },{
             name:'Rice Pudding',
             dish:['Rice Pudding'],

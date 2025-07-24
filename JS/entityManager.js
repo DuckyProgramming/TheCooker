@@ -253,37 +253,53 @@ class entityManager extends manager{
     sendPackages(set){
         let possible=this.getEmptyGrid(1)
         for(let a=0,la=set.length;a<la;a++){
-            let inside=findName(set[a],types.wall)
-            let total=1
-            while(a<la-1&&set[a]==set[a+1]){
-                a++
-                total++
-            }
-            if(set[a]!='Tin'){
+            if(set[a][0]=='-'){
+                let inside=findName(set[a].substr(1),types.wall)
                 for(let b=0,lb=this.entities.walls.length;b<lb;b++){
                     for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
                         if(
                             this.entities.walls[b][c].type==inside||
-                            this.entities.walls[b][c].spec.includes(0)&&set[a]=='Starter Hob'||
-                            this.entities.walls[b][c].spec.includes(2)&&set[a]=='Starter Sink'||
                             this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside&&dev.overlap
                         ){
-                            total--
+                            this.entities.walls[b][c].removeMark=true
+                        }else if(this.entities.walls[b][c].name=='Blueprint'&&this.entities.walls[b][c].contain==inside){
+                            this.entities.walls[b][c]=this.blueprintManager.getOptions(0,[0,1])
                         }
                     }
                 }
-            }
-            let edit=false
-            while(total>0){
-                let index=floor(random(0,possible.length))
-                let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(possible[index][1]+0.5),this.tileset[1]*(possible[index][0]+0.5),[possible[index][0]*2+1,possible[index][1]*2+1],-1,-1,findName('Crate',types.wall)),0)
-                this.entities.walls[0][pos].contain=inside
-                this.grid[possible[index][0]*2+1][possible[index][1]*2+1]=1
-                possible.splice(index,1)
-                total--
-            }
-            if(edit){
-                this.updateLadderTrigger=true
+            }else{
+                let inside=findName(set[a],types.wall)
+                let total=1
+                while(a<la-1&&set[a]==set[a+1]){
+                    a++
+                    total++
+                }
+                if(set[a]!='Tin'){
+                    for(let b=0,lb=this.entities.walls.length;b<lb;b++){
+                        for(let c=0,lc=this.entities.walls[b].length;c<lc;c++){
+                            if(
+                                this.entities.walls[b][c].type==inside||
+                                this.entities.walls[b][c].spec.includes(0)&&set[a]=='Starter Hob'||
+                                this.entities.walls[b][c].spec.includes(2)&&set[a]=='Starter Sink'||
+                                this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside&&dev.overlap
+                            ){
+                                total--
+                            }
+                        }
+                    }
+                }
+                let edit=false
+                while(total>0){
+                    let index=floor(random(0,possible.length))
+                    let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(possible[index][1]+0.5),this.tileset[1]*(possible[index][0]+0.5),[possible[index][0]*2+1,possible[index][1]*2+1],-1,-1,findName('Crate',types.wall)),0)
+                    this.entities.walls[0][pos].contain=inside
+                    this.grid[possible[index][0]*2+1][possible[index][1]*2+1]=1
+                    possible.splice(index,1)
+                    total--
+                }
+                if(edit){
+                    this.updateLadderTrigger=true
+                }
             }
         }
     }

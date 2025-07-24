@@ -35,11 +35,18 @@ class blueprintManager extends manager{
         return result
     }
     addEnabled(wall){
-        let type=findName(wall,types.wall)
-        if(!this.enabled.includes(type)){
-            this.enabled.push(type)
-            if(types.wall[type].spec.includes(0)){
-                this.trigger.heat=true
+        if(wall[0]=='-'){
+            let type=findName(wall.substr(1),types.wall)
+            if(this.enabled.includes(type)){
+                this.enabled.splice(this.enabled.indexOf(type),1)
+            }
+        }else{
+            let type=findName(wall,types.wall)
+            if(!this.enabled.includes(type)){
+                this.enabled.push(type)
+                if(types.wall[type].spec.includes(0)){
+                    this.trigger.heat=true
+                }
             }
         }
     }

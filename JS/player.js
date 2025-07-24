@@ -145,63 +145,64 @@ class player extends partisan{
         this.order=[]
         this.paying=[]
         let index
+        let obj
         let offset=tableName=='Metal Table'?3:0
         switch(orderPhase){
             case 0:
                 if(floor(random(0,menu.obj[1].length+(1+offset)))>offset||activate){
-                    index=floor(random(0,menu.obj[1].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[1][index][0],types.item)))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[1])
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu.obj[1][index][1])
+                    this.paying.push(obj[1])
                 }
             break
             case 1:
                 index=floor(random(0,menu.mains.length))
-                let obj=randin(menu.mains[index].obj)
-                this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(obj[0],types.item)))
+                obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.mains[index].obj)
+                this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                 last(this.order).fade.main=0
                 last(this.order).fade.trigger=false
                 last(this.order).size=0.8
                 this.paying.push(obj[1])
                 if(floor(random(0,menu.obj[2].length+(1+offset)))>offset){
-                    index=floor(random(0,menu.obj[2].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1].type:findName(menu.obj[2][index][0],types.item)))
+                    obj=tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1]:randin(menu.obj[2])
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu.obj[2][index][1])
+                    this.paying.push(obj[1])
                 }
             break
             case 2:
                 if(floor(random(0,menu.obj[3].length+(1+offset)))>offset||menu.obj[0].length<=0){
-                    index=floor(random(0,menu.obj[3].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[3][index][0],types.item)))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[3])
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu.obj[3][index][1])
+                    this.paying.push(obj[1])
                 }
             break
             case 3:
                 if(floor(random(0,menu.obj[4].length+(1+offset)))>offset){
-                    index=floor(random(0,menu.obj[4].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[4][index][0],types.item)))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[4])
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu.obj[4][index][1])
+                    this.paying.push(obj[1])
                 }
             break
             case 4:
                 if(floor(random(0,menu.obj[5].length+(1+offset)))>offset){
-                    index=floor(random(0,menu.obj[5].length))
-                    this.order.push(new item(this.layer,this.parent,0,0,tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0].type:findName(menu.obj[5][index][0],types.item)))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[5])
+                    this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
                     last(this.order).size=0.8
-                    this.paying.push(menu.obj[5][index][1])
+                    this.paying.push(obj[1])
                 }
             break
         }

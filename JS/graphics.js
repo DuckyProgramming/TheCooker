@@ -162,7 +162,12 @@ function displayScene(layer,scene){
 					}
 				}
 			}
-			possible=range(0,types.dish.length)
+			possible=[]
+			for(let a=0,la=types.dish.length;a<la;a++){
+				if(types.dish[a].obj.length>0){
+					possible.push(a)
+				}
+			}
 			for(let a=0,la=8;a<la;a++){
 				for(let b=0,lb=9;b<lb;b++){
 					let index=floor(random(0,possible.length))

@@ -99,6 +99,7 @@ function findName(name,list){
 			return a
 		}
 	}
+    print(name)
 	return -1
 }
 function updateMouse(layer,scale){
