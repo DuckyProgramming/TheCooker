@@ -142,7 +142,7 @@ class wall extends partisan{
                 this.speed=0.4
                 this.animSet={num:0}
             break
-            case 'Dish Washer':
+            case 'Dishwasher':
                 this.speed=0.2
                 this.animSet={num:0,close:0}
             break
@@ -282,7 +282,7 @@ class wall extends partisan{
                 this.base.plates=4
                 this.washed=false
             break
-            case 'Dish Washer':
+            case 'Dishwasher':
                 this.plates=0
                 this.base.plates=4
                 this.washed=false
@@ -676,7 +676,14 @@ class wall extends partisan{
                         layer.fill(240,this.fade.main)
                         layer.noStroke()
                         layer.textSize(7.5)
-                        layer.text(types.wall[this.contain].name,0,0,this.base.width)
+                        let named=types.wall[this.contain].name
+                        if(named.includes(' ')){
+                            layer.text(named,0,0,this.base.width-5)
+                        }else{
+                            layer.textWrap(CHAR)
+                            layer.text(named,0,0,this.base.width-5)
+                            layer.textWrap(WORD)
+                        }
                     break
                     case 'Option':
                         layer.fill(200,this.fade.main)
@@ -690,7 +697,7 @@ class wall extends partisan{
                         layer.fill(0,this.fade.main)
                         layer.noStroke()
                         layer.textSize(7.5)
-                        layer.text(['Begin','Practice','Reroll','End Practice'][this.contain],0,0,this.base.width)
+                        layer.text(['Begin','Practice','Reroll','End Practice'][this.contain],0,0,this.base.width-5)
                     break
                     case 'Displayer':
                         for(let a=0,la=this.displayItem.length;a<la;a++){
@@ -1213,7 +1220,7 @@ class wall extends partisan{
                         layer.rect(-7,-10,3,4)
                         layer.rect(7,-10,3,4)
                     break
-                    case 'Dish Washer':
+                    case 'Dishwasher':
                         layer.fill(200,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height,8)
                         layer.stroke(180,this.fade.main)
@@ -2005,7 +2012,7 @@ class wall extends partisan{
                         layer.fill(220,this.fade.main)
                         layer.rect(0,-11,9,12,3)
                     break
-                    case 'Dish Washer':
+                    case 'Dishwasher':
                         layer.translate(0,-6.5+14*this.animSet.close)
                         layer.noStroke()
                         layer.fill(220,this.fade.main)
@@ -2113,7 +2120,7 @@ class wall extends partisan{
                     break
                     case 'Starter Plates': case 'Plates': case 'Large Plates':
                     case 'Dish Rack': case 'Large Dish Rack':
-                    case 'Wash Basin': case 'Dish Washer':
+                    case 'Wash Basin': case 'Dishwasher':
                         layer.fill(225,this.fade.main*this.animSet.num)
                         layer.rect(-16,-16,12,12,4)
                         layer.fill(0,this.fade.main*this.animSet.num)
@@ -2266,7 +2273,7 @@ class wall extends partisan{
             case 'Wash Basin':
                 this.animSet.num=smoothAnim(this.animSet.num,this.plates>0,0,1,5)
             break
-            case 'Dish Washer':
+            case 'Dishwasher':
                 this.animSet.num=smoothAnim(this.animSet.num,this.plates>0,0,1,5)
                 this.animSet.close=smoothAnim(this.animSet.close,this.cycle>0,0,1,5)
                 if(this.cycle>0){
@@ -2411,7 +2418,7 @@ class wall extends partisan{
                             la--
                         }
                     }
-                    if(this.occupants.length==0){
+if(this.occupants.length==0){
                         this.occupied=false
                     }
                     switch(this.operation.phase){
@@ -2428,7 +2435,7 @@ class wall extends partisan{
                                     this.occupants[a].stop=true
                                 }
                                 this.makeOrders()
-                                this.parent.operation.dayManager.patience.restore+=60
+                                this.parent.operation.dayManager.patience.restore+=75
                             }else if(this.operation.timer>300){
                                 this.occupied=false
                                 for(let a=0,la=this.occupants.length;a<la;a++){
@@ -2452,7 +2459,7 @@ class wall extends partisan{
                                 this.item.fade.trigger=false
                                 if(this.item.fade.main<=0){
                                     this.item=-1
-                                    this.patience.restore=600
+                                    this.patience.restore=750
                                 }
                             }
                             if(this.patience.restore>0){
@@ -2895,7 +2902,7 @@ class wall extends partisan{
                                             }
                                         }
                                     break
-                                    case 'Dish Washer':
+                                    case 'Dishwasher':
                                         if(obj.cycle==0){
                                             if(this.item==-1&&obj.item!=-1&&obj.item.name=='Plate'){
                                                 this.activating++
@@ -2991,7 +2998,7 @@ class wall extends partisan{
                                     break
                                     case 'Waffle Iron':
                                         if(obj.cycle==0){
-                                            if(this.item==-1&&obj.item!=-1){
+                                            if(this.item==-1&&obj.item!=-1&&obj.item.name!='Batter'&&obj.item.name!='Chopped Potato'){
                                                 this.activating++
                                                 if(this.activating>12){
                                                     this.activating=0
@@ -3083,7 +3090,7 @@ class wall extends partisan{
                                             }
                                         }
                                     break
-                                    case 'Dish Washer':
+                                    case 'Dishwasher':
                                         if(obj.cycle==0){
                                             if(this.item!=-1&&obj.item!=-1&&this.item.fade.trigger&&this.item.checkCombine(obj.item)&&obj.plates<=1){
                                                 this.anim+=2
@@ -3270,6 +3277,14 @@ class wall extends partisan{
                                     this.remove=true
                                     return true
                                 }
+                            }
+                        break
+                        case 'Trash Can':
+                            if(player.item!=-1){
+                                if(!player.item.checkUtility('Trash')){
+                                    player.item=-1
+                                }
+                                return true
                             }
                         break
                         default:
@@ -3542,7 +3557,9 @@ class wall extends partisan{
                         break
                         case 'Starter Sink': case 'Sink':  case 'Soaking Sink': case 'Power Sink': case 'Rinsing Sink':
                             if(player.item!=-1){
-                                if(!player.item.checkUtility('Water')){
+                                if(player.item.checkUtility('Water')){
+                                    return true
+                                }else{
                                     if(this.item!=-1){
                                         if(this.item.attemptCombine(player.item)){
                                             player.item=-1
@@ -3564,7 +3581,9 @@ class wall extends partisan{
                         break
                         case 'Wash Basin':
                             if(player.item!=-1){
-                                if(!player.item.checkUtility('Water')){
+                                if(player.item.checkUtility('Water')){
+                                    return true
+                                }else{
                                     if(this.item!=-1){
                                         if(player.item.attemptCombine(this.item)){
                                             if(this.plates>1){
@@ -3609,10 +3628,12 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Dish Washer':
+                        case 'Dishwasher':
                             if(this.cycle==0){
                                 if(player.item!=-1){
-                                    if(!player.item.checkUtility('Water')){
+                                    if(player.item.checkUtility('Water')){
+                                        return true
+                                    }else{
                                         if(this.item!=-1){
                                             if(player.item.attemptCombine(this.item)){
                                                 if(this.plates>1){
@@ -3939,7 +3960,7 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Starter Hob': case 'Hob': case 'Fast Hob':
+                        case 'Starter Hob': case 'Hob': case 'Fast Hob': case 'Safe Hob':
                             if(this.item!=-1){
                                 this.item.moved=false
                                 let result=this.item.generalProcess([2,3],1)
@@ -4047,7 +4068,7 @@ class wall extends partisan{
                                 player.item.checkUtility('Water')
                             }
                         break
-                        case 'Dish Washer':
+                        case 'Dishwasher':
                             if(this.cycle<=0){
                                 this.cycle=600
                             }

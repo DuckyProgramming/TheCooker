@@ -153,7 +153,7 @@ function displayScene(layer,scene){
 		case 0:
 			layer.fill(180)
 			layer.rect(layer.width/2,layer.height/2,layer.width,layer.height)
-			layer.fill(160)
+			layer.fill(165,165,195)
 			tileset=30
 			for(let a=0,la=layer.width/tileset;a<la;a++){
 				for(let b=0,lb=layer.height/tileset;b<lb;b++){
@@ -181,7 +181,7 @@ function displayScene(layer,scene){
 		case 1:
 			layer.fill(180)
 			layer.rect(layer.width/2,layer.height/2,layer.width,layer.height)
-			layer.fill(160)
+			layer.fill(165,165,195)
 			tileset=30
 			for(let a=0,la=layer.width/tileset;a<la;a++){
 				for(let b=0,lb=layer.height/tileset;b<lb;b++){

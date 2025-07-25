@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,customerMult:1,overlap:true,test:false,first:false}
+dev={bound:false,customerMult:1,overlap:true,test:true,first:false}
 inputs={
     keys:[
         {
@@ -876,7 +876,7 @@ types={
         },{
             floor:[
                 [[0,-2,0,0]],
-                [[0,-7,0,0],[3,-6,0,0],[10,-5,0,0]],
+                [[0,-7,0,0],[3,-6,0,0],[10,-5,0,0],[0,-5,10,0]],
             ],wall:[
                 [19,5,'Starter Trash Bin',0],
                 [5,5,'Blueprint Cabinet',0],
@@ -1412,7 +1412,7 @@ types={
         },{
             floor:[
                 [[0,-2,0,0]],
-                [[-7,-5,0,0],[-4,-8,0,0]],
+                [[-7,-4,0,0],[-4,-8,0,0]],
             ],wall:[
                 [9,3,'Starter Trash Bin',0],
                 [15,5,'Blueprint Cabinet',2],
@@ -2267,7 +2267,7 @@ types={
             edit:true,
             level:1,
             rarity:1,
-            cost:20,
+            cost:10,
             prereq:[],
             desc:'Remove an appliance and get back its full price',
             upgrade:[],
@@ -2640,7 +2640,7 @@ types={
             desc:'Wash the first part of plates very quickly and get water',
             upgrade:['Soaking Sink','Wash Basin','Power Sink','Dishwasher'],
         },{
-            name:'Dish Washer',
+            name:'Dishwasher',
             width:36,
             height:36,
             spec:[],
@@ -4438,7 +4438,7 @@ types={
             trashable:true,
             process:[
                 [6,30,'Spring Roll','Spring Roll'],
-                [9,90,'Burnt'],
+                [9,150,'Burnt'],
             ],
         },{
             name:'Spring Roll',
@@ -8576,6 +8576,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry R'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry R',
@@ -8589,6 +8590,7 @@ types={
                 [0,'Chopped Meat','Stir Fry Rm'],
                 [0,'Mixed Egg','Stir Fry Re'],
                 [11,'Plate','Pan','Plated Stir Fry R'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry b',
@@ -8598,6 +8600,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry B'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry B',
@@ -8611,6 +8614,7 @@ types={
                 [0,'Chopped Meat','Stir Fry Bm'],
                 [0,'Uncooked Noodles','Stir Fry Bn'],
                 [0,'Mixed Egg','Stir Fry Be'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry m',
@@ -8620,6 +8624,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry M'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry M',
@@ -8633,6 +8638,7 @@ types={
                 [0,'Chopped Broccoli','Stir Fry Mb'],
                 [0,'Uncooked Noodles','Stir Fry Mn'],
                 [0,'Mixed Egg','Stir Fry Me'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Rb',
@@ -8642,6 +8648,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RB'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Rm',
@@ -8651,6 +8658,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Br',
@@ -8660,6 +8668,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RB'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Mr',
@@ -8669,6 +8678,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Bm',
@@ -8678,6 +8688,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry BM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Mb',
@@ -8687,6 +8698,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry BM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RB',
@@ -8699,6 +8711,7 @@ types={
                 [0,'Chopped Meat','Stir Fry RBm'],
                 [0,'Mixed Egg','Stir Fry RBe'],
                 [11,'Plate','Pan','Plated Stir Fry RB'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RM',
@@ -8711,6 +8724,7 @@ types={
                 [0,'Chopped Broccoli','Stir Fry RMb'],
                 [0,'Mixed Egg','Stir Fry RMe'],
                 [11,'Plate','Pan','Plated Stir Fry RM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BM',
@@ -8723,6 +8737,7 @@ types={
                 [0,'Rice','Stir Fry BMr'],
                 [0,'Mixed Egg','Stir Fry BMe'],
                 [0,'Uncooked Noodles','Stir Fry BMn'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RBm',
@@ -8732,6 +8747,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RMb',
@@ -8741,6 +8757,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BMr',
@@ -8750,6 +8767,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RBM',
@@ -8761,6 +8779,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Mixed Egg','Stir Fry RBMe'],
                 [11,'Plate','Pan','Plated Stir Fry RBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Plated Stir Fry R',
@@ -8884,6 +8903,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry N'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry N',
@@ -8897,6 +8917,7 @@ types={
                 [0,'Chopped Meat','Stir Fry Nm'],
                 [0,'Mixed Egg','Stir Fry Ne'],
                 [11,'Plate','Pan','Plated Stir Fry N'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Nb',
@@ -8906,6 +8927,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NB'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Nm',
@@ -8915,6 +8937,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Bn',
@@ -8924,6 +8947,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NB'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Mn',
@@ -8933,6 +8957,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NB',
@@ -8945,6 +8970,7 @@ types={
                 [0,'Chopped Meat','Stir Fry NBm'],
                 [0,'Mixed Egg','Stir Fry NBe'],
                 [11,'Plate','Pan','Plated Stir Fry NB'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NM',
@@ -8957,6 +8983,7 @@ types={
                 [0,'Chopped Broccoli','Stir Fry NMb'],
                 [0,'Mixed Egg','Stir Fry NMe'],
                 [11,'Plate','Pan','Plated Stir Fry NM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NBm',
@@ -8966,6 +8993,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NMb',
@@ -8975,6 +9003,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BMn',
@@ -8984,6 +9013,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NBM',
@@ -8995,6 +9025,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Mixed Egg','Stir Fry NBMe'],
                 [11,'Plate','Pan','Plated Stir Fry NBM'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Plated Stir Fry N',
@@ -9235,8 +9266,9 @@ types={
             component:false,
             trashable:true,
             process:[
-                [5,'Cooked Chicken','Plated Buffalo Chicken'],
-                [5,'Chicken Nugget','Plated Buffalo Chicken Nugget'],
+                [5,'Trash','Plate'],
+                [0,'Cooked Chicken','Plated Buffalo Chicken'],
+                [0,'Chicken Nugget','Plated Buffalo Chicken Nugget'],
             ],
         },{
             name:'Plated Buffalo Chicken',
@@ -9341,6 +9373,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry E'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry E',
@@ -9354,6 +9387,7 @@ types={
                 [0,'Chopped Broccoli','Stir Fry Eb'],
                 [0,'Chopped Meat','Stir Fry Em'],
                 [0,'Uncooked Noodles','Stir Fry En'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Er',
@@ -9363,6 +9397,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Re',
@@ -9372,6 +9407,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry En',
@@ -9381,6 +9417,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Ne',
@@ -9390,6 +9427,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Eb',
@@ -9399,6 +9437,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry BE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Be',
@@ -9408,6 +9447,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry BE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Em',
@@ -9417,6 +9457,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry ME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry Me',
@@ -9426,6 +9467,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry ME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RE',
@@ -9438,6 +9480,7 @@ types={
                 [0,'Chopped Broccoli','Stir Fry REb'],
                 [0,'Chopped Meat','Stir Fry REm'],
                 [11,'Plate','Pan','Plated Stir Fry RE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NE',
@@ -9450,6 +9493,7 @@ types={
                 [0,'Chopped Broccoli','Stir Fry NEb'],
                 [0,'Chopped Meat','Stir Fry NEm'],
                 [11,'Plate','Pan','Plated Stir Fry NE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BE',
@@ -9462,6 +9506,7 @@ types={
                 [0,'Rice','Stir Fry BEr'],
                 [0,'Chopped Meat','Stir Fry BEm'],
                 [0,'Uncooked Noodles','Stir Fry BEn'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry ME',
@@ -9474,6 +9519,7 @@ types={
                 [0,'Rice','Stir Fry MEr'],
                 [0,'Chopped Broccoli','Stir Fry MEb'],
                 [0,'Uncooked Noodles','Stir Fry MEn'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BMe',
@@ -9483,6 +9529,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry BME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BEm',
@@ -9492,6 +9539,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry BME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry MEb',
@@ -9501,6 +9549,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry BME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RBe',
@@ -9510,6 +9559,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry REb',
@@ -9519,6 +9569,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BEr',
@@ -9528,6 +9579,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RMe',
@@ -9537,6 +9589,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry REm',
@@ -9546,6 +9599,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry MEr',
@@ -9555,6 +9609,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NBe',
@@ -9564,6 +9619,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NEb',
@@ -9573,6 +9629,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BEn',
@@ -9582,6 +9639,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NMe',
@@ -9591,6 +9649,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NEm',
@@ -9600,6 +9659,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry MEn',
@@ -9609,6 +9669,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BME',
@@ -9620,6 +9681,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Rice','Stir Fry BMEr'],
                 [0,'Uncooked Noodles','Stir Fry BMEn'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RBE',
@@ -9631,6 +9693,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Chopped Meat','Stir Fry RBEm'],
                 [11,'Plate','Pan','Plated Stir Fry RBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RME',
@@ -9642,6 +9705,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Chopped Broccoli','Stir Fry RMEb'],
                 [11,'Plate','Pan','Plated Stir Fry RME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NBE',
@@ -9653,6 +9717,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Chopped Meat','Stir Fry NBEm'],
                 [11,'Plate','Pan','Plated Stir Fry NBE'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NME',
@@ -9664,6 +9729,7 @@ types={
                 [9,300,'Burnt Pan'],
                 [0,'Chopped Broccoli','Stir Fry NMEb'],
                 [11,'Plate','Pan','Plated Stir Fry NME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BMEr',
@@ -9673,6 +9739,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry BMEn',
@@ -9682,6 +9749,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RBEm',
@@ -9691,6 +9759,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RMEb',
@@ -9700,6 +9769,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RBMe',
@@ -9709,6 +9779,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry RBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NBEm',
@@ -9718,6 +9789,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NMEb',
@@ -9727,6 +9799,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NBMe',
@@ -9736,6 +9809,7 @@ types={
             trashable:false,
             process:[
                 [1,180,'Stir Fry NBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry RBME',
@@ -9746,6 +9820,7 @@ types={
             process:[
                 [9,300,'Burnt Pan'],
                 [11,'Plate','Pan','Plated Stir Fry RBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Stir Fry NBME',
@@ -9756,6 +9831,7 @@ types={
             process:[
                 [9,300,'Burnt Pan'],
                 [11,'Plate','Pan','Plated Stir Fry NBME'],
+                [5,'Trash','Pan'],
             ],
         },{
             name:'Plated Stir Fry RE',
@@ -9992,8 +10068,9 @@ types={
             component:false,
             trashable:true,
             process:[
-                [5,'Cooked Chicken','Plated Lemon Pepper Chicken'],
-                [5,'Chicken Nugget','Plated Lemon Pepper Chicken Nugget'],
+                [0,'Cooked Chicken','Plated Lemon Pepper Chicken'],
+                [0,'Chicken Nugget','Plated Lemon Pepper Chicken Nugget'],
+                [5,'Trash','Plate'],
             ],
         },{
             name:'Plated Lemon Pepper Chicken',
@@ -11513,9 +11590,9 @@ types={
             name:'Chicken Nuggets',
             dish:['Chicken Nuggets'],
             list:1,
-            rate:[0,''],
+            rate:[3,'8'],
             customerMult:0.8,
-            prereq:[],
+            prereq:['Fried Chicken'],
             mutex:[],
             wall:[],
             desc:'Adds chicken nuggets as a main dish',
@@ -11525,7 +11602,7 @@ types={
             list:1,
             rate:[1,'+1'],
             customerMult:0.8,
-            prereq:[],
+            prereq:['Fried Chicken'],
             mutex:[],
             wall:['Starter Hob','Peppers','Butter'],
             desc:'Adds buffalo sauce as a chicken topping',
@@ -11535,7 +11612,7 @@ types={
             list:1,
             rate:[1,'+1'],
             customerMult:0.8,
-            prereq:[],
+            prereq:['Fried Chicken'],
             mutex:[],
             wall:['Starter Hob','Lemons'],
             desc:'Adds lemon pepper sauce as a chicken topping',

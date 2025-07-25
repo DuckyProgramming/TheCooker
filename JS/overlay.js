@@ -51,6 +51,15 @@ class overlay extends located{
                             this.anim.push(0)
                         }
                     break
+                    case 5:
+                        let possible=range(0,60)
+                        for(let a=0,la=3;a<la;a++){
+                            let value=possible.splice(floor(random(0,possible.length)),1)[0]
+                            this.cards.push(new layout(this.layer,this.parent.operation.entityManager,even(a,la)*240,20,value))
+                            this.support.push([])
+                            this.anim.push(0)
+                        }
+                    break
                     default:
                         result=this.parent.operation.cardManager.getOptions(args[0],[3,this.franchise])
                         for(let a=0,la=result.length;a<la;a++){
@@ -94,7 +103,17 @@ class overlay extends located{
                 layer.stroke(0,this.fade.main)
                 layer.strokeWeight(2)
                 layer.textSize(60)
-                layer.text('Choose Card',0,-120)
+                switch(this.setupArgs[0]){
+                    case 4:
+                        layer.text('Choose Appliance',0,-120)
+                    break
+                    case 5:
+                        layer.text('Choose Layout',0,-120)
+                    break
+                    default:
+                        layer.text('Choose Card',0,-120)
+                    break
+                }
                 for(let a=0,la=this.cards.length;a<la;a++){
                     this.cards[a].display()
                     layer.fill(225,this.fade.main)
@@ -106,7 +125,7 @@ class overlay extends located{
                     layer.ellipse(this.cards[a].position.x-60,this.cards[a].position.y+130,22)
                     displaySymbol(layer,this.cards[a].position.x-60,this.cards[a].position.y+130,0,[-180,-90,0,90][a],0.9,[0,0,0],this.fade.main)
                     for(let b=0,lb=this.support[a].length;b<lb;b++){
-                        layer.fill(...this.parent.operation.entityManager.entities.players[this.support[a][b]].color.skin.body,this.fade.main)
+                        layer.fill(...types.cosmetic.color[this.parent.operation.player[this.support[a][b]].color].skin.body,this.fade.main)
                         layer.ellipse(this.cards[a].position.x-36+b*21,this.cards[a].position.y+130,16)
                     }
                 }
@@ -294,6 +313,16 @@ class overlay extends located{
                                     this.parent.operation.updateFranchise(this.franchise)
                                     this.parent.operation.transition('menu',[])
                                 break
+                                case 5:
+                                    this.parent.operation.level=this.cards[a].type
+                                    if(this.parent.operation.franchise.current.length==0){
+                                        this.parent.operation.transition('main',[])
+                                        this.revive=0
+                                    }else{
+                                        this.parent.operation.transition('main',[])
+                                        this.parent.operation.loadFranchise(this.parent.operation.franchise.current)
+                                    }
+                                break
                                 default:
                                     this.parent.operation.cardManager.addCard(this.cards[a].type)
                                 break
@@ -357,17 +386,15 @@ class overlay extends located{
                                     case 2:
                                         this.active=false
                                         this.parent.operation.generatePlayers(this.players)
-                                        this.parent.operation.transition('main',[])
-                                        this.parent.activate(0,[0])
+                                        this.parent.activate(0,[5])
                                     break
                                     case 3:
                                         this.active=false
+                                        this.parent.operation.generatePlayers(this.players)
                                         if(this.parent.operation.franchise.active.length>0){
                                             this.parent.activate(4,[])
-                                            this.parent.operation.generatePlayers(this.players)
                                         }else{
-                                            this.parent.operation.transition('main',[])
-                                            this.parent.activate(0,[0])
+                                            this.parent.activate(0,[5])
                                         }
                                     break
                                 }
@@ -389,6 +416,17 @@ class overlay extends located{
                                     this.parent.activate(0,[2])
                                 break
                             }
+                        }
+                    }
+                }
+            break
+            case 4:
+                for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
+                    for(let b=0,lb=4;b<lb;b++){
+                        if(inputs.keys[a].tap[2]&&a==0||inputs.keys[a].tap[3]&&a==la-1||(inputs.keys[a].tap[0]||inputs.keys[a].tap[1])&&a==(la-1)/2){
+                            this.active=false
+                            this.parent.activate(0,[5])
+                            this.parent.operation.franchise.current=this.parent.operation.franchise.active[a]
                         }
                     }
                 }
@@ -431,6 +469,16 @@ class overlay extends located{
                                     this.parent.operation.updateFranchise(this.franchise)
                                     this.parent.operation.transition('menu',[])
                                 break
+                                case 5:
+                                    this.parent.operation.level=this.cards[a].type
+                                    if(this.parent.operation.franchise.current.length==0){
+                                        this.parent.operation.transition('main',[])
+                                        this.revive=0
+                                    }else{
+                                        this.parent.operation.transition('main',[])
+                                        this.parent.operation.loadFranchise(this.parent.operation.franchise.current)
+                                    }
+                                break
                                 default:
                                     this.parent.operation.cardManager.addCard(this.cards[a].type)
                                 break
@@ -460,8 +508,7 @@ class overlay extends located{
                     if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+55},width:125,height:40})){
                         this.active=false
                         this.parent.operation.generatePlayers(this.players)
-                        this.parent.operation.transition('main',[])
-                        this.parent.activate(0,[0])
+                        this.parent.activate(0,[5])
                     }
                     if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+102.5},width:125,height:40})&&this.parent.operation.franchise.active.length>0){
                         this.active=false
@@ -469,8 +516,8 @@ class overlay extends located{
                     }
                     if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+150},width:125,height:40})&&this.parent.operation.franchise.active.length>0){
                         this.active=false
-                        this.parent.activate(4,[])
                         this.parent.operation.generatePlayers(this.players)
+                        this.parent.activate(4,[])
                     }
                 break
                 case 3:
@@ -490,8 +537,8 @@ class overlay extends located{
                     for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
                         if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+even(a,la)*112.5},width:485,height:105})){
                             this.active=false
-                            this.parent.operation.transition('main',[])
-                            this.parent.operation.loadFranchise(this.parent.operation.franchise.active[a])
+                            this.parent.activate(0,[5])
+                            this.parent.operation.franchise.current=this.parent.operation.franchise.active[a]
                         }
                     }
                 break

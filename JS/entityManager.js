@@ -15,7 +15,7 @@ class entityManager extends manager{
         }
         this.customer={internal:0,groupSizeMin:1,groupSizeMax:2,group:0,queue:[],cooldown:0}
         this.index={player:0,wall:0,group:0}
-        this.reroll={cost:10}
+        this.reroll={cost:10,tick:0}
         this.updateLadderTrigger=false
     }
     generatePlayers(){
@@ -171,6 +171,10 @@ class entityManager extends manager{
         this.entities.walls.forEach(set=>set.forEach(wall=>wall.beginDay()))
     }
     endDay(){
+        this.reroll.tick=0
+        if(this.reroll.cost>=20){
+            this.reroll.cost-=10
+        }
         this.entities.walls.forEach(set=>set.forEach(wall=>wall.endDay()))
     }
     hasWall(type){
@@ -472,8 +476,9 @@ class entityManager extends manager{
         }
     }
     rerollBlueprints(){
+        this.reroll.tick++
         this.clearWalls(['Option'])
-        this.spawnBlueprints(this.clearWalls(['Blueprint']),3)
+        this.spawnBlueprints(this.clearWalls(['Blueprint']),this.reroll.tick==1?3:this.reroll.tick==2?5:this.reroll.tick+3)
     }
     spawnGridWall(loc,type,args,direction){
         for(let a=0,la=(this.grid.length-1)/2;a<la;a++){

@@ -1,5 +1,24 @@
-add 10 maps lol
-
 august update
 
-64/64/128
+4 maps
+
+4 walls
+gasser - boosts the speed of hobs, sinks, and mixers
+cutlery - instantly ends eating phase
+floor buffer
+auto buffer
+
+8 cards
+
+[main]
+[variant]
+[variant]
+[variant]
+
+starters:
+pumpkin soup
+roasted pumpkin seeds
+
+premiership:
+variety - add a random main dish
+automator - get automation items more often
