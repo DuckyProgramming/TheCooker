@@ -22,21 +22,26 @@ class player extends partisan{
         this.follower=-1
         this.speed=0.4
         this.base.speed=this.speed
-        if(this.id==-1){
-            this.side=-1
-            this.follow=-1
-            this.oldFollow=-1
-            this.mode=0
-            this.orderPhase=0
-            this.order=[]
-            this.paying=[]
-            this.angle=0
-            this.timer.angle=0
-            this.timer.angleCap=random(15,30)
-            this.axis=floor(random(0,2))
-            this.touch=false
-            this.stop=false
-            this.groupIndex=0
+        switch(this.id){
+            case -1:
+                this.side=-1
+                this.follow=-1
+                this.oldFollow=-1
+                this.mode=0
+                this.orderPhase=0
+                this.order=[]
+                this.paying=[]
+                this.angle=0
+                this.timer.angle=0
+                this.timer.angleCap=random(15,30)
+                this.axis=floor(random(0,2))
+                this.touch=false
+                this.stop=false
+                this.groupIndex=0
+            break
+            default:
+                this.tempItem=-1
+            break
         }
     }
     scale(value){
@@ -560,7 +565,8 @@ class player extends partisan{
                         }
                     }
                     if(inputKeys.tap[4]&&!process){
-                        if(!handLenChecked){
+                        if(this.handLen==30){
+                            this.handLen=36
                             this.findHandLen()
                         }
                         for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
@@ -582,6 +588,19 @@ class player extends partisan{
                                         b=lb
                                     }
                                 }
+                            }
+                            if(!interact&&this.handLen>8){
+                                this.handLen-=8
+                                for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                                    for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                        if(this.collide(2,this.parent.entities.walls[a][b])){
+                                            interact=true
+                                            a=la
+                                            b=lb
+                                        }
+                                    }
+                                }
+                                this.handLen+=8
                             }
                             this.handLen+=8
                         }
@@ -609,9 +628,8 @@ class player extends partisan{
                                         }
                                         if(!success){
                                             this.handLen=min(cap,48)-8
-                                            let temp=this.item
+                                            this.tempItem=this.item
                                             this.item=-1
-                                            this.timer.interact=15
                                             for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                                                 for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
                                                     if(
@@ -620,15 +638,34 @@ class player extends partisan{
                                                         this.collide(2,this.parent.entities.walls[a][b])
                                                     ){
                                                         success=true
-                                                        this.parent.spawnGridWall(this.parent.entities.walls[a][b],temp.contain,[],dir)
+                                                        this.parent.spawnGridWall(this.parent.entities.walls[a][b],this.tempItem.contain,[],dir)
                                                         a=la
                                                         b=lb
                                                     }
                                                 }
                                             }
-                                            if(!success){
-                                                this.item=temp
+                                            if(!success&&this.handLen>8){
+                                                this.handLen-=8
+                                                for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                                                    for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                                        if(
+                                                            (this.parent.entities.walls[a][b].edit||this.parent.entities.walls[a][b].name=='Crate'||this.parent.entities.walls[a][b].name=='Blueprint')&&
+                                                            this.parent.checkSpawnWall(this.parent.entities.walls[a][b])&&
+                                                            this.collide(2,this.parent.entities.walls[a][b])
+                                                        ){
+                                                            success=true
+                                                            this.parent.spawnGridWall(this.parent.entities.walls[a][b],this.tempItem.contain,[],dir)
+                                                            a=la
+                                                            b=lb
+                                                        }
+                                                    }
+                                                }
+                                                if(!success){
+                                                    this.item=this.tempItem
+                                                }
                                             }
+                                            this.tempItem=-1
+                                            this.timer.interact=15
                                         }
                                     break
                                     case 'Blueprint':
@@ -649,26 +686,44 @@ class player extends partisan{
                                         }
                                         if(!success){
                                             this.handLen=min(cap,48)-8
-                                            let temp=this.item
+                                            this.tempItem=this.item
                                             this.item=-1
-                                            this.timer.interact=15
                                             for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                                                 for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
                                                     if(
                                                         (this.parent.entities.walls[a][b].edit||this.parent.entities.walls[a][b].name=='Crate'||this.parent.entities.walls[a][b].name=='Blueprint')&&
-                                                        this.parent.checkSpawnWall(this.parent.entities.walls[a][b])&&
+                                                        (this.parent.entities.walls[a][b].name.includes('Cabinet')||this.parent.checkSpawnWall(this.parent.entities.walls[a][b]))&&
                                                         this.collide(2,this.parent.entities.walls[a][b])
                                                     ){
                                                         success=true
-                                                        this.parent.spawnGridWall(this.parent.entities.walls[a][b],findName('Blueprint',types.wall),[[0,temp.contain,temp.cost]],0)
+                                                        this.parent.spawnGridWall(this.parent.entities.walls[a][b],findName('Blueprint',types.wall),[[0,this.tempItem.contain,this.tempItem.cost]],0)
                                                         a=la
                                                         b=lb
                                                     }
                                                 }
                                             }
-                                            if(!success){
-                                                this.item=temp
+                                            if(!success&&this.handLen>8){
+                                                this.handLen-=8
+                                                for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                                                    for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                                        if(
+                                                            (this.parent.entities.walls[a][b].edit||this.parent.entities.walls[a][b].name=='Crate'||this.parent.entities.walls[a][b].name=='Blueprint')&&
+                                                            (this.parent.entities.walls[a][b].name.includes('Cabinet')||this.parent.checkSpawnWall(this.parent.entities.walls[a][b]))&&
+                                                            this.collide(2,this.parent.entities.walls[a][b])
+                                                        ){
+                                                            success=true
+                                                            this.parent.spawnGridWall(this.parent.entities.walls[a][b],findName('Blueprint',types.wall),[[0,this.tempItem.contain,this.tempItem.cost]],0)
+                                                            a=la
+                                                            b=lb
+                                                        }
+                                                    }
+                                                }
+                                                if(!success){
+                                                    this.item=this.tempItem
+                                                }
                                             }
+                                            this.tempItem=-1
+                                            this.timer.interact=15
                                         }
                                     break
                                 }

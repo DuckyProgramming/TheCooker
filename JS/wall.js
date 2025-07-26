@@ -3166,9 +3166,11 @@ class wall extends partisan{
                     case 'Trash Can': case 'Flour': case 'Nuts': case 'Potatoes': case 'Bonito': case 'Cocoa Powder': case 'Miso': case 'Rice': case 'Small Table':
                         return distPos(obj,this)<this.radius
                     case 'Dining Table': case 'Fancy Table': case 'Metal Table': case 'Simple Table':
-                        return inPointBox(obj,{position:this.position,width:this.width+10,height:this.height+10})
+                        return inPointBox(obj,{position:this.position,width:this.width+12,height:this.height+12})
                     case 'Booking Desk':
-                        return inPointBox(obj,{position:this.position,width:this.width+5,height:this.height+5})
+                        return inPointBox(obj,{position:this.position,width:this.width+6,height:this.height+6})
+                    case 'Starter Trash Bin':
+                        return inPointBox(obj,{position:this.position,width:this.width+4,height:this.height+4})
                     case 'High Wall': case 'Wall':
                         return inPointBox(obj,{position:this.position,width:max(this.width,this.width*0.5+this.height*0.5),height:max(this.width*0.5+this.height*0.5,this.height)})
                     default:
@@ -3225,6 +3227,10 @@ class wall extends partisan{
                                     send.cost=this.cost
                                     player.item=send
                                     this.contain=-1
+                                    if(player.tempItem!=-1&&player.tempItem.name=='Blueprint'){
+                                        this.contain=player.tempItem.contain
+                                        this.cost=player.tempItem.cost
+                                    }
                                     return true
                                 }else if(this.edit){
                                     let send=this.generateItem('Crate')

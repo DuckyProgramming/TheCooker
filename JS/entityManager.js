@@ -345,11 +345,15 @@ class entityManager extends manager{
         this.customer.queue=[]
     }
     queuing(){
+        if(this.customer.queue.length>0){
+            return true
+        }
         for(let a=0,la=this.entities.players.length;a<la;a++){
             if(this.entities.players[a].id==-1&&(this.entities.players[a].mode==-1||this.entities.players[a].mode==0)&&this.entities.players[a].timer.main>300&&this.entities.players[a].follower==-1){
                 return true
             }
         }
+        return false
     }
     clearCustomer(){
         for(let a=0,la=this.entities.players.length;a<la;a++){

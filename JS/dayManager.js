@@ -242,7 +242,7 @@ class dayManager extends manager{
                                 this.patience.fail=true
                                 this.operation.entityManager.queueFail()
                             }
-                        }else{
+                        }else if(this.patience.anim<=0){
                             this.patience.main=this.patience.base
                         }
                     break

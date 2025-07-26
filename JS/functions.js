@@ -356,6 +356,15 @@ function checkValid(){
         }
     }
 }
+function checkLevel(){
+    for(let a=0,la=types.level.length;a<la;a++){
+        for(let b=0,lb=types.level[a].wall.length;b<lb;b++){
+            if(types.level[a].map[types.level[a].wall[b][1]][types.level[a].wall[b][0]]!=' '){
+                print(types.level[a].id,types.level[a].wall[b][2])
+            }
+        }
+    }
+}
 function summon(item){
     current.entityManager.entities.players[0].item=current.entityManager.entities.walls[0][0].generateItem(item)
 }
