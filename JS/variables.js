@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,customerMult:1,overlap:true,test:true,first:false}
+dev={bound:false,customerMult:1,overlap:true,test:false,first:false}
 inputs={
     keys:[
         {
@@ -364,7 +364,7 @@ types={
                 [[0,-2,0,0]],
                 [[0,-8,0,0],[8,-5,0,0]],
             ],wall:[
-                [1,5,'Starter Trash Bin',0],
+                [7,1,'Starter Trash Bin',0],
                 [21,17,'Blueprint Cabinet',1],
                 [3,17,'Booking Desk',2],
             ],
@@ -2087,6 +2087,7 @@ types={
         */
         {
             name:'',
+            blueprint:['',7.5],
             width:0,
             height:0,
             spec:[],
@@ -2101,6 +2102,7 @@ types={
         
         {
             name:'Sidewalk',
+            blueprint:['Sidewalk',7.5],
             width:0,
             height:0,
             spec:[],
@@ -2113,6 +2115,7 @@ types={
             upgrade:[],
         },{
             name:'Floor',
+            blueprint:['Floor',7.5],
             width:0,
             height:0,
             spec:[],
@@ -2125,6 +2128,7 @@ types={
             upgrade:[],
         },{
             name:'Kitchen Floor',
+            blueprint:['Kitchen Floor',7.5],
             width:0,
             height:0,
             spec:[],
@@ -2137,6 +2141,7 @@ types={
             upgrade:[],
         },{
             name:'High Wall',
+            blueprint:['High Wall',7.5],
             width:8,
             height:8,
             spec:[],
@@ -2149,6 +2154,7 @@ types={
             upgrade:[],
         },{
             name:'Wall',
+            blueprint:['Wall',7.5],
             width:12,
             height:12,
             spec:[],
@@ -2161,6 +2167,7 @@ types={
             upgrade:[],
         },{
             name:'Trash Can',
+            blueprint:['Trash Can',7.5],
             width:36,
             height:36,
             spec:[],
@@ -2175,6 +2182,7 @@ types={
 
         {
             name:'Crate',
+            blueprint:['Crate',7.5],
             width:30,
             height:30,
             spec:[],
@@ -2187,6 +2195,7 @@ types={
             upgrade:[],
         },{
             name:'Blueprint',
+            blueprint:['Blueprint',7.5],
             width:36,
             height:36,
             spec:[],
@@ -2199,6 +2208,7 @@ types={
             upgrade:[],
         },{
             name:'Option',
+            blueprint:['Option',7.5],
             width:36,
             height:36,
             spec:[],
@@ -2211,6 +2221,7 @@ types={
             upgrade:[],
         },{
             name:'Displayer',
+            blueprint:['Displayer',7.5],
             width:36,
             height:36,
             spec:[],
@@ -2225,6 +2236,7 @@ types={
 
         {
             name:'Upgrade Kit',
+            blueprint:['Upgrade Kit',7.5],
             width:30,
             height:24,
             spec:[],
@@ -2237,6 +2249,7 @@ types={
             upgrade:[],
         },{
             name:'Drill Kit',
+            blueprint:['Drill Kit',7.5],
             width:30,
             height:24,
             spec:[],
@@ -2249,6 +2262,7 @@ types={
             upgrade:[],
         },{
             name:'Deconstruction Kit',
+            blueprint:['Decon\nstruction Kit',7.5],
             width:30,
             height:24,
             spec:[],
@@ -2261,6 +2275,7 @@ types={
             upgrade:[],
         },{
             name:'Sell Kit',
+            blueprint:['Sell Kit',7.5],
             width:30,
             height:24,
             spec:[],
@@ -2275,6 +2290,7 @@ types={
         
         {
             name:'Blueprint Cabinet',
+            blueprint:['Blueprint Cabinet',7.5],
             width:30,
             height:30,
             spec:[],
@@ -2287,6 +2303,7 @@ types={
             upgrade:['Upgrade Cabinet','Discount Cabinet','Generator Cabinet','Copy Cabinet'],
         },{
             name:'Upgrade Cabinet',
+            blueprint:['Upgrade Cabinet',7.5],
             width:30,
             height:30,
             spec:[],
@@ -2299,6 +2316,7 @@ types={
             upgrade:['Discount Cabinet','Generator Cabinet','Copy Cabinet'],
         },{
             name:'Discount Cabinet',
+            blueprint:['Discount Cabinet',7.5],
             width:30,
             height:30,
             spec:[],
@@ -2311,6 +2329,7 @@ types={
             upgrade:['Upgrade Cabinet','Generator Cabinet','Copy Cabinet'],
         },{
             name:'Generator Cabinet',
+            blueprint:['Generator Cabinet',7.5],
             width:30,
             height:30,
             spec:[],
@@ -2323,6 +2342,7 @@ types={
             upgrade:['Upgrade Cabinet','Discount Cabinet','Copy Cabinet'],
         },{
             name:'Copy Cabinet',
+            blueprint:['Copy Cabinet',7.5],
             width:30,
             height:30,
             spec:[],
@@ -2337,6 +2357,7 @@ types={
         
         {
             name:'Dining Table',
+            blueprint:['Dining Table',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2349,6 +2370,7 @@ types={
             upgrade:['Fancy Table','Small Table','Metal Table','Simple Table'],
         },{
             name:'Fancy Table',
+            blueprint:['Fancy Table',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2361,6 +2383,7 @@ types={
             upgrade:['Small Table','Metal Table','Simple Table'],
         },{
             name:'Small Table',
+            blueprint:['Small Table',7.5],
             width:36,
             height:36,
             spec:[],
@@ -2373,6 +2396,7 @@ types={
             upgrade:['Fancy Table','Metal Table','Simple Table'],
         },{
             name:'Metal Table',
+            blueprint:['Metal Table',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2385,6 +2409,7 @@ types={
             upgrade:['Fancy Table','Small Table','Simple Table'],
         },{
             name:'Simple Table',
+            blueprint:['Simple Table',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2399,6 +2424,7 @@ types={
         
         {
             name:'Counter',
+            blueprint:['Counter',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2411,6 +2437,7 @@ types={
             upgrade:['Freezer','Cutting Board','Rolling Board','Portioning Board','Mixer','Levitating Counter'],
         },{
             name:'Freezer',
+            blueprint:['Freezer',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2423,6 +2450,7 @@ types={
             upgrade:['Cutting Board','Rolling Board','Portioning Board','Mixer','Levitating Counter'],
         },{
             name:'Cutting Board',
+            blueprint:['Cutting Board',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2435,6 +2463,7 @@ types={
             upgrade:['Swiss Army Board'],
         },{
             name:'Rolling Board',
+            blueprint:['Rolling Board',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2447,6 +2476,7 @@ types={
             upgrade:['Swiss Army Board'],
         },{
             name:'Portioning Board',
+            blueprint:['Portioning Board',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2459,6 +2489,7 @@ types={
             upgrade:['Swiss Army Board'],
         },{
             name:'Swiss Army Board',
+            blueprint:['Swiss Army Board',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2471,6 +2502,7 @@ types={
             upgrade:['Freezer','Mixer','Levitating Counter'],
         },{
             name:'Levitating Counter',
+            blueprint:['Levitating Counter',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2483,6 +2515,7 @@ types={
             upgrade:['Freezer','Cutting Board','Portioning Board','Rolling Board','Mixer'],
         },{
             name:'Mixer',
+            blueprint:['Mixer',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2495,6 +2528,7 @@ types={
             upgrade:['Heated Mixer','Fast Mixer'],
         },{
             name:'Fast Mixer',
+            blueprint:['Fast Mixer',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2507,6 +2541,7 @@ types={
             upgrade:['Heated Mixer'],
         },{
             name:'Heated Mixer',
+            blueprint:['Heated Mixer',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2519,6 +2554,7 @@ types={
             upgrade:['Fast Mixer'],
         },{
             name:'Prep Station',
+            blueprint:['Prep Station',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2531,6 +2567,7 @@ types={
             upgrade:['Frozen Prep Station','Stack Station','Silo'],
         },{
             name:'Frozen Prep Station',
+            blueprint:['Frozen Prep Station',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2543,6 +2580,7 @@ types={
             upgrade:['Stack Station','Silo'],
         },{
             name:'Stack Station',
+            blueprint:['Stack Station',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2551,10 +2589,11 @@ types={
             rarity:2,
             cost:40,
             prereq:[],
-            desc:'Holds 4 small items in a pile',
+            desc:'Holds 4 of any items in a pile',
             upgrade:['Frozen Prep Station','Silo'],
         },{
             name:'Silo',
+            blueprint:['Silo',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2569,6 +2608,7 @@ types={
         
         {
             name:'Starter Sink',
+            blueprint:['Starter Sink',7.5],
             width:42,
             height:36,
             spec:[2],
@@ -2581,6 +2621,7 @@ types={
             upgrade:['Sink'],
         },{
             name:'Sink',
+            blueprint:['Sink',7.5],
             width:42,
             height:36,
             spec:[2],
@@ -2593,6 +2634,7 @@ types={
             upgrade:['Soaking Sink','Wash Basin','Power Sink','Rinsing Sink','Dishwasher'],
         },{
             name:'Soaking Sink',
+            blueprint:['Soaking Sink',7.5],
             width:42,
             height:36,
             spec:[2],
@@ -2605,6 +2647,7 @@ types={
             upgrade:['Wash Basin','Power Sink','Rinsing Sink','Dishwasher'],
         },{
             name:'Wash Basin',
+            blueprint:['Wash Basin',7.5],
             width:48,
             height:42,
             spec:[2],
@@ -2617,6 +2660,7 @@ types={
             upgrade:['Soaking Sink','Power Sink','Rinsing Sink','Dishwasher'],
         },{
             name:'Power Sink',
+            blueprint:['Power Sink',7.5],
             width:42,
             height:36,
             spec:[2],
@@ -2629,6 +2673,7 @@ types={
             upgrade:['Soaking Sink','Wash Basin','Rinsing Sink','Dishwasher'],
         },{
             name:'Rinsing Sink',
+            blueprint:['Rinsing Sink',7.5],
             width:42,
             height:36,
             spec:[2],
@@ -2641,6 +2686,7 @@ types={
             upgrade:['Soaking Sink','Wash Basin','Power Sink','Dishwasher'],
         },{
             name:'Dishwasher',
+            blueprint:['Dish\nwasher',7.5],
             width:36,
             height:36,
             spec:[],
@@ -2653,6 +2699,7 @@ types={
             upgrade:['Soaking Sink','Wash Basin','Power Sink','Rinsing Sink'],
         },{
             name:'Dish Rack',
+            blueprint:['Dish Rack',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2665,6 +2712,7 @@ types={
             upgrade:['Large Dish Rack'],
         },{
             name:'Large Dish Rack',
+            blueprint:['Large Dish Rack',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2679,6 +2727,7 @@ types={
 
         {
             name:'Starter Hob',
+            blueprint:['Starter Hob',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2691,6 +2740,7 @@ types={
             upgrade:['Hob'],
         },{
             name:'Hob',
+            blueprint:['Hob',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2703,6 +2753,7 @@ types={
             upgrade:['Safe Hob','Fast Hob','Manual Hob'],
         },{
             name:'Safe Hob',
+            blueprint:['Safe Hob',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2715,6 +2766,7 @@ types={
             upgrade:['Fast Hob','Override Hob'],
         },{
             name:'Fast Hob',
+            blueprint:['Fast Hob',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2727,6 +2779,7 @@ types={
             upgrade:['Safe Hob','Override Hob'],
         },{
             name:'Override Hob',
+            blueprint:['Override Hob',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2739,6 +2792,7 @@ types={
             upgrade:['Safe Hob','Fast Hob'],
         },{
             name:'Oven',
+            blueprint:['Oven',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2751,6 +2805,7 @@ types={
             upgrade:['Fast Oven','Microwave'],
         },{
             name:'Fast Oven',
+            blueprint:['Fast Oven',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2763,6 +2818,7 @@ types={
             upgrade:['Microwave'],
         },{
             name:'Microwave',
+            blueprint:['Microwave',7],
             width:48,
             height:48,
             spec:[0],
@@ -2775,6 +2831,7 @@ types={
             upgrade:['Fast Oven'],
         },{
             name:'Waffle Iron',
+            blueprint:['Waffle Iron',7.5],
             width:48,
             height:48,
             spec:[0],
@@ -2789,6 +2846,7 @@ types={
 
         {
             name:'Booking Desk',
+            blueprint:['Booking Desk',7.5],
             width:48,
             height:24,
             spec:[],
@@ -2803,6 +2861,7 @@ types={
 
         {
             name:'Starter Plates',
+            blueprint:['Starter Plates',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2815,6 +2874,7 @@ types={
             upgrade:['Plates'],
         },{
             name:'Plates',
+            blueprint:['Plates',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2827,6 +2887,7 @@ types={
             upgrade:['Large Plates'],
         },{
             name:'Large Plates',
+            blueprint:['Large Plates',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2839,6 +2900,7 @@ types={
             upgrade:[],
         },{
             name:'Pots',
+            blueprint:['Pots',7.5],
             width:40,
             height:30,
             spec:[],
@@ -2851,6 +2913,7 @@ types={
             upgrade:[],
         },{
             name:'Pans',
+            blueprint:['Pans',7.5],
             width:40,
             height:30,
             spec:[],
@@ -2865,6 +2928,7 @@ types={
 
         {
             name:'Starter Trash Bin',
+            blueprint:['Starter Trash Bin',7.5],
             width:20,
             height:20,
             spec:[],
@@ -2877,6 +2941,7 @@ types={
             upgrade:['Trash Bin'],
         },{
             name:'Trash Bin',
+            blueprint:['Trash Bin',7.5],
             width:24,
             height:24,
             spec:[],
@@ -2889,6 +2954,7 @@ types={
             upgrade:['Large Trash Bin','Compost Bin'],
         },{
             name:'Large Trash Bin',
+            blueprint:['Large Trash Bin',7.5],
             width:24,
             height:24,
             spec:[],
@@ -2901,6 +2967,7 @@ types={
             upgrade:['Compost Bin'],
         },{
             name:'Compost Bin',
+            blueprint:['Compost Bin',7.5],
             width:24,
             height:24,
             spec:[],
@@ -2915,6 +2982,7 @@ types={
 
         {
             name:'Ordering Terminal',
+            blueprint:['Ordering Terminal',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2927,6 +2995,7 @@ types={
             upgrade:[],
         },{
             name:'Breadsticks',
+            blueprint:['Breadsticks',6.5],
             width:48,
             height:24,
             spec:[],
@@ -2939,6 +3008,7 @@ types={
             upgrade:[],
         },{
             name:'Laborer',
+            blueprint:['Laborer',7.5],
             width:25,
             height:25,
             spec:[],
@@ -2951,6 +3021,7 @@ types={
             upgrade:[],
         },{
             name:'Grabber',
+            blueprint:['Grabber',7.5],
             width:24,
             height:48,
             spec:[],
@@ -2963,6 +3034,7 @@ types={
             upgrade:['Combiner'],
         },{
             name:'Combiner',
+            blueprint:['Combiner',7.5],
             width:48,
             height:48,
             spec:[],
@@ -2975,6 +3047,7 @@ types={
             upgrade:['Grabber'],
         },{
             name:'Teleporter',
+            blueprint:['Teleporter',7.5],
             width:30,
             height:30,
             spec:[],
@@ -2989,6 +3062,7 @@ types={
 
         {
             name:'Coffee Machine',
+            blueprint:['Coffee Machine',7.5],
             width:48,
             height:48,
             spec:[],
@@ -3001,6 +3075,7 @@ types={
             upgrade:[],
         },{
             name:'Ketchup',
+            blueprint:['Ketchup',7.5],
             width:48,
             height:24,
             spec:[],
@@ -3013,6 +3088,7 @@ types={
             upgrade:[],
         },{
             name:'Mustard',
+            blueprint:['Mustard',7.5],
             width:48,
             height:24,
             spec:[],
@@ -3027,6 +3103,7 @@ types={
 
         {
             name:'Tray',
+            blueprint:['Tray',7.5],
             width:48,
             height:48,
             spec:[],
@@ -3039,6 +3116,7 @@ types={
             upgrade:[],
         },{
             name:'Tin',
+            blueprint:['Tin',7.5],
             width:48,
             height:48,
             spec:[],
@@ -3051,6 +3129,7 @@ types={
             upgrade:[],
         },{
             name:'Donut Tray',
+            blueprint:['Donut Tray',7.5],
             width:48,
             height:48,
             spec:[],
@@ -3063,6 +3142,7 @@ types={
             upgrade:[],
         },{
             name:'Cupcake Stand',
+            blueprint:['Cupcake Stand',7.5],
             width:48,
             height:48,
             spec:[],
@@ -3077,6 +3157,7 @@ types={
 
         {
             name:'Onions',
+            blueprint:['Onions',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Onion',
@@ -3089,6 +3170,7 @@ types={
             upgrade:[],
         },{
             name:'Meat',
+            blueprint:['Meat',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Meat',
@@ -3101,6 +3183,7 @@ types={
             upgrade:[],
         },{
             name:'Tomatoes',
+            blueprint:['Tomatoes',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Tomato',
@@ -3113,6 +3196,7 @@ types={
             upgrade:[],
         },{
             name:'Broccoli',
+            blueprint:['Broccoli',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Broccoli',
@@ -3125,6 +3209,7 @@ types={
             upgrade:[],
         },{
             name:'Cheese',
+            blueprint:['Cheese',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Cheese',
@@ -3137,6 +3222,7 @@ types={
             upgrade:[],
         },{
             name:'Flour',
+            blueprint:['Flour',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Flour',
@@ -3149,6 +3235,7 @@ types={
             upgrade:[],
         },{
             name:'Butter',
+            blueprint:['Butter',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Butter',
@@ -3161,6 +3248,7 @@ types={
             upgrade:[],
         },{
             name:'Garlic',
+            blueprint:['Garlic',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Garlic',
@@ -3173,6 +3261,7 @@ types={
             upgrade:[],
         },{
             name:'Soybeans',
+            blueprint:['Soybeans',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Soybean',
@@ -3185,6 +3274,7 @@ types={
             upgrade:[],
         },{
             name:'Miso',
+            blueprint:['Miso',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Miso',
@@ -3197,6 +3287,7 @@ types={
             upgrade:[],
         },{
             name:'Lettuce',
+            blueprint:['Lettuce',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Lettuce',
@@ -3209,6 +3300,7 @@ types={
             upgrade:[],
         },{
             name:'Potatoes',
+            blueprint:['Potatoes',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Potato',
@@ -3221,6 +3313,7 @@ types={
             upgrade:[],
         },{
             name:'Macaroni',
+            blueprint:['Macaroni',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Macaroni',
@@ -3233,6 +3326,7 @@ types={
             upgrade:[],
         },{
             name:'Eggs',
+            blueprint:['Eggs',7.5],
             width:40,
             height:30,
             spec:[1],provide:'Egg',
@@ -3245,6 +3339,7 @@ types={
             upgrade:[],
         },{
             name:'Apples',
+            blueprint:['Apples',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Apple',
@@ -3257,6 +3352,7 @@ types={
             upgrade:[],
         },{
             name:'Cherries',
+            blueprint:['Cherries',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Cherry',
@@ -3269,6 +3365,7 @@ types={
             upgrade:[],
         },{
             name:'Sugar',
+            blueprint:['Sugar',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Sugar',
@@ -3281,6 +3378,7 @@ types={
             upgrade:[],
         },{
             name:'Lemons',
+            blueprint:['Lemons',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Lemon',
@@ -3293,6 +3391,7 @@ types={
             upgrade:[],
         },{
             name:'Chocolate',
+            blueprint:['Chocolate',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Chocolate',
@@ -3305,6 +3404,7 @@ types={
             upgrade:[],
         },{
             name:'Ice Cream',
+            blueprint:['Ice Cream',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Ice Cream C',
@@ -3317,6 +3417,7 @@ types={
             upgrade:[],
         },{
             name:'Fish',
+            blueprint:['Fish',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Raw Fish',
@@ -3329,6 +3430,7 @@ types={
             upgrade:[],
         },{
             name:'Fish Fillet',
+            blueprint:['Fish Fillet',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Raw Fish Fillet',
@@ -3341,6 +3443,7 @@ types={
             upgrade:[],
         },{
             name:'Spiny Fish',
+            blueprint:['Spiny Fish',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Raw Spiny Fish',
@@ -3353,6 +3456,7 @@ types={
             upgrade:[],
         },{
             name:'Crabs',
+            blueprint:['Crabs',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Crab',
@@ -3365,6 +3469,7 @@ types={
             upgrade:[],
         },{
             name:'Bone Meat',
+            blueprint:['Bone Meat',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Bone Meat',
@@ -3377,6 +3482,7 @@ types={
             upgrade:[],
         },{
             name:'Thick Meat',
+            blueprint:['Thick Meat',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Thick Meat',
@@ -3389,6 +3495,7 @@ types={
             upgrade:[],
         },{
             name:'Nuts',
+            blueprint:['Nuts',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Nuts',
@@ -3401,6 +3508,7 @@ types={
             upgrade:[],
         },{
             name:'Oil',
+            blueprint:['Oil',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Oil',
@@ -3413,6 +3521,7 @@ types={
             upgrade:[],
         },{
             name:'Hot Dogs',
+            blueprint:['Hot Dogs',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Raw Hot Dog',
@@ -3425,6 +3534,7 @@ types={
             upgrade:[],
         },{
             name:'Hot Dog Buns',
+            blueprint:['Hot Dog Buns',7.5],
             width:40,
             height:30,
             spec:[1],provide:'Hot Dog Bun',
@@ -3437,6 +3547,7 @@ types={
             upgrade:[],
         },{
             name:'Noodles',
+            blueprint:['Noodles',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Uncooked Noodles',
@@ -3449,6 +3560,7 @@ types={
             upgrade:[],
         },{
             name:'Milk',
+            blueprint:['Milk',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Milk',
@@ -3461,6 +3573,7 @@ types={
             upgrade:[],
         },{
             name:'Pasta Sheet',
+            blueprint:['Pasta Sheet',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Pasta Sheet',
@@ -3473,6 +3586,7 @@ types={
             upgrade:[],
         },{
             name:'Bonito',
+            blueprint:['Bonito',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Bonito',
@@ -3485,6 +3599,7 @@ types={
             upgrade:[],
         },{
             name:'Cocoa Powder',
+            blueprint:['Cocoa Powder',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Cocoa Powder',
@@ -3497,6 +3612,7 @@ types={
             upgrade:[],
         },{
             name:'Rice',
+            blueprint:['Rice',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Rice',
@@ -3509,6 +3625,7 @@ types={
             upgrade:[],
         },{
             name:'Flour',
+            blueprint:['Flour',7.5],
             width:48,
             height:48,
             spec:[1],provide:'Flour',
@@ -3521,6 +3638,7 @@ types={
             upgrade:[],
         },{
             name:'Cinnamon',
+            blueprint:['Cinnamon',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Cinnamon',
@@ -3533,6 +3651,7 @@ types={
             upgrade:[],
         },{
             name:'Wine',
+            blueprint:['Wine',7.5],
             width:36,
             height:30,
             spec:[1],provide:'Wine',
@@ -3545,6 +3664,7 @@ types={
             upgrade:[],
         },{
             name:'Peppers',
+            blueprint:['Peppers',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Pepper',
@@ -3557,6 +3677,7 @@ types={
             upgrade:[],
         },{
             name:'Chicken',
+            blueprint:['Chicken',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Chicken',
@@ -3569,6 +3690,7 @@ types={
             upgrade:[],
         },{
             name:'Mozzarella',
+            blueprint:['Mozzarella',7.5],
             width:30,
             height:30,
             spec:[1],provide:'Mozzarella',
@@ -3581,6 +3703,7 @@ types={
             upgrade:[],
         },{
             name:'Basil',
+            blueprint:['Basil',7.5],
             width:48,
             height:36,
             spec:[1],provide:'Basil',
@@ -3593,6 +3716,7 @@ types={
             upgrade:[],
         },{
             name:'Patties',
+            blueprint:['Patties',7.5],
             width:40,
             height:40,
             spec:[1],provide:'Patty',
@@ -3605,6 +3729,7 @@ types={
             upgrade:[],
         },{
             name:'Burger Buns',
+            blueprint:['Burger Buns',7.5],
             width:40,
             height:30,
             spec:[1],provide:'Burger Bun',
@@ -8838,7 +8963,9 @@ types={
             holdDir:0,
             component:true,
             trashable:true,
-            process:[],
+            process:[
+                [6,60,'Bone','Raw Chicken Nugget'],
+            ],
         },{
             name:'Deboned Chicken',
             holdDist:16,
@@ -10373,7 +10500,7 @@ types={
             obj:[
                 ['Plated Margherita Pizza Slice',6],
             ],
-            desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce and mozzarella.\nCook, add basil, portion, and serve.',
+            desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce and chopped mozzarella.\nCook, add basil, portion, and serve.',
         },{
             name:'Calzone',
             group:'Pizza',
@@ -10711,7 +10838,7 @@ types={
             obj:[
                 ['Plated 2 Chicken',6],
             ],
-            desc:'Add oil and chicken to pot.\nCook and portion chicken out, then add to plate.\nRepeat with another piece of chicken, and serve.\nLeaves bones on the plate afterward.',
+            desc:'Add flour to chicken.\nAdd breaded chicken and oil to pot.\nCook and portion chicken out, then add to plate.\nRepeat with another piece of chicken, and serve.\nLeaves bones on the plate afterward.',
         },{
             name:'Chicken Nuggets',
             group:'Chicken',
@@ -10720,7 +10847,7 @@ types={
             obj:[
                 ['Plated 2 Chicken Nugget',8],
             ],
-            desc:'Portion bone from chicken and discard.\nAdd oil and chicken to pot.\nCook and portion chicken out, then add to plate.\nRepeat with another piece of chicken, and serve.',
+            desc:'Portion bone from chicken and discard.\nAdd oil and breaded deboned chicken to pot.\nCook and portion chicken out, then add to plate.\nRepeat with another piece of chicken, and serve.',
         },{
             name:'Buffalo Chicken',
             group:'Chicken',
@@ -10888,7 +11015,7 @@ types={
             obj:[
                 ['Macaroni and Cheese',2],
             ],
-            desc:'Boil water with macaroni.\nRemove water and add chopped cheese and butter.\nPortion and serve.',
+            desc:'Boil water with macaroni.\nRemove water and add chopped cheese and butter.\nMix, portion and serve.',
         },{
             name:'Scrambled Eggs',
             list:2,

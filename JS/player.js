@@ -591,7 +591,7 @@ class player extends partisan{
                                 let success
                                 switch(this.item.name){
                                     case 'Crate':
-                                        this.handLen=56
+                                        this.handLen=48
                                         this.findHandLen()
                                         cap=this.handLen
                                         success=false
@@ -601,19 +601,24 @@ class player extends partisan{
                                             if(this.parent.spawnGridWall(this.hand,this.item.contain,[],dir)){
                                                 this.item=-1
                                                 success=true
+                                                a=la
                                             }
                                             if(this.handLen==cap){
                                                 a=la
                                             }
                                         }
-                                        this.handLen=min(cap,48)
                                         if(!success){
+                                            this.handLen=min(cap,48)-8
                                             let temp=this.item
                                             this.item=-1
                                             this.timer.interact=15
                                             for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                                                 for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
-                                                    if(this.collide(2,this.parent.entities.walls[a][b])){
+                                                    if(
+                                                        (this.parent.entities.walls[a][b].edit||this.parent.entities.walls[a][b].name=='Crate'||this.parent.entities.walls[a][b].name=='Blueprint')&&
+                                                        this.parent.checkSpawnWall(this.parent.entities.walls[a][b])&&
+                                                        this.collide(2,this.parent.entities.walls[a][b])
+                                                    ){
                                                         success=true
                                                         this.parent.spawnGridWall(this.parent.entities.walls[a][b],temp.contain,[],dir)
                                                         a=la
@@ -627,7 +632,7 @@ class player extends partisan{
                                         }
                                     break
                                     case 'Blueprint':
-                                        this.handLen=56
+                                        this.handLen=48
                                         this.findHandLen()
                                         cap=this.handLen
                                         success=false
@@ -636,19 +641,24 @@ class player extends partisan{
                                             if(this.parent.spawnGridWall(this.hand,findName('Blueprint',types.wall),[[0,this.item.contain,this.item.cost]],0)){
                                                 this.item=-1
                                                 success=true
+                                                a=la
                                             }
                                             if(this.handLen==cap){
                                                 a=la
                                             }
                                         }
-                                        this.handLen=min(cap,48)
                                         if(!success){
+                                            this.handLen=min(cap,48)-8
                                             let temp=this.item
                                             this.item=-1
                                             this.timer.interact=15
                                             for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                                                 for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
-                                                    if(this.collide(2,this.parent.entities.walls[a][b])){
+                                                    if(
+                                                        (this.parent.entities.walls[a][b].edit||this.parent.entities.walls[a][b].name=='Crate'||this.parent.entities.walls[a][b].name=='Blueprint')&&
+                                                        this.parent.checkSpawnWall(this.parent.entities.walls[a][b])&&
+                                                        this.collide(2,this.parent.entities.walls[a][b])
+                                                    ){
                                                         success=true
                                                         this.parent.spawnGridWall(this.parent.entities.walls[a][b],findName('Blueprint',types.wall),[[0,temp.contain,temp.cost]],0)
                                                         a=la

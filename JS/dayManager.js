@@ -47,6 +47,7 @@ class dayManager extends manager{
         this.patience.fail=false
         this.operation.entityManager.clearWalls(['Crate','Blueprint','Option'])
         this.operation.entityManager.clearOuterWalls()
+        this.operation.entityManager.clearPlayerItem()
         this.operation.entityManager.beginDay()
         this.fail.num=0
         this.spawners=[]

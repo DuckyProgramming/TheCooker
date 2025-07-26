@@ -397,6 +397,24 @@ class entityManager extends manager{
             possible.splice(index,1)
         }
     }
+    testBlueprints(){
+        let possible=this.getEmptyGrid(1)
+        let set=[]
+        for(let a=0,la=types.wall.length;a<la;a++){
+            if(types.wall[a].edit){
+                set.push(a)
+            }
+        }
+        for(let a=0,la=set.length;a<la;a++){
+            if(possible.length>0){
+                let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(possible[0][1]+0.5),this.tileset[1]*(possible[0][0]+0.5),[possible[0][0]*2+1,possible[0][1]*2+1],-1,-1,findName('Blueprint',types.wall)),0)
+                this.entities.walls[0][pos].contain=set[a]
+                this.entities.walls[0][pos].cost=types.wall[set[a]].cost
+                this.grid[possible[0][0]*2+1][possible[0][1]*2+1]=1
+                possible.splice(0,1)
+            }
+        }
+    }
     clearWalls(names){
         let total=0
         for(let a=0,la=this.entities.walls.length;a<la;a++){
@@ -431,6 +449,7 @@ class entityManager extends manager{
         return total
     }
     tempClearWalls(names){
+        this.entities.tempWalls=[[],[]]
         let total=0
         for(let a=0,la=this.entities.walls.length;a<la;a++){
             for(let b=0,lb=this.entities.walls[a].length;b<lb;b++){
@@ -497,7 +516,7 @@ class entityManager extends manager{
                     }
                     if(inPointBox(loc,{position:{x:this.tileset[0]*(b+0.5)+shift[0]*3,y:this.tileset[1]*(a+0.5)+shift[1]*3},width:this.tileset[0]+abs(shift[0])*6,height:this.tileset[1]+abs(shift[1])*6})){
                         for(let c=0,lc=this.entities.players.length;c<lc;c++){
-                            if(inCircleBox(this.entities.players[c],{position:{x:this.tileset[0]*(b+0.5),y:this.tileset[1]*(a+0.5)},width:this.tileset[0]-8,height:this.tileset[1]-8})){
+                            if(inCircleBox(this.entities.players[c],{position:{x:this.tileset[0]*(b+0.5),y:this.tileset[1]*(a+0.5)},width:this.tileset[0]-20,height:this.tileset[1]-20})){
                                 return false
                             }
                         }
@@ -521,6 +540,31 @@ class entityManager extends manager{
             }
         }
         return false
+    }
+    checkSpawnWall(loc){
+        for(let a=0,la=(this.grid.length-1)/2;a<la;a++){
+            for(let b=0,lb=(this.grid[a].length-1)/2;b<lb;b++){
+                let shift=[0,0]
+                if(a>0&&this.grid[a*2-1][b*2+1]==0){
+                    shift[1]--
+                }else if(a<la-1&&this.grid[a*2+3][b*2+1]==0){
+                    shift[1]++
+                }
+                if(b>0&&this.grid[a*2+1][b*2-1]==0){
+                    shift[0]--
+                }else if(b<lb-1&&this.grid[a*2+1][b*2+3]==0){
+                    shift[0]++
+                }
+                if(inPointBox(loc,{position:{x:this.tileset[0]*(b+0.5)+shift[0]*3,y:this.tileset[1]*(a+0.5)+shift[1]*3},width:this.tileset[0]+abs(shift[0])*6,height:this.tileset[1]+abs(shift[1])*6})){
+                    for(let c=0,lc=this.entities.players.length;c<lc;c++){
+                        if(inCircleBox(this.entities.players[c],{position:{x:this.tileset[0]*(b+0.5),y:this.tileset[1]*(a+0.5)},width:this.tileset[0]-20,height:this.tileset[1]-20})){
+                            return false
+                        }
+                    }
+                    return true
+                }
+            }
+        }
     }
     emptySpot(wall){
         if(wall.gridPos[0]>=0&&wall.gridPos[1]>=0){

@@ -675,15 +675,8 @@ class wall extends partisan{
                         layer.rect(0,0,this.base.width-3,this.base.height-3)
                         layer.fill(240,this.fade.main)
                         layer.noStroke()
-                        layer.textSize(7.5)
-                        let named=types.wall[this.contain].name
-                        if(named.includes(' ')){
-                            layer.text(named,0,0,this.base.width-5)
-                        }else{
-                            layer.textWrap(CHAR)
-                            layer.text(named,0,0,this.base.width-5)
-                            layer.textWrap(WORD)
-                        }
+                        layer.textSize(types.wall[this.contain].blueprint[1])
+                        layer.text(types.wall[this.contain].blueprint[0],0,0,this.base.width-5)
                     break
                     case 'Option':
                         layer.fill(200,this.fade.main)
@@ -2418,7 +2411,7 @@ class wall extends partisan{
                             la--
                         }
                     }
-if(this.occupants.length==0){
+                    if(this.occupants.length==0){
                         this.occupied=false
                     }
                     switch(this.operation.phase){
