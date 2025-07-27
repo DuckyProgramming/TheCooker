@@ -5,7 +5,7 @@ function setup(){
     if(dev.test){
         current.generatePlayers(1)
         current.transition('main',[])
-        current.cardManager.addCard(findName('Fish',types.card))
+        current.cardManager.addCard(findName('Stir Fry',types.card))
         current.overlayManager.closeAll()
     }
 }

@@ -151,7 +151,7 @@ class player extends partisan{
         this.paying=[]
         let index
         let obj
-        let offset=tableName=='Metal Table'?3:0
+        let offset=tableName=='Metal Table'?4:1
         switch(orderPhase){
             case 0:
                 if(floor(random(0,menu.obj[1].length+(1+offset)))>offset||activate){
@@ -660,9 +660,9 @@ class player extends partisan{
                                                         }
                                                     }
                                                 }
-                                                if(!success){
-                                                    this.item=this.tempItem
-                                                }
+                                            }
+                                            if(!success){
+                                                this.item=this.tempItem
                                             }
                                             this.tempItem=-1
                                             this.timer.interact=15
@@ -718,9 +718,9 @@ class player extends partisan{
                                                         }
                                                     }
                                                 }
-                                                if(!success){
-                                                    this.item=this.tempItem
-                                                }
+                                            }
+                                            if(!success){
+                                                this.item=this.tempItem
                                             }
                                             this.tempItem=-1
                                             this.timer.interact=15

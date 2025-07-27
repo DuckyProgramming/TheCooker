@@ -21,12 +21,12 @@ class item extends located{
         this.component=types.item[this.type].component
         this.trashable=types.item[this.type].trashable
         this.process=[]
-        let set=[0,11,5,7,1,10,9,2,3,4,6,8]
+        let set=[0,12,11,5,7,1,10,9,2,3,4,6,8]
         for(let a=0,la=set.length;a<la;a++){
             for(let b=0,lb=types.item[this.type].process.length;b<lb;b++){
                 if(types.item[this.type].process[b][0]==set[a]){
                     switch(set[a]){
-                        case 0:
+                        case 0: case 12:
                             this.process.push({type:types.item[this.type].process[b][0],other:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],active:false,display:0,anim:0})
                         break
                         case 1: case 2: case 3: case 4: case 9: case 10:
@@ -37,6 +37,8 @@ class item extends located{
                         break
                         case 6:
                             this.portions=types.item[this.type].portions
+                            this.base={portions:types.item[this.type].portions}
+                            this.replace=types.item[this.type].replace
                             this.process.push({type:types.item[this.type].process[b][0],main:0,goal:types.item[this.type].process[b][1],result:types.item[this.type].process[b][2],leave:types.item[this.type].process[b][3],active:false,display:0,anim:0})
                         break
                         case 7:
@@ -138,38 +140,55 @@ class item extends located{
     }
     checkCombine(obj){
         for(let a=0,la=this.process.length;a<la;a++){
-            if(this.process[a].type==0&&this.process[a].other==obj.name){
+            if((this.process[a].type==0||this.process[a].type==12)&&this.process[a].other==obj.name){
+                return true
+            }else if(this.process[a].type==6&&this.process[a].result==obj.name&&this.replace&&this.portions<this.base.portions){
                 return true
             }
         }
         for(let a=0,la=obj.process.length;a<la;a++){
-            if(obj.process[a].type==0&&obj.process[a].other==this.name){
+            if((obj.process[a].type==0||obj.process[a].type==12)&&obj.process[a].other==this.name){
+                return true
+            }else if(obj.process[a].type==6&&obj.process[a].result==this.name&&obj.replace&&obj.portions<obj.base.portions){
                 return true
             }
         }
         return false
     }
     attemptCombine(obj){
-        let complete=false
         for(let a=0,la=this.process.length;a<la;a++){
             if(this.process[a].type==0&&this.process[a].other==obj.name){
                 this.type=findName(this.process[a].result,types.item)
                 this.initialValues()
-                a=la
-                complete=true
+                return true
+            }else if(this.process[a].type==6&&this.process[a].result==obj.name&&this.replace&&this.portions<this.base.portions){
+                this.portions++
+                return true
+            }else if(this.process[a].type==12&&this.process[a].other==obj.name){
+                this.type=findName(this.process[a].result,types.item)
+                this.initialValues()
+                this.portions=1
+                return true
             }
         }
-        if(!complete){
-            for(let a=0,la=obj.process.length;a<la;a++){
-                if(obj.process[a].type==0&&obj.process[a].other==this.name){
-                    this.type=findName(obj.process[a].result,types.item)
-                    this.initialValues()
-                    a=la
-                    complete=true
-                }
+        for(let a=0,la=obj.process.length;a<la;a++){
+            if(obj.process[a].type==0&&obj.process[a].other==this.name){
+                this.type=findName(obj.process[a].result,types.item)
+                this.initialValues()
+                return true
+            }else if(obj.process[a].type==6&&obj.process[a].result==this.name&&obj.replace&&obj.portions<obj.base.portions){
+                this.type=obj.type
+                this.initialValues()
+                this.portions=obj.portions+1
+                return true
+            }else if(obj.process[a].type==12&&obj.process[a].other==this.name){
+                this.type=findName(obj.process[a].result,types.item)
+                this.initialValues()
+                this.portions=1
+                return true
             }
         }
-        return complete
+        return false
     }
     attemptDoubleCombine(obj){
         for(let a=0,la=this.process.length;a<la;a++){

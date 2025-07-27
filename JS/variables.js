@@ -3803,7 +3803,7 @@ types={
         },
     ],item:[
         /*
-        0-combine [0,other,result] (assigned object is in hand, other object is on counter)
+        0-combine [0,other,result]
         1-cooking [1,time,result]
         2-chopping [2,time,result]
         3-kneading [3,time,result]
@@ -3815,6 +3815,7 @@ types={
         9-burning [9,time,result]
         10-waffling [1,time,result]
         11-double combine [0,other,resultThis,resultOther] (assigned object is in hand, other object is on counter)
+        12-inportion [0,other,result]
         */
         {
             name:'',
@@ -3894,6 +3895,7 @@ types={
         },{
             name:'Bone Plate',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -3905,6 +3907,7 @@ types={
         },{
             name:'Bone Food Plate',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -3916,6 +3919,7 @@ types={
         },{
             name:'2 Bone Plate',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -3927,6 +3931,7 @@ types={
         },{
             name:'2 Bone Food Plate',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -3967,6 +3972,14 @@ types={
                 [0,'Chopped Pepper','Chopped Pepper in Pot'],
                 [0,'Chopped Potato','Chopped Potato in Pot'],
                 [0,'Chopped Onion','Chopped Onion in Pot'],
+                [12,'Mashed Potato','Mashed Potato Pot'],
+                [12,'Macaroni and Cheese','Macaroni and Cheese Pot'],
+                [12,'Scrambled Eggs','Scrambled Eggs Pot'],
+                [12,'Bolognese Sauce','Bolognese Sauce Pot'],
+                [12,'White Sauce','White Sauce Pot'],
+                [12,'Rice Pudding','Rice Pudding Pot'],
+                [12,'Buffalo Sauce','Buffalo Sauce Pot'],
+                [12,'Chili','Chili Pot'],
             ],
         },{
             name:'Water Pot',
@@ -3985,6 +3998,7 @@ types={
                 [0,'Uncooked Noodles','Raw Noodles'],
                 [5,'Water','Pot'],
                 [5,'Trash','Pot'],
+                [12,'Broccoli Portion','Chopped Broccoli Pot'],
             ],
         },{
             name:'Onion',
@@ -4086,12 +4100,13 @@ types={
         },{
             name:'Meat Soup Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
             trashable:true,
             process:[
-                [6,60,'Meat Soup','Onion in Pot'],
+                [6,60,'Meat Soup','Spent Broth'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -4185,12 +4200,13 @@ types={
         },{
             name:'Tomato Soup Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
             trashable:true,
             process:[
-                [6,60,'Tomato Soup','Onion in Pot'],
+                [6,60,'Tomato Soup','Spent Broth'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -4288,12 +4304,13 @@ types={
         },{
             name:'Broccoli Cheese Soup Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
             trashable:true,
             process:[
-                [6,60,'Broccoli Cheese Soup','Onion in Pot'],
+                [6,60,'Broccoli Cheese Soup','Spent Broth'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -4496,6 +4513,7 @@ types={
             component:false,
             trashable:true,
             process:[
+                [12,'Miso Soup','Miso Soup Pot'],
                 [0,'Miso','Miso in Pot'],
                 [5,'Water','Tofu Broth'],
                 [5,'Trash','Pot'],
@@ -4533,6 +4551,7 @@ types={
         },{
             name:'Miso Soup Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -4617,6 +4636,7 @@ types={
         },{
             name:'Spring Rolls',
             portions:3,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -4657,6 +4677,7 @@ types={
         },{
             name:'Broccoli Pot',
             portions:8,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -4706,7 +4727,6 @@ types={
             ],
         },{
             name:'Potato Pot',
-            portions:8,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -4718,6 +4738,7 @@ types={
         },{
             name:'Mashed Potato Pot',
             portions:8,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -4893,6 +4914,7 @@ types={
         },{
             name:'Macaroni and Cheese Pot',
             portions:8,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -4951,6 +4973,7 @@ types={
         },{
             name:'Scrambled Eggs Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -5450,6 +5473,7 @@ types={
         },{
             name:'Raw Spiny Fish',
             portions:1,
+            replace:false,
             holdDist:18,
             holdDir:0,
             component:true,
@@ -6170,6 +6194,7 @@ types={
         },{
             name:'Boiled Potato in Pot',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -6352,6 +6377,7 @@ types={
         },{
             name:'Cheese Pizza',
             portions:3,
+            replace:false,
             holdDist:20,
             holdDir:180,
             component:false,
@@ -6411,6 +6437,7 @@ types={
         },{
             name:'Onion Pizza',
             portions:3,
+            replace:false,
             holdDist:20,
             holdDir:180,
             component:false,
@@ -6441,6 +6468,7 @@ types={
         },{
             name:'Meat Pizza',
             portions:3,
+            replace:false,
             holdDist:20,
             holdDir:180,
             component:false,
@@ -6471,6 +6499,7 @@ types={
         },{
             name:'Onion and Meat Pizza',
             portions:3,
+            replace:false,
             holdDist:20,
             holdDir:180,
             component:false,
@@ -6710,6 +6739,7 @@ types={
         },{
             name:'Nut Roast',
             portions:3,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -6928,6 +6958,7 @@ types={
         },{
             name:'Cooked Noodles in Pot',
             portions:2,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7031,6 +7062,7 @@ types={
         },{
             name:'Bolognese Sauce Pot',
             portions:2,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7123,6 +7155,7 @@ types={
         },{
             name:'White Sauce Pot',
             portions:2,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7301,6 +7334,7 @@ types={
         },{
             name:'Lasagne Tray',
             portions:4,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7358,12 +7392,13 @@ types={
         },{
             name:'Ramen Soup Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
             trashable:true,
             process:[
-                [6,60,'Ramen Soup','Onion in Pot'],
+                [6,60,'Ramen Soup','Spent Broth'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -7578,6 +7613,7 @@ types={
         },{
             name:'Chocolate Cake Tin',
             portions:6,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7589,6 +7625,7 @@ types={
         },{
             name:'Coffee Cake Tin',
             portions:6,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7600,6 +7637,7 @@ types={
         },{
             name:'Cherry Cake Tin',
             portions:6,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7611,6 +7649,7 @@ types={
         },{
             name:'Lemon Cake Tin',
             portions:6,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7658,6 +7697,7 @@ types={
         },{
             name:'Batter Donut Tray',
             portions:12,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7708,6 +7748,7 @@ types={
         },{
             name:'Donut Pot',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -7884,6 +7925,7 @@ types={
         },{
             name:'Tiramisu',
             portions:6,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -8028,6 +8070,7 @@ types={
         },{
             name:'Rice Pudding Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -8065,6 +8108,7 @@ types={
         },{
             name:'Brownie Tray',
             portions:4,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -8103,13 +8147,14 @@ types={
         },{
             name:'Wine Jus Pot',
             portions:8,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
             trashable:true,
             process:[
                 [5,'Trash','Pot'],
-                [6,30,'Wine Jus','Pot'],
+                [6,30,'Wine Jus','Spent Broth'],
             ],
         },{
             name:'Wine Jus',
@@ -8440,6 +8485,7 @@ types={
         },{
             name:'Chili Pot',
             portions:8,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -8553,12 +8599,13 @@ types={
         },{
             name:'French Onion Soup Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
             trashable:true,
             process:[
-                [6,60,'French Onion Soup','Onion in Pot'],
+                [6,60,'French Onion Soup','Spent Broth'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -8667,6 +8714,7 @@ types={
         },{
             name:'Chopped Broccoli Pot',
             portions:8,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -8975,6 +9023,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry R'],
             ],
         },{
             name:'Plated Stir Fry RB',
@@ -8985,6 +9034,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry RB'],
             ],
         },{
             name:'Plated Stir Fry RM',
@@ -8995,6 +9045,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry RM'],
             ],
         },{
             name:'Plated Stir Fry RBM',
@@ -9005,10 +9056,12 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry RBM'],
             ],
         },{
             name:'Chicken',
             portions:1,
+            replace:false,
             holdDist:16,
             holdDir:0,
             component:true,
@@ -9065,6 +9118,7 @@ types={
         },{
             name:'Chicken Nugget Pot',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -9223,6 +9277,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry N'],
             ],
         },{
             name:'Plated Stir Fry NB',
@@ -9233,6 +9288,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry NB'],
             ],
         },{
             name:'Plated Stir Fry NM',
@@ -9243,6 +9299,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry NM'],
             ],
         },{
             name:'Plated Stir Fry NBM',
@@ -9253,6 +9310,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry NBM'],
             ],
         },{
             name:'Applesauce',
@@ -9308,6 +9366,7 @@ types={
         },{
             name:'Margherita Pizza',
             portions:3,
+            replace:false,
             holdDist:20,
             holdDir:180,
             component:false,
@@ -9357,6 +9416,7 @@ types={
         },{
             name:'Chicken Pot',
             portions:1,
+            replace:false,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -9429,6 +9489,7 @@ types={
         },{
             name:'Buffalo Sauce Pot',
             portions:4,
+            replace:true,
             holdDist:20,
             holdDir:0,
             component:false,
@@ -10029,6 +10090,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry RE'],
             ],
         },{
             name:'Plated Stir Fry NE',
@@ -10039,6 +10101,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry NE'],
             ],
         },{
             name:'Plated Stir Fry RBE',
@@ -10049,6 +10112,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry RBE'],
             ],
         },{
             name:'Plated Stir Fry RME',
@@ -10059,6 +10123,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry RME'],
             ],
         },{
             name:'Plated Stir Fry NBE',
@@ -10069,6 +10134,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry NBE'],
             ],
         },{
             name:'Plated Stir Fry NME',
@@ -10079,6 +10145,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry NME'],
             ],
         },{
             name:'Plated Stir Fry RBME',
@@ -10089,6 +10156,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry RBME'],
             ],
         },{
             name:'Plated Stir Fry NBME',
@@ -10099,6 +10167,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
+                [11,'Pan','Plate','Stir Fry NBME'],
             ],
         },{
             name:'Chopped Cinnamon',
@@ -10300,6 +10369,32 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [7,180,'2 Bone Plate'],
+            ],
+        },{
+            name:'Spent Broth',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Water','Reheating Broth'],
+                [5,'Trash','Pot'],
+                [12,'Meat Soup','Meat Soup Pot'],
+                [12,'Tomato Soup','Tomato Soup Pot'],
+                [12,'Broccoli Cheese Soup','Broccoli Cheese Soup Pot'],
+                [12,'Ramen Soup','Ramen Soup Pot'],
+                [12,'French Onion Soup','French Onion Soup Pot'],
+                [12,'Wine Jus','Wine Jus Pot'],
+            ],
+        },{
+            name:'Reheating Broth',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,360,'Broth'],
+                [5,'Trash','Pot'],
             ],
         },
         //mark

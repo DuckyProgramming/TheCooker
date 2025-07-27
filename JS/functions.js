@@ -278,7 +278,7 @@ function checkValid(){
         }
         for(let b=0,lb=types.item[a].process.length;b<lb;b++){
             switch(types.item[a].process[b][0]){
-                case 0:
+                case 0: case 12:
                     if(findName(types.item[a].process[b][1],types.item)<0){
                         print('C',types.item[a].name,'-',types.item[a].process[b][1])
                     }

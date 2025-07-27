@@ -14494,6 +14494,32 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(-1.5,4.5,7.5,6.75)
             layer.ellipse(1.25,4.5,8,7)
         break
+        case 'Spent Broth':
+            layer.fill(180,200,220,fade)
+            layer.rect(-14,0,4,8,2)
+            layer.rect(14,0,4,8,2)
+            layer.ellipse(0,0,28)
+            layer.fill(150,128,95,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(255,165,60,fade)
+            layer.ellipse(-5.4,-3.6,9.3)
+            layer.rect(-7.8,-6,3.6,3.6,1.2)
+            layer.fill(245,150,45,fade)
+            layer.ellipse(-5.4,-3.6,7.2)
+        break
+        case 'Reheating Broth':
+            layer.fill(180,200,220,fade)
+            layer.rect(-14,0,4,8,2)
+            layer.rect(14,0,4,8,2)
+            layer.ellipse(0,0,28)
+            layer.fill(205,195,158,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(255,165,60,fade)
+            layer.ellipse(-5.4,-3.6,9.3)
+            layer.rect(-7.8,-6,3.6,3.6,1.2)
+            layer.fill(245,150,45,fade)
+            layer.ellipse(-5.4,-3.6,7.2)
+        break
         default:
             print(name)
         break

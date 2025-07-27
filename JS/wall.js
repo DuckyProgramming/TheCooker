@@ -3163,8 +3163,10 @@ class wall extends partisan{
         switch(type){
             case 0:
                 switch(this.name){
-                    case 'Trash Can': case 'Flour': case 'Nuts': case 'Potatoes': case 'Bonito': case 'Cocoa Powder': case 'Miso': case 'Rice': case 'Small Table':
+                    case 'Trash Can': case 'Flour': case 'Nuts': case 'Potatoes': case 'Bonito': case 'Cocoa Powder': case 'Miso': case 'Rice':
                         return distPos(obj,this)<this.radius
+                    case 'Small Table':
+                        return distPos(obj,this)<this.radius+6
                     case 'Dining Table': case 'Fancy Table': case 'Metal Table': case 'Simple Table':
                         return inPointBox(obj,{position:this.position,width:this.width+12,height:this.height+12})
                     case 'Booking Desk':
@@ -3260,6 +3262,10 @@ class wall extends partisan{
                                     send.cost=this.cost2
                                     player.item=send
                                     this.contain2=-1
+                                    if(player.tempItem!=-1&&player.tempItem.name=='Blueprint'){
+                                        this.contain2=player.tempItem.contain
+                                        this.cost2=player.tempItem.cost
+                                    }
                                     return true
                                 }else if(this.contain!=-1){
                                     let send=this.generateItem('Blueprint')
@@ -3267,6 +3273,10 @@ class wall extends partisan{
                                     send.cost=this.cost
                                     player.item=send
                                     this.contain=-1
+                                    if(player.tempItem!=-1&&player.tempItem.name=='Blueprint'){
+                                        this.contain=player.tempItem.contain
+                                        this.cost=player.tempItem.cost
+                                    }
                                     return true
                                 }else if(this.edit){
                                     let send=this.generateItem('Crate')
