@@ -6886,8 +6886,8 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,15)
             layer.fill(195,125,55,fade)
             layer.ellipse(0,-4.5,8)
-            layer.ellipse(-4.25,2.25,8)
-            layer.ellipse(4.25,2.25,8)
+            layer.ellipse(-4,2.25,8)
+            layer.ellipse(4,2.25,8)
         break
         case 'Ice Cream CCV':
             layer.fill(220,fade)
@@ -6898,9 +6898,9 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,15)
             layer.fill(195,125,55,fade)
             layer.ellipse(0,-4.5,8)
-            layer.ellipse(-4.25,2.25,8)
+            layer.ellipse(-4,2.25,8)
             layer.fill(255,255,180,fade)
-            layer.ellipse(4.25,2.25,8)
+            layer.ellipse(4,2.25,8)
         break
         case 'Ice Cream CVV':
             layer.fill(220,fade)
@@ -6912,8 +6912,8 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.fill(195,125,55,fade)
             layer.ellipse(0,-4.5,8)
             layer.fill(255,255,180,fade)
-            layer.ellipse(-4.25,2.25,8)
-            layer.ellipse(4.25,2.25,8)
+            layer.ellipse(-4,2.25,8)
+            layer.ellipse(4,2.25,8)
         break
         case 'Ice Cream VVV':
             layer.fill(220,fade)
@@ -6924,8 +6924,8 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,15)
             layer.fill(255,255,180,fade)
             layer.ellipse(0,-4.5,8)
-            layer.ellipse(-4.25,2.25,8)
-            layer.ellipse(4.25,2.25,8)
+            layer.ellipse(-4,2.25,8)
+            layer.ellipse(4,2.25,8)
         break
         case 'Sugar Dough':
             layer.fill(220,220,160,fade)

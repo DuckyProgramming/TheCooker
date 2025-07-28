@@ -5,13 +5,12 @@ august update
 4 walls
 gasser - boosts the speed of hobs, sinks, and mixers
 cutlery - instantly ends eating phase
-change order item
+alternate menu - change order item
 floor buffer
-auto buffer
 
 8 cards
 
-[main]
+soup dumplings
 [variant]
 [variant]
 [variant]

@@ -3163,16 +3163,24 @@ class wall extends partisan{
         switch(type){
             case 0:
                 switch(this.name){
-                    case 'Trash Can': case 'Flour': case 'Nuts': case 'Potatoes': case 'Bonito': case 'Cocoa Powder': case 'Miso': case 'Rice':
+                    case 'Trash Can':
+                    case 'Flour': case 'Nuts': case 'Potatoes': case 'Bonito': case 'Cocoa Powder': case 'Miso': case 'Rice':
                         return distPos(obj,this)<this.radius
                     case 'Small Table':
                         return distPos(obj,this)<this.radius+6
                     case 'Dining Table': case 'Fancy Table': case 'Metal Table': case 'Simple Table':
                         return inPointBox(obj,{position:this.position,width:this.width+12,height:this.height+12})
                     case 'Booking Desk':
-                        return inPointBox(obj,{position:this.position,width:this.width+6,height:this.height+6})
+                    case 'Grabber':
+                        return inPointBox(obj,{position:this.position,width:max(this.width,this.width*0.75+this.height*0.25),height:max(this.width*0.25+this.height*0.75,this.height)})
                     case 'Starter Trash Bin':
-                        return inPointBox(obj,{position:this.position,width:this.width+4,height:this.height+4})
+                        return inPointBox(obj,{position:this.position,width:this.width+12,height:this.height+12})
+                    case 'Trash Bin': case 'Large Trash Bin': case 'Compost Bin':
+                        return inPointBox(obj,{position:this.position,width:this.width+8,height:this.height+8})
+                    case 'Teleporter':
+                    case 'Blueprint Cabinet': case 'Upgrade Cabinet': case 'Discount Cabinet': case 'Generator Cabinet': case 'Copy Cabinet':
+                    case 'Cheese': case 'Butter': case 'Macaroni': case 'Chocolate': case 'Noodles': case 'Pasta Sheet': case 'Cinnamon': case 'Mozzarella':
+                        return inPointBox(obj,{position:this.position,width:this.width+2,height:this.height+2})
                     case 'High Wall': case 'Wall':
                         return inPointBox(obj,{position:this.position,width:max(this.width,this.width*0.5+this.height*0.5),height:max(this.width*0.5+this.height*0.5,this.height)})
                     default:
@@ -3698,6 +3706,7 @@ class wall extends partisan{
                             }else if(player.item==-1&&this.trash>0){
                                 player.item=this.generateItem('Trash Bag')
                                 this.trash=0
+                                return true
                             }
                         break
                         case 'Compost Bin':
@@ -3710,6 +3719,7 @@ class wall extends partisan{
                             }else if(player.item==-1&&this.trash>0){
                                 player.item=this.generateItem('Compost Bag')
                                 this.trash=0
+                                return true
                             }
                         break
                         case 'Trash Can':
