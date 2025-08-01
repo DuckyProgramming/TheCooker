@@ -10,10 +10,10 @@ floor buffer
 
 8 cards
 
-soup dumplings
-[variant]
-[variant]
-[variant]
+dumplings - knead and coup dough with chopped meat and onion
+soup dumplings - filled with meat and meat soup portion
+grilled cheese - bread, cheese, butter, bread, then cook (toast variant)
+tomato burgers
 
 starters:
 pumpkin soup

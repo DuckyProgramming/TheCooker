@@ -7,7 +7,7 @@ class dayManager extends manager{
         this.time={main:0,end:9000}
         this.patience={anim:0,main:0,base:5400,restore:0,fail:false,active:false}
         this.anim={phase:[0,0]}
-        this.fail={num:0}
+        this.fail={num:0,trigger:false}
         this.spawners=[]
     }
     addCurrency(amount){
@@ -115,7 +115,7 @@ class dayManager extends manager{
         this.operation.entityManager.clearPlayerItem()
         this.operation.entityManager.resetWalls()
         this.operation.entityManager.endDay()
-        this.operation.entityManager.spawnBlueprints(5+(this.operation.cardManager.hasCard('Catalogue')?1:0),0)
+        this.operation.entityManager.spawnBlueprints(5+(this.operation.cardManager.hasCard('Catalogue')?1:0),0)    
     }
     fakeDay(){
         this.beginDay()
@@ -133,6 +133,7 @@ class dayManager extends manager{
         this.operation.entityManager.entities.particles.push(new particle(this.layer,x,y,0,{value:-value}))
         if(this.currency.main<=0){
             this.operation.transition('end',[this.day>=16?1:0])
+            this.fail.trigger=true
         }
     }
     booking(x,y){
@@ -232,7 +233,7 @@ class dayManager extends manager{
                             this.spawners.splice(0,1)
                         }
                         this.time.main++
-                        if(this.time.main>=this.time.end&&this.operation.entityManager.entities.players.length<=this.operation.player.length){
+                        if(this.time.main>=this.time.end&&this.operation.entityManager.entities.players.length<=this.operation.player.length&&!this.fail.trigger){
                             this.endDay()
                         }
                         if(this.patience.active){

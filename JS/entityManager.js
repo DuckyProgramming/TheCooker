@@ -284,6 +284,7 @@ class entityManager extends manager{
                             if(
                                 this.entities.walls[b][c].type==inside||
                                 this.entities.walls[b][c].spec.includes(0)&&set[a]=='Starter Hob'||
+                                this.entities.walls[b][c].spec.includes(3)&&set[a]=='Starter Plates'||
                                 this.entities.walls[b][c].spec.includes(2)&&set[a]=='Starter Sink'||
                                 this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside&&dev.overlap
                             ){

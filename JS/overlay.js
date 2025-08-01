@@ -267,12 +267,12 @@ class overlay extends located{
                 layer.text('Exit',0,63.75+players*32.5)
                 for(let a=0,la=players;a<la;a++){
                     layer.textSize(inputs.layout[la-1][a]==0?15:20)
-                    layer.text(['','A','F','J'][inputs.layout[la-1][a]],-150,47.5+even(a,la)*65)
-                    layer.text(['','D','H','L'][inputs.layout[la-1][a]],-90,47.5+even(a,la)*65)
-                    layer.text(['','W','T','I'][inputs.layout[la-1][a]],-30,47.5+even(a,la)*65)
-                    layer.text(['','S','G','K'][inputs.layout[la-1][a]],30,47.5+even(a,la)*65)
-                    layer.text(['Shift','Q','R','U'][inputs.layout[la-1][a]],90,47.5+even(a,la)*65)
-                    layer.text(['End','E','Y','O'][inputs.layout[la-1][a]],150,47.5+even(a,la)*65)
+                    layer.text(['','A','J','F'][inputs.layout[la-1][a]],-150,47.5+even(a,la)*65)
+                    layer.text(['','D','L','H'][inputs.layout[la-1][a]],-90,47.5+even(a,la)*65)
+                    layer.text(['','W','I','T'][inputs.layout[la-1][a]],-30,47.5+even(a,la)*65)
+                    layer.text(['','S','K','G'][inputs.layout[la-1][a]],30,47.5+even(a,la)*65)
+                    layer.text(['Shift','Q','U','R'][inputs.layout[la-1][a]],90,47.5+even(a,la)*65)
+                    layer.text(['End','E','O','Y'][inputs.layout[la-1][a]],150,47.5+even(a,la)*65)
                     if(inputs.layout[la-1][a]==0){
                         displaySymbol(layer,-150,47.5+even(a,la)*65,0,-180,1,[0,0,0],this.fade.main)
                         displaySymbol(layer,-90,47.5+even(a,la)*65,0,0,1,[0,0,0],this.fade.main)

@@ -2129,6 +2129,7 @@ types={
         0-cooker
         1-provider
         2-water provider
+        3-plates
         */
         /*
         RARITY
@@ -2924,7 +2925,7 @@ types={
             blueprint:['Starter Plates',7.5],
             width:48,
             height:48,
-            spec:[],
+            spec:[3],
             edit:true,
             level:1,
             rarity:4,
@@ -2937,7 +2938,7 @@ types={
             blueprint:['Plates',7.5],
             width:48,
             height:48,
-            spec:[],
+            spec:[3],
             edit:true,
             level:1,
             rarity:3,
@@ -2950,7 +2951,7 @@ types={
             blueprint:['Large Plates',7.5],
             width:48,
             height:48,
-            spec:[],
+            spec:[3],
             edit:true,
             level:1,
             rarity:1,
@@ -11326,7 +11327,7 @@ types={
             dish:['Salad'],
             list:0,
             rate:[1,'3-4'],
-            customerMult:1.25,
+            customerMult:[1.25,1],
             prereq:[],
             mutex:[],
             wall:['Lettuce','Tomatoes','Starter Sink','Starter Plates'],
@@ -11346,7 +11347,7 @@ types={
             dish:['Toast'],
             list:0,
             rate:[2,'4'],
-            customerMult:1.25,
+            customerMult:[1.25,1],
             prereq:[],
             mutex:[],
             wall:['Flour','Oven','Starter Sink','Starter Plates'],
@@ -11386,7 +11387,7 @@ types={
             dish:['Nut Roast'],
             list:0,
             rate:[2,'4'],
-            customerMult:1.25,
+            customerMult:[1.25,1],
             prereq:[],
             mutex:[],
             wall:['Nuts','Onions','Oven','Starter Sink','Starter Plates'],
@@ -11396,7 +11397,7 @@ types={
             dish:['Hot Dog','Ketchup'],
             list:0,
             rate:[2,'5'],
-            customerMult:1.25,
+            customerMult:[1.25,1],
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Hot Dog Buns','Hot Dogs','Ketchup','Starter Sink','Starter Plates'],
@@ -11416,7 +11417,7 @@ types={
             dish:['Spaghetti'],
             list:0,
             rate:[2,'5'],
-            customerMult:1,
+            customerMult:[1,0.8],
             prereq:[],
             mutex:[],
             wall:['Starter Hob','Starter Hob','Tomatoes','Noodles','Pots','Starter Sink','Starter Plates'],
@@ -11436,7 +11437,7 @@ types={
             dish:['Stir Fry'],
             list:0,
             rate:[3,'5-7'],
-            customerMult:1,
+            customerMult:[1,0.8],
             prereq:[],
             mutex:[],
             wall:['Rice','Broccoli','Pans','Starter Hob','Starter Hob','Starter Sink','Starter Plates'],
