@@ -3871,11 +3871,11 @@ class wall extends partisan{
                                                     let send=this.generateItem('Crate')
                                                     send.contain=this.contain
                                                     player.item=send
-                                                    this.parent.emptySpot(this)
                                                     this.parent.operation.dayManager.loseCurrency(this.cost)
                                                     if(this.parent.operation.cardManager.hasCard('Extra Stock')){
                                                         this.item.resetProcess([8])
                                                     }else{
+                                                        this.parent.emptySpot(this)
                                                         this.remove=true
                                                     }
                                                 }

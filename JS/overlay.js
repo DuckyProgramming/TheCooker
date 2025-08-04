@@ -52,7 +52,7 @@ class overlay extends located{
                         }
                     break
                     case 5:
-                        let possible=range(0,60)
+                        let possible=range(0,types.level.length)
                         for(let a=0,la=3;a<la;a++){
                             let value=possible.splice(floor(random(0,possible.length)),1)[0]
                             this.cards.push(new layout(this.layer,this.parent.operation.entityManager,even(a,la)*240,20,value))
@@ -423,7 +423,7 @@ class overlay extends located{
             case 4:
                 for(let a=0,la=this.parent.operation.franchise.active.length;a<la;a++){
                     for(let b=0,lb=4;b<lb;b++){
-                        if(inputs.keys[a].tap[2]&&a==0||inputs.keys[a].tap[3]&&a==la-1||(inputs.keys[a].tap[0]||inputs.keys[a].tap[1])&&a==(la-1)/2){
+                        if(inputs.keys[b].tap[2]&&a==0||inputs.keys[b].tap[3]&&a==la-1||(inputs.keys[b].tap[0]||inputs.keys[b].tap[1])&&a==(la-1)/2){
                             this.active=false
                             this.parent.activate(0,[5])
                             this.parent.operation.franchise.current=this.parent.operation.franchise.active[a]
