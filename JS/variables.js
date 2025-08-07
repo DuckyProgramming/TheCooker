@@ -2711,10 +2711,10 @@ types={
             edit:true,
             level:1,
             rarity:2,
-            cost:80,
+            cost:60,
             prereq:[],
             desc:'Can be moved through',
-            upgrade:['Freezer','Cutting Board','Portioning Board','Rolling Board','Mixer'],
+            upgrade:['Levitating Grabber'],
         },{
             name:'Mixer',
             blueprint:['Mixer',7.5],
@@ -2727,7 +2727,7 @@ types={
             cost:40,
             prereq:[],
             desc:'Cuts and rolls things slowly automatically',
-            upgrade:['Heated Mixer','Fast Mixer'],
+            upgrade:['Heated Mixer','Fast Mixer','Conveyor Mixer'],
         },{
             name:'Fast Mixer',
             blueprint:['Fast Mixer',7.5],
@@ -2740,7 +2740,7 @@ types={
             cost:120,
             prereq:[],
             desc:'Cuts and rolls things quickly automatically',
-            upgrade:['Heated Mixer'],
+            upgrade:['Heated Mixer','Conveyor Mixer'],
         },{
             name:'Heated Mixer',
             blueprint:['Heated Mixer',7.5],
@@ -2753,7 +2753,20 @@ types={
             cost:80,
             prereq:[1],
             desc:'Cuts, rolls, and cooks slowly automatically',
-            upgrade:['Fast Mixer'],
+            upgrade:['Fast Mixer','Conveyor Mixer'],
+        },{
+            name:'Conveyor Mixer',
+            blueprint:['Conveyor Mixer',7.5],
+            width:48,
+            height:48,
+            spec:[0],
+            edit:true,
+            level:1,
+            rarity:2,
+            cost:80,
+            prereq:[1],
+            desc:'Cuts and rolls things slowly automatically, then pushes them',
+            upgrade:['Fast Mixer','Heated Mixer'],
         },{
             name:'Prep Station',
             blueprint:['Prep Station',7.5],
@@ -3209,6 +3222,19 @@ types={
             desc:'Place on a table to reset its patience',
             upgrade:[],
         },{
+            name:'Cutlery',
+            blueprint:['Cutlery',6.5],
+            width:48,
+            height:24,
+            spec:[],
+            edit:true,
+            level:0,
+            rarity:1,
+            cost:20,
+            prereq:[],
+            desc:'Place on a table to make them finish eating',
+            upgrade:[],
+        },{
             name:'Laborer',
             blueprint:['Laborer',7.5],
             width:25,
@@ -3233,20 +3259,20 @@ types={
             cost:60,
             prereq:[],
             desc:'Moves things from one side to the other',
-            upgrade:['Combiner'],
+            upgrade:['Levitating Grabber','Teleporter'],
         },{
-            name:'Combiner',
-            blueprint:['Combiner',7.5],
-            width:48,
+            name:'Levitating Grabber',
+            blueprint:['Levitating Grabber',7.5],
+            width:24,
             height:48,
             spec:[],
             edit:true,
-            level:2,
-            rarity:1,
-            cost:40,
+            level:0,
+            rarity:2,
+            cost:120,
             prereq:[],
-            desc:'Combines with something ahead automatically',
-            upgrade:['Grabber'],
+            desc:'Moves things from one side to the other and can be moved through',
+            upgrade:['Teleporter'],
         },{
             name:'Teleporter',
             blueprint:['Teleporter',7.5],
@@ -3258,7 +3284,46 @@ types={
             rarity:2,
             cost:120,
             prereq:[],
-            desc:'Teleporters items to any other teleporter',
+            desc:'Teleports items to any other teleporter',
+            upgrade:['Levitating Grabber'],
+        },{
+            name:'Combiner',
+            blueprint:['Combiner',7.5],
+            width:48,
+            height:48,
+            spec:[],
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:40,
+            prereq:[],
+            desc:'Combines with something ahead automatically',
+            upgrade:['Portioner'],
+        },{
+            name:'Portioner',
+            blueprint:['Portioner',7.5],
+            width:48,
+            height:48,
+            spec:[],
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:40,
+            prereq:[],
+            desc:'Portions something ahead automatically',
+            upgrade:['Combiner'],
+        },{
+            name:'Gasser',
+            blueprint:['Gasser',7.5],
+            width:16,
+            height:32,
+            spec:[],
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:40,
+            prereq:[],
+            desc:'Speeds up the thing that it points to by 1.5x',
             upgrade:[],
         },
 
@@ -3942,6 +4007,19 @@ types={
             prereq:[0],
             desc:'Provides Burger Buns',
             upgrade:[],
+        },{
+            name:'Pumpkins',
+            blueprint:['Pumpkins',7.5],
+            width:48,
+            height:36,
+            spec:[1],provide:'Pumpkin',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Pumpkins',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -4190,6 +4268,8 @@ types={
                 [0,'Bonito','Raw Ramen Soup'],
                 [0,'Wine','Raw Wine Jus'],
                 [0,'Chopped Onion','Chopped Onion in Broth'],
+                [0,'Deboned Chicken','Chicken in Broth'],
+                [0,'Uncooked Noodles','Noodles in Broth'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -4486,6 +4566,8 @@ types={
                 [0,'Butter','Butter Dough'],
                 [0,'Chopped Lettuce','Lettuce Dough'],
                 [0,'Chopped Onion','Onion Dough'],
+                [0,'Chopped Meat','Meat Dough'],
+                [0,'Meat Soup','Meat Soup Dough'],
                 [0,'Sugar','Sugar Dough'],
                 [0,'Oil','Pizza Base'],
             ],
@@ -4509,6 +4591,7 @@ types={
             process:[
                 [0,'Chopped Garlic','Garlic on Bread'],
                 [0,'Chopped Cheese','Cheese on Bread'],
+                [0,'Butter','Butter on Bread'],
                 [0,'Oil','Oil on Bread'],
                 [0,'Chopped Tomato','Tomato on Bread'],
                 [1,90,'Toast'],
@@ -4584,6 +4667,7 @@ types={
             trashable:true,
             process:[
                 [0,'Chopped Garlic','Raw Garlic Bread'],
+                [0,'Butter','Cheese Butter Bread'],
             ],
         },{
             name:'Raw Garlic Bread',
@@ -4756,6 +4840,7 @@ types={
             trashable:true,
             process:[
                 [0,'Chopped Lettuce','Lettuce Onion Dough'],
+                [0,'Chopped Meat','Meat Onion Dough'],
             ],
         },{
             name:'Lettuce Onion Dough',
@@ -5736,6 +5821,7 @@ types={
                 [0,'Chopped Onion','Plated Tomato and Onion'],
                 [0,'Toast','Plated Tomato Toast'],
                 [0,'Fried Egg','Plated Egg and Tomato'],
+                [0,'Burger Bun','Plated Tomato Bun'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -8711,6 +8797,13 @@ types={
             component:false,
             trashable:false,
             process:[],
+        },{
+            name:'Cutlery',
+            holdDist:16,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[],
         },
 
         {
@@ -8721,6 +8814,7 @@ types={
             trashable:true,
             process:[
                 [0,'Cheese','Raw French Onion Soup'],
+                [0,'Chopped Cheese','Raw Chopped French Onion Soup'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -10424,6 +10518,7 @@ types={
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
                 [0,'Unbunned Burger','Plated Burger'],
+                [0,'Chopped Tomato','Plated Tomato Bun'],
             ],
         },{
             name:'Plated Unbunned Burger',
@@ -10444,6 +10539,8 @@ types={
             trashable:true,
             process:[
                 [0,'Plate','Plated Burger'],
+                [0,'Chopped Tomato','Tomato Burger'],
+                [0,'Plated Tomato','Plated Tomato Burger'],
             ],
         },{
             name:'Plated Burger',
@@ -10453,6 +10550,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Tomato Burger'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -10542,6 +10640,267 @@ types={
             process:[
                 [1,360,'Broth'],
                 [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Meat Dough',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Chopped Onion','Meat Onion Dough'],
+                [0,'Meat Soup','Meat Meat Soup Dough'],
+            ],
+        },{
+            name:'Meat Onion Dough',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [3,15,'Raw Dumplings'],
+            ],
+        },{
+            name:'Raw Dumplings',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,60,'Dumplings'],
+            ],
+        },{
+            name:'Dumplings',
+            holdDist:18,
+            holdDir:90,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Dumplings'],
+                [9,120,'Burnt'],
+            ],
+        },{
+            name:'Plated Dumplings',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Meat Soup Dough',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Chopped Meat','Meat Meat Soup Dough'],
+            ],
+        },{
+            name:'Meat Meat Soup Dough',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [3,15,'Raw Soup Dumplings'],
+            ],
+        },{
+            name:'Raw Soup Dumplings',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,60,'Soup Dumplings'],
+            ],
+        },{
+            name:'Soup Dumplings',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Soup Dumplings'],
+                [9,120,'Burnt'],
+            ],
+        },{
+            name:'Plated Soup Dumplings',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Chicken in Broth',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Uncooked Noodles','Raw Chicken Noodle Soup'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Noodles in Broth',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Deboned Chicken','Raw Chicken Noodle Soup'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Raw Chicken Noodle Soup',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,450,'Chicken Noodle Soup Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Chicken Noodle Soup Pot',
+            portions:4,
+            replace:true,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [6,60,'Chicken Noodle Soup','Spent Broth'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Chicken Noodle Soup',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
+        },{
+            name:'Butter on Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Chopped Cheese','Cheese Butter Bread'],
+                [0,'Cheese on Bread','Raw Grilled Cheese'],
+            ],
+        },{
+            name:'Cheese Butter Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Bread Slice','Raw Grilled Cheese'],
+            ],
+        },{
+            name:'Raw Grilled Cheese',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [1,180,'Grilled Cheese'],
+            ],
+        },{
+            name:'Grilled Cheese',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Grilled Cheese'],
+                [9,240,'Burnt'],
+            ],
+        },{
+            name:'Plated Grilled Cheese',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Tomato Burger',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Tomato Burger'],
+            ],
+        },{
+            name:'Plated Tomato Burger',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Tomato Bun',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+                [0,'Unbunned Burger','Plated Tomato Burger'],
+            ],
+        },{
+            name:'Pumpkin',
+            portions:1,
+            replace:false,
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [6,60,'Pumpkin Seeds','Pumpkin Husk'],
+            ],
+        },{
+            name:'Pumpkin Husk',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Pumpkin Seeds',
+            holdDist:18,
+            holdDir:45,
+            component:true,
+            trashable:true,
+            process:[
+                [1,120,'Roasted Pumpkin Seeds'],
+            ],
+        },{
+            name:'Roasted Pumpkin Seeds',
+            holdDist:18,
+            holdDir:45,
+            component:true,
+            trashable:true,
+            process:[
+                [9,180,'Burnt'],
+                [7,180,''],
             ],
         },
         //mark
@@ -10728,6 +11087,15 @@ types={
             ],
             desc:'Cook patty.\nAdd to bun and serve.',
         },{
+            name:'Tomato Burger',
+            group:'Tomato Burger',
+            list:0,
+            value:'+1',
+            obj:[
+                ['Plated Tomato Burger',5],
+            ],
+            desc:'Chop and add tomato to burger.',
+        },{
             name:'Patty',
             group:'Patty',
             list:0,
@@ -10764,6 +11132,15 @@ types={
                 ['Plated Egg Toast','Plated Egg and Tomato Toast',6],
             ],
             desc:'Chop tomato, add to plated toast, and serve.',
+        },{
+            name:'Grilled Cheese',
+            group:'Toast',
+            list:0,
+            value:'7',
+            obj:[
+                ['Plated Grilled Cheese',7],
+            ],
+            desc:'Stack bread slice, chopped cheese, butter, and another bread slice.\nCook, plate, and serve.',
         },
 
         {
@@ -10836,6 +11213,7 @@ types={
 
         {
             name:'Coffee',
+            group:'Coffee',
             list:3,
             value:'1',
             obj:[
@@ -10844,6 +11222,7 @@ types={
             desc:'Activate coffee machine, then take the cup and serve.',
         },{
             name:'Affogato',
+            group:'Coffee',
             list:3,
             value:'2',
             obj:[
@@ -10852,6 +11231,7 @@ types={
             desc:'Take vanilla ice cream, add to coffee cup, and serve.',
         },{
             name:'Sugar',
+            group:'Sugar',
             list:5,
             value:'0',
             obj:[
@@ -10860,6 +11240,7 @@ types={
             desc:'Take and deliver sugar',
         },{
             name:'Cupcake Stand',
+            group:'Cupcake Stand',
             list:5,
             value:'0',
             obj:[
@@ -11023,6 +11404,7 @@ types={
 
         {
             name:'Cake',
+            group:'Cake',
             list:3,
             value:'4',
             obj:[
@@ -11031,6 +11413,7 @@ types={
             desc:'Combine sugar, flour, and cracked egg, mix to make batter.\nAdd milk to batter, then place in cake tin.\nCook, then add melted chocolate as flavoring.\nPortion and serve.',
         },{
             name:'Coffee Cake',
+            group:'Cake',
             list:3,
             value:'0',
             obj:[
@@ -11039,6 +11422,7 @@ types={
             desc:'After cooking, use coffee from coffee machine as cake flavoring.',
         },{
             name:'Cherry Cake',
+            group:'Cake',
             list:3,
             value:'0',
             obj:[
@@ -11047,6 +11431,7 @@ types={
             desc:'After cooking, use cherry sauce as cake flavoring.',
         },{
             name:'Lemon Cake',
+            group:'Cake',
             list:3,
             value:'0',
             obj:[
@@ -11055,6 +11440,7 @@ types={
             desc:'After cooking, use chopped lemon as cake flavoring.',
         },{
             name:'Donut',
+            group:'Cake',
             list:3,
             value:'5',
             obj:[
@@ -11066,6 +11452,7 @@ types={
             desc:'Add batter with milk to donut tray.\nPortion a donut out of the tray.\nAdd oil and donut to pot.\nCook, then portion out donut, add flavoring, and serve.',
         },{
             name:'Tiramisu',
+            group:'Cake',
             list:3,
             value:'5',
             obj:[
@@ -11074,6 +11461,7 @@ types={
             desc:'Combine chopped lemon, sugar, and cracked egg, and mix, then add milk to make mascarpone.\nAfter cooking cake, add mascarpone and cocoa powder.\nPortion and serve.',
         },{
             name:'Brownies',
+            group:'Cake',
             list:3,
             value:'4',
             obj:[
@@ -11171,9 +11559,30 @@ types={
             ],
             desc:'Combine oil and chopped lemon.\nAdd to plate with chicken.',
         },
+
+        {
+            name:'Dumplings',
+            group:'Dumplings',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated Dumplings',6],
+            ],
+            desc:'Add water to flour to make dough.\nAdd chopped meat and chopped onion.\nKnead to make dumplings, then cook, plate and serve.',
+        },{
+            name:'Soup Dumplings',
+            group:'Dumplings',
+            list:0,
+            value:'8',
+            obj:[
+                ['Plated Soup Dumplings',7],
+            ],
+            desc:'Boil water with onion to make broth.\nAdd meat to broth and cook again.\nPortion to get meat soup.\nWhile making dumplings, instead of adding chopped onion, add meat soup portion.',
+        },
         
         {
             name:'Meat Soup',
+            group:'Meat Soup',
             list:1,
             value:'2',
             obj:[
@@ -11182,6 +11591,7 @@ types={
             desc:'Boil water with onion to make broth.\nAdd meat to broth and cook again.\nPortion and serve.',
         },{
             name:'Tomato Soup',
+            group:'Tomato Soup',
             list:1,
             value:'2',
             obj:[
@@ -11190,6 +11600,7 @@ types={
             desc:'Boil water with onion to make broth.\nCut tomato two times to make tomato sauce.\nAdd tomato and tomato sauce to broth and cook again.\nPortion and serve.',
         },{
             name:'Broccoli Cheese Soup',
+            group:'Broccoli Cheese Soup',
             list:1,
             value:'2',
             obj:[
@@ -11198,6 +11609,7 @@ types={
             desc:'Boil water with onion to make broth.\nAdd broccoli and cheese to broth and cook again.\nPortion and serve.',
         },{
             name:'French Onion Soup',
+            group:'French Onion Soup',
             list:1,
             value:'2',
             obj:[
@@ -11205,7 +11617,17 @@ types={
             ],
             desc:'Boil water with onion to make broth.\nAdd chopped onion and cheese to broth and cook again.\nPortion and serve.',
         },{
+            name:'Chicken Noodle Soup',
+            group:'Chicken Noodle Soup',
+            list:1,
+            value:'2',
+            obj:[
+                ['Chicken Noodle Soup',2],
+            ],
+            desc:'Boil water with onion to make broth.\nAdd chicken with bone removed and noodles to broth and cook again.\nPortion and serve.',
+        },{
             name:'Miso Soup',
+            group:'Miso Soup',
             list:1,
             value:'2',
             obj:[
@@ -11214,6 +11636,7 @@ types={
             desc:'Boil water with soybeans, then cut to make tofu.\nAdd water again and miso and cook again.\nPortion and serve.',
         },{
             name:'Bread',
+            group:'Bread',
             list:1,
             value:'1',
             obj:[
@@ -11222,6 +11645,7 @@ types={
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and serve.',
         },{
             name:'Garlic Bread',
+            group:'Garlic Bread',
             list:1,
             value:'2',
             obj:[
@@ -11230,6 +11654,7 @@ types={
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and add chopped garlic and chopped cheese.\nCook again and serve.',
         },{
             name:'Bruschetta',
+            group:'Bruschetta',
             list:1,
             value:'2',
             obj:[
@@ -11238,6 +11663,7 @@ types={
             desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion and add oil and chopped tomato, then serve.',
         },{
             name:'Croissant',
+            group:'Croissant',
             list:1,
             value:'2',
             obj:[
@@ -11246,16 +11672,27 @@ types={
             desc:'Add water to flour to make dough.\nAdd butter and knead to make a croissant.\nCook and serve.',
         },{
             name:'Spring Roll',
+            group:'Spring Roll',
             list:1,
             value:'1',
             obj:[
                 ['Spring Roll',1],
             ],
             desc:'Add water to flour to make dough.\nAdd chopped lettuce and onions.\nKnead into rolls and cook.\nPortions and serve.',
+        },{
+            name:'Roasted Pumpkin Seeds',
+            group:'Roasted Pumpkin Seeds',
+            list:1,
+            value:'2',
+            obj:[
+                ['Roasted Pumpkin Seeds',2],
+            ],
+            desc:'Portion seeds from pumpkin, roast and serve.\nDiscard remaining pumpkin.',
         },
 
         {
             name:'Broccoli',
+            group:'Broccoli',
             list:2,
             value:'1',
             obj:[
@@ -11264,6 +11701,7 @@ types={
             desc:'Boil water with broccoli.\nPortion and serve.',
         },{
             name:'Mashed Potato',
+            group:'Mashed Potato',
             list:2,
             value:'2',
             obj:[
@@ -11272,6 +11710,7 @@ types={
             desc:'Boil water with potato.\nMash when complete.\nPortion and serve.',
         },{
             name:'Roast Potato',
+            group:'Roast Potato',
             list:2,
             value:'1',
             obj:[
@@ -11280,6 +11719,7 @@ types={
             desc:'Cook potato and serve.',
         },{
             name:'Fries',
+            group:'Fries',
             list:2,
             value:'2',
             obj:[
@@ -11288,6 +11728,7 @@ types={
             desc:'Chop potato, then cook and serve.',
         },{
             name:'Hash Brown',
+            group:'Hash Brown',
             list:2,
             value:'2',
             obj:[
@@ -11296,6 +11737,7 @@ types={
             desc:'Chop potato and cook in waffle iron, then serve.',
         },{
             name:'Onion Rings',
+            group:'Onion Rings',
             list:2,
             value:'2',
             obj:[
@@ -11304,6 +11746,7 @@ types={
             desc:'Chop onions, add flour, then cook and serve.',
         },{
             name:'Cheese Sticks',
+            group:'Cheese Sticks',
             list:2,
             value:'3',
             obj:[
@@ -11312,6 +11755,7 @@ types={
             desc:'Chop cheese, add flour and cook.\nChop tomato twice to make sauce.\nCombine sticks and sauce and serve.',
         },{
             name:'Macaroni and Cheese',
+            group:'Macaroni and Cheese',
             list:2,
             value:'2',
             obj:[
@@ -11320,6 +11764,7 @@ types={
             desc:'Boil water with macaroni.\nRemove water and add chopped cheese and butter.\nMix, portion and serve.',
         },{
             name:'Scrambled Eggs',
+            group:'Scrambled Eggs',
             list:2,
             value:'1',
             obj:[
@@ -11328,6 +11773,7 @@ types={
             desc:'Crack egg, then mix it.\nPlace in pot and cook.\nPortion and serve.',
         },{
             name:'Applesauce',
+            group:'Applesauce',
             list:2,
             value:'1',
             obj:[
@@ -11338,6 +11784,7 @@ types={
 
         {
             name:'Apple Pie',
+            group:'Apple Pie',
             list:3,
             value:'3',
             obj:[
@@ -11346,6 +11793,7 @@ types={
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd chopped apple to pastry and cook again.',
         },{
             name:'Cherry Pie',
+            group:'Cherry Pie',
             list:3,
             value:'3',
             obj:[
@@ -11354,6 +11802,7 @@ types={
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nAdd cherry to pastry and cook again.',
         },{
             name:'Caramel Pie',
+            group:'Caramel Pie',
             list:3,
             value:'3',
             obj:[
@@ -11362,6 +11811,7 @@ types={
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook sugar to make caramel.\nAdd caramel to pastry and cook again.',
         },{
             name:'Chocolate Pudding Pie',
+            group:'Chocolate Pudding Pie',
             list:3,
             value:'3',
             obj:[
@@ -11370,6 +11820,7 @@ types={
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook chocolate to melt it.\nAdd melted chocolate to pastry and mix.',
         },{
             name:'Lemon Meringue Pie',
+            group:'Lemon Meringue Pie',
             list:3,
             value:'4',
             obj:[
@@ -11378,6 +11829,7 @@ types={
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCombine chopped lemon, sugar, and cracked egg, and mix to create meringue.\nAdd meringue to pastry and cook again.',
         },{
             name:'Apple Crisp',
+            group:'Apple Crisp',
             list:3,
             value:'2',
             obj:[
@@ -11386,6 +11838,7 @@ types={
             desc:'Combine chopped apple, sugar and flour.\nCook and serve.',
         },{
             name:'Apple Rings',
+            group:'Apple Rings',
             list:3,
             value:'2',
             obj:[
@@ -11394,6 +11847,7 @@ types={
             desc:'Combine chopped apple and chopped cinnamaon.\nCook and serve.',
         },{
             name:'Rice Pudding',
+            group:'Rice Pudding',
             list:3,
             value:'2',
             obj:[
@@ -11402,6 +11856,7 @@ types={
             desc:'Combine rice, milk, and cinnamon in a pot.\nCook, portion, and serve.',
         },{
             name:'Ice Cream',
+            group:'Ice Cream',
             list:3,
             value:'2-3',
             obj:[
@@ -11416,6 +11871,7 @@ types={
             desc:'Switch between flavors and grab scoops, then serve.',
         },{
             name:'Zeppole',
+            group:'Zeppole',
             list:3,
             value:'2',
             obj:[
@@ -11593,6 +12049,16 @@ types={
             mutex:[],
             wall:['Starter Hob','Starter Hob','Chicken','Flour','Oil','Pots','Starter Sink','Starter Plates'],
             desc:'Adds fried chicken as a main dish',
+        },{
+            name:'Dumplings',
+            dish:['Dumplings'],
+            list:0,
+            rate:[3,'6'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Starter Hob','Flour','Meat','Onions','Starter Sink','Starter Plates'],
+            desc:'Adds dumplings as a main dish',
         },
 
         {
@@ -11706,6 +12172,16 @@ types={
             wall:['Garlic','Flour','Oven'],
             desc:'Consists of lettuce, garlic, and breadcrumbs',
         },{
+            name:'Tomato Burgers',
+            dish:['Tomato Burger'],
+            list:0,
+            rate:[1,'+1'],
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            wall:['Tomatoes'],
+            desc:'Adds tomato as a burger topping',
+        },{
             name:'Fresh Patties',
             dish:['Patty'],
             list:0,
@@ -11735,6 +12211,16 @@ types={
             mutex:[],
             wall:['Tomatoes'],
             desc:'Adds tomato as a toast topping',
+        },{
+            name:'Grilled Cheese',
+            dish:['Grilled Cheese'],
+            list:1,
+            rate:[3,'7'],
+            customerMult:0.64,
+            prereq:['Toast'],
+            mutex:[],
+            wall:['Cheese','Butter'],
+            desc:'Adds grilled cheese sandwiches as a main dish',
         },{
             name:'Onion Pizza',
             dish:['Onion Pizza'],
@@ -12045,6 +12531,16 @@ types={
             mutex:[],
             wall:['Starter Hob','Lemons'],
             desc:'Adds lemon pepper sauce as a chicken topping',
+        },{
+            name:'Soup Dumplings',
+            dish:['Soup Dumplings'],
+            list:1,
+            rate:[1,'7'],
+            customerMult:0.8,
+            prereq:['Dumplings'],
+            mutex:[],
+            wall:['Pots'],
+            desc:'Adds soup dumplings as a main dish',
         },
         
         {
@@ -12087,6 +12583,16 @@ types={
             mutex:[],
             wall:['Starter Hob','Pots','Cheese','Onions','Starter Sink'],
             desc:'Adds french onion soup as a starter',
+        },{
+            name:'Chicken Noodle Soup',
+            dish:['Chicken Noodle Soup'],
+            list:2,
+            rate:[1,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Pots','Chicken','Noodles','Onions','Starter Sink'],
+            desc:'Adds chicken noodle soup as a starter',
         },{
             name:'Miso Soup',
             dish:['Miso Soup'],
@@ -12147,6 +12653,16 @@ types={
             mutex:[],
             wall:['Starter Hob','Flour','Lettuce','Onions','Starter Sink'],
             desc:'Adds spring rolls as a starter',
+        },{
+            name:'Pumpkin Seeds',
+            dish:['Roasted Pumpkin Seeds'],
+            list:2,
+            rate:[2,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Pumpkins'],
+            desc:'Adds roasted pumpkin seeds as a starter',
         },
 
         {
@@ -12565,6 +13081,20 @@ types={
             prereq:[],
             mutex:[],
             desc:'Players move 20% faster',
+        },{
+            name:'Thin Out',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Customers are less likely to order extra food',
+        },{
+            name:'Pacing',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Combines delivery and serving phase',
         },
     ],cosmetic:{
         color:[

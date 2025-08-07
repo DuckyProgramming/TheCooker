@@ -221,7 +221,7 @@ class item extends located{
                 layer.noStroke()
                 switch(this.name){
                     case 'Bolognese Sauce Pot': case 'White Sauce Pot': case 'Ramen Soup Pot': case 'Meat Soup Pot': case 'Tomato Soup Pot': case 'Broccoli Cheese Soup Pot': case 'Miso Soup Pot': case 'Broccoli Pot': case 'Mashed Potato Pot': case 'Macaroni and Cheese Pot':
-                    case 'Scrambled Eggs Pot': case 'Rice Pudding Pot': case 'Wine Jus Pot': case 'Chili Pot': case 'Chopped Broccoli Pot': case 'Buffalo Sauce Pot':
+                    case 'Scrambled Eggs Pot': case 'Rice Pudding Pot': case 'Wine Jus Pot': case 'Chili Pot': case 'Chopped Broccoli Pot': case 'Buffalo Sauce Pot': case 'French Onion Soup Pot': case 'Chicken Noodle Soup Pot':
                         layer.fill(225,this.fade.main)
                         layer.rect(-8,-8,12,12,4)
                         layer.fill(0,this.fade.main)

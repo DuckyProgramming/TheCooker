@@ -95,6 +95,8 @@ class dayManager extends manager{
         this.operation.entityManager.tempClearWalls(['Crate','Blueprint','Option'])
         this.operation.entityManager.tempClearOuterWalls()
         this.operation.entityManager.spawnOptions(1,3)
+        this.operation.entityManager.clearPlayerItem()
+        this.operation.entityManager.beginDay()
     }
     endPractice(){
         this.phase=0

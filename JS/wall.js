@@ -29,6 +29,7 @@ class wall extends partisan{
         this.base.width=this.width
         this.base.height=this.height
         this.item=-1
+        this.buff=[1]
         switch(this.name){
             case 'Sidewalk': case 'Floor': case 'Kitchen Floor':
                 this.colliders.main=[]
@@ -101,6 +102,12 @@ class wall extends partisan{
             case 'Heated Mixer':
                 this.speed=[1,1,0.25,0.5]
             break
+            case 'Conveyor Mixer':
+                this.speed=[1,1,0.25]
+                this.activating=0
+                this.anim=0
+                this.handLen=48
+            break
             case 'Levitating Counter':
                 this.speed=[1,1]
                 this.colliders.main=[]
@@ -163,7 +170,7 @@ class wall extends partisan{
             case 'Fish': case 'Meat': case 'Lettuce': case 'Tomatoes': case 'Cheese': case 'Onions': case 'Nuts': case 'Hot Dogs': case 'Hot Dog Buns': case 'Noodles':
             case 'Eggs': case 'Chocolate': case 'Milk': case 'Fish Fillet': case 'Spiny Fish': case 'Crabs': case 'Bone Meat': case 'Thick Meat': case 'Apples': case 'Garlic':
             case 'Broccoli': case 'Butter': case 'Pasta Sheet': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Macaroni': case 'Cinnamon': case 'Peppers': case 'Chicken':
-            case 'Mozzarella': case 'Basil': case 'Patties': case 'Burger Buns':
+            case 'Mozzarella': case 'Basil': case 'Patties': case 'Burger Buns': case 'Pumpkins':
                 this.displayItem=this.generateItem(this.provide)
             break
             case 'Coffee Machine':
@@ -173,10 +180,13 @@ class wall extends partisan{
                 this.speed=1/120
                 this.animSet={close:0}
             break
-            case 'Breadsticks': case 'Ketchup': case 'Mustard':
+            case 'Breadsticks': case 'Cutlery': case 'Ketchup': case 'Mustard':
                 switch(this.name){
                     case 'Breadsticks':
                         this.provide='Breadsticks'
+                    break
+                    case 'Cutlery':
+                        this.provide='Cutlery'
                     break
                     case 'Ketchup':
                         this.provide='Ketchup'
@@ -206,10 +216,26 @@ class wall extends partisan{
                 this.anim=48
                 this.handLen=[48,48]
             break
+            case 'Levitating Grabber':
+                this.activating=0
+                this.anim=48
+                this.handLen=[48,48]
+                this.colliders.main=[]
+            break
             case 'Combiner':
                 this.activating=0
                 this.anim=0
                 this.handLen=48
+            break
+            case 'Portioner':
+                this.activating=0
+                this.anim=0
+                this.handLen=48
+                this.speed=0.25
+            break
+            case 'Gasser':
+                this.handLen=48
+                this.position.y-=8
             break
         }
         this.reset()
@@ -309,7 +335,7 @@ class wall extends partisan{
             case 'Microwave': case 'Coffee Machine': case 'Waffle Iron':
                 this.cycle=0
             break
-            case 'Breadsticks':
+            case 'Breadsticks': case 'Cutlery':
                 this.items=4
                 this.base.items=4
             break
@@ -345,10 +371,13 @@ class wall extends partisan{
             break
         }
     }
+    preBeginDay(){
+        this.buff[0]=1
+    }
     beginDay(){
         let hand
         switch(this.name){
-            case 'Grabber':
+            case 'Grabber': case 'Levitating Grabber':
                 this.handLen=[48,48]
                 hand=[
                     {position:{x:this.position.x+lsin(this.direction.main)*this.handLen[0],y:this.position.y-lcos(this.direction.main)*this.handLen[0]}},
@@ -371,7 +400,7 @@ class wall extends partisan{
                     }
                 }
             break
-            case 'Combiner':
+            case 'Combiner': case 'Portioner': case 'Conveyor Mixer':
                 this.handLen=48
                 hand={position:{x:this.position.x-lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
                 for(let a=0,la=this.parent.entities.walls[0].length;a<la;a++){
@@ -385,6 +414,32 @@ class wall extends partisan{
                                     hand={position:{x:this.position.x-lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
                                 }
                             }
+                        }
+                    }
+                }
+            break
+            case 'Gasser':
+                this.handLen=48
+                hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y-lcos(this.direction.main)*this.handLen}}
+                for(let a=0,la=this.parent.entities.walls[0].length;a<la;a++){
+                    if(this.parent.entities.walls[0][a].name=='High Wall'){
+                        let obj=this.parent.entities.walls[0][a]
+                        for(let b=0,lb=obj.boundary.length;b<lb;b++){
+                            if(intersect(this.position,hand.position,obj.boundary[b][0],obj.boundary[b][1])){
+                                let point=intersectKey(this.position,hand.position,obj.boundary[b][0],obj.boundary[b][1])
+                                if(dist(this.position.x,this.position.y,point.x,point.y)<this.handLen){
+                                    this.handLen=dist(this.position.x,this.position.y,point.x,point.y)
+                                    hand={position:{x:this.position.x+lsin(this.direction.main)*this.handLen,y:this.position.y-lcos(this.direction.main)*this.handLen}}
+                                }
+                            }
+                        }
+                    }
+                }
+                for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                    for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                        let obj=this.parent.entities.walls[a][b]
+                        if(obj!=this&&obj.checkIn(0,hand)){
+                            obj.buff[0]*=1.5
                         }
                     }
                 }
@@ -540,9 +595,13 @@ class wall extends partisan{
         this.height=this.width
         this.width=hold
         switch(this.name){
-            case 'Breadsticks': case 'Ketchup': case 'Mustard': case 'Booking Desk':
+            case 'Breadsticks': case 'Cutlery': case 'Ketchup': case 'Mustard': case 'Booking Desk':
                 this.position.x=this.base.position.x+lsin(this.direction.goal)*12
                 this.position.y=this.base.position.y-lcos(this.direction.goal)*12
+            break
+            case 'Gasser':
+                this.position.x=this.base.position.x+lsin(this.direction.goal)*8
+                this.position.y=this.base.position.y-lcos(this.direction.goal)*8
             break
         }
     }
@@ -580,7 +639,7 @@ class wall extends partisan{
             case 0:
                 layer.push()
                 switch(this.name){
-                    case 'Booking Desk': case 'Breadsticks': case 'Ketchup': case 'Mustard':
+                    case 'Booking Desk': case 'Breadsticks': case 'Cutlery': case 'Ketchup': case 'Mustard':
                         layer.translate(this.base.position.x+this.offset.position.x,this.base.position.y+this.offset.position.y)
                     break
                     default:
@@ -972,6 +1031,28 @@ class wall extends partisan{
                             layer.arc(-4.5,0,9,4,0,180)
                             layer.rotate(360/la)
                         }
+                        layer.ellipse(0,0,2)
+                    break
+                    case 'Conveyor Mixer':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(200,50,50,this.fade.main)
+                        layer.ellipse(0,0,30)
+                        layer.fill(100,this.fade.main)
+                        layer.ellipse(0,0,24)
+                        layer.fill(60,this.fade.main)
+                        layer.ellipse(0,0,20)
+                        layer.noFill()
+                        layer.stroke(225,200,50,this.fade.main)
+                        layer.strokeWeight(2)
+                        regTriangle(layer,0,0,5,5,0)
+                        layer.noStroke()
+                        layer.rotate(this.timer.main*6)
+                        layer.fill(180,this.fade.main)
+                        layer.arc(-4.5,0,9,4,0,180)
+                        layer.arc(4.5,0,9,4,-180,0)
                         layer.ellipse(0,0,2)
                     break
                     case 'Prep Station':
@@ -1579,7 +1660,7 @@ class wall extends partisan{
                         layer.fill(240,225,60,this.fade.main)
                         layer.rect(0,0,28,20,2)
                     break
-                    case 'Breadsticks':
+                    case 'Breadsticks': case 'Cutlery':
                         layer.fill(140,95,80,this.fade.main)
                         layer.rect(0,-12,this.base.width+3,this.base.height+3)
                         layer.fill(180,125,100,this.fade.main)
@@ -1615,6 +1696,24 @@ class wall extends partisan{
                         regTriangle(layer,0,0,5,5,0)
                         regTriangle(layer,0,12,5,5,0)
                     break
+                    case 'Levitating Grabber':
+                        layer.fill(140,95,80,this.fade.main*0.5)
+                        layer.rect(-this.base.width*0.5+1,0,2,this.base.height)
+                        layer.rect(this.base.width*0.5-1,0,2,this.base.height)
+                        layer.fill(180,125,100,this.fade.main*0.5)
+                        layer.rect(-this.base.width*0.5+4,0,2,this.base.height)
+                        layer.rect(this.base.width*0.5-4,0,2,this.base.height)
+                        layer.fill(90,this.fade.main*0.5)
+                        for(let a=0,la=6;a<la;a++){
+                            layer.rect(0,-24+(this.anim+4)%8+a*8,a==0?min(24,16+((this.anim+4)%8)*2):a==la-1?min(24,32-((this.anim+4)%8)*2):24,2)
+                        }
+                        layer.noFill()
+                        layer.stroke(225,200,50,this.fade.main)
+                        layer.strokeWeight(2)
+                        regTriangle(layer,0,-12,5,5,0)
+                        regTriangle(layer,0,0,5,5,0)
+                        regTriangle(layer,0,12,5,5,0)
+                    break
                     case 'Combiner':
                         layer.fill(140,95,80,this.fade.main)
                         layer.rect(0,0,this.base.width+3,this.base.height+3)
@@ -1628,6 +1727,32 @@ class wall extends partisan{
                         layer.stroke(225,200,50,this.fade.main)
                         layer.strokeWeight(2)
                         regTriangle(layer,0,0,5,5,0)
+                        regPolyOpen(layer,0,0,8,11,11,22.5)
+                    break
+                    case 'Portioner':
+                        layer.fill(140,95,80,this.fade.main)
+                        layer.rect(0,0,this.base.width+3,this.base.height+3)
+                        layer.fill(180,125,100,this.fade.main)
+                        layer.rect(0,0,this.base.width-3,this.base.height-3)
+                        layer.fill(160,this.fade.main)
+                        regPoly(layer,0,0,8,20,20,22.5)
+                        layer.fill(120,this.fade.main)
+                        regPoly(layer,0,0,8,16,16,22.5)
+                        layer.noFill()
+                        layer.stroke(225,200,50,this.fade.main)
+                        layer.strokeWeight(2)
+                        regTriangle(layer,0,0,5,5,60)
+                        regPolyOpen(layer,0,0,8,11,11,22.5)
+                    break
+                    case 'Gasser':
+                        layer.fill(255,165,15,this.fade.main)
+                        layer.rect(0,-this.base.width*0.25,this.base.width,this.base.height-this.base.width*0.5)
+                        layer.ellipse(0,this.base.height*0.5-this.base.width*0.5,this.base.width)
+                        layer.fill(255,75,35,this.fade.main)
+                        layer.rect(0,-this.base.height*0.5+11.25,this.base.width+2,2.5,1)
+                        layer.rect(0,-this.base.height*0.5+16.25,this.base.width+2,2.5,1)
+                        layer.fill(160,90,60,this.fade.main)
+                        layer.rect(0,-this.base.height*0.5+2.5,this.base.width+4,5,2)
                     break
                     case 'Teleporter':
                         layer.fill(80,this.fade.main)
@@ -1665,7 +1790,7 @@ class wall extends partisan{
                         layer.rect(0,10,this.base.width,2)
                     break
                     case 'Lettuce': case 'Tomatoes': case 'Onions': case 'Apples': case 'Garlic': case 'Broccoli': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Peppers':
-                    case 'Basil':
+                    case 'Basil': case 'Pumpkins':
                         layer.fill(160,100,40,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height)
                         layer.fill(130,85,40,this.fade.main)
@@ -1949,7 +2074,7 @@ class wall extends partisan{
                     break
                     //mark
                 }
-                if(this.name!='Prep Station'&&this.name!='Frozen Prep Station'&&this.name!='Grabber'&&this.name!='Combiner'&&this.item!=-1){
+                if(this.name!='Prep Station'&&this.name!='Frozen Prep Station'&&this.name!='Grabber'&&this.name!='Levitating Grabber'&&this.name!='Combiner'&&this.name!='Portioner'&&this.name!='Conveyor Mixer'&&this.item!=-1){
                     this.item.display(0)
                 }
                 switch(this.name){
@@ -2155,7 +2280,7 @@ class wall extends partisan{
                             layer.rect(-16.5*(1-part),-8,33*part,5,2)
                         }
                     break
-                    case 'Grabber':
+                    case 'Grabber': case 'Levitating Grabber':
                         layer.rotate(this.direction.main)
                         layer.translate(0,-48+this.anim)
                         if(this.item!=-1){
@@ -2163,7 +2288,7 @@ class wall extends partisan{
                         }
                         layer.rotate(-this.direction.main)
                     break
-                    case 'Combiner':
+                    case 'Combiner': case 'Portioner': case 'Conveyor Mixer':
                         layer.rotate(this.direction.main)
                         layer.translate(0,this.anim)
                         if(this.item!=-1){
@@ -2270,9 +2395,9 @@ class wall extends partisan{
                 this.animSet.num=smoothAnim(this.animSet.num,this.plates>0,0,1,5)
                 this.animSet.close=smoothAnim(this.animSet.close,this.cycle>0,0,1,5)
                 if(this.cycle>0){
-                    this.cycle--
+                    this.cycle-=this.buff[0]
                     if(this.item!=-1){
-                        let result=this.item.generalProcess([4],this.speed)
+                        let result=this.item.generalProcess([4],this.speed*this.buff[0])
                         for(let a=0,la=result.length;a<la;a++){
                             switch(result[a].type){
                                 case 4:
@@ -2294,7 +2419,7 @@ class wall extends partisan{
             break
             case 'Mixer': case 'Fast Mixer':
                 if(this.item!=-1){
-                    let result=this.item.generalProcess([2,3],this.speed[2])
+                    let result=this.item.generalProcess([2,3],this.speed[2]*this.buff[0])
                     for(let a=0,la=result.length;a<la;a++){
                         switch(result[a].type){
                             case 2: case 3:
@@ -2307,7 +2432,7 @@ class wall extends partisan{
             case 'Heated Mixer':
                 if(this.item!=-1){
                     this.item.moved=false
-                    let result=this.item.generalProcess([2,3],this.speed[2])
+                    let result=this.item.generalProcess([2,3],this.speed[2]*this.buff[0])
                     for(let a=0,la=result.length;a<la;a++){
                         switch(result[a].type){
                             case 2: case 3:
@@ -2316,7 +2441,7 @@ class wall extends partisan{
                         }
                     }
                     if(!this.item.moved){
-                        result=this.item.generalProcess([1,9],this.speed[3])
+                        result=this.item.generalProcess([1,9],this.speed[3]*this.buff[0])
                         for(let a=0,la=result.length;a<la;a++){
                             switch(result[a].type){
                                 case 1: case 9:
@@ -2327,9 +2452,245 @@ class wall extends partisan{
                     }
                 }
             break
+            case 'Conveyor Mixer':
+                if(this.item!=-1){
+                    this.item.moved=false
+                    let result=this.item.generalProcess([2,3],this.speed[2]*this.buff[0])
+                    for(let a=0,la=result.length;a<la;a++){
+                        switch(result[a].type){
+                            case 2: case 3:
+                                this.item=this.generateItem(result[a].result)
+                            break
+                        }
+                    }
+                    if(!this.item.moved){
+                        if(this.parent.operation.dayManager.phase==1||this.parent.operation.dayManager.phase==2){
+                            let hand
+                            hand={position:{x:this.position.x-lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                            for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                                for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                    let obj=this.parent.entities.walls[a][b]
+                                    if(obj!=this&&obj.checkIn(0,hand)){
+                                        switch(obj.name){
+                                            case 'Starter Plates': case 'Plates': case 'Large Plates':
+                                                if(xthis.item.name=='Plate'&&obj.plates<obj.base.plates){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Pots':
+                                                if(this.item.name=='Pot'&&obj.pots<obj.base.pots){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Pans':
+                                                if(this.item.name=='Pan'&&obj.pans<obj.base.pans){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Dish Rack': case 'Large Dish Rack':
+                                                if(this.item.name=='Dirty Plate'&&obj.plates<obj.base.plates){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
+                                            case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
+                                            case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                                            case 'Combiner': case 'Portioner': case 'Teleporter':
+                                                if(obj.item==-1&&this.item.fade.trigger){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Grabber': case 'Levitating Grabber':
+                                                if(obj.item==-1){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
+                                            case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
+                                                if(obj.item==-1){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Oven': case 'Fast Oven':
+                                                if(!obj.close()){
+                                                    if(obj.item==-1){
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            obj.grabEffect(this)
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Microwave': case 'Coffee Machine':
+                                                if(obj.cycle==0){
+                                                    if(obj.item==-1){
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            obj.grabEffect(this)
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Prep Station': case 'Frozen Prep Station': case 'Silo':
+                                                if(obj.item==-1&&this.item.component||obj.item!=-1&&obj.item.type==this.item.type&&obj.items<obj.base.items){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Stack Station':
+                                                if(obj.item==-1||obj.item!=-1&&obj.items.length<obj.base.items-1){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Power Sink': case 'Rinsing Sink':
+                                                if(!this.item.checkUtility('Water')){
+                                                    if(obj.item==-1){
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            obj.grabEffect(this)
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Wash Basin':
+                                                if(!this.item.checkUtility('Water')){
+                                                    if(obj.item==-1||obj.item!=-1&&obj.item.name==this.item.name&&obj.item.name=='Dirty Plate'&&obj.plates<obj.base.plates){
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            obj.grabEffect(this)
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Dishwasher':
+                                                if(obj.cycle==0){
+                                                    if(!this.item.checkUtility('Water')){
+                                                        if(obj.item==-1||obj.item!=-1&&obj.item.name==this.item.name&&obj.item.name=='Dirty Plate'&&obj.plates<obj.base.plates){
+                                                            this.anim++
+                                                            if(this.anim>=48){
+                                                                this.anim=0
+                                                                obj.grabEffect(this)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Starter Trash Bin': case 'Trash Bin': case 'Large Trash Bin':
+                                                if(obj.trash<obj.base.trash&&this.item.trashable){
+                                                    if(this.item.checkUtility('Trash')){
+                                                        obj.trash++
+                                                    }else{
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            this.item=-1
+                                                            obj.trash++
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Compost Bin':
+                                                if(obj.trash<obj.base.trash&&this.item.trashable){
+                                                    if(this.item.checkUtility('Trash')){
+                                                        obj.trash++
+                                                    }else{
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            this.item=-1
+                                                            obj.trash++
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Trash Can':
+                                                if(this.item.trashable||this.item.name=='Trash Bag'||this.item.name=='Compost Bag'){
+                                                    if(!this.item.checkUtility('Trash')){
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            this.item=-1
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                            case 'Breadsticks': case 'Cutlery': case 'Ketchup': case 'Mustard':
+                                                if(this.item.name==obj.provide&&obj.items<obj.base.items){
+                                                    this.anim++
+                                                    if(this.anim>=48){
+                                                        this.anim=0
+                                                        obj.grabEffect(this)
+                                                    }
+                                                }
+                                            break
+                                            case 'Waffle Iron':
+                                                if(obj.cycle==0){
+                                                    if(obj.item==-1&&(this.item.name=='Batter'||this.item.name=='Chopped Potato')){
+                                                        this.anim++
+                                                        if(this.anim>=48){
+                                                            this.anim=0
+                                                            obj.grabEffect(this)
+                                                        }
+                                                    }
+                                                }
+                                            break
+                                        }
+                                        if(obj.spec.includes(1)&&this.item==-1){
+                                            this.item=this.generateItem(obj.provide)
+                                            this.item.fade.main=0
+                                            this.anim=0
+                                        }
+                                        a=la
+                                        b=lb
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            break
             case 'Starter Hob': case 'Hob': case 'Fast Hob': case 'Override Hob':
                 if(this.item!=-1){
-                    let result=this.item.generalProcess([1,9],this.speed)
+                    let result=this.item.generalProcess([1,9],this.speed*this.buff[0])
                     for(let a=0,la=result.length;a<la;a++){
                         switch(result[a].type){
                             case 1: case 9:
@@ -2341,7 +2702,7 @@ class wall extends partisan{
             break
             case 'Safe Hob':
                 if(this.item!=-1){
-                    let result=this.item.generalProcess([1],this.speed)
+                    let result=this.item.generalProcess([1],this.speed*this.buff[0])
                     for(let a=0,la=result.length;a<la;a++){
                         switch(result[a].type){
                             case 1:
@@ -2353,7 +2714,7 @@ class wall extends partisan{
             break
             case 'Soaking Sink':
                 if(this.item!=-1){
-                    let result=this.item.generalProcess([4],0.25)
+                    let result=this.item.generalProcess([4],0.25*this.buff[0])
                     for(let a=0,la=result.length;a<la;a++){
                         switch(result[a].type){
                             case 4:
@@ -2371,7 +2732,7 @@ class wall extends partisan{
             case 'Oven': case 'Fast Oven':
                 this.animSet.close=smoothAnim(this.animSet.close,this.close,0,1,5)
                 if(this.item!=-1&&this.close){
-                    let result=this.item.generalProcess([1,9],this.speed)
+                    let result=this.item.generalProcess([1,9],this.speed*this.buff[0])
                     for(let a=0,la=result.length;a<la;a++){
                         switch(result[a].type){
                             case 1: case 9:
@@ -2384,9 +2745,9 @@ class wall extends partisan{
             case 'Microwave':
                 this.animSet.close=smoothAnim(this.animSet.close,this.cycle>0,0,1,5)
                 if(this.cycle>0){
-                    this.cycle--
+                    this.cycle-=this.buff[0]
                     if(this.item!=-1){
-                        let result=this.item.generalProcessConstant([1,9],this.speed*(this.cycle==0?5:1))
+                        let result=this.item.generalProcessConstant([1,9],this.speed*(this.cycle==0?5:1)*this.buff[0])
                         for(let a=0,la=result.length;a<la;a++){
                             switch(result[a].type){
                                 case 1: case 9:
@@ -2428,7 +2789,7 @@ class wall extends partisan{
                                     this.occupants[a].stop=true
                                 }
                                 this.makeOrders()
-                                this.parent.operation.dayManager.patience.restore+=75
+                                this.parent.operation.dayManager.patience.restore+=60
                             }else if(this.operation.timer>300){
                                 this.occupied=false
                                 for(let a=0,la=this.occupants.length;a<la;a++){
@@ -2452,7 +2813,7 @@ class wall extends partisan{
                                 this.item.fade.trigger=false
                                 if(this.item.fade.main<=0){
                                     this.item=-1
-                                    this.patience.restore=750
+                                    this.patience.restore=600
                                 }
                             }
                             if(this.patience.restore>0){
@@ -2471,20 +2832,60 @@ class wall extends partisan{
                             }
                         break
                         case 3:
-                            for(let a=0,la=this.occupants.length;a<la;a++){
-                                if(this.occupants[a].item!=-1||this.occupants[a].side!=-1){
-                                    this.operation.phase=4
+                            if(this.parent.operation.cardManager.hasCard('Pacing')){
+                                valid=true
+                                for(let a=0,la=this.occupants.length;a<la;a++){
+                                    if(this.occupants[a].order.length>0){
+                                        valid=false
+                                    }
+                                }
+                                if(valid){
+                                    this.operation.phase=5
                                     this.operation.timer=0
                                     this.operation.timerCap=0
-                                    this.patience.main=900
-                                    this.patience.base=900
-                                    a=la
+                                    for(let a=0,la=this.occupants.length;a<la;a++){
+                                        if(this.occupants[a].item!=-1){
+                                            for(let b=0,lb=this.occupants[a].item.process.length;b<lb;b++){
+                                                if(this.occupants[a].item.process[b].type==7){
+                                                    this.operation.timerCap=max(this.operation.timerCap,this.occupants[a].item.process[b].timer)
+                                                }
+                                            }
+                                        }
+                                        if(this.occupants[a].side!=-1){
+                                            for(let b=0,lb=this.occupants[a].item.process.length;b<lb;b++){
+                                                if(this.occupants[a].item.process[b].type==7){
+                                                    this.operation.timerCap=max(this.operation.timerCap,this.occupants[a].item.process[b].timer)
+                                                }
+                                            }
+                                        }
+                                    }
                                     if(this.parent.operation.cardManager.hasCard('Envy')){
                                         for(let b=0,lb=this.parent.entities.walls.length;b<lb;b++){
                                             for(let c=0,lc=this.parent.entities.walls[b].length;c<lc;c++){
                                                 if(this.parent.entities.walls[b][c].table()&&this.parent.entities.walls[b][c].patience.main>0){
                                                     let bar=this.parent.entities.walls[b][c].patience.base*0.2
                                                     this.parent.entities.walls[b][c].patience.main=max(this.parent.entities.walls[b][c].patience.main-bar,min(this.parent.entities.walls[b][c].patience.main,bar))
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }else{
+                                for(let a=0,la=this.occupants.length;a<la;a++){
+                                    if(this.occupants[a].item!=-1||this.occupants[a].side!=-1){
+                                        this.operation.phase=4
+                                        this.operation.timer=0
+                                        this.operation.timerCap=0
+                                        this.patience.main=900
+                                        this.patience.base=900
+                                        a=la
+                                        if(this.parent.operation.cardManager.hasCard('Envy')){
+                                            for(let b=0,lb=this.parent.entities.walls.length;b<lb;b++){
+                                                for(let c=0,lc=this.parent.entities.walls[b].length;c<lc;c++){
+                                                    if(this.parent.entities.walls[b][c].table()&&this.parent.entities.walls[b][c].patience.main>0){
+                                                        let bar=this.parent.entities.walls[b][c].patience.base*0.2
+                                                        this.parent.entities.walls[b][c].patience.main=max(this.parent.entities.walls[b][c].patience.main-bar,min(this.parent.entities.walls[b][c].patience.main,bar))
+                                                    }
                                                 }
                                             }
                                         }
@@ -2599,58 +3000,70 @@ class wall extends partisan{
                                     }
                                 }
                             }
-                            if(this.operation.timer>this.operation.timerCap*(this.name=='Small Table'?0.5:1)){
-                                for(let a=0,la=this.occupants.length;a<la;a++){
-                                    if(this.occupants[a].item!=-1){
-                                        for(let b=0,lb=this.occupants[a].item.process.length;b<lb;b++){
-                                            if(this.occupants[a].item.process[b].type==7){
-                                                switch(this.occupants[a].item.process[b].result){
-                                                    case 'Dirty Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Food Plate':'Dirty Plate'))
-                                                    break
-                                                    case 'Bone Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
-                                                    break
-                                                    case '2 Bone Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
-                                                    break
-                                                    case '3 Bone Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
-                                                    break
-                                                }
-                                            }
-                                        }
-                                        this.occupants[a].item=-1
-                                    }
-                                    if(this.occupants[a].side!=-1){
-                                        for(let b=0,lb=this.occupants[a].side.process.length;b<lb;b++){
-                                            if(this.occupants[a].side.process[b].type==7){
-                                                switch(this.occupants[a].side.process[b].result){
-                                                    case 'Dirty Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Food Plate':'Dirty Plate'))
-                                                    break
-                                                    case 'Bone Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
-                                                    break
-                                                    case '2 Bone Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
-                                                    break
-                                                    case '3 Bone Plate':
-                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
-                                                    break
-                                                }
-                                            }
-                                        }
-                                        this.occupants[a].side=-1
+                            if(this.operation.phase==5){
+                                if(this.item!=-1&&this.item.name=='Cutlery'){
+                                    this.item.fade.trigger=false
+                                    if(this.item.fade.main<=0){
+                                        this.item=-1
+                                        this.operation.timer=this.operation.timerCap*(this.name=='Small Table'?0.5:1)
                                     }
                                 }
-                                if(!(this.parent.operation.cardManager.hasCard('Double Helpings')&&floor(random(0,5))==0)){
-                                    this.orderPhase++
+                                if(this.operation.timer>=this.operation.timerCap*(this.name=='Small Table'?0.5:1)){
+                                    for(let a=0,la=this.occupants.length;a<la;a++){
+                                        if(this.occupants[a].item!=-1){
+                                            for(let b=0,lb=this.occupants[a].item.process.length;b<lb;b++){
+                                                if(this.occupants[a].item.process[b].type==7){
+                                                    switch(this.occupants[a].item.process[b].result){
+                                                        case 'Dirty Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Food Plate':'Dirty Plate'))
+                                                        break
+                                                        case 'Bone Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
+                                                        break
+                                                        case '2 Bone Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
+                                                        break
+                                                        case '3 Bone Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                            this.occupants[a].item=-1
+                                        }
+                                        if(this.occupants[a].side!=-1){
+                                            for(let b=0,lb=this.occupants[a].side.process.length;b<lb;b++){
+                                                if(this.occupants[a].side.process[b].type==7){
+                                                    switch(this.occupants[a].side.process[b].result){
+                                                        case 'Dirty Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Food Plate':'Dirty Plate'))
+                                                        break
+                                                        case 'Bone Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
+                                                        break
+                                                        case '2 Bone Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
+                                                        break
+                                                        case '3 Bone Plate':
+                                                            this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                            this.occupants[a].side=-1
+                                        }
+                                    }
+                                    if(!(this.parent.operation.cardManager.hasCard('Double Helpings')&&floor(random(0,5))==0)){
+                                        this.orderPhase++
+                                    }
+                                    this.makeOrders()
                                 }
-                                this.makeOrders()
                             }
                         break
                     }
+                }
+                if(this.item!=-1&&this.item.fade.main<=0&&!this.item.fade.trigger){
+                    this.item=-1
                 }
             break
             case 'Laborer':
@@ -2659,7 +3072,7 @@ class wall extends partisan{
                     this.player.idle()
                 }
             break
-            case 'Grabber':
+            case 'Grabber': case 'Levitating Grabber':
                 if(this.anim<48){
                     this.anim++
                 }else if(this.parent.operation.dayManager.phase==1||this.parent.operation.dayManager.phase==2){
@@ -2741,7 +3154,7 @@ class wall extends partisan{
                                     case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
                                     case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
                                     case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
-                                    case 'Combiner': case 'Teleporter':
+                                    case 'Combiner': case 'Portioner': case 'Teleporter':
                                         if(this.item==-1&&obj.item!=-1){
                                             this.activating++
                                             if(this.activating>12){
@@ -2757,7 +3170,7 @@ class wall extends partisan{
                                             }
                                         }
                                     break
-                                    case 'Grabber':
+                                    case 'Grabber': case 'Levitating Grabber':
                                         if(this.item!=-1&&obj.item==-1){
                                             this.anim++
                                             if(this.anim>=96){
@@ -2766,7 +3179,7 @@ class wall extends partisan{
                                             }
                                         }
                                     break
-                                    case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
+                                    case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
                                     case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                                         if(this.item==-1&&obj.item!=-1&&!obj.item.processGood){
                                             this.activating++
@@ -2972,7 +3385,7 @@ class wall extends partisan{
                                             }
                                         }
                                     break
-                                    case 'Breadsticks': case 'Ketchup': case 'Mustard':
+                                    case 'Breadsticks': case 'Cutlery': case 'Ketchup': case 'Mustard':
                                         if(this.item==-1&&obj.items>0){
                                             this.activating++
                                             if(this.activating>12){
@@ -3001,7 +3414,7 @@ class wall extends partisan{
                                             }else if(this.item!=-1&&obj.item==-1&&(this.item.name=='Batter'||this.item.name=='Chopped Potato')){
                                                 this.anim++
                                                 if(this.anim>=96){
-                                                    this.anim=0
+                                                    this.anim=48
                                                     obj.grabEffect(this)
                                                 }
                                             }
@@ -3029,10 +3442,10 @@ class wall extends partisan{
                             if(obj!=this&&obj.checkIn(0,hand)){
                                 switch(obj.name){
                                     case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
-                                    case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
+                                    case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
                                     case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
                                     case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
-                                    case 'Grabber': case 'Combiner': case 'Teleporter':
+                                    case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner': case 'Teleporter':
                                     case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                                     case 'Stack Station':
                                     case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Power Sink': case 'Rinsing Sink':
@@ -3109,6 +3522,129 @@ class wall extends partisan{
                     }
                 }
             break
+            case 'Portioner':
+                if(this.parent.operation.dayManager.phase==1||this.parent.operation.dayManager.phase==2){
+                    if(this.anim>0){
+                        this.anim-=2
+                    }else if(this.item==-1){
+                        let hand={position:{x:this.position.x-lsin(this.direction.main)*this.handLen,y:this.position.y+lcos(this.direction.main)*this.handLen}}
+                        for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                            for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                let obj=this.parent.entities.walls[a][b]
+                                if(obj!=this&&obj.checkIn(0,hand)){
+                                    switch(obj.name){
+                                        case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
+                                        case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
+                                        case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
+                                        case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                                        case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner': case 'Teleporter':
+                                        case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
+                                        case 'Stack Station':
+                                        case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Power Sink': case 'Rinsing Sink':
+                                            if(obj.item!=-1){
+                                                let result=obj.item.generalProcess([6],this.speed)
+                                                for(let a=0,la=result.length;a<la;a++){
+                                                    switch(result[a].type){
+                                                        case 6:
+                                                            this.item=this.generateItem(result[a].result)
+                                                            this.anim=48
+                                                            obj.item.portions--
+                                                            if(obj.item.portions<=0){
+                                                                obj.item=this.generateItem(result[a].leave)
+                                                            }
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        break
+                                        case 'Oven': case 'Fast Oven':
+                                            if(!obj.close()){
+                                                if(obj.item!=-1){
+                                                    let result=obj.item.generalProcess([6],this.speed)
+                                                    for(let a=0,la=result.length;a<la;a++){
+                                                        switch(result[a].type){
+                                                            case 6:
+                                                                this.item=this.generateItem(result[a].result)
+                                                                this.anim=48
+                                                                obj.item.portions--
+                                                                if(obj.item.portions<=0){
+                                                                    obj.item=this.generateItem(result[a].leave)
+                                                                }
+                                                            break
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        break
+                                        case 'Microwave': case 'Coffee Machine':
+                                            if(obj.cycle==0){
+                                                if(obj.item!=-1){
+                                                    let result=obj.item.generalProcess([6],this.speed)
+                                                    for(let a=0,la=result.length;a<la;a++){
+                                                        switch(result[a].type){
+                                                            case 6:
+                                                                this.item=this.generateItem(result[a].result)
+                                                                this.anim=48
+                                                                obj.item.portions--
+                                                                if(obj.item.portions<=0){
+                                                                    obj.item=this.generateItem(result[a].leave)
+                                                                }
+                                                            break
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        break
+                                        case 'Wash Basin':
+                                            if(obj.item!=-1&&obj.plates<=1){
+                                                let result=obj.item.generalProcess([6],this.speed)
+                                                for(let a=0,la=result.length;a<la;a++){
+                                                    switch(result[a].type){
+                                                        case 6:
+                                                            this.item=this.generateItem(result[a].result)
+                                                            this.anim=48
+                                                            obj.item.portions--
+                                                            if(obj.item.portions<=0){
+                                                                obj.item=this.generateItem(result[a].leave)
+                                                            }
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        break
+                                        case 'Dishwasher':
+                                            if(obj.cycle==0){
+                                                if(obj.item!=-1&&obj.plates<=1){
+                                                    let result=obj.item.generalProcess([6],this.speed)
+                                                    for(let a=0,la=result.length;a<la;a++){
+                                                        switch(result[a].type){
+                                                            case 6:
+                                                                this.item=this.generateItem(result[a].result)
+                                                                this.anim=48
+                                                                obj.item.portions--
+                                                                if(obj.item.portions<=0){
+                                                                    obj.item=this.generateItem(result[a].leave)
+                                                                }
+                                                            break
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        break
+                                    }
+                                    if(obj.spec.includes(1)&&this.item==-1){
+                                        this.item=this.generateItem(obj.provide)
+                                        this.item.fade.main=0
+                                        this.anim=0
+                                    }
+                                    a=la
+                                    b=lb
+                                }
+                            }
+                        }
+                    }
+                }
+            break
             case 'Coffee Machine':
                 this.animSet.cycle=smoothAnim(this.animSet.cycle,this.cycle>0,0,1,5)
                 if(this.cycle>0){
@@ -3121,9 +3657,9 @@ class wall extends partisan{
             case 'Waffle Iron':
                 this.animSet.close=smoothAnim(this.animSet.close,this.cycle>0,0,1,5)
                 if(this.cycle>0){
-                    this.cycle--
+                    this.cycle-=this.buff[0]
                     if(this.item!=-1){
-                        let result=this.item.generalProcessConstant([10],this.speed)
+                        let result=this.item.generalProcessConstant([10],this.speed*this.buff[0])
                         for(let a=0,la=result.length;a<la;a++){
                             switch(result[a].type){
                                 case 10:
@@ -3171,7 +3707,7 @@ class wall extends partisan{
                     case 'Dining Table': case 'Fancy Table': case 'Metal Table': case 'Simple Table':
                         return inPointBox(obj,{position:this.position,width:this.width+12,height:this.height+12})
                     case 'Booking Desk':
-                    case 'Grabber':
+                    case 'Grabber': case 'Levitating Grabber':
                         return inPointBox(obj,{position:this.position,width:max(this.width,this.width*0.75+this.height*0.25),height:max(this.width*0.25+this.height*0.75,this.height)})
                     case 'Starter Trash Bin':
                         return inPointBox(obj,{position:this.position,width:this.width+12,height:this.height+12})
@@ -3436,10 +3972,10 @@ class wall extends partisan{
                             }
                         break
                         case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
-                        case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
+                        case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
                         case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                         case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
-                        case 'Grabber': case 'Combiner':
+                        case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner':
                             if(player.item!=-1){
                                 if(this.item!=-1){
                                     if(this.item.attemptCombine(player.item)){
@@ -3732,7 +4268,7 @@ class wall extends partisan{
                         break
                         case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
                             if(player.item!=-1){
-                                if(this.operation.phase!=5){
+                                if(this.operation.phase!=5||player.item.name=='Cutlery'&&this.item==-1&&this.plates.length<=0){
                                     if(this.item!=-1){
                                         if(this.item.attemptCombine(player.item)){
                                             player.item=-1
@@ -3758,7 +4294,7 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Breadsticks': case 'Ketchup': case 'Mustard':
+                        case 'Breadsticks': case 'Cutlery': case 'Ketchup': case 'Mustard':
                             if(player.item!=-1&&player.item.name==this.provide&&this.items<this.base.items){
                                 this.items++
                                 player.item=-1
@@ -3939,7 +4475,7 @@ class wall extends partisan{
                         case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Wash Basin': case 'Power Sink': case 'Rinsing Sink':
                             if(this.item!=-1){
                                 this.item.moved=false
-                                let result=this.item.generalProcess([4],this.speed)
+                                let result=this.item.generalProcess([4],this.speed*this.buff[0])
                                 for(let a=0,la=result.length;a<la;a++){
                                     switch(result[a].type){
                                         case 4:
@@ -3953,12 +4489,12 @@ class wall extends partisan{
                             }
                         break
                         case 'Counter': case 'Freezer': case 'Cutting Board': case 'Portioning Board': case 'Swiss Army Board': case 'Rolling Board': case 'Levitating Counter':
-                        case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
+                        case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
                         case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
-                        case 'Grabber': case 'Combiner':
+                        case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner':
                             if(this.item!=-1){
                                 this.item.moved=false
-                                let result=this.item.generalProcess([2],this.speed[0])
+                                let result=this.item.generalProcess([2],this.speed[0]*this.buff[0])
                                 for(let a=0,la=result.length;a<la;a++){
                                     switch(result[a].type){
                                         case 2:
@@ -3966,7 +4502,7 @@ class wall extends partisan{
                                         break
                                     }
                                 }
-                                result=this.item.generalProcess([3],this.speed[1])
+                                result=this.item.generalProcess([3],this.speed[1]*this.buff[0])
                                 for(let a=0,la=result.length;a<la;a++){
                                     switch(result[a].type){
                                         case 3:
@@ -4001,7 +4537,7 @@ class wall extends partisan{
                         case 'Override Hob':
                             if(this.item!=-1){
                                 this.item.moved=false
-                                let result=this.item.generalProcess([1,9],this.speed*2)
+                                let result=this.item.generalProcess([1,9],this.speed*2*this.buff[0])
                                 for(let a=0,la=result.length;a<la;a++){
                                     switch(result[a].type){
                                         case 1: case 9:

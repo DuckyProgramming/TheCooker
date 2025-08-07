@@ -250,6 +250,13 @@ function regPoly(layer,x,y,sides,radiusX,radiusY,direction){
 	}
 	layer.endShape(CLOSE)
 }
+function regPolyOpen(layer,x,y,sides,radiusX,radiusY,direction){
+	layer.beginShape()
+	for(a=0,la=sides;a<la;a++){
+		layer.vertex(x+lsin(direction+360*a/la)*radiusX,y+lcos(direction+360*a/la)*radiusY)
+	}
+	layer.endShape()
+}
 function regStar(layer,x,y,sides,radiusX,radiusY,direction){
 	layer.beginShape()
 	for(a=0,la=sides*2;a<la;a++){

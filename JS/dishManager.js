@@ -4,7 +4,7 @@ class dishManager extends manager{
         this.active=[[],[],[],[],[],[]]
         this.obj=[[],[],[],[],[],[]]
         this.disabled=[[],[],[],[],[],[]]
-        this.mains=[]
+        this.sets=[[],[],[],[],[],[]]
         this.total=0
     }
     addDish(dish){
@@ -19,23 +19,17 @@ class dishManager extends manager{
         for(let a=0,la=types.dish[dish].obj.length;a<la;a++){
             switch(types.dish[dish].obj[a].length){
                 case 2:
-                    this.obj[types.dish[dish].list].push(types.dish[dish].obj[a].slice())
-                    if(types.dish[dish].list==0){
-                        last(this.obj[types.dish[dish].list]).push(types.dish[dish].group)
-                    }
+                    this.obj[types.dish[dish].list].push([...types.dish[dish].obj[a].slice(),types.dish[dish].group])
                 break
                 case 3:
-                    this.disabled[types.dish[dish].list].push(types.dish[dish].obj[a].slice())
-                    if(types.dish[dish].list==0){
-                        last(this.disabled[types.dish[dish].list]).push(types.dish[dish].group)
-                    }
+                    this.disabled[types.dish[dish].list].push([...types.dish[dish].obj[a].slice(),types.dish[dish].group])
                 break
             }
         }
         this.operation.overlayManager.overlays[1].execute(0,[dish])
         this.operation.overlayManager.activate(1,[0])
         this.updateObj()
-        this.updateMains()
+        this.updateSets()
     }
     updateObj(){
         for(let a=0,la=this.disabled.length;a<la;a++){
@@ -52,19 +46,21 @@ class dishManager extends manager{
             }
         }
     }
-    updateMains(){
-        this.mains=[]
-        for(let a=0,la=this.obj[0].length;a<la;a++){
-            let valid=true
-            for(let b=0,lb=this.mains.length;b<lb;b++){
-                if(this.mains[b].group==last(this.obj[0][a])){
-                    this.mains[b].obj.push(this.obj[0][a].slice(0,-1))
-                    valid=false
-                    b=lb
+    updateSets(){
+        this.sets=[[],[],[],[],[],[]]
+        for(let a=0,la=this.obj.length;a<la;a++){
+            for(let b=0,lb=this.obj[a].length;b<lb;b++){
+                let valid=true
+                for(let c=0,lc=this.sets[a].length;c<lc;c++){
+                    if(this.sets[a][c].group==last(this.obj[a][b])){
+                        this.sets[a][c].obj.push(this.obj[a][b].slice(0,-1))
+                        valid=false
+                        c=lc
+                    }
                 }
-            }
-            if(valid){
-                this.mains.push({group:last(this.obj[0][a]),obj:[this.obj[0][a].slice(0,-1)]})
+                if(valid){
+                    this.sets[a].push({group:last(this.obj[a][b]),obj:[this.obj[a][b].slice(0,-1)]})
+                }
             }
         }
     }

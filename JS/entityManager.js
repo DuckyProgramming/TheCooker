@@ -168,6 +168,7 @@ class entityManager extends manager{
         this.entities.walls.forEach(set=>set.forEach(wall=>wall.reset()))
     }
     beginDay(){
+        this.entities.walls.forEach(set=>set.forEach(wall=>wall.preBeginDay()))
         this.entities.walls.forEach(set=>set.forEach(wall=>wall.beginDay()))
     }
     endDay(){
@@ -367,7 +368,7 @@ class entityManager extends manager{
     }
     clearPlayerItem(){
         for(let a=0,la=this.entities.players.length;a<la;a++){
-            if(this.entities.players[a].id>=0){
+            if(this.entities.players[a].id>=0&&this.entities.players[a].item!=-1&&this.entities.players[a].item.name!='Crate'){
                 this.entities.players[a].item=-1
             }
         }

@@ -151,11 +151,12 @@ class player extends partisan{
         this.paying=[]
         let index
         let obj
-        let offset=tableName=='Metal Table'?4:1
+        let offset=1+(tableName=='Metal Table'?3:0)+(this.parent.operation.cardManager.hasCard('Thin Out')?2:0)
         switch(orderPhase){
             case 0:
-                if(floor(random(0,menu.obj[1].length+(1+offset)))>offset||activate){
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[1])
+                if(floor(random(0,menu.sets[1].length+(1+offset)))>offset||activate){
+                    index=floor(random(0,menu.sets[1].length))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[1][index].obj)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -164,15 +165,16 @@ class player extends partisan{
                 }
             break
             case 1:
-                index=floor(random(0,menu.mains.length))
-                obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.mains[index].obj)
+                index=floor(random(0,menu.sets[0].length))
+                obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[0][index].obj)
                 this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                 last(this.order).fade.main=0
                 last(this.order).fade.trigger=false
                 last(this.order).size=0.8
                 this.paying.push(obj[1])
-                if(floor(random(0,menu.obj[2].length+(1+offset)))>offset){
-                    obj=tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1]:randin(menu.obj[2])
+                if(floor(random(0,menu.sets[2].length+(1+offset)))>offset){
+                    index=floor(random(0,menu.sets[2].length))
+                    obj=tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1]:randin(menu.sets[2][index].obj)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -181,8 +183,9 @@ class player extends partisan{
                 }
             break
             case 2:
-                if(floor(random(0,menu.obj[3].length+(1+offset)))>offset||menu.obj[0].length<=0){
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[3])
+                if(floor(random(0,menu.sets[3].length+(1+offset)))>offset||menu.obj[0].length<=0){
+                    index=floor(random(0,menu.sets[3].length))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[3][index].obj)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -191,8 +194,9 @@ class player extends partisan{
                 }
             break
             case 3:
-                if(floor(random(0,menu.obj[4].length+(1+offset)))>offset){
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[4])
+                if(floor(random(0,menu.sets[4].length+(1+offset)))>offset){
+                    index=floor(random(0,menu.sets[4].length))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[4][index].obj)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -201,8 +205,9 @@ class player extends partisan{
                 }
             break
             case 4:
-                if(floor(random(0,menu.obj[5].length+(1+offset)))>offset){
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.obj[5])
+                if(floor(random(0,menu.sets[5].length+(1+offset*0.5)))>offset*0.5){
+                    index=floor(random(0,menu.sets[5].length))
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[5][index].obj)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -337,6 +342,17 @@ class player extends partisan{
                 }
             }
         }
+        if(!process&&this.timer.main%120==0){
+            for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                    if(this.parent.entities.walls[a][b].name!='Laborer'&&this.collide(4,this.parent.entities.walls[a][b])){
+                        process=true
+                        a=la
+                        b=lb
+                    }
+                }
+            }
+        }
         if(process||this.animSet.process.loop>0&&this.animSet.process.loop%15!=0){
             this.runAnim(1,1)
         }else{
@@ -346,6 +362,7 @@ class player extends partisan{
             this.animSet.process.loop=0
         }
         this.mainAnim()
+        this.timer.main++
     }
     update(){
         super.update()
@@ -473,7 +490,7 @@ class player extends partisan{
                                     if(value>0){
                                         this.parent.operation.dayManager.payout(value,this.position.x,this.position.y-30)
                                     }
-                                    this.follow.patience.restore+=30
+                                    this.follow.patience.restore+=this.parent.operation.cardManager.hasCard('Pacing')?90:30
                                     this.paying.splice(a,1)
                                     interact=true
                                     a=la
