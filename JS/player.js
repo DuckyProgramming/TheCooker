@@ -14,6 +14,7 @@ class player extends partisan{
         this.radius=12.5
         this.timer.dizzy=0
         this.timer.interact=0
+        this.timer.buff=0
         this.infoAnim={dizzy:0}
         this.controlDirection={x:0,y:0}
         this.animSet.hold=0
@@ -155,8 +156,7 @@ class player extends partisan{
         switch(orderPhase){
             case 0:
                 if(floor(random(0,menu.sets[1].length+(1+offset)))>offset||activate){
-                    index=floor(random(0,menu.sets[1].length))
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[1][index].obj)
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:menu.getSet(1)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -165,16 +165,14 @@ class player extends partisan{
                 }
             break
             case 1:
-                index=floor(random(0,menu.sets[0].length))
-                obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[0][index].obj)
+                obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:menu.getSet(0)
                 this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                 last(this.order).fade.main=0
                 last(this.order).fade.trigger=false
                 last(this.order).size=0.8
                 this.paying.push(obj[1])
                 if(floor(random(0,menu.sets[2].length+(1+offset)))>offset){
-                    index=floor(random(0,menu.sets[2].length))
-                    obj=tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1]:randin(menu.sets[2][index].obj)
+                    obj=tableName=='Simple Table'&&firstOrder.length>1?firstOrder[1]:menu.getSet(2)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -184,8 +182,7 @@ class player extends partisan{
             break
             case 2:
                 if(floor(random(0,menu.sets[3].length+(1+offset)))>offset||menu.obj[0].length<=0){
-                    index=floor(random(0,menu.sets[3].length))
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[3][index].obj)
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:menu.getSet(3)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -195,8 +192,7 @@ class player extends partisan{
             break
             case 3:
                 if(floor(random(0,menu.sets[4].length+(1+offset)))>offset){
-                    index=floor(random(0,menu.sets[4].length))
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[4][index].obj)
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:menu.getSet(4)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -206,8 +202,7 @@ class player extends partisan{
             break
             case 4:
                 if(floor(random(0,menu.sets[5].length+(1+offset*0.5)))>offset*0.5){
-                    index=floor(random(0,menu.sets[5].length))
-                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:randin(menu.sets[5][index].obj)
+                    obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:menu.getSet(5)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0
                     last(this.order).fade.trigger=false
@@ -396,15 +391,15 @@ class player extends partisan{
                             }
                             if(dist(this.position.x,this.position.y,x,this.parent.loc.lineup.y)>20){
                                 this.direction.goal=dirPos(this,{position:{x:x,y:this.parent.loc.lineup.y}})
-                                this.velocity.x+=this.speed*lsin(this.direction.main)*0.5
-                                this.velocity.y+=this.speed*lcos(this.direction.main)*0.5
+                                this.velocity.x+=this.speed*lsin(this.direction.main)*0.5*(this.timer.buff>0?2:1)
+                                this.velocity.y+=this.speed*lcos(this.direction.main)*0.5*(this.timer.buff>0?2:1)
                                 moving=true
                             }
                         }else{
                             if(distPos(this,this.follow)>40){
                                 this.direction.goal=dirPos(this,this.follow)
-                                this.velocity.x+=this.speed*lsin(this.direction.main)*0.5
-                                this.velocity.y+=this.speed*lcos(this.direction.main)*0.5
+                                this.velocity.x+=this.speed*lsin(this.direction.main)*0.5*(this.timer.buff>0?2:1)
+                                this.velocity.y+=this.speed*lcos(this.direction.main)*0.5*(this.timer.buff>0?2:1)
                                 moving=true
                             }
                         }
@@ -421,8 +416,8 @@ class player extends partisan{
                     case 1:
                         if(distPos(this,this.follow)>30){
                             this.direction.goal=dirPos(this,this.follow)
-                            this.velocity.x+=this.speed*lsin(this.direction.main)
-                            this.velocity.y+=this.speed*lcos(this.direction.main)
+                            this.velocity.x+=this.speed*lsin(this.direction.main)*(this.timer.buff>0?2:1)
+                            this.velocity.y+=this.speed*lcos(this.direction.main)*(this.timer.buff>0?2:1)
                             moving=true
                         }else if(distPos(this,this.follow)>120&&this.follow.id>=0){
                             this.follow.follower=-1
@@ -451,8 +446,8 @@ class player extends partisan{
                                 y:this.follow.position.y-lcos(effectiveDir)*40
                             }}
                             this.direction.goal=dirPos(this,loc)
-                            this.velocity.x+=this.speed*lsin(this.direction.main)
-                            this.velocity.y+=this.speed*lcos(this.direction.main)
+                            this.velocity.x+=this.speed*lsin(this.direction.main)*(this.timer.buff>0?2:1)
+                            this.velocity.y+=this.speed*lcos(this.direction.main)*(this.timer.buff>0?2:1)
                             moving=true
                         }else{
                             this.direction.goal=dirPos(this,this.follow)
@@ -544,8 +539,8 @@ class player extends partisan{
                 if(moveKey.x!=0||moveKey.y!=0){
                     let magnitude=magVec(moveKey)
                     let mult=(this.parent.operation.cardManager.hasCard('Rushed')?1.2:1)
-                    this.velocity.x+=this.speed*moveKey.x/magnitude*mult
-                    this.velocity.y+=this.speed*moveKey.y/magnitude*mult
+                    this.velocity.x+=this.speed*moveKey.x/magnitude*mult*(this.timer.buff>0?2:1)
+                    this.velocity.y+=this.speed*moveKey.y/magnitude*mult*(this.timer.buff>0?2:1)
                 }
                 let process=false
                 let interact=false
@@ -790,6 +785,9 @@ class player extends partisan{
         this.mainAnim()
         if(this.timer.dizzy>0){
             this.timer.dizzy--
+        }
+        if(this.timer.buff>0){
+            this.timer.buff--
         }
         this.infoAnim.dizzy=smoothAnim(this.infoAnim.dizzy,this.timer.dizzy>0,0,1,5)
         this.animSet.hold=smoothAnim(this.animSet.hold,this.item!=-1,0,1,5)

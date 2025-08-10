@@ -31,6 +31,28 @@ class dishManager extends manager{
         this.updateObj()
         this.updateSets()
     }
+    getSet(type){
+        let display=[]
+        for(let a=0,la=this.operation.entityManager.entities.walls.length;a<la;a++){
+            for(let b=0,lb=this.operation.entityManager.entities.walls[a].length;b<lb;b++){
+                let c=this.operation.entityManager.entities.walls[a][b]
+                if(c.name=='Display Stand'&&c.item!=-1){
+                    for(let d=0,ld=this.sets[type].length;d<ld;d++){
+                        for(let e=0,le=this.sets[type][d].obj.length;e<le;e++){
+                            if(this.sets[type][d].obj[e][0]==c.item.name){
+                                display.push(this.sets[type][d].obj[e])
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(display.length>0&&random(0,1)>0.75**display.length){
+            return randin(display)
+        }
+        let index=floor(random(0,this.sets[type].length))
+        return randin(this.sets[type][index].obj)
+    }
     updateObj(){
         for(let a=0,la=this.disabled.length;a<la;a++){
             for(let b=0,lb=this.disabled[a].length;b<lb;b++){

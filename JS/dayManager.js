@@ -39,6 +39,11 @@ class dayManager extends manager{
                 this.spawners.push([this.time.end*((a+random(0,0.5))/(la-0.5)+shift),floor(random(this.operation.entityManager.customer.groupSizeMin,this.operation.entityManager.customer.groupSizeMax+1))])
             }
         }
+        if(this.operation.cardManager.hasCard('Unpredictable')){
+            for(let a=0,la=round(random(0,this.operation.entityManager.customer.group*mult*0.5));a<la;a++){
+                this.spawners.push([this.time.end*((a+random(0,0.5))/(la-0.5)+shift),floor(random(this.operation.entityManager.customer.groupSizeMin,this.operation.entityManager.customer.groupSizeMax+1))])
+            }
+        }
     }
     beginDay(){
         this.phase=1
@@ -166,7 +171,7 @@ class dayManager extends manager{
                     this.layer.stroke(0,this.anim.phase[0])
                     this.layer.text('Preparation',6,58)
                     this.layer.textSize(12)
-                    this.layer.text(`Groups Expected: ${this.operation.entityManager.customer.group}${buff>0?`+${ceil(this.operation.entityManager.customer.group*buff)}`:``}`,6,76)
+                    this.layer.text(`Groups Expected: ${this.operation.entityManager.customer.group}${this.operation.cardManager.hasCard('Unpredictable')?`-${ceil(this.operation.entityManager.customer.group*1.5)}`:``}${buff>0?`+${ceil(this.operation.entityManager.customer.group*buff)}`:``}`,6,76)
                     this.layer.text(`Group Size: ${this.operation.entityManager.customer.groupSizeMin}-${this.operation.entityManager.customer.groupSizeMax}`,6,92)
                 }
                 this.layer.noFill()

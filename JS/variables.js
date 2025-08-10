@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,customerMult:1,overlap:true,test:false,first:false}
+dev={bound:false,customerMult:1,overlap:true,test:true,first:true}
 inputs={
     keys:[
         {
@@ -2122,7 +2122,7 @@ types={
                 `                           `,
             ],
         },{
-            id:59,
+            id:60,
             floor:[
                 [[0,-2,0,0]],
                 [[-3,-6,0,0],[-9,-4,0,0]],
@@ -2159,7 +2159,7 @@ types={
                 `                         `,
             ],
         },{
-            id:49,
+            id:61,
             floor:[
                 [[0,-2,0,0]],
                 [[0,-8,0,0],[-9,-7,0,0],[6,-7,0,0],[8,-4,0,0]],
@@ -2194,7 +2194,7 @@ types={
                 `                       `,
             ],
         },{
-            id:8,
+            id:62,
             floor:[
                 [[0,-2,0,0]],
                 [[0,-7,0,0],[11,-5,0,0]],
@@ -2229,7 +2229,7 @@ types={
                 `                             `,
             ],
         },{
-            id:1,
+            id:63,
             floor:[
                 [[0,-2,0,0]],
                 [[3,-6,0,0],[6,-5,0,0],[9,-2,0,0]],
@@ -2260,6 +2260,74 @@ types={
                 `                         `,
                 `                       T `,
                 `                         `,
+            ],
+        },{
+            id:64,
+            floor:[
+                [[0,-2,0,0]],
+                [[-3,-6,0,0],[2,-5,6,0]],
+            ],wall:[
+                [15,9,'Starter Trash Bin',0],
+                [17,1,'Blueprint Cabinet',0],
+                [21,5,'Booking Desk',1 ],
+            ],
+            inside:[0,0,0,2],
+            spawn:[90],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ _ `,
+                `|               |     |`,
+                `                       `,
+                `|               |     |`,
+                `                 _ ] _ `,
+                `|    1          |     |`,
+                `                       `,
+                `|               |     |`,
+                ` _ - - - _             `,
+                `|. . . . .|     |     |`,
+                `           _ ] _       `,
+                `|                     |`,
+                `                       `,
+                `|    D       D        |`,
+                `                       `,
+                `|                     |`,
+                ` _ _ _ _ _ _ _ _ _ ] _ `,
+                `                   e   `,
+                `                       `,
+                `                     T `,
+                `                       `,
+            ],
+        },{
+            id:65,
+            floor:[
+                [[0,-2,0,0]],
+                [[0,-6,0,0],[5,-5,0,0]],
+            ],wall:[
+                [19,7,'Starter Trash Bin',0],
+                [19,13,'Blueprint Cabinet',2],
+                [1,13,'Booking Desk',3],
+            ],
+            inside:[0,0,0,2],
+            spawn:[270],
+            map:[
+                ` _ _ _ _ _ _ _ _ _ _ `,
+                `|                   |`,
+                `                     `,
+                `|    1              |`,
+                `                     `,
+                `|. . . . . .        |`,
+                ` - - - - -           `,
+                `|         i.        |`,
+                `           _ ] _ _ _ `,
+                `|  D   D        |   |`,
+                `                     `,
+                `|               [   |`,
+                `                     `,
+                `|               |   |`,
+                ` _ _ ] _ _ _ _ _ _ _ `,
+                `     e               `,
+                `                     `,
+                `                   T `,
+                `                     `,
             ],
         },
     ],wall:[
@@ -3066,7 +3134,7 @@ types={
             height:24,
             spec:[],
             edit:true,
-            level:0,
+            level:1,
             rarity:4,
             cost:20,
             prereq:[],
@@ -3209,13 +3277,39 @@ types={
             desc:'Take an order remotely',
             upgrade:[],
         },{
+            name:'Display Stand',
+            blueprint:['Display Stand',7.5],
+            width:30,
+            height:30,
+            spec:[],
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[],
+            desc:'Makes people more likely to order an item',
+            upgrade:[],
+        },{
+            name:'Buff Floor',
+            blueprint:['Buff Floor',7.5],
+            width:48,
+            height:48,
+            spec:[],
+            edit:true,
+            level:0,
+            rarity:1,
+            cost:20,
+            prereq:[],
+            desc:'Walk much faster here',
+            upgrade:[],
+        },{
             name:'Breadsticks',
             blueprint:['Breadsticks',6.5],
             width:48,
             height:24,
             spec:[],
             edit:true,
-            level:0,
+            level:1,
             rarity:1,
             cost:20,
             prereq:[],
@@ -3228,7 +3322,7 @@ types={
             height:24,
             spec:[],
             edit:true,
-            level:0,
+            level:1,
             rarity:1,
             cost:20,
             prereq:[],
@@ -5297,6 +5391,7 @@ types={
                 [0,'Cherry','Raw Cherry Pie'],
                 [0,'Caramel','Raw Caramel Pie'],
                 [0,'Melted Chocolate','Chocolate Pie'],
+                [0,'Chopped Pumpkin','Raw Pumpkin Pie'],
                 [0,'Lemon Meringue','Raw Lemon Meringue Pie'],
                 [0,'Meat','Raw Meat Pie'],
                 [0,'Meat','Raw Chopped Meat Pie'],
@@ -6583,6 +6678,7 @@ types={
             trashable:true,
             process:[
                 [0,'Tomato Sauce','Sauce Pizza Base'],
+                [0,'White Sauce','White Sauce Pizza Base'],
             ],
         },{
             name:'Sauce Pizza Base',
@@ -8651,7 +8747,7 @@ types={
             component:true,
             trashable:true,
             process:[
-                [2,60,'Chopped Pepper']
+                [2,60,'Chopped Pepper'],
             ],
         },{
             name:'Pepper in Pot',
@@ -9706,7 +9802,9 @@ types={
             holdDir:90,
             component:true,
             trashable:true,
-            process:[],
+            process:[
+                [0,'Oil','Chili Oil'],
+            ],
         },{
             name:'Chopped Pepper in Pot',
             holdDist:20,
@@ -10687,6 +10785,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chili Oil','Plated Chili Oil Dumplings'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -10734,6 +10833,7 @@ types={
             trashable:true,
             process:[
                 [5,'Trash','Plate'],
+                [0,'Chili Oil','Plated Chili Oil Soup Dumplings'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -10882,7 +10982,9 @@ types={
             holdDir:0,
             component:true,
             trashable:true,
-            process:[],
+            process:[
+                [2,120,'Chopped Pumpkin'],
+            ],
         },{
             name:'Pumpkin Seeds',
             holdDist:18,
@@ -10901,6 +11003,130 @@ types={
             process:[
                 [9,180,'Burnt'],
                 [7,180,''],
+            ],
+        },{
+            name:'Chopped Pumpkin',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Raw Pumpkin Pie',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [1,60,'Pumpkin Pie'],
+            ],
+        },{
+            name:'Pumpkin Pie',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [9,120,'Burnt'],
+                [7,180,''],
+            ],
+        },{
+            name:'White Sauce Pizza Base',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Chopped Cheese','Unseasoned White Pizza'],
+            ],
+        },{
+            name:'Unseasoned White Pizza',
+            holdDist:20,
+            holdDir:180,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Chopped Garlic','Raw White Pizza'],
+            ],
+        },{
+            name:'Raw White Pizza',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,720,'White Pizza'],
+            ],
+        },{
+            name:'White Pizza',
+            portions:3,
+            replace:false,
+            holdDist:20,
+            holdDir:180,
+            component:false,
+            trashable:true,
+            process:[
+                [9,720,'Burnt'],
+                [6,60,'White Pizza Slice','White Pizza Slice'],
+            ],
+        },{
+            name:'White Pizza Slice',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated White Pizza Slice'],
+            ],
+        },{
+            name:'Plated White Pizza Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Chili Oil',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Chili Oil'],
+            ],
+        },{
+            name:'Plated Chili Oil',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Dumplings','Plated Chili Oil Dumplings'],
+                [0,'Soup Dumplings','Plated Chili Oil Soup Dumplings'],
+            ],
+        },{
+            name:'Plated Chili Oil Dumplings',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Chili Oil Soup Dumplings',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },
         //mark
@@ -11179,12 +11405,21 @@ types={
             obj:[
                 ['Plated Margherita Pizza Slice',6],
             ],
-            desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce and chopped mozzarella.\nCook, add basil, portion, and serve.',
+            desc:'Make pizza base.\nAdd tomato sauce and chopped mozzarella.\nCook, add basil, portion, and serve.',
+        },{
+            name:'White Pizza',
+            group:'Pizza',
+            list:0,
+            value:'8',
+            obj:[
+                ['Plated White Pizza Slice',8],
+            ],
+            desc:'Add butter and flour to pot, then cook to make roux.\nAdd milk and knead to make white sauce.\nPortion white sauce and add to pizza base, then add chopped garlic.\nCook, portion, and serve.',
         },{
             name:'Calzone',
             group:'Pizza',
             list:0,
-            value:'8',
+            value:'9',
             obj:[
                 ['Plated Calzone',9],
             ],
@@ -11573,11 +11808,21 @@ types={
             name:'Soup Dumplings',
             group:'Dumplings',
             list:0,
-            value:'8',
+            value:'7',
             obj:[
                 ['Plated Soup Dumplings',7],
             ],
             desc:'Boil water with onion to make broth.\nAdd meat to broth and cook again.\nPortion to get meat soup.\nWhile making dumplings, instead of adding chopped onion, add meat soup portion.',
+        },{
+            name:'Chili Oil Dumplings',
+            group:'Dumplings',
+            list:0,
+            value:'7',
+            obj:[
+                ['Plated Chili Oil Dumplings',7],
+                ['Plated Soup Dumplings','Plated Chili Oil Soup Dumplings',8],
+            ],
+            desc:'Chop pepper and add to oil to make sauce.\nAdd sauce to plated dumplings.',
         },
         
         {
@@ -11818,6 +12063,15 @@ types={
                 ['Chocolate Pudding Pie',3],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nCook chocolate to melt it.\nAdd melted chocolate to pastry and mix.',
+        },{
+            name:'Pumpkin Pie',
+            group:'Pumpkin Pie',
+            list:3,
+            value:'3',
+            obj:[
+                ['Pumpkin Pie',3],
+            ],
+            desc:'Add water to flour to make dough.\nKnead dough to make crust and cook to make pastry.\nPortion seeds from pumpkin and discard.\nChop pumpkin, adds to pastry and cook again.',
         },{
             name:'Lemon Meringue Pie',
             group:'Lemon Meringue Pie',
@@ -12252,10 +12506,20 @@ types={
             wall:['Mozzarella','Basil'],
             desc:'Pizza with mozzarella and basil',
         },{
+            name:'White Pizza',
+            dish:['White Pizza'],
+            list:1,
+            rate:[3,'8'],
+            customerMult:0.8,
+            prereq:['Pizza'],
+            mutex:[],
+            wall:['Garlic','Pots','Starter Hob','Flour','Butter','Milk'],
+            desc:'Pizza with white sauce and garlic',
+        },{
             name:'Calzones',
             dish:['Calzone'],
             list:1,
-            rate:[3,'8'],
+            rate:[3,'9'],
             customerMult:0.64,
             prereq:['Pizza'],
             mutex:[],
@@ -12541,6 +12805,16 @@ types={
             mutex:[],
             wall:['Pots'],
             desc:'Adds soup dumplings as a main dish',
+        },{
+            name:'Chili Oil Dumplings',
+            dish:['Chili Oil Dumplings'],
+            list:1,
+            rate:[1,'7'],
+            customerMult:0.8,
+            prereq:['Dumplings'],
+            mutex:[],
+            wall:['Peppers','Oil'],
+            desc:'Adds chili oil as a dumpling topping',
         },
         
         {
@@ -12808,6 +13082,16 @@ types={
             wall:['Oven','Flour','Chocolate','Starter Hob'],
             desc:'Adds chocolate pudding pie as a dessert',
         },{
+            name:'Pumpkin Pie',
+            dish:['Pumpkin Pie'],
+            list:4,
+            rate:[2,'3'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Oven','Flour','Pumpkins'],
+            desc:'Adds pumpkin pie as a dessert',
+        },{
             name:'Lemon Meringue Pie',
             dish:['Lemon Meringue Pie'],
             list:4,
@@ -13009,6 +13293,13 @@ types={
             prereq:[],
             mutex:[],
             desc:'When you serve customers, all other groups lose patience',
+        },{
+            name:'Unpredictable',
+            list:5,
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            desc:'More customers come at random times',
         },
 
         {

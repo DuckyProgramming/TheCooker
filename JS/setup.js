@@ -5,8 +5,9 @@ function setup(){
     if(dev.test){
         current.generatePlayers(1)
         current.transition('main',[])
-        current.cardManager.addCard(findName('Pumpkin Seeds',types.card))
-        current.cardManager.addCard(findName('Fish',types.card))
+        current.cardManager.addCard(findName('Dumplings',types.card))
+        current.cardManager.addCard(findName('Soup Dumplings',types.card))
+        current.cardManager.addCard(findName('Chili Oil Dumplings',types.card))
         current.overlayManager.closeAll()
     }
 }
