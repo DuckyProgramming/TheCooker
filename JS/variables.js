@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,customerMult:1,overlap:true,test:true,first:true}
+dev={bound:false,customerMult:1,overlap:true,test:false,first:false}
 inputs={
     keys:[
         {

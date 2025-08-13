@@ -217,6 +217,7 @@ class wall extends partisan{
                 this.handLen=[48,48]
             break
             case 'Levitating Grabber':
+                this.speed=[1,1]
                 this.activating=0
                 this.anim=48
                 this.handLen=[48,48]
@@ -2980,6 +2981,48 @@ class wall extends partisan{
                             }else{
                                 this.occupied=false
                                 for(let a=0,la=this.occupants.length;a<la;a++){
+                                    if(this.occupants[a].item!=-1){
+                                        for(let b=0,lb=this.occupants[a].item.process.length;b<lb;b++){
+                                            if(this.occupants[a].item.process[b].type==7){
+                                                switch(this.occupants[a].item.process[b].result){
+                                                    case 'Dirty Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Food Plate':'Dirty Plate'))
+                                                    break
+                                                    case 'Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
+                                                    break
+                                                    case '2 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
+                                                    break
+                                                    case '3 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
+                                                    break
+                                                }
+                                            }
+                                        }
+                                        this.occupants[a].item=-1
+                                    }
+                                    if(this.occupants[a].side!=-1){
+                                        for(let b=0,lb=this.occupants[a].side.process.length;b<lb;b++){
+                                            if(this.occupants[a].side.process[b].type==7){
+                                                switch(this.occupants[a].side.process[b].result){
+                                                    case 'Dirty Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Food Plate':'Dirty Plate'))
+                                                    break
+                                                    case 'Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'Bone Food Plate':'Bone Plate'))
+                                                    break
+                                                    case '2 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'2 Bone Food Plate':'2 Bone Plate'))
+                                                    break
+                                                    case '3 Bone Plate':
+                                                        this.plates.push(this.generateItem(this.parent.operation.cardManager.hasCard('Picky Eating')&&floor(random(0,2))==0?'3 Bone Food Plate':'3 Bone Plate'))
+                                                    break
+                                                }
+                                            }
+                                        }
+                                        this.occupants[a].side=-1
+                                    }
                                     this.occupants[a].fade.trigger=false
                                 }
                                 this.operation.phase=0
@@ -3175,10 +3218,25 @@ class wall extends partisan{
                                     break
                                     case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
                                     case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
-                                    case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
                                     case 'Combiner': case 'Portioner': case 'Teleporter':
                                     case 'Display Stand':
                                         if(this.item==-1&&obj.item!=-1){
+                                            this.activating++
+                                            if(this.activating>12){
+                                                this.activating=0
+                                                this.anim=0
+                                                obj.grabEffect(this)
+                                            }
+                                        }else if(this.item!=-1&&obj.item==-1&&this.item.fade.trigger){
+                                            this.anim++
+                                            if(this.anim>=96){
+                                                this.anim=48
+                                                obj.grabEffect(this)
+                                            }
+                                        }
+                                    break
+                                    case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                                        if(this.item==-1&&(obj.item!=-1||obj.plates.length>0)){
                                             this.activating++
                                             if(this.activating>12){
                                                 this.activating=0
@@ -3467,13 +3525,31 @@ class wall extends partisan{
                                     case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
                                     case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
                                     case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
-                                    case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
                                     case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner': case 'Teleporter':
                                     case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                                     case 'Stack Station':
                                     case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Power Sink': case 'Rinsing Sink':
                                     case 'Display Stand':
                                         if(this.item!=-1&&obj.item!=-1&&this.item.fade.trigger&&this.item.checkCombine(obj.item)){
+                                            this.anim+=2
+                                            if(this.anim>=48){
+                                                this.anim=0
+                                                if(obj.item.attemptCombine(this.item)){
+                                                    this.item=-1
+                                                }
+                                            }
+                                        }
+                                    break
+                                    case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                                        if(this.item!=-1&&obj.item!=-1&&this.item.fade.trigger&&this.item.checkCombine(obj.item)){
+                                            this.anim+=2
+                                            if(this.anim>=48){
+                                                this.anim=0
+                                                if(obj.item.attemptCombine(this.item)){
+                                                    this.item=-1
+                                                }
+                                            }
+                                        }else if(this.item!=-1&&obj.plates.length>1&&this.item.fade.trigger&&this.item.checkCombine(obj.plates[0])){
                                             this.anim+=2
                                             if(this.anim>=48){
                                                 this.anim=0
@@ -3560,7 +3636,6 @@ class wall extends partisan{
                                         case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
                                         case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
                                         case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
-                                        case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
                                         case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner': case 'Teleporter':
                                         case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                                         case 'Stack Station':
@@ -3576,6 +3651,37 @@ class wall extends partisan{
                                                             obj.item.portions--
                                                             if(obj.item.portions<=0){
                                                                 obj.item=this.generateItem(result[a].leave)
+                                                            }
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        break
+                                        case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                                            if(obj.item!=-1){
+                                                let result=obj.item.generalProcess([6],this.speed)
+                                                for(let a=0,la=result.length;a<la;a++){
+                                                    switch(result[a].type){
+                                                        case 6:
+                                                            this.item=this.generateItem(result[a].result)
+                                                            this.anim=48
+                                                            obj.item.portions--
+                                                            if(obj.item.portions<=0){
+                                                                obj.item=this.generateItem(result[a].leave)
+                                                            }
+                                                        break
+                                                    }
+                                                }
+                                            }else if(obj.plates.length>0){
+                                                let result=obj.plates[0].generalProcess([6],this.speed)
+                                                for(let a=0,la=result.length;a<la;a++){
+                                                    switch(result[a].type){
+                                                        case 6:
+                                                            this.item=this.generateItem(result[a].result)
+                                                            this.anim=48
+                                                            obj.plates[0].portions--
+                                                            if(obj.plates[0].portions<=0){
+                                                                obj.plates[0]=this.generateItem(result[a].leave)
                                                             }
                                                         break
                                                     }
