@@ -3,13 +3,28 @@ class dish extends located{
         super(layer,x,y,{main:0,trigger:true,speed:10})
         this.parent=parent
         this.type=type
+        this.width=200
+        this.height=200
+        this.size=1
+        this.initial()
+    }
+    save(){
+        let composite={
+            position:this.position,
+            type:this.type,
+        }
+        return composite
+    }
+    load(composite){
+        this.position=composite.position
+        this.type=composite.type
+        this.initial()
+    }
+    initial(){
         this.name=types.dish[this.type].name
         this.list=types.dish[this.type].list
         this.value=types.dish[this.type].value
         this.desc=types.dish[this.type].desc
-        this.width=200
-        this.height=200
-        this.size=1
     }
     display(layer=this.layer){
         layer.push()

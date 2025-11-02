@@ -8,6 +8,61 @@ class operation{
         this.initialManagers()
         this.initial()
     }
+    /*
+    save(){
+        let composite={
+        }
+        return composite
+    }
+    load(composite){
+    }
+    */
+    save(){
+        let composite={
+            scene:this.scene,
+            level:this.level,
+            player:this.player,
+            dishManager:this.dishManager.save(),
+            cardManager:this.cardManager.save(),
+            blueprintManager:this.blueprintManager.save(),
+            entityManager:this.entityManager.save(),
+            dayManager:this.dayManager.save(),
+            overlayManager:this.overlayManager.save(),
+        }
+        return composite
+    }
+    saveCol(){
+        saveStrings([JSON.stringify(this.save())],'saveFile','json')
+    }
+    load(result){
+        let composite=JSON.parse(result)
+
+        this.transitionManager.begin(composite.scene)
+        this.level=composite.level
+        this.player=composite.player
+        this.dishManager.load(composite.dishManager)
+        this.cardManager.load(composite.cardManager)
+        this.blueprintManager.load(composite.blueprintManager)
+        this.entityManager.load(composite.entityManager)
+        this.dayManager.load(composite.dayManager)
+        this.overlayManager.load(composite.overlayManager)
+    }
+    loadStp(input){
+        let file=input.files[0]
+        let reader=new FileReader()
+        reader.battle=this
+        reader.readAsText(file)
+        reader.onload=function(){
+            this.battle.load(reader.result);
+        }
+    }
+    loadCol(){
+        let input=document.createElement('input')
+        input.type='file'
+        input.battle=this
+        input.click()
+        input.addEventListener('change',function(){this.battle.loadStp(this)},false)
+    }
     generatePlayers(num){
         this.player=[]
         for(let a=0,la=num;a<la;a++){
@@ -118,5 +173,12 @@ class operation{
             break
         }
         this.overlayManager.onClick(this.scene,mouse)
+    }
+    onKey(key){
+        switch(this.scene){
+            case 'main':
+                this.dayManager.onKey(this.scene,key)
+            break
+        }
     }
 }

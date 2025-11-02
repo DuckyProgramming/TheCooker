@@ -7,9 +7,128 @@ class player extends partisan{
         this.active=true
         this.colliders={main:[[parent.entities.players,0]]}
         this.setupGraphics()
-        this.setupValues()
+        this.initialValues()
     }
-    setupValues(){
+    save(){
+        let composite={
+            position:this.position,
+            base:{position:this.position},
+            id:this.id,
+            cosmetic:this.cosmetic,
+            active:this.active,
+            speed:this.speed,
+            item:this.item==-1?-1:this.item.save(),
+            follower:this.follower==-1?-1:{type:typeof(this.follower),id:this.follower.id},
+        }
+        switch(this.id){
+            case -1:
+                composite.side=this.side==-1?-1:this.side.save()
+                composite.follow=this.follow==-1?-1:{type:typeof(this.follow),id:this.follow.id}
+                composite.oldFollow=this.oldFollow==-1?-1:{type:typeof(this.oldFollow),id:this.oldFollow.id}
+                composite.mode=this.mode
+                composite.orderPhase=this.orderPhase
+                composite.order=this.order
+                composite.paying=this.paying
+                composite.angle=this.angle
+                composite.timer={
+                    angle:this.timer.angle,
+                    angleCap:this.timer.angleCap
+                }
+                composite.axis=this.axis
+                composite.touch=this.touch
+                composite.stop=this.stop
+                composite.groupIndex=this.groupIndex
+            break
+            default:
+                composite.tempItem=this.tempItem==-1?-1:this.tempItem.save()
+            break
+        }
+        return composite
+    }
+    load(composite){
+        this.id=composite.id
+        this.initialValues()
+        this.position=composite.position
+        this.base.position=composite.base.position
+        this.cosmetic=composite.cosmetic
+        this.setupGraphics()
+        this.active=composite.active
+        this.speed=composite.speed
+        if(composite.item==-1){
+            this.item=-1
+        }else{
+            this.item=new item(this.layer,this.parent,0,0,0)
+            this.item.load(composite.item)
+        }
+        this.follower=composite.follower
+        switch(this.id){
+            case -1:
+                if(composite.side==-1){
+                    this.side=-1
+                }else{
+                    this.side=new item(this.layer,this.parent,0,0,0)
+                    this.side.load(composite.side)
+                }
+                this.follow=composite.follow
+                this.oldFollow=composite.oldFollow
+                this.mode=composite.mode
+                this.orderPhase=composite.orderPhase
+                this.order=[]
+                this.paying=composite.paying
+                this.angle=composite.angle
+                this.timer.angle=composite.timer.angle
+                this.timer.angleCap=composite.timer.angleCap
+                this.axis=composite.axis
+                this.touch=composite.touch
+                this.stop=composite.stop
+                this.groupIndex=composite.groupIndex
+                composite.order.forEach((order)=>{this.order.push(new this.item(this.layer,this.parent,0,0,0));last(this.order).load(order)})
+            break
+            default:
+                if(composite.tempItem==-1){
+                    this.tempItem=-1
+                }else{
+                    this.tempItem=new item(this.layer,this.parent,0,0,0)
+                    this.tempItem.load(composite.tempItem)
+                }
+            break
+        }
+    }
+    subFind(value){
+        if(value==-1){
+            return value
+        }else if(value.type=='player'){
+            for(let a=0,la=this.parent.entities.players.length;a<la;a++){
+                if(this.parent.entities.players[a].id==value.id){
+                    return this.parent.entities.players[a]
+                }
+            }
+            for(let a=0,la=this.parent.customer.queeu.length;a<la;a++){
+                if(this.parent.customer.queeu[a].id==value.id){
+                    return this.parent.customer.queeu[a]
+                }
+            }
+        }else if(value.type=='wall'){
+            for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
+                for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                    if(this.parent.entities.walls[a][b].id==value.id){
+                        return this.parent.entities.walls[a][b]
+                    }
+                }
+            }
+        }
+        return -1
+    }
+    loadFollow(){
+        this.follower=this.subFind(this.follower)
+        switch(this.id){
+            case -1:
+                this.follow=this.subFind(this.follow)
+                this.oldFollow=this.subFind(this.oldFollow)
+            break
+        }
+    }
+    initialValues(){
         this.size=1
         this.radius=12.5
         this.timer.dizzy=0
@@ -17,7 +136,6 @@ class player extends partisan{
         this.timer.buff=0
         this.infoAnim={dizzy:0}
         this.controlDirection={x:0,y:0}
-        this.animSet.hold=0
         this.item=-1
         this.handLen=0
         this.follower=-1
@@ -82,6 +200,7 @@ class player extends partisan{
             process:{loop:0,flip:0},
             interact:{loop:0},
             attack:{loop:0},
+            hold:0,
         }
     }
     calculateParts(){
@@ -644,13 +763,14 @@ class player extends partisan{
                                             this.item=-1
                                             for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                                                 for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                                    let obj=this.parent.entities.walls[a][b]
                                                     if(
-                                                        (this.parent.entities.walls[a][b].edit||this.parent.entities.walls[a][b].name=='Crate'||this.parent.entities.walls[a][b].name=='Blueprint')&&
-                                                        this.parent.checkSpawnWall(this.parent.entities.walls[a][b])&&
-                                                        this.collide(2,this.parent.entities.walls[a][b])
+                                                        (obj.edit||obj.name=='Crate'||obj.name=='Blueprint'&&!((obj.name=='Blueprint Cabinet'||obj.name=='Upgrade Cabinet'||obj.name=='Discount Cabinet'||obj.name=='Generator Cabinet')&&obj.contain!=-1))&&
+                                                        this.parent.checkSpawnWall(obj)&&
+                                                        this.collide(2,obj)
                                                     ){
                                                         success=true
-                                                        this.parent.spawnGridWall(this.parent.entities.walls[a][b],this.tempItem.contain,[],dir)
+                                                        this.parent.spawnGridWall(obj,this.tempItem.contain,[],dir)
                                                         a=la
                                                         b=lb
                                                     }
@@ -660,13 +780,14 @@ class player extends partisan{
                                                 this.handLen-=8
                                                 for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                                                     for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
+                                                        let obj=this.parent.entities.walls[a][b]
                                                         if(
-                                                            (this.parent.entities.walls[a][b].edit||this.parent.entities.walls[a][b].name=='Crate'||this.parent.entities.walls[a][b].name=='Blueprint')&&
-                                                            this.parent.checkSpawnWall(this.parent.entities.walls[a][b])&&
-                                                            this.collide(2,this.parent.entities.walls[a][b])
+                                                            (obj.edit||obj.name=='Crate'||obj.name=='Blueprint'&&!((obj.name=='Blueprint Cabinet'||obj.name=='Upgrade Cabinet'||obj.name=='Discount Cabinet'||obj.name=='Generator Cabinet')&&obj.contain!=-1))&&
+                                                            this.parent.checkSpawnWall(obj)&&
+                                                            this.collide(2,obj)
                                                         ){
                                                             success=true
-                                                            this.parent.spawnGridWall(this.parent.entities.walls[a][b],this.tempItem.contain,[],dir)
+                                                            this.parent.spawnGridWall(obj,this.tempItem.contain,[],dir)
                                                             a=la
                                                             b=lb
                                                         }

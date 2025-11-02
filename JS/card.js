@@ -3,6 +3,24 @@ class card extends located{
         super(layer,x,y,{main:0,trigger:true,speed:10})
         this.parent=parent
         this.type=type
+        this.width=160
+        this.height=200
+        this.size=1
+        this.initial()
+    }
+    save(){
+        let composite={
+            position:this.position,
+            type:this.type,
+        }
+        return composite
+    }
+    load(composite){
+        this.position=composite.position
+        this.type=composite.type
+        this.initial()
+    }
+    initial(){
         this.name=types.card[this.type].name
         this.list=types.card[this.type].list
         if(this.list>=0&&this.list<=4){
@@ -13,9 +31,6 @@ class card extends located{
             this.customerMult=this.customerMult[this.parent.operation.dayManager.day==0?1:0]
         }
         this.desc=types.card[this.type].desc
-        this.width=160
-        this.height=200
-        this.size=1
     }
     display(layer=this.layer){
         layer.push()

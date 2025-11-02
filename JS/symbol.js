@@ -30,6 +30,15 @@ function displaySymbol(layer,x,y,type,direction,size,color,fade){
             layer.vertex(-3,4)
             layer.endShape()
         break
+        case 2:
+            layer.fill(...color[0],fade)
+            layer.rect(0,0,8,8,1)
+            layer.fill(...color[1],fade)
+            layer.rect(0,1.5,6,3)
+            layer.rect(-0.25,-2.75,5,2.5)
+            layer.fill(...color[0],fade)
+            layer.rect(0.5,-3.25,2,1.5)
+        break
     }
     layer.pop()
 }

@@ -5,6 +5,18 @@ class item extends located{
         this.type=type
         this.initialValues()
     }
+    save(){
+        let composite={
+            type:this.type,
+            process:this.process,
+        }
+        return composite
+    }
+    load(composite){
+        this.type=composite.type
+        this.initialValues()
+        this.process=composite.process
+    }
     initialValues(){
         this.direction=0
         this.size=1

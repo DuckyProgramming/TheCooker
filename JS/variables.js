@@ -1,6 +1,6 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,customerMult:1,overlap:true,test:false,first:false}
+dev={bound:false,customerMult:1,overlap:true,test:false,first:false,emergencyKey:false,zeroKey:false}
 inputs={
     keys:[
         {
@@ -1457,7 +1457,7 @@ types={
                 [[-7,-4,0,0],[-4,-8,0,0]],
             ],wall:[
                 [9,3,'Starter Trash Bin',0],
-                [15,5,'Blueprint Cabinet',2],
+                [17,5,'Blueprint Cabinet',2],
                 [21,7,'Booking Desk',0],
             ],
             inside:[0,0,0,2],
@@ -5278,7 +5278,7 @@ types={
             name:'Mixed Egg',
             holdDist:20,
             holdDir:0,
-            component:false,
+            component:true,
             trashable:true,
             process:[],
         },{

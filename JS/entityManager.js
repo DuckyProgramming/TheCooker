@@ -2,6 +2,7 @@ class entityManager extends manager{
     constructor(layer,operation){
         super(layer,operation)
         this.tileset=[48,48,8]
+        this.grid=[]
         this.edge={main:{x:0,y:0},outer:{x:[0,0],y:[0,0]},inside:[]}
         this.loc={lineup:{x:0,y:0},spawn:{x:0,y:0,direction:0}}
         this.constants={gravity:1.25}
@@ -17,6 +18,80 @@ class entityManager extends manager{
         this.index={player:0,wall:0,group:0}
         this.reroll={cost:10,tick:0}
         this.updateLadderTrigger=false
+    }
+    save(){
+        let composite={
+            grid:this.grid,
+            edge:this.edge,
+            loc:this.loc,
+            view:this.view,
+            entities:{walls:[[],[]],players:[],particles:[],tempWalls:[[],[]]},
+            customer:{
+                internal:this.customer.internal,
+                groupSizeMin:this.customer.groupSizeMin,
+                groupSizeMax:this.customer.groupSizeMax,
+                group:this.customer.group,
+                queue:[],
+                cooldown:this.customer.cooldown
+            },
+            index:this.index,
+            reroll:this.reroll,
+            updateLadderTrigger:this.updateLaggerTrigger,
+        }
+        for(let a=0,la=this.entities.walls.length;a<la;a++){
+            this.entities.walls[a].forEach(wall=>composite.entities.walls[a].push(wall.save()))
+        }
+        this.entities.players.forEach(player=>composite.entities.players.push(player.save()))
+        this.entities.particles.forEach(player=>composite.entities.particles.push(player.save()))
+        for(let a=0,la=this.entities.tempWalls.length;a<la;a++){
+            this.entities.tempWalls[a].forEach(wall=>composite.entities.tempWalls[a].push(wall.save()))
+        }
+        this.customer.queue.forEach(customer=>composite.customer.queue.push(customer.save()))
+        return composite
+    }
+    load(composite){
+        this.grid=composite.grid
+        this.edge=composite.edge
+        this.loc=composite.loc
+        this.view=composite.view
+        this.entities={walls:[[],[]],players:[],particles:[],tempWalls:[[],[]]}
+        this.customer={
+            internal:composite.customer.internal,
+            groupSizeMin:composite.customer.groupSizeMin,
+            groupSizeMax:composite.customer.groupSizeMax,
+            group:composite.customer.group,
+            queue:[],
+            cooldown:composite.customer.cooldown,
+        }
+        for(let a=0,la=composite.entities.walls.length;a<la;a++){
+            for(let b=0,lb=composite.entities.walls[a].length;b<lb;b++){
+                this.entities.walls[a].push(new wall(this.layer,this,0,0,0,[],0,0,0))
+                this.entities.walls[a][b].load(composite.entities.walls[a][b])
+            }
+        }
+        for(let a=0,la=composite.entities.players.length;a<la;a++){
+            this.entities.players.push(new player(this.layer,this,0,0,0,0,{color:0}))
+            this.entities.players[a].load(composite.entities.players[a])
+        }
+        for(let a=0,la=composite.entities.particles.length;a<la;a++){
+            this.entities.particles.push(new particle(new particle(this.layer,0,0,0,{})))
+            this.entities.particles[a].load(composite.entities.particles[a])
+        }
+        for(let a=0,la=composite.entities.tempWalls.length;a<la;a++){
+            for(let b=0,lb=composite.entities.tempWalls[a].length;b<lb;b++){
+                this.entities.tempWalls[a].push(new wall(this.layer,this,0,0,0,[],0,0,0))
+                this.entities.tempWalls[a][b].load(composite.entities.tempWalls[a][b])
+            }
+        }
+        for(let a=0,la=composite.customer.queue.length;a<la;a++){
+            this.customer.queue.push(new player(this.layer,this,0,0,0,0,{color:0}))
+            this.customer.queue[a].load(composite.customer.queue[a])
+        }
+        this.entities.players.forEach(player=>player.loadFollow())
+        this.customer.queue.forEach(player=>player.loadFollow())
+        this.entities.walls.forEach(set=>set.forEach(wall=>wall.loadFollow()))
+        this.entities.tempWalls.forEach(set=>set.forEach(wall=>wall.loadFollow()))
+        this.postBuild()
     }
     generatePlayers(){
         for(let a=0,la=this.operation.player.length;a<la;a++){
@@ -146,6 +221,9 @@ class entityManager extends manager{
                 }
             }
         }
+        this.postBuild()
+    }
+    postBuild(){
         this.run.fore=[[this.entities.walls[1],0],[this.entities.walls[0],0],[this.entities.players,0],[this.entities.players,1],[this.entities.walls[0],1],[this.entities.particles,0]]
         if(dev.bound){
             this.run.fore.push([this.entities.walls[0],-1],[this.entities.players,-1])
@@ -288,10 +366,28 @@ class entityManager extends manager{
                                 this.entities.walls[b][c].spec.includes(4)&&set[a]=='Oven'||
                                 this.entities.walls[b][c].spec.includes(3)&&set[a]=='Starter Plates'||
                                 this.entities.walls[b][c].spec.includes(2)&&set[a]=='Starter Sink'||
-                                this.entities.walls[b][c].name=='Crate'&&this.entities.walls[b][c].contain==inside&&dev.overlap
+                                this.entities.walls[b][c].name=='Crate'&&(
+                                    this.entities.walls[b][c].contain==inside&&dev.overlap||
+                                    types.wall[this.entities.walls[b][c].contain].spec.includes(5)&&set[a]=='Starter Hob'&&dev.overlap||
+                                    types.wall[this.entities.walls[b][c].contain].spec.includes(4)&&set[a]=='Oven'&&dev.overlap||
+                                    types.wall[this.entities.walls[b][c].contain].spec.includes(3)&&set[a]=='Starter Plates'&&dev.overlap||
+                                    types.wall[this.entities.walls[b][c].contain].spec.includes(2)&&set[a]=='Starter Sink'&&dev.overlap
+                                )
                             ){
                                 total--
                             }
+                        }
+                    }
+                    for(let b=0,lb=this.entities.players.length;b<lb;b++){
+                        if(
+                            this.entities.players[b].item!=-1&&this.entities.players[b].item.name=='Crate'&&(
+                                types.wall[this.entities.players[b].item.contain].spec.includes(5)&&set[a]=='Starter Hob'&&dev.overlap||
+                                types.wall[this.entities.players[b].item.contain].spec.includes(4)&&set[a]=='Oven'&&dev.overlap||
+                                types.wall[this.entities.players[b].item.contain].spec.includes(3)&&set[a]=='Starter Plates'&&dev.overlap||
+                                types.wall[this.entities.players[b].item.contain].spec.includes(2)&&set[a]=='Starter Sink'&&dev.overlap
+                            )
+                        ){
+                            total--
                         }
                     }
                 }

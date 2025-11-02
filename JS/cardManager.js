@@ -4,6 +4,17 @@ class cardManager extends manager{
         this.active=[]
         this.initial()
     }
+    save(){
+        let composite={
+            active:this.active,
+            listing:this.listing,
+        }
+        return composite
+    }
+    load(composite){
+        this.active=composite.active
+        this.listing=composite.listing
+    }
     initial(){
         this.listing={
             full:[[],[],[],[],[],[],[]],

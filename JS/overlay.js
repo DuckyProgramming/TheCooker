@@ -8,6 +8,63 @@ class overlay extends located{
         this.remove=false
         this.initial()
     }
+    save(){
+        let composite={
+            type:this.type,
+            args:this.args,
+            active:this.active,
+            remove:this.remove
+        }
+        switch(this.type){
+            case 0:
+                composite.cards=[]
+                this.cards.forEach(card=>composite.cards.push(card.save()))
+                composite.support=this.support
+                composite.anim=this.anim
+                composite.franchise=this.franchise
+                composite.revive=this.revive
+            break
+            case 1:
+                composite.dishes=[]
+                this.dishes.forEach(dish=>composite.dishes.push(dish.save()))
+                composite.page=this.page
+            break
+            case 2:
+                composite.players=this.players
+            break
+        }
+        return composite
+    }
+    load(composite){
+        this.type=composite.type
+        this.args=composite.args
+        this.active=composite.active
+        this.remove=composite.remove
+        switch(this.type){
+            case 0:
+                this.cards=[]
+                for(let a=0,la=composite.cards.length;a<la;a++){
+                    this.cards.push(new card(this.layer,this.parent,0,0,0))
+                    this.cards[a].load(composite.cards[a])
+                }
+                this.support=composite.support
+                this.anim=composite.anim
+                this.franchise=composite.franchise
+                this.revive=composite.revive
+            break
+            case 1:
+                this.dishes=[]
+                for(let a=0,la=composite.dishes.length;a<la;a++){
+                    this.dishes.push(new dish(this.layer,this.parent,0,0,0))
+                    this.dishes[a].load(composite.dishes[a])
+                }   
+                this.page=composite.page
+            break
+            case 2:
+                this.players=composite.players
+            break
+        }
+    }
     initial(){
         this.timer.active=0
         switch(this.type){
@@ -24,6 +81,14 @@ class overlay extends located{
             break
             case 2:
                 this.players=1
+            break
+        }
+    }
+    reset(){
+        switch(this.type){
+            case 1:
+                this.dishes=[]
+                this.page=0
             break
         }
     }
@@ -142,12 +207,14 @@ class overlay extends located{
                 layer.fill(225,this.fade.main)
                 layer.stroke(150,this.fade.main)
                 layer.strokeWeight(5)
-                layer.rect(0,150,35,35,10)
+                layer.rect(-26,150,35,35,10)
+                layer.rect(26,150,35,35,10)
                 layer.rect(-130,20,35,35,10)
                 layer.rect(130,20,35,35,10)
                 displaySymbol(layer,-130,20,0,-180,1,[0,0,0],this.fade.main)
                 displaySymbol(layer,130,20,0,0,1,[0,0,0],this.fade.main)
-                displaySymbol(layer,0,150,1,0,1.5,[0,0,0],this.fade.main)
+                displaySymbol(layer,-26,150,1,0,1.5,[0,0,0],this.fade.main)
+                displaySymbol(layer,26,150,2,0,1.5,[[0,0,0],[225,225,225]],this.fade.main)
             break
             case 2:
                 layer.fill(225,this.fade.main)
@@ -163,8 +230,9 @@ class overlay extends located{
                 layer.rect(130,0,35,35,10)
                 layer.rect(0,55,120,35,10)
                 layer.rect(0,102.5,120,35,10)
+                layer.rect(0,150,120,35,10)
                 if(this.parent.operation.franchise.active.length>0){
-                    layer.rect(0,150,120,35,10)
+                    layer.rect(0,197.5,120,35,10)
                 }
                 displaySymbol(layer,-130,0,0,-180,1,[0,0,0],this.fade.main)
                 displaySymbol(layer,130,0,0,0,1,[0,0,0],this.fade.main)
@@ -174,9 +242,10 @@ class overlay extends located{
                 layer.text(`${this.players} Player${pl(this.players)}`,0,0)
                 layer.textSize(20)
                 layer.text('Begin',0,55)
-                layer.text('Controls',0,102.5)
+                layer.text('Load Save',0,102.5)
+                layer.text('Controls',0,150)
                 if(this.parent.operation.franchise.active.length>0){
-                    layer.text('Franchises',0,150)
+                    layer.text('Franchises',0,197.5)
                 }
             break
             case 3:
@@ -411,6 +480,7 @@ class overlay extends located{
                             switch(this.setupArgs[0]){
                                 case 0:
                                     this.parent.operation.transition('menu',[])
+                                    this.parent.reset()
                                 break
                                 case 1:
                                     this.parent.activate(0,[2])
@@ -494,8 +564,12 @@ class overlay extends located{
                     if(inPointBox(mouse,{position:{x:this.layer.width/2+130,y:this.layer.height/2+20},width:40,height:40})){
                         this.page=(this.page+1)%this.dishes.length
                     }
-                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+150},width:40,height:40})){
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2-26,y:this.layer.height/2+150},width:40,height:40})){
                         this.active=false
+                    }
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2+26,y:this.layer.height/2+150},width:40,height:40})){
+                        this.active=false
+                        this.parent.operation.saveCol()
                     }
                 break
                 case 2:
@@ -510,11 +584,15 @@ class overlay extends located{
                         this.parent.operation.generatePlayers(this.players)
                         this.parent.activate(0,[5])
                     }
-                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+102.5},width:125,height:40})&&this.parent.operation.franchise.active.length>0){
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+102.5},width:125,height:40})){
+                        this.active=false
+                        this.parent.operation.loadCol()
+                    }
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+150},width:125,height:40})){
                         this.active=false
                         this.parent.activate(5,[])
                     }
-                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+150},width:125,height:40})&&this.parent.operation.franchise.active.length>0){
+                    if(inPointBox(mouse,{position:{x:this.layer.width/2,y:this.layer.height/2+197.5},width:125,height:40})&&this.parent.operation.franchise.active.length>0){
                         this.active=false
                         this.parent.operation.generatePlayers(this.players)
                         this.parent.activate(4,[])

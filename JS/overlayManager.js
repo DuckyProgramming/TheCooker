@@ -15,6 +15,20 @@ class overlayManager extends manager{
         5-controls rebind
         */
     }
+    save(){
+        let composite={
+            overlays:[],
+            active:this.active,
+        }
+        this.overlays.forEach(overlay=>composite.overlays.push(overlay.save()))
+        return composite
+    }
+    load(composite){
+        for(let a=0,la=composite.overlays.length;a<la;a++){
+            this.overlays[a].load(composite.overlays[a])
+        }
+        this.active=composite.active
+    }
     anyActive(){
         return this.active.length>0
     }
@@ -30,6 +44,9 @@ class overlayManager extends manager{
         for(let a=0,la=this.active.length;a<la;a++){
             this.overlays[this.active[a]].active=false
         }
+    }
+    reset(){
+        this.overlays.forEach((overlay)=>{overlay.reset()})
     }
     display(scene){
         switch(scene){

@@ -7,6 +7,23 @@ class dishManager extends manager{
         this.sets=[[],[],[],[],[],[]]
         this.total=0
     }
+    save(){
+        let composite={
+            active:this.active,
+            obj:this.obj,
+            disabled:this.disabled,
+            sets:this.sets,
+            total:this.total,
+        }
+        return composite
+    }
+    load(composite){
+        this.active=composite.active
+        this.obj=composite.obj
+        this.disabled=composite.disabled
+        this.sets=composite.sets
+        this.total=composite.total
+    }
     addDish(dish){
         if(this.active[types.dish[dish].list].length==0){
             this.total++

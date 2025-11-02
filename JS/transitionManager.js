@@ -5,6 +5,19 @@ class transitionManager extends manager{
         this.anim=0
         this.scene=''
     }
+    save(){
+        let composite={
+            trigger:this.trigger,
+            anim:this.anim,
+            scene:this.scene,
+        }
+        return composite
+    }
+    load(composite){
+        this.trigger=composite.trigger
+        this.anim=composite.anim
+        this.scene=composite.scene
+    }
     begin(scene){
         this.scene=scene
         this.trigger=true

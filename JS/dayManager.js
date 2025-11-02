@@ -10,6 +10,29 @@ class dayManager extends manager{
         this.fail={num:0,trigger:false}
         this.spawners=[]
     }
+    save(){
+        let composite={
+            day:this.day,
+            phase:this.phase,
+            currency:this.currency,
+            time:this.time,
+            patience:this.patience,
+            anim:this.anim,
+            fail:this.fail,
+            spawners:this.spawners,
+        }
+        return composite
+    }
+    load(composite){
+        this.day=composite.day
+        this.phase=composite.phase
+        this.currency=composite.currency
+        this.time=composite.time
+        this.patience=composite.patience
+        this.anim=composite.anim
+        this.fail=composite.fail
+        this.spawners=composite.spawners
+    }
     addCurrency(amount){
         this.currency.main+=amount
     }
@@ -262,6 +285,15 @@ class dayManager extends manager{
         switch(scene){
             case 'main':
                 if(distPos(mouse,{position:{x:this.layer.width-21,y:21}})<30){
+                    this.operation.overlayManager.activate(1,[-1])
+                }
+            break
+        }
+    }
+    onKey(scene,key){
+        switch(scene){
+            case 'main':
+                if(key=='Escape'){
                     this.operation.overlayManager.activate(1,[-1])
                 }
             break

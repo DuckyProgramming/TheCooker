@@ -11,6 +11,212 @@ class wall extends partisan{
         this.removeMark=false
         this.initialValues()
     }
+    save(){
+        let composite={
+            position:this.position,
+            gridPos:this.gridPos,
+            width:this.width,
+            height:this.height,
+            base:{position:this.base.position,width:this.base.width,height:this.base.height},
+            type:this.type,
+            redundant:this.redundant,
+            removeMark:this.removeMark,
+            item:this.item==-1?-1:this.item.save()
+        }
+        switch(this.name){
+            case 'Crate': case 'Option':
+                composite.contain=this.contain
+            break
+            case 'Blueprint':
+            case 'Blueprint Cabinet': case 'Upgrade Cabinet': case 'Discount Cabinet': case 'Generator Cabinet':
+                composite.contain=this.contain
+                composite.cost=this.cost
+            break
+            case 'Copy Cabinet':
+                composite.contain=this.contain
+                composite.cost=this.cost
+                composite.contain2=this.contain2
+                composite.cost2=this.cost2
+            break
+            case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                composite.occupied=this.occupied
+                composite.occupants=[]
+                this.occupants.forEach(occupant=>composite.occupants.push(occupant.id))
+                composite.operation=this.operation
+                composite.orderPhase=this.orderPhase
+                composite.patience=this.patience
+            break
+            case 'Frozen Prep Station':
+                composite.items=this.items
+            break
+            case 'Ice Cream':
+                composite.close=this.close
+            break
+        }
+        switch(this.name){
+            case 'Starter Plates': case 'Plates': case 'Large Plates':
+            case 'Dish Rack': case 'Large Dish Rack':
+                composite.plates=this.plates
+                composite.base.plates=this.base.plates
+            break
+            case 'Starter Trash Bin': case 'Trash Bin': case 'Compost Bin': case 'Large Trash Bin':
+                composite.trash=this.trash
+                composite.base.trash=this.base.trash
+            break
+            case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                composite.plates=[]
+                this.plates.forEach(plate=>composite.plates.push(plate.save()))
+            break
+            case 'Wash Basin':
+                composite.plates=this.plates
+                composite.base.plates=this.base.plates
+                composite.washed=this.washed
+            break
+            case 'Dishwasher':
+                composite.plates=this.plates
+                composite.base.plates=this.base.plates
+                composite.washed=this.washed
+                composite.cycle=this.cycle
+            break
+            case 'Prep Station': case 'Frozen Prep Station': case 'Silo':
+            case 'Breadsticks': case 'Cutlery':
+            case 'Ketchup': case 'Mustard':
+                composite.items=this.items
+                composite.base.items=this.base.items
+            break
+            case 'Stack Station':
+                composite.items=[]
+                this.items.forEach(item=>composite.items.push(item.save()))
+            break
+            case 'Oven': case 'Fast Oven':
+                composite.close=this.close
+            break
+            case 'Microwave': case 'Coffee Machine': case 'Waffle Iron':
+                composite.cycle=this.cycle
+            break
+            case 'Pots':
+                composite.pots=this.pots
+                composite.base.pots=this.base.pots
+            break
+            case 'Pans':
+                composite.pans=this.pans
+                composite.base.pans=this.base.pans
+            break
+        }
+        return composite
+    }
+    load(composite){
+        this.type=composite.type
+        this.initialValues()
+        this.position=composite.position
+        this.gridPos=composite.gridPos
+        this.width=composite.width
+        this.height=composite.height
+        this.base.position=composite.base.position
+        this.base.width=composite.base.width
+        this.base.height=composite.base.height
+        this.redundant=composite.redundant
+        this.removeMark=composite.removeMark
+        if(composite.item==-1){
+            this.item=-1
+        }else{
+            this.item=new item(this.layer,this.parent,0,0,0)
+            this.item.load(composite.item)
+        }
+        switch(this.name){
+            case 'Crate': case 'Option':
+                this.contain=composite.contain
+            break
+            case 'Blueprint':
+            case 'Blueprint Cabinet': case 'Upgrade Cabinet': case 'Discount Cabinet': case 'Generator Cabinet':
+                this.contain=composite.contain
+                this.cost=composite.cost
+            break
+            case 'Copy Cabinet':
+                this.contain=composite.contain
+                this.cost=composite.cost
+                this.contain2=composite.contain2
+                this.cost2=composite.cost2
+            break
+            case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                this.occupied=composite.occupied
+                this.occupants=composite.occupants
+                this.operation=composite.operation
+                this.orderPhase=composite.orderPhase
+                this.patience=composite.patience
+            break
+            case 'Frozen Prep Station':
+                this.items=composite.items
+            break
+            case 'Ice Cream':
+                this.close=composite.close
+            break
+        }
+        switch(this.name){
+            case 'Starter Plates': case 'Plates': case 'Large Plates':
+            case 'Dish Rack': case 'Large Dish Rack':
+                this.plates=composite.plates
+                this.base.plates=composite.base.plates
+            break
+            case 'Starter Trash Bin': case 'Trash Bin': case 'Compost Bin': case 'Large Trash Bin':
+                this.trash=composite.trash
+                this.base.trash=composite.base.trash
+            break
+            case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                this.plates=[]
+                composite.plates.forEach(plate=>{this.plates.push(new item(this.layer,this.parent,0,0,0));this.plates.push(plate.save())})
+            break
+            case 'Wash Basin':
+                this.plates=composite.plates
+                this.base.plates=composite.base.plates
+                this.washed=composite.washed
+            break
+            case 'Dishwasher':
+                this.plates=composite.plates
+                this.base.plates=composite.base.plates
+                this.washed=composite.washed
+                this.cycle=composite.cycle
+            break
+            case 'Prep Station': case 'Frozen Prep Station': case 'Silo':
+            case 'Breadsticks': case 'Cutlery':
+            case 'Ketchup': case 'Mustard':
+                this.items=composite.items
+                this.base.items=composite.base.items
+            break
+            case 'Stack Station':
+                this.items=[]
+                composite.items.forEach(item=>{this.items.push(new item(this.layer,this.parent,0,0,0));this.items.push(item.save())})
+            break
+            case 'Oven': case 'Fast Oven':
+                this.close=composite.close
+            break
+            case 'Microwave': case 'Coffee Machine': case 'Waffle Iron':
+                this.cycle=composite.cycle
+            break
+            case 'Pots':
+                this.pots=composite.pots
+                this.base.pots=composite.base.pots
+            break
+            case 'Pans':
+                this.pans=composite.pans
+                this.base.pans=composite.base.pans
+            break
+        }
+    }
+    loadFollow(){
+        switch(this.name){
+            case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
+                for(let a=0,la=this.occupants.length;a<la;a++){
+                    for(let b=0,lb=this.parent.entities.players.length;b<lb;b++){
+                        if(this.occupants[a]==this.parent.entities.players[b].id){
+                            this.occupants[a]=this.parent.entities.players[b]
+                            break
+                        }
+                    }
+                }
+            break
+        }
+    }
     initialValues(){
         this.mover=false
         //NOT whos
@@ -215,24 +421,31 @@ class wall extends partisan{
                 this.activating=0
                 this.anim=48
                 this.handLen=[48,48]
+                this.speed=[1,1]
+                this.buff=[1,1]
             break
             case 'Levitating Grabber':
-                this.speed=[1,1]
                 this.activating=0
                 this.anim=48
                 this.handLen=[48,48]
+                this.speed=[1,1]
+                this.buff=[1,1]
                 this.colliders.main=[]
             break
             case 'Combiner':
                 this.activating=0
                 this.anim=0
                 this.handLen=48
+                this.speed=[1,1]
+                this.buff=[1,1]
             break
             case 'Portioner':
                 this.activating=0
                 this.anim=0
                 this.handLen=48
                 this.speed=0.25
+                this.speed=[1,1]
+                this.buff=[1,1]
             break
             case 'Gasser':
                 this.handLen=48
@@ -4005,7 +4218,7 @@ class wall extends partisan{
                             }
                         break
                     }
-                    if(this.edit&&player.item!=-1&&player.item.name=='Crate'){
+                    if(this.edit&&player.item!=-1&&player.item.name=='Crate'&&!((this.name=='Blueprint Cabinet'||this.name=='Upgrade Cabinet'||this.name=='Discount Cabinet'||this.name=='Generator Cabinet')&&this.contain!=-1)){
                         if(player.item.contain==findName('Upgrade Kit',types.wall)){
                             if(types.wall[this.type].upgrade.length>0){
                                 this.parent.emptySpot(this)

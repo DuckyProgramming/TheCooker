@@ -4,8 +4,10 @@ function keyPressed(){
         case 'ArrowRight': inputs.keys[0].main[1]=true; inputs.keys[0].tap[1]=true; break
         case 'ArrowUp': inputs.keys[0].main[2]=true; inputs.keys[0].tap[2]=true; break
         case 'ArrowDown': inputs.keys[0].main[3]=true; inputs.keys[0].tap[3]=true; break
+        case '/': if(dev.emergencyKey){inputs.keys[0].main[3]=true; inputs.keys[0].tap[3]=true} break
         case 'Shift': inputs.keys[0].main[4]=true; inputs.keys[0].tap[4]=true; break
         case 'End': inputs.keys[0].main[5]=true; inputs.keys[0].tap[5]=true; break
+        case 'Insert': if(dev.zerpKey){inputs.keys[0].main[6]=true; inputs.keys[0].tap[6]=true} break
         case 'a': case 'A': inputs.keys[1].main[0]=true; inputs.keys[1].tap[0]=true; break
         case 'd': case 'D': inputs.keys[1].main[1]=true; inputs.keys[1].tap[1]=true; break
         case 'w': case 'W': inputs.keys[1].main[2]=true; inputs.keys[1].tap[2]=true; break
@@ -25,6 +27,7 @@ function keyPressed(){
         case 'r': case 'R': inputs.keys[3].main[4]=true; inputs.keys[3].tap[4]=true; break
         case 'y': case 'Y': inputs.keys[3].main[5]=true; inputs.keys[3].tap[5]=true; break
     }
+    current.onKey(key)
 }
 function keyReleased(){
     switch(key){
@@ -32,8 +35,10 @@ function keyReleased(){
         case 'ArrowRight': inputs.keys[0].main[1]=false; break
         case 'ArrowUp': inputs.keys[0].main[2]=false; break
         case 'ArrowDown': inputs.keys[0].main[3]=false; break
+        case '/': if(dev.emergencyKey){inputs.keys[0].main[3]=false} break
         case 'Shift': inputs.keys[0].main[4]=false; break
         case 'End': inputs.keys[0].main[5]=false; break
+        case 'Insert': if(dev.zerpKey){inputs.keys[0].main[6]=false} break
         case 'a': case 'A': inputs.keys[1].main[0]=false; break
         case 'd': case 'D': inputs.keys[1].main[1]=false; break
         case 'w': case 'W': inputs.keys[1].main[2]=false; break
@@ -58,9 +63,9 @@ function staticKeys(){
     inputs.keys[0].main[0]=keyIsDown(37)
     inputs.keys[0].main[1]=keyIsDown(39)
     inputs.keys[0].main[2]=keyIsDown(38)
-    inputs.keys[0].main[3]=keyIsDown(40)
+    inputs.keys[0].main[3]=keyIsDown(40)||keyIsDown(191)&&dev.emergencyKey
     inputs.keys[0].main[4]=keyIsDown(16)
-    inputs.keys[0].main[5]=keyIsDown(35)
+    inputs.keys[0].main[5]=keyIsDown(35)||keyIsDown(45)&&dev.zeroKey
     inputs.keys[1].main[0]=keyIsDown(65)
     inputs.keys[1].main[1]=keyIsDown(68)
     inputs.keys[1].main[2]=keyIsDown(87)

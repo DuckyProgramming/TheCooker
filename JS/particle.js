@@ -9,6 +9,37 @@ class particle extends located{
         this.control=control
         this.setupValues(control)
     }
+    save(){
+        let composite={
+            position:this.position,
+            fade:this.fade,
+            type:this.type,
+            control:this.control,
+            direction:this.direction,
+            size:this.size
+        }
+        switch(this.type){
+            case 0:
+                composite.timer={hold:this.timer.hold}
+                composite.value=this.value
+            break
+        }
+        return composite
+    }
+    load(composite){
+        this.position=composite.position
+        this.fade=composite.fade
+        this.type=composite.type
+        this.control=composite.control
+        this.direction=composite.direction
+        this.size=composite.size
+        switch(this.type){
+            case 0:
+                this.timer.hold=composite.timer.hold
+                this.value=composite.valuee
+            break
+        }
+    }
     setupValues(control){
         this.direction=0
         this.size=1
