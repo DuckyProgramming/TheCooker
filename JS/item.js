@@ -7,6 +7,8 @@ class item extends located{
     }
     save(){
         let composite={
+            position:this.position,
+            fade:this.fade,
             type:this.type,
             process:this.process,
         }
@@ -15,6 +17,8 @@ class item extends located{
     load(composite){
         this.type=composite.type
         this.initialValues()
+        this.position=composite.position
+        this.fade=composite.fade
         this.process=composite.process
     }
     initialValues(){

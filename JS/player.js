@@ -11,23 +11,26 @@ class player extends partisan{
     }
     save(){
         let composite={
+            index:this.index,
             position:this.position,
             base:{position:this.position},
+            direction:this.direction,
             id:this.id,
             cosmetic:this.cosmetic,
             active:this.active,
             speed:this.speed,
             item:this.item==-1?-1:this.item.save(),
-            follower:this.follower==-1?-1:{type:typeof(this.follower),id:this.follower.id},
+            follower:this.follower==-1?-1:{type:this.follower.constructor.name,index:this.follower.index},
         }
         switch(this.id){
             case -1:
                 composite.side=this.side==-1?-1:this.side.save()
-                composite.follow=this.follow==-1?-1:{type:typeof(this.follow),id:this.follow.id}
-                composite.oldFollow=this.oldFollow==-1?-1:{type:typeof(this.oldFollow),id:this.oldFollow.id}
+                composite.follow=this.follow==-1?-1:{type:this.follow.constructor.name,index:this.follow.index}
+                composite.oldFollow=this.oldFollow==-1?-1:{type:this.oldFollow.constructor.name,index:this.oldFollow.index}
                 composite.mode=this.mode
                 composite.orderPhase=this.orderPhase
-                composite.order=this.order
+                composite.order=[]
+                this.order.forEach(order=>composite.order.push(order.save()))
                 composite.paying=this.paying
                 composite.angle=this.angle
                 composite.timer={
@@ -48,10 +51,12 @@ class player extends partisan{
     load(composite){
         this.id=composite.id
         this.initialValues()
+        this.index=composite.index
         this.position=composite.position
         this.base.position=composite.base.position
         this.cosmetic=composite.cosmetic
         this.setupGraphics()
+        this.direction=composite.direction
         this.active=composite.active
         this.speed=composite.speed
         if(composite.item==-1){
@@ -74,6 +79,7 @@ class player extends partisan{
                 this.mode=composite.mode
                 this.orderPhase=composite.orderPhase
                 this.order=[]
+                composite.order.forEach(order=>{this.order.push(new item(this.layer,this.parent,0,0,0));last(this.order).load(order)})
                 this.paying=composite.paying
                 this.angle=composite.angle
                 this.timer.angle=composite.timer.angle
@@ -82,7 +88,6 @@ class player extends partisan{
                 this.touch=composite.touch
                 this.stop=composite.stop
                 this.groupIndex=composite.groupIndex
-                composite.order.forEach((order)=>{this.order.push(new this.item(this.layer,this.parent,0,0,0));last(this.order).load(order)})
             break
             default:
                 if(composite.tempItem==-1){
@@ -99,19 +104,19 @@ class player extends partisan{
             return value
         }else if(value.type=='player'){
             for(let a=0,la=this.parent.entities.players.length;a<la;a++){
-                if(this.parent.entities.players[a].id==value.id){
+                if(this.parent.entities.players[a].index==value.index){
                     return this.parent.entities.players[a]
                 }
             }
-            for(let a=0,la=this.parent.customer.queeu.length;a<la;a++){
-                if(this.parent.customer.queeu[a].id==value.id){
-                    return this.parent.customer.queeu[a]
+            for(let a=0,la=this.parent.customer.queue.length;a<la;a++){
+                if(this.parent.customer.queue[a].index==value.index){
+                    return this.parent.customer.queue[a]
                 }
             }
         }else if(value.type=='wall'){
             for(let a=0,la=this.parent.entities.walls.length;a<la;a++){
                 for(let b=0,lb=this.parent.entities.walls[a].length;b<lb;b++){
-                    if(this.parent.entities.walls[a][b].id==value.id){
+                    if(this.parent.entities.walls[a][b].index==value.index){
                         return this.parent.entities.walls[a][b]
                     }
                 }
@@ -269,7 +274,6 @@ class player extends partisan{
         this.orderPhase=orderPhase
         this.order=[]
         this.paying=[]
-        let index
         let obj
         let offset=1+(tableName=='Metal Table'?3:0)+(this.parent.operation.cardManager.hasCard('Thin Out')?2:0)
         switch(orderPhase){
@@ -332,9 +336,7 @@ class player extends partisan{
         }
     }
     revealOrder(){
-        for(let a=0,la=this.order.length;a<la;a++){
-            this.order[a].fade.trigger=true
-        }
+        this.order.forEach(order=>order.fade.trigger=true)
     }
     display(level,layer=this.layer){
         switch(level){

@@ -13,7 +13,9 @@ class wall extends partisan{
     }
     save(){
         let composite={
+            index:this.index,
             position:this.position,
+            direction:this.direction,
             gridPos:this.gridPos,
             width:this.width,
             height:this.height,
@@ -41,7 +43,7 @@ class wall extends partisan{
             case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
                 composite.occupied=this.occupied
                 composite.occupants=[]
-                this.occupants.forEach(occupant=>composite.occupants.push(occupant.id))
+                this.occupants.forEach(occupant=>composite.occupants.push(occupant.index))
                 composite.operation=this.operation
                 composite.orderPhase=this.orderPhase
                 composite.patience=this.patience
@@ -108,7 +110,9 @@ class wall extends partisan{
     load(composite){
         this.type=composite.type
         this.initialValues()
+        this.index=composite.index
         this.position=composite.position
+        this.direction=composite.direction
         this.gridPos=composite.gridPos
         this.width=composite.width
         this.height=composite.height
@@ -144,12 +148,23 @@ class wall extends partisan{
                 this.operation=composite.operation
                 this.orderPhase=composite.orderPhase
                 this.patience=composite.patience
+                if(this.name=='Small Table'){
+                    this.radius=(this.width+this.height)/4
+                }
             break
             case 'Frozen Prep Station':
                 this.items=composite.items
             break
             case 'Ice Cream':
                 this.close=composite.close
+            break
+            case 'Laborer':
+                this.player.position.x=this.position.x
+                this.player.position.y=this.position.y
+                this.radius=(this.width+this.height)/4
+            break
+            case 'Trash Can': case 'Flour': case 'Nuts': case 'Sugar': case 'Potatoes': case 'Bonito': case 'Cocoa Powder': case 'Miso': case 'Rice':
+                this.radius=(this.width+this.height)/4
             break
         }
         switch(this.name){
@@ -208,7 +223,7 @@ class wall extends partisan{
             case 'Dining Table': case 'Fancy Table': case 'Small Table': case 'Metal Table': case 'Simple Table':
                 for(let a=0,la=this.occupants.length;a<la;a++){
                     for(let b=0,lb=this.parent.entities.players.length;b<lb;b++){
-                        if(this.occupants[a]==this.parent.entities.players[b].id){
+                        if(this.occupants[a]==this.parent.entities.players[b].index){
                             this.occupants[a]=this.parent.entities.players[b]
                             break
                         }
@@ -786,9 +801,7 @@ class wall extends partisan{
             this.patience.mem=this.patience.main/this.patience.base*0.5
             this.patience.main=7200
             this.patience.base=7200
-            for(let a=0,la=this.occupants.length;a<la;a++){
-                this.occupants[a].revealOrder()
-            }
+            this.occupants.forEach(occupant=>occupant.revealOrder())
         }
     }
     move(x,y){

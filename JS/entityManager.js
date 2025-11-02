@@ -74,7 +74,7 @@ class entityManager extends manager{
             this.entities.players[a].load(composite.entities.players[a])
         }
         for(let a=0,la=composite.entities.particles.length;a<la;a++){
-            this.entities.particles.push(new particle(new particle(this.layer,0,0,0,{})))
+            this.entities.particles.push(new particle(this.layer,0,0,0,{}))
             this.entities.particles[a].load(composite.entities.particles[a])
         }
         for(let a=0,la=composite.entities.tempWalls.length;a<la;a++){
@@ -500,10 +500,10 @@ class entityManager extends manager{
             possible.splice(index,1)
         }
     }
-    testBlueprints(){
+    testBlueprints(begin){
         let possible=this.getEmptyGrid(1)
         let set=[]
-        for(let a=0,la=types.wall.length;a<la;a++){
+        for(let a=begin,la=types.wall.length;a<la;a++){
             if(types.wall[a].edit){
                 set.push(a)
             }
@@ -513,6 +513,22 @@ class entityManager extends manager{
                 let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(possible[0][1]+0.5),this.tileset[1]*(possible[0][0]+0.5),[possible[0][0]*2+1,possible[0][1]*2+1],-1,-1,findName('Blueprint',types.wall)),0)
                 this.entities.walls[0][pos].contain=set[a]
                 this.entities.walls[0][pos].cost=types.wall[set[a]].cost
+                this.grid[possible[0][0]*2+1][possible[0][1]*2+1]=1
+                possible.splice(0,1)
+            }
+        }
+    }
+    testWalls(begin){
+        let possible=this.getEmptyGrid(1)
+        let set=[]
+        for(let a=begin,la=types.wall.length;a<la;a++){
+            if(types.wall[a].edit){
+                set.push(a)
+            }
+        }
+        for(let a=0,la=set.length;a<la;a++){
+            if(possible.length>0){
+                let pos=this.insertWall(new wall(this.layer,this,this.index.wall++,this.tileset[0]*(possible[0][1]+0.5),this.tileset[1]*(possible[0][0]+0.5),[possible[0][0]*2+1,possible[0][1]*2+1],-1,-1,set[a]),0)
                 this.grid[possible[0][0]*2+1][possible[0][1]*2+1]=1
                 possible.splice(0,1)
             }
