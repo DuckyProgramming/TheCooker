@@ -32,7 +32,7 @@ class operation{
         return composite
     }
     saveCol(){
-        saveStrings([JSON.stringify(this.save())],'saveFile','json')
+        saveStrings([JSON.stringify(this.save())],'theCookerSaveFile','json')
     }
     load(result){
         let composite=JSON.parse(result)

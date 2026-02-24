@@ -109,6 +109,9 @@ function updateMouse(layer,scale){
 	inputs.mouse.rel.y=(inputs.mouse.base.y-height/2)/scale+layer.height/2
 }
 //operational
+function boxify(x,y,width,height){
+	return {position:{x:x,y:y},width:width,height:height}
+}
 function onSegment(p,q,r){ 
     return q.x<=max(p.x,r.x)&&q.x>=min(p.x, r.x)&&q.y<=max(p.y,r.y)&&q.y>=min(p.y, r.y)
 }
