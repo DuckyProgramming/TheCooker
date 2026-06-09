@@ -324,7 +324,7 @@ class player extends partisan{
                 }
             break
             case 4:
-                if(floor(random(0,menu.sets[5].length+(1+offset*0.5)))>offset*0.5){
+                if(menu.sets[5].length>0&&floor(random(0,menu.sets[5].length+(1+offset*0.5)))>offset*0.5){
                     obj=tableName=='Simple Table'&&firstOrder.length>0?firstOrder[0]:menu.getSet(5)
                     this.order.push(new item(this.layer,this.parent,0,0,findName(obj[0],types.item)))
                     last(this.order).fade.main=0

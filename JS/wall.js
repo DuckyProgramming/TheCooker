@@ -458,8 +458,7 @@ class wall extends partisan{
                 this.activating=0
                 this.anim=0
                 this.handLen=48
-                this.speed=0.25
-                this.speed=[1,1]
+                this.speed=[1,1,0.25]
                 this.buff=[1,1]
             break
             case 'Gasser':
@@ -3868,7 +3867,7 @@ class wall extends partisan{
                                         case 'Starter Sink': case 'Sink': case 'Soaking Sink': case 'Power Sink': case 'Rinsing Sink':
                                         case 'Display Stand':
                                             if(obj.item!=-1){
-                                                let result=obj.item.generalProcess([6],this.speed)
+                                                let result=obj.item.generalProcess([6],this.speed[2])
                                                 for(let a=0,la=result.length;a<la;a++){
                                                     switch(result[a].type){
                                                         case 6:
@@ -4352,10 +4351,9 @@ class wall extends partisan{
                             }
                         break
                         case 'Counter': case 'Freezer': case 'Cutting Board': case 'Rolling Board': case 'Portioning Board': case 'Swiss Army Board': case 'Levitating Counter':
-                        case 'Mixer': case 'Heated Mixer': case 'Fast Mixer': case 'Conveyor Mixer':
+                        case 'Mixer': case 'Heated Mixer': case 'Fast Mixer':
                         case 'Starter Hob': case 'Hob': case 'Safe Hob': case 'Fast Hob': case 'Override Hob':
                         case 'Tin': case 'Tray': case 'Donut Tray': case 'Cupcake Stand':
-                        case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner':
                         case 'Display Stand':
                             if(player.item!=-1){
                                 if(this.item!=-1){
@@ -4372,6 +4370,34 @@ class wall extends partisan{
                                 }else if(this.item==-1){
                                     this.item=player.item
                                     player.item=-1
+                                    return true
+                                }
+                            }else if(player.item==-1){
+                                if(this.item!=-1){
+                                    player.item=this.item
+                                    this.item=-1
+                                    return true
+                                }
+                            }
+                        break
+                        case 'Conveyor Mixer':
+                        case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner':
+                            if(player.item!=-1){
+                                if(this.item!=-1){
+                                    if(this.item.attemptCombine(player.item)){
+                                        player.item=-1
+                                        return true
+                                    }else{
+                                        let result=this.item.attemptDoubleCombine(player.item)
+                                        if(result[0]){
+                                            player.item=this.generateItem(result[1])
+                                            return true
+                                        }
+                                    }
+                                }else if(this.item==-1){
+                                    this.item=player.item
+                                    player.item=-1
+                                    this.anim=0
                                     return true
                                 }
                             }else if(player.item==-1){
