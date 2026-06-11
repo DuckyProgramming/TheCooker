@@ -144,7 +144,7 @@ class player extends partisan{
         this.item=-1
         this.handLen=0
         this.follower=-1
-        this.speed=0.4
+        this.speed=0.4*(this.id==-1&&this.parent.operation.cardManager.hasCard('Lethargy')?0.5:1)
         this.base.speed=this.speed
         switch(this.id){
             case -1:

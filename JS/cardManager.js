@@ -76,6 +76,24 @@ class cardManager extends manager{
         }
         print(result)
     }
+    outFull(){
+        let result=``
+        for(let a=0,la=this.listing.full.length;a<la;a++){
+            result+=(a>0?`\n`:``)+[`Main`,`Variant`,`Starter`,`Side`,`Dessert`,`Customer`,`Franchise`][a]+` (${this.listing.full[a].length}): `
+            for(let b=0,lb=this.listing.full[a].length;b<lb;b++){
+                result+=(b>0?`, `:``)+types.card[this.listing.full[a][b]].name
+            }
+        }
+        print(result)
+    }
+    outCount(){
+        let result=``
+        for(let a=0,la=this.listing.full.length;a<la;a++){
+            result+=(a>0?`\n`:``)+[`Main`,`Variant`,`Starter`,`Side`,`Dessert`,`Customer`,`Franchise`][a]+` (${this.listing.full[a].length})`
+        }
+        result+=`\nTotal: ${this.listing.full.reduce((acc,a)=>acc+a.length,0)}`
+        print(result)
+    }
     getOptions(type,args){
         let result=[]
         let temp

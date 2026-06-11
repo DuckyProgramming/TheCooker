@@ -2,10 +2,10 @@ function setup(){
     createCanvas(windowWidth-50,windowHeight-50)
     setupGraphics()
     current=new operation(graphics.main)
-    if(dev.test){
+    if(dev.test.length>0){
         current.generatePlayers(1)
         current.transition('main',[])
-        current.cardManager.addCard(findName('Coffee',types.card))
+        dev.test.forEach(card=>current.cardManager.addCard(findName(card,types.card)))
         current.overlayManager.closeAll()
     }
 }

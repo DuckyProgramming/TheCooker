@@ -1,6 +1,5 @@
 constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
 graphics={main:undefined,menu:undefined}
-dev={bound:false,customerMult:1,overlap:true,test:true,first:false,emergencyKey:false,zeroKey:false}
 inputs={
     keys:[
         {
@@ -36,8 +35,7 @@ types={
             ],wall:[
                 [9,1,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',0],
-                [7,5,'Booking Desk',2],
-                //[1,3,'Displayer',0],
+                [7,5,'Booking Desk',2]
             ],
             inside:[0,0,0,2],
             spawn:[270],
@@ -2381,7 +2379,7 @@ types={
             rarity:-1,
             cost:0,
             prereq:[],
-            desc:'Blocks you',
+            desc:'Walk on it',
             upgrade:[],
         },{
             name:'Floor',
@@ -2394,7 +2392,7 @@ types={
             rarity:-1,
             cost:0,
             prereq:[],
-            desc:'Blocks you',
+            desc:'Walk on it',
             upgrade:[],
         },{
             name:'Kitchen Floor',
@@ -2407,7 +2405,7 @@ types={
             rarity:-1,
             cost:0,
             prereq:[],
-            desc:'Blocks you',
+            desc:'Walk on it',
             upgrade:[],
         },{
             name:'High Wall',
@@ -3206,6 +3204,19 @@ types={
             cost:20,
             prereq:[0],
             desc:'Holds 3 pans',
+            upgrade:[],
+        },{
+            name:'Boards',
+            blueprint:['Boards',7.5],
+            width:40,
+            height:30,
+            spec:[],
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:20,
+            prereq:[0],
+            desc:'Holds 3 boards',
             upgrade:[],
         },
 
@@ -4114,6 +4125,19 @@ types={
             prereq:[0],
             desc:'Provides Pumpkins',
             upgrade:[],
+        },{
+            name:'Lobster',
+            blueprint:['Lobster',7.5],
+            width:48,
+            height:36,
+            spec:[1],provide:'Lobster',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Lobster',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -4286,6 +4310,7 @@ types={
                 [0,'Chopped Pepper','Chopped Pepper in Pot'],
                 [0,'Chopped Potato','Chopped Potato in Pot'],
                 [0,'Chopped Onion','Chopped Onion in Pot'],
+                [0,'Lobster','Lobster in Pot'],
                 [12,'Mashed Potato','Mashed Potato Pot'],
                 [12,'Macaroni and Cheese','Macaroni and Cheese Pot'],
                 [12,'Scrambled Eggs','Scrambled Eggs Pot'],
@@ -4310,6 +4335,7 @@ types={
                 [0,'Macaroni','Raw Macaroni'],
                 [0,'Chopped Potato','Raw Boiled Potato'],
                 [0,'Uncooked Noodles','Raw Noodles'],
+                [0,'Lobster','Raw Lobster'],
                 [5,'Water','Pot'],
                 [5,'Trash','Pot'],
                 [12,'Broccoli Portion','Chopped Broccoli Pot'],
@@ -4697,7 +4723,9 @@ types={
             holdDir:0,
             component:true,
             trashable:true,
-            process:[],
+            process:[
+                [3,90,'Softened Butter'],
+            ],
         },{
             name:'Butter Dough',
             holdDist:18,
@@ -11128,6 +11156,452 @@ types={
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
             ],
+        },{
+            name:'Softened Butter',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Chopped Garlic','Garlic Butter'],
+            ],
+        },{
+            name:'Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Garlic Butter'],
+                [0,'Plated Rare Steak','Plated Rare Steak With Garlic Butter'],
+                [0,'Plated Medium Steak','Plated Medium Steak With Garlic Butter'],
+                [0,'Plated Well Done Steak','Plated Well Done Steak With Garlic Butter'],
+                [0,'Plated Rare Bone Steak','Plated Rare Bone Steak With Garlic Butter'],
+                [0,'Plated Medium Bone Steak','Plated Medium Bone Steak With Garlic Butter'],
+                [0,'Plated Well Done Bone Steak','Plated Well Done Bone Steak With Garlic Butter'],
+                [0,'Plated Rare Thick Steak','Plated Rare Thick Steak With Garlic Butter'],
+                [0,'Plated Medium Thick Steak','Plated Medium Thick Steak With Garlic Butter'],
+                [0,'Plated Well Done Thick Steak','Plated Well Done Thick Steak With Garlic Butter'],
+                [0,'Plated Rare Steak With Tomato','Plated Rare Steak With Tomato and Garlic Butter'],
+                [0,'Plated Medium Steak With Tomato','Plated Medium Steak With Tomato and Garlic Butter'],
+                [0,'Plated Well Done Steak With Tomato','Plated Well Done Steak With Tomato and Garlic Butter'],
+                [0,'Plated Rare Bone Steak With Tomato','Plated Rare Bone Steak With Tomato and Garlic Butter'],
+                [0,'Plated Medium Bone Steak With Tomato','Plated Medium Bone Steak With Tomato and Garlic Butter'],
+                [0,'Plated Well Done Bone Steak With Tomato','Plated Well Done Bone Steak With Tomato and Garlic Butter'],
+                [0,'Plated Rare Thick Steak With Tomato','Plated Rare Thick Steak With Tomato and Garlic Butter'],
+                [0,'Plated Medium Thick Steak With Tomato','Plated Medium Thick Steak With Tomato and Garlic Butter'],
+                [0,'Plated Well Done Thick Steak With Tomato','Plated Well Done Thick Steak With Tomato and Garlic Butter'],
+            ],
+        },{
+            name:'Plated Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Rare Steak','Plated Rare Steak With Garlic Butter'],
+                [0,'Medium Steak','Plated Medium Steak With Garlic Butter'],
+                [0,'Well Done Steak','Plated Well Done Steak With Garlic Butter'],
+                [0,'Rare Bone Steak','Plated Rare Bone Steak With Garlic Butter'],
+                [0,'Medium Bone Steak','Plated Medium Bone Steak With Garlic Butter'],
+                [0,'Well Done Bone Steak','Plated Well Done Bone Steak With Garlic Butter'],
+                [0,'Rare Thick Steak','Plated Rare Thick Steak With Garlic Butter'],
+                [0,'Medium Thick Steak','Plated Medium Thick Steak With Garlic Butter'],
+                [0,'Well Done Thick Steak','Plated Well Done Thick Steak With Garlic Butter'],
+                [0,'Chopped Tomato','Plated Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Rare Steak','Plated Rare Steak With Tomato and Garlic Butter'],
+                [0,'Medium Steak','Plated Medium Steak With Tomato and Garlic Butter'],
+                [0,'Well Done Steak','Plated Well Done Steak With Tomato and Garlic Butter'],
+                [0,'Rare Bone Steak','Plated Rare Bone Steak With Tomato and Garlic Butter'],
+                [0,'Medium Bone Steak','Plated Medium Bone Steak With Tomato and Garlic Butter'],
+                [0,'Well Done Bone Steak','Plated Well Done Bone Steak With Tomato and Garlic Butter'],
+                [0,'Rare Thick Steak','Plated Rare Thick Steak With Tomato and Garlic Butter'],
+                [0,'Medium Thick Steak','Plated Medium Thick Steak With Tomato and Garlic Butter'],
+                [0,'Well Done Thick Steak','Plated Well Done Thick Steak With Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Rare Steak With Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Medium Steak With Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Well Done Steak With Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Bone Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Rare Bone Steak With Tomato and Garlic Butter'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Medium Bone Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Medium Bone Steak With Tomato and Garlic Butter'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Well Done Bone Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Well Done Bone Steak With Tomato and Garlic Butter'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Rare Thick Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Rare Thick Steak With Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Thick Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Medium Thick Steak With Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Thick Steak With Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Well Done Thick Steak With Tomato and Garlic Butter'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Rare Bone Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Medium Bone Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Well Done Bone Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Bone Plate'],
+            ],
+        },{
+            name:'Plated Rare Thick Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Medium Thick Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Well Done Thick Steak With Tomato and Garlic Butter',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Lobster',
+            holdDist:18,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Lobster in Pot',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Water','Raw Lobster'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Raw Lobster',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,600,'Lobster Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Lobster Pot',
+            portions:1,
+            replace:true,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [6,30,'Cooked Lobster','Water Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Cooked Lobster',
+            holdDist:18,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Lobster'],
+            ],
+        },{
+            name:'Plated Lobster',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Lobster Plate'],
+            ],
+        },{
+            name:'Lobster Plate',
+            portions:1,
+            replace:false,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Dirty Plate'],
+                [6,30,'Lobster Shell','Dirty Plate'],
+            ],
+        },{
+            name:'Lobster Food Plate',
+            portions:1,
+            replace:false,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Dirty Plate'],
+                [6,30,'Lobster Shell','Food Plate'],
+            ],
+        },{
+            name:'Lobster Shell',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [0,'Cheese','Cheese Board'],
+                [0,'Chopped Apple','Apple Board'],
+                [0,'Nuts','Nut Board'],
+            ],
+        },{
+            name:'Cheese Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [0,'Chopped Apple','Cheese Apple Board'],
+                [0,'Nuts','Cheese Nut Board'],
+                [5,'Trash','Board'],
+            ],
+        },{
+            name:'Apple Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [0,'Cheese','Cheese Apple Board'],
+                [0,'Nuts','Apple Nut Board'],
+                [5,'Trash','Board'],
+            ],
+        },{
+            name:'Nut Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [0,'Cheese','Cheese Nut Board'],
+                [0,'Chopped Apple','Apple Nut Board'],
+                [5,'Trash','Board'],
+            ],
+        },{
+            name:'Cheese Apple Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [0,'Nuts','Full Board'],
+                [5,'Trash','Board'],
+            ],
+        },{
+            name:'Cheese Nut Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [0,'Chopped Apple','Full Board'],
+                [5,'Trash','Board'],
+            ],
+        },{
+            name:'Apple Nut Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [0,'Cheese','Full Board'],
+                [5,'Trash','Board'],
+            ],
+        },{
+            name:'Full Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:false,
+            process:[
+                [7,180,'Board'],
+                [5,'Trash','Board'],
+            ],
+        },{
+            name:'Food Board',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Board'],
+            ],
         },
         //mark
     ],dish:[
@@ -11174,6 +11648,15 @@ types={
                 ['Plated Crab Cake',6],
             ],
             desc:'Chop crab, combined with cracked egg and flour.\nCook and serve.',
+        },{
+            name:'Lobster',
+            group:'Lobster',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated Lobster',6],
+            ],
+            desc:'Boil lobster in water and serve.\nLeaves behind a shell.',
         },
 
         {
@@ -11252,6 +11735,32 @@ types={
                 ['Plated Well Done Thick Steak With Tomato','Plated Well Done Thick Steak With Tomato and Wine Jus',7],
             ],
             desc:'Boil water with onion to make broth.\nAdd wine to broth and cook again.\nPortion wine jus and addd to plated steak.',
+        },{
+            name:'Garlic Butter Steak',
+            group:'Steak',
+            list:0,
+            value:'+2',
+            obj:[
+                ['Plated Rare Steak With Garlic Butter',6],
+                ['Plated Medium Steak With Garlic Butter',6],
+                ['Plated Well Done Steak With Garlic Butter',6],
+                ['Plated Rare Bone Steak','Plated Rare Bone Steak With Garlic Butter',7],
+                ['Plated Medium Bone Steak','Plated Medium Bone Steak With Garlic Butter',7],
+                ['Plated Well Done Bone Steak','Plated Well Done Bone Steak With Garlic Butter',7],
+                ['Plated Rare Thick Steak','Plated Rare Thick Steak With Garlic Butter',7],
+                ['Plated Medium Thick Steak','Plated Medium Thick Steak With Garlic Butter',7],
+                ['Plated Well Done Thick Steak','Plated Well Done Thick Steak With Garlic Butter',7],
+                ['Plated Rare Steak With Tomato','Plated Rare Steak With Tomato and Garlic Butter',7],
+                ['Plated Medium Steak With Tomato','Plated Medium Steak With Tomato and Garlic Butter',7],
+                ['Plated Well Done Steak With Tomato','Plated Well Done Steak With Tomato and Garlic Butter',7],
+                ['Plated Rare Bone Steak With Tomato','Plated Rare Bone Steak With Tomato and Garlic Butter',8],
+                ['Plated Medium Bone Steak With Tomato','Plated Medium Bone Steak With Tomato and Garlic Butter',8],
+                ['Plated Well Done Bone Steak With Tomato','Plated Well Done Bone Steak With Tomato and Garlic Butter',8],
+                ['Plated Rare Thick Steak With Tomato','Plated Rare Thick Steak With Tomato and Garlic Butter',8],
+                ['Plated Medium Thick Steak With Tomato','Plated Medium Thick Steak With Tomato and Garlic Butter',8],
+                ['Plated Well Done Thick Steak With Tomato','Plated Well Done Thick Steak With Tomato and Garlic Butter',8],
+            ],
+            desc:'Mix butter to soften it.\nAdd chopped garlic to softened butter.\nAdd to plated steak.',
         },
 
         {
@@ -11367,6 +11876,15 @@ types={
                 ['Plated Grilled Cheese',7],
             ],
             desc:'Stack bread slice, chopped cheese, butter, and another bread slice.\nCook, plate, and serve.',
+        },{
+            name:'Club Sandwich',
+            group:'Toast',
+            list:0,
+            value:'7',
+            obj:[
+                ['Plated Grilled Cheese',7],
+            ],
+            desc:'Toast two slices of bread.\n',
         },
 
         {
@@ -12132,6 +12650,15 @@ types={
                 ['Zeppole',2],
             ],
             desc:'Add water to flour to make dough.\nAdd sugar and cook.\nAdd sugar again and serve.',
+        },{
+            name:'Cheese Board',
+            group:'Cheese Board',
+            list:3,
+            value:'2',
+            obj:[
+                ['Full Board',2],
+            ],
+            desc:'Combine cheese, nuts, and chopped apple on a board and serve.',
         },
     ],card:[
         /*
@@ -12346,6 +12873,16 @@ types={
             wall:['Crabs','Eggs','Flour'],
             desc:'Combine chopped crab, egg, and flour',
         },{
+            name:'Lobster',
+            dish:['Lobster'],
+            list:1,
+            rate:[2,'5'],
+            customerMult:0.8,
+            prereq:['Fish'],
+            mutex:[],
+            wall:['Lobster','Pots'],
+            desc:'Must be boiled alive and leaves a shell to throw away',
+        },{
             name:'Bone Steak',
             dish:['Bone Steak'],
             list:1,
@@ -12385,6 +12922,16 @@ types={
             mutex:[],
             wall:['Pots','Onions','Wine','Starter Hob'],
             desc:'Adds wine jus as a steak topping',
+        },{
+            name:'Garlic Butter Steak',
+            dish:['Garlic Butter Steak'],
+            list:1,
+            rate:[1,'+2'],
+            customerMult:0.8,
+            prereq:['Steak'],
+            mutex:[],
+            wall:['Garlic','Butter'],
+            desc:'Adds garlic butter as a steak topping',
         },{
             name:'Onion Salad',
             dish:['Onion Salad'],
@@ -13151,6 +13698,16 @@ types={
             mutex:[],
             wall:['Oven','Flour','Sugar'],
             desc:'Adds zeppole as a dessert',
+        },{
+            name:'Cheese Board',
+            dish:['Cheese Board'],
+            list:4,
+            rate:[1,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Boards','Cheese','Apples','Nuts'],
+            desc:'Adds cheese board as a dessert',
         },
         
         {
@@ -13223,6 +13780,13 @@ types={
             prereq:[],
             mutex:[],
             desc:'Customers may order a course twice',
+        },{
+            name:'Buffet',
+            list:5,
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            desc:'Customers may order a course any number of times',
         },{
             name:'Discount',
             list:5,
@@ -13300,6 +13864,20 @@ types={
             prereq:[],
             mutex:[],
             desc:'More customers come at random times',
+        },{
+            name:'Lethargy',
+            list:5,
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            desc:'Customers move 50% slower',
+        },{
+            name:'QR Code Menus',
+            list:5,
+            customerMult:1,
+            prereq:[],
+            mutex:[],
+            desc:'Customers randomly spend extra time deciding on their order',
         },
 
         {
@@ -13416,4 +13994,11 @@ types={
             },
         ],
     },
+}
+dev={
+    bound:false,customerMult:1,overlap:true,first:false,emergencyKey:false,zeroKey:false,
+    test:[],
+    display:[
+        //...types.item.slice(types.item.findIndex(item=>item.name=='Board')).map(item=>item.name)
+    ]
 }

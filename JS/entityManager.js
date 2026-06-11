@@ -135,6 +135,9 @@ class entityManager extends manager{
                 this.grid[a].push(0)
             }
         }
+        if(dev.display.length>0){
+            level.wall.push([1,1,'Displayer',0],)
+        }
         for(let a=0,la=level.wall.length;a<la;a++){
             this.grid[level.wall[a][1]][level.wall[a][0]]=1
             let type=findName(level.wall[a][2],types.wall)
