@@ -4390,6 +4390,8 @@ types={
                 [0,'Chopped Onion','Chopped Onion in Broth'],
                 [0,'Deboned Chicken','Chicken in Broth'],
                 [0,'Uncooked Noodles','Noodles in Broth'],
+                [0,'Chopped Pumpkin','Raw Pumpkin Soup'],
+                [0,'Bone','Bone in Broth'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -8928,9 +8930,7 @@ types={
             component:false,
             trashable:false,
             process:[],
-        },
-
-        {
+        },{
             name:'Chopped Onion in Broth',
             holdDist:20,
             holdDir:0,
@@ -8939,6 +8939,7 @@ types={
             process:[
                 [0,'Cheese','Raw French Onion Soup'],
                 [0,'Chopped Cheese','Raw Chopped French Onion Soup'],
+                [0,'Bone','Raw Bone Soup'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -9500,6 +9501,7 @@ types={
             trashable:true,
             process:[
                 [0,'Plate','Plated Chicken Nugget'],
+                [0,'Burger Bun','Chicken Burger'],
             ],
         },{
             name:'Stir Fry n',
@@ -9918,6 +9920,7 @@ types={
                 [0,'Chicken Nugget','Plated 2 Chicken Nugget'],
                 [0,'Buffalo Sauce','Plated Buffalo Chicken Nugget'],
                 [0,'Lemon Pepper Sauce','Plated Lemon Pepper Chicken Nugget'],
+                [0,'Burger Bun','Plated Chicken Burger'],
             ],
         },{
             name:'Plated 2 Chicken Nugget',
@@ -10644,6 +10647,7 @@ types={
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
                 [0,'Unbunned Burger','Plated Burger'],
+                [0,'Chicken Nugget','Plated Chicken Burger'],
                 [0,'Chopped Tomato','Plated Tomato Bun'],
             ],
         },{
@@ -10992,6 +10996,7 @@ types={
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
                 [0,'Unbunned Burger','Plated Tomato Burger'],
+                [0,'Chicken Nugget','Plated Tomato Chicken Burger'],
             ],
         },{
             name:'Pumpkin',
@@ -11602,6 +11607,119 @@ types={
             process:[
                 [5,'Trash','Board'],
             ],
+        },{
+            name:'Chicken Burger',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Chicken Burger'],
+                [0,'Chopped Tomato','Tomato Chicken Burger'],
+                [0,'Plated Tomato','Plated Tomato Chicken Burger'],
+            ],
+        },{
+            name:'Plated Chicken Burger',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Tomato','Plated Tomato Chicken Burger'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Tomato Chicken Burger',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Tomato Chicken Burger'],
+            ],
+        },{
+            name:'Plated Tomato Chicken Burger',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Raw Pumpkin Soup',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,360,'Pumpkin Soup Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Pumpkin Soup Pot',
+            portions:4,
+            replace:true,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [6,60,'Pumpkin Soup','Spent Broth'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Pumpkin Soup',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
+        },{
+            name:'Bone in Broth',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Chopped Onion','Raw Bone Soup'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Raw Bone Soup',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,900,'Bone Soup Pot'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Bone Soup Pot',
+            portions:4,
+            replace:true,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [6,60,'Bone Soup','Spent Broth'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Bone Soup',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
         },
         //mark
     ],dish:[
@@ -11837,6 +11955,16 @@ types={
             value:'0',
             obj:[],
             desc:'Chop meat, crack egg, combine.\nContinue with making burger.',
+        },{
+            name:'Chicken Burger',
+            group:'Chicken Burger',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated Chicken Burger',6],
+                ['Plated Tomato Burger',`Plated Tomato Chicken Burger`,7],
+            ],
+            desc:'Portion bone from chicken and discard, then add flour.\nAdd oil and breaded deboned chicken to pot.\nCook and portion chicken out, then add to burger bun and serve.',
         },
 
         {
@@ -12398,6 +12526,24 @@ types={
             ],
             desc:'Boil water with soybeans, then cut to make tofu.\nAdd water again and miso and cook again.\nPortion and serve.',
         },{
+            name:'Pumpkin Soup',
+            group:'Pumpkin Soup',
+            list:1,
+            value:'2',
+            obj:[
+                ['Pumpkin Soup',2],
+            ],
+            desc:'Boil water with onion to make broth.\nRemove seeds from pumpkin and throw away.\nChop pumpkin, add to broth, and cook again.\nPortion and serve.',
+        },{
+            name:'Bone Soup',
+            group:'Bone Soup',
+            list:1,
+            value:'2',
+            obj:[
+                ['Bone Soup',2],
+            ],
+            desc:'Boil water with onion to make broth.\nPortion bone from chicken, discard the rest.\nAdd chopped onion and bone to broth and cook again.\nPortion and serve.',
+        },{
             name:'Bread',
             group:'Bread',
             list:1,
@@ -12433,24 +12579,6 @@ types={
                 ['Croissant',2],
             ],
             desc:'Add water to flour to make dough.\nAdd butter and knead to make a croissant.\nCook and serve.',
-        },{
-            name:'Spring Roll',
-            group:'Spring Roll',
-            list:1,
-            value:'1',
-            obj:[
-                ['Spring Roll',1],
-            ],
-            desc:'Add water to flour to make dough.\nAdd chopped lettuce and onions.\nKnead into rolls and cook.\nPortions and serve.',
-        },{
-            name:'Roasted Pumpkin Seeds',
-            group:'Roasted Pumpkin Seeds',
-            list:1,
-            value:'2',
-            obj:[
-                ['Roasted Pumpkin Seeds',2],
-            ],
-            desc:'Portion seeds from pumpkin, roast and serve.\nDiscard remaining pumpkin.',
         },
 
         {
@@ -12543,6 +12671,24 @@ types={
                 ['Applesauce',1],
             ],
             desc:'Chop apple twice and serve.',
+        },{
+            name:'Spring Roll',
+            group:'Spring Roll',
+            list:2,
+            value:'1',
+            obj:[
+                ['Spring Roll',1],
+            ],
+            desc:'Add water to flour to make dough.\nAdd chopped lettuce and onions.\nKnead into rolls and cook.\nPortions and serve.',
+        },{
+            name:'Roasted Pumpkin Seeds',
+            group:'Roasted Pumpkin Seeds',
+            list:2,
+            value:'2',
+            obj:[
+                ['Roasted Pumpkin Seeds',2],
+            ],
+            desc:'Portion seeds from pumpkin, roast and serve.\nDiscard remaining pumpkin.',
         },
 
         {
@@ -12882,7 +13028,9 @@ types={
             mutex:[],
             wall:['Lobster','Pots'],
             desc:'Must be boiled alive and leaves a shell to throw away',
-        },{
+        },
+        
+        {
             name:'Bone Steak',
             dish:['Bone Steak'],
             list:1,
@@ -12932,7 +13080,9 @@ types={
             mutex:[],
             wall:['Garlic','Butter'],
             desc:'Adds garlic butter as a steak topping',
-        },{
+        },
+        
+        {
             name:'Onion Salad',
             dish:['Onion Salad'],
             list:1,
@@ -12972,7 +13122,9 @@ types={
             mutex:[],
             wall:['Garlic','Flour','Oven'],
             desc:'Consists of lettuce, garlic, and breadcrumbs',
-        },{
+        },
+        
+        {
             name:'Tomato Burgers',
             dish:['Tomato Burger'],
             list:1,
@@ -12993,6 +13145,18 @@ types={
             wall:['Meat','Eggs','-Patties'],
             desc:'Make patties yourself',
         },{
+            name:'Chicken Burgers',
+            dish:['Chicken Burger'],
+            list:1,
+            rate:[3,'6'],
+            customerMult:0.8,
+            prereq:['Burgers'],
+            mutex:[],
+            wall:['Chicken','Pots','Flour','Oil'],
+            desc:'Burgers with fried chicken patties',
+        },
+        
+        {
             name:'Egg Toast',
             dish:['Egg Toast'],
             list:1,
@@ -13022,7 +13186,9 @@ types={
             mutex:[],
             wall:['Cheese','Butter'],
             desc:'Adds grilled cheese sandwiches as a main dish',
-        },{
+        },
+        
+        {
             name:'Onion Pizza',
             dish:['Onion Pizza'],
             list:1,
@@ -13072,7 +13238,9 @@ types={
             mutex:[],
             wall:['Eggs'],
             desc:'Like a pizza, but also kinda like a pie',
-        },{
+        },
+        
+        {
             name:'Vegetable Pies',
             dish:['Vegetable Pie'],
             list:1,
@@ -13082,7 +13250,9 @@ types={
             mutex:[],
             wall:['Broccoli','Potatoes'],
             desc:'Pies containing broccoli and potatoes',
-        },{
+        },
+        
+        {
             name:'Affogato',
             dish:['Affogato'],
             list:1,
@@ -13112,7 +13282,9 @@ types={
             mutex:[],
             wall:['Cupcake Stand'],
             desc:'Customers may request cupcakes after receiving coffee',
-        },{
+        },
+        
+        {
             name:'Lemon Nut Roast',
             dish:['Lemon Nut Roast'],
             list:1,
@@ -13132,7 +13304,9 @@ types={
             mutex:[],
             wall:['Flour','Onions'],
             desc:'Adds stuffing as a nut roast topping',
-        },{
+        },
+        
+        {
             name:'Mustard',
             dish:['Mustard'],
             list:1,
@@ -13162,7 +13336,9 @@ types={
             mutex:[],
             wall:['Pots','Tomatoes','Peppers','Onions'],
             desc:'Adds chili as a hot dog topping',
-        },{
+        },
+        
+        {
             name:'Butter Waffles',
             dish:['Butter Waffle'],
             list:1,
@@ -13182,7 +13358,9 @@ types={
             mutex:[],
             wall:['Cherries'],
             desc:'Adds cherry sauce as a waffle topping',
-        },{
+        },
+        
+        {
             name:'Bolognese Spaghetti',
             dish:['Bolognese Spaghetti'],
             list:1,
@@ -13222,7 +13400,9 @@ types={
             mutex:[],
             wall:['Onions','Bonito'],
             desc:'Noodles served inside soup',
-        },{
+        },
+        
+        {
             name:'Coffee Cake',
             dish:['Coffee Cake'],
             list:1,
@@ -13282,7 +13462,9 @@ types={
             mutex:[],
             wall:['Tray'],
             desc:'Pre-flavor cake with chocolate',
-        },{
+        },
+        
+        {
             name:'Steak Stir Fry',
             dish:['Steak Stir Fry'],
             list:1,
@@ -13312,7 +13494,9 @@ types={
             mutex:[],
             wall:['Noodles'],
             desc:'Adds noodles as a stir fry base',
-        },{
+        },
+        
+        {
             name:'Chicken Nuggets',
             dish:['Chicken Nuggets'],
             list:1,
@@ -13342,7 +13526,9 @@ types={
             mutex:[],
             wall:['Starter Hob','Lemons'],
             desc:'Adds lemon pepper sauce as a chicken topping',
-        },{
+        },
+        
+        {
             name:'Soup Dumplings',
             dish:['Soup Dumplings'],
             list:1,
@@ -13425,6 +13611,26 @@ types={
             wall:['Starter Hob','Pots','Miso','Soybeans','Starter Sink'],
             desc:'Adds miso soup as a starter',
         },{
+            name:'Pumpkin Soup',
+            dish:['Pumpkin Soup'],
+            list:2,
+            rate:[1,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Pots','Onions','Pumpkins','Starter Sink'],
+            desc:'Adds pumpkin soup as a starter',
+        },{
+            name:'Bone Soup',
+            dish:['Bone Soup'],
+            list:2,
+            rate:[1,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Pots','Onions','Chicken','Starter Sink'],
+            desc:'Adds bone soup as a starter',
+        },{
             name:'Bread',
             dish:['Bread'],
             list:2,
@@ -13464,26 +13670,6 @@ types={
             mutex:[],
             wall:['Flour','Butter','Oven','Starter Sink'],
             desc:'Adds croissant as a starter',
-        },{
-            name:'Spring Rolls',
-            dish:['Spring Roll'],
-            list:2,
-            rate:[2,'1'],
-            customerMult:0.8,
-            prereq:[],
-            mutex:[],
-            wall:['Starter Hob','Flour','Lettuce','Onions','Starter Sink'],
-            desc:'Adds spring rolls as a starter',
-        },{
-            name:'Pumpkin Seeds',
-            dish:['Roasted Pumpkin Seeds'],
-            list:2,
-            rate:[2,'2'],
-            customerMult:0.8,
-            prereq:[],
-            mutex:[],
-            wall:['Starter Hob','Pumpkins'],
-            desc:'Adds roasted pumpkin seeds as a starter',
         },
 
         {
@@ -13586,6 +13772,26 @@ types={
             mutex:[],
             wall:['Apples'],
             desc:'Adds applesauce as a side',
+        },{
+            name:'Spring Rolls',
+            dish:['Spring Roll'],
+            list:3,
+            rate:[2,'1'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Flour','Lettuce','Onions','Starter Sink'],
+            desc:'Adds spring rolls as a starter',
+        },{
+            name:'Pumpkin Seeds',
+            dish:['Roasted Pumpkin Seeds'],
+            list:3,
+            rate:[2,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Starter Hob','Pumpkins'],
+            desc:'Adds roasted pumpkin seeds as a starter',
         },
 
         {
@@ -13999,6 +14205,6 @@ dev={
     bound:false,customerMult:1,overlap:true,first:false,emergencyKey:false,zeroKey:false,
     test:[],
     display:[
-        //...types.item.slice(types.item.findIndex(item=>item.name=='Board')).map(item=>item.name)
+        //...types.item.slice(types.item.findIndex(item=>item.name=='Bone in Broth')).map(item=>item.name)
     ]
 }
