@@ -363,7 +363,7 @@ class player extends partisan{
                 if(this.id==-1&&this.side!=-1){
                     layer.push()
                     layer.rotate(-this.direction.main)
-                    layer.translate(6,this.item.holdDist+6)
+                    layer.translate(6,this.side.holdDist+6)
                     layer.rotate(this.side.holdDir+180)
                     this.side.display(0)
                     layer.pop()

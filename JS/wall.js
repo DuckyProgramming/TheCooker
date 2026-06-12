@@ -400,7 +400,7 @@ class wall extends partisan{
             case 'Fish': case 'Meat': case 'Lettuce': case 'Tomatoes': case 'Cheese': case 'Onions': case 'Nuts': case 'Hot Dogs': case 'Hot Dog Buns': case 'Noodles':
             case 'Eggs': case 'Chocolate': case 'Milk': case 'Fish Fillet': case 'Spiny Fish': case 'Crabs': case 'Bone Meat': case 'Thick Meat': case 'Apples': case 'Garlic':
             case 'Broccoli': case 'Butter': case 'Pasta Sheet': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Macaroni': case 'Cinnamon': case 'Peppers': case 'Chicken':
-            case 'Mozzarella': case 'Basil': case 'Patties': case 'Burger Buns': case 'Pumpkins': case 'Lobster':
+            case 'Mozzarella': case 'Basil': case 'Patties': case 'Burger Buns': case 'Pumpkins': case 'Lobster': case 'Bacon':
                 this.displayItem=this.generateItem(this.provide)
             break
             case 'Coffee Machine':
@@ -2039,7 +2039,7 @@ class wall extends partisan{
                         this.displayItem.fade.main=this.fade.main
                         this.displayItem.display(0)
                     break
-                    case 'Meat': case 'Hot Dogs': case 'Milk': case 'Bone Meat': case 'Thick Meat': case 'Chicken': case 'Patties':
+                    case 'Meat': case 'Hot Dogs': case 'Milk': case 'Bone Meat': case 'Thick Meat': case 'Chicken': case 'Patties': case 'Bacon':
                         layer.fill(220,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height)
                         layer.fill(180,180,200,this.fade.main)
@@ -2947,7 +2947,7 @@ class wall extends partisan{
                                             break
                                             case 'Waffle Iron':
                                                 if(obj.cycle==0){
-                                                    if(obj.item==-1&&(this.item.name=='Batter'||this.item.name=='Chopped Potato')){
+                                                    if(obj.item==-1&&(this.item.name=='Batter'||this.item.name=='Chopped Potato'||this.item.name=='Mochi')){
                                                         this.anim++
                                                         if(this.anim>=48){
                                                             this.anim=0
@@ -3790,14 +3790,14 @@ class wall extends partisan{
                                     break
                                     case 'Waffle Iron':
                                         if(obj.cycle==0){
-                                            if(this.item==-1&&obj.item!=-1&&obj.item.name!='Batter'&&obj.item.name!='Chopped Potato'){
+                                            if(this.item==-1&&obj.item!=-1&&obj.item.name!='Batter'&&obj.item.name!='Chopped Potato'&&obj.item.name!='Mochi'){
                                                 this.activating++
                                                 if(this.activating>12){
                                                     this.activating=0
                                                     this.anim=0
                                                     obj.grabEffect(this)
                                                 }
-                                            }else if(this.item!=-1&&obj.item==-1&&(this.item.name=='Batter'||this.item.name=='Chopped Potato')){
+                                            }else if(this.item!=-1&&obj.item==-1&&(this.item.name=='Batter'||this.item.name=='Chopped Potato'||this.item.name=='Mochi')){
                                                 this.anim++
                                                 if(this.anim>=96){
                                                     this.anim=48
@@ -4831,7 +4831,7 @@ class wall extends partisan{
                                             this.item=-1
                                             return true
                                         }
-                                    }else if(this.item==-1&&(player.item.name=='Batter'||player.item.name=='Chopped Potato')){
+                                    }else if(this.item==-1&&(player.item.name=='Batter'||player.item.name=='Chopped Potato'||player.item.name=='Mochi')){
                                         this.item=player.item
                                         player.item=-1
                                         return true
