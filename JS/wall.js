@@ -400,7 +400,7 @@ class wall extends partisan{
             case 'Fish': case 'Meat': case 'Lettuce': case 'Tomatoes': case 'Cheese': case 'Onions': case 'Nuts': case 'Hot Dogs': case 'Hot Dog Buns': case 'Noodles':
             case 'Eggs': case 'Chocolate': case 'Milk': case 'Fish Fillet': case 'Spiny Fish': case 'Crabs': case 'Bone Meat': case 'Thick Meat': case 'Apples': case 'Garlic':
             case 'Broccoli': case 'Butter': case 'Pasta Sheet': case 'Cherries': case 'Lemons': case 'Soybeans': case 'Macaroni': case 'Cinnamon': case 'Peppers': case 'Chicken':
-            case 'Mozzarella': case 'Basil': case 'Patties': case 'Burger Buns': case 'Pumpkins': case 'Lobster': case 'Bacon':
+            case 'Mozzarella': case 'Basil': case 'Patties': case 'Burger Buns': case 'Pumpkins': case 'Lobster': case 'Bacon': case 'Pickles':
                 this.displayItem=this.generateItem(this.provide)
             break
             case 'Coffee Machine':
@@ -2085,7 +2085,7 @@ class wall extends partisan{
                         layer.fill(220,120,60,this.fade.main)
                         layer.rect(0,0,4,4,1.5)
                     break
-                    case 'Cheese': case 'Chocolate': case 'Butter':
+                    case 'Cheese': case 'Chocolate': case 'Butter': case 'Pickles':
                         layer.fill(220,this.fade.main)
                         layer.rect(0,0,this.base.width,this.base.height,4)
                         layer.fill(180,this.fade.main)
@@ -4174,7 +4174,7 @@ class wall extends partisan{
                         return inPointBox(obj,{position:this.position,width:this.width+8,height:this.height+8})
                     case 'Teleporter':
                     case 'Blueprint Cabinet': case 'Upgrade Cabinet': case 'Discount Cabinet': case 'Generator Cabinet': case 'Copy Cabinet':
-                    case 'Cheese': case 'Butter': case 'Macaroni': case 'Chocolate': case 'Noodles': case 'Pasta Sheet': case 'Cinnamon': case 'Mozzarella':
+                    case 'Cheese': case 'Butter': case 'Macaroni': case 'Chocolate': case 'Noodles': case 'Pasta Sheet': case 'Cinnamon': case 'Mozzarella': case 'Pickles':
                         return inPointBox(obj,{position:this.position,width:this.width+2,height:this.height+2})
                     case 'High Wall': case 'Wall':
                         return inPointBox(obj,{position:this.position,width:max(this.width,this.width*0.5+this.height*0.5),height:max(this.width*0.5+this.height*0.5,this.height)})

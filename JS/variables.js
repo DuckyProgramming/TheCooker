@@ -4151,6 +4151,19 @@ types={
             prereq:[0],
             desc:'Provides Bacon',
             upgrade:[],
+        },{
+            name:'Pickles',
+            blueprint:['Pickles',7.5],
+            width:30,
+            height:30,
+            spec:[1],provide:'Pickle',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Pickles',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -4427,6 +4440,8 @@ types={
             process:[
                 [1,120,'Cooked Mince'],
                 [0,'Cracked Egg','Patty'],
+                [0,'Flour','Breaded Meat'],
+                [0,'Breadcrumbs','Crumbed Meat'],
             ],
         },{
             name:'Burnt',
@@ -4728,6 +4743,10 @@ types={
                 [0,'Chopped Garlic','Garlic on Bread'],
                 [0,'Chopped Cheese','Cheese on Bread'],
                 [0,'Butter','Butter on Bread'],
+                [0,'Chopped Meat','Meat on Bread'],
+                [0,'Chopped Lettuce','Lettuce on Bread'],
+                [0,'Chopped Tomato','Tomato on Bread'],
+                [0,'Cooked Bacon','Bacon on Bread'],
                 [0,'Oil','Oil on Bread'],
                 [0,'Chopped Tomato','Tomato on Bread'],
                 [1,90,'Toast'],
@@ -4805,6 +4824,7 @@ types={
             trashable:true,
             process:[
                 [0,'Chopped Garlic','Raw Garlic Bread'],
+                [0,'Chopped Meat','Cheese Meat Bread'],
                 [0,'Butter','Cheese Butter Bread'],
             ],
         },{
@@ -7789,6 +7809,7 @@ types={
             component:true,
             trashable:true,
             process:[
+                [0,'Fried Egg','Egg Ramen'],
                 [7,180,''],
             ],
         },{
@@ -9012,7 +9033,7 @@ types={
                 [0,'Chopped Tomato','Bruschetta'],
                 [7,180,''],
             ],
-        },{
+        },/*{
             name:'Tomato on Bread',
             holdDist:20,
             holdDir:0,
@@ -9022,7 +9043,7 @@ types={
                 [0,'Oil','Bruschetta'],
                 [7,180,''],
             ],
-        },{
+        },*/{
             name:'Bruschetta',
             holdDist:20,
             holdDir:0,
@@ -9942,7 +9963,7 @@ types={
                 [0,'Chicken Nugget','Plated 2 Chicken Nugget'],
                 [0,'Buffalo Sauce','Plated Buffalo Chicken Nugget'],
                 [0,'Lemon Pepper Sauce','Plated Lemon Pepper Chicken Nugget'],
-                [0,'Cherry Glaze Sauce','Plated Cherry Glaze Chicken Nugget'],
+                [0,'Cherry Glaze','Plated Cherry Glaze Chicken Nugget'],
                 [0,'Burger Bun','Plated Chicken Burger'],
             ],
         },{
@@ -9956,7 +9977,7 @@ types={
                 [7,180,'2 Bone Plate'],
                 [0,'Buffalo Sauce','Plated 2 Buffalo Chicken Nugget'],
                 [0,'Lemon Pepper Sauce','Plated 2 Lemon Pepper Chicken Nugget'],
-                [0,'Cherry Glaze Sauce','Plated 2 Cherry Glaze Chicken Nugget'],
+                [0,'Cherry Glaze','Plated 2 Cherry Glaze Chicken Nugget'],
             ],
         },{
             name:'Plated Buffalo Chicken Nugget',
@@ -11796,7 +11817,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [6,60,'Cooked Bacon',`Pan`],
+                [6,30,'Cooked Bacon',`Pan`],
                 [9,60,'Burnt Pan'],
                 [5,'Trash','Pan'],
             ],
@@ -11906,7 +11927,7 @@ types={
             component:false,
             trashable:true,
             process:[
-                [1,240,'Mochi Pot'],
+                [1,450,'Mochi Pot'],
                 [5,'Trash','Pot'],
             ],
         },{
@@ -11950,6 +11971,292 @@ types={
             ],
         },{
             name:'Plated Moffle',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Meat on Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Chopped Cheese','Cheese Meat Bread'],
+                [0,'Cheese on Bread','Cheese Meat Sandwich'],
+            ],
+        },{
+            name:'Cheese Meat Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Bread Slice','Cheese Meat Sandwich'],
+            ],
+        },{
+            name:'Cheese Meat Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Cracked Egg','Raw Croque Madame'],
+            ],
+        },{
+            name:'Raw Croque Madame',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [1,270,'Croque Madame'],
+            ],
+        },{
+            name:'Croque Madame',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Croque Madame'],
+                [9,240,'Burnt'],
+            ],
+        },{
+            name:'Plated Croque Madame',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Lettuce on Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Chopped Tomato','Lettuce Tomato Bread'],
+                [0,'Cooked Bacon','Lettuce Bacon Bread'],
+                [0,'Tomato on Bread','Sandwich'],
+                [0,'Tomato Bacon Bread','Bacon Sandwich'],
+            ],
+        },{
+            name:'Tomato on Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Oil','Bruschetta'],
+                [0,'Cooked Bacon','Tomato Bacon Bread'],
+                [0,'Lettuce Bacon Bread','Bacon Sandwich'],
+            ],
+        },{
+            name:'Bacon on Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Lettuce Tomato Bread','Bacon Sandwich'],
+            ],
+        },{
+            name:'Lettuce Tomato Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Bread Slice','Sandwich'],
+                [0,'Bacon on Bread','Bacon Sandwich'],
+            ],
+        },{
+            name:'Lettuce Bacon Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Tomato on Bread','Bacon Sandwich'],
+            ],
+        },{
+            name:'Tomato Bacon Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Lettuce on Bread','Bacon Sandwich'],
+            ],
+        },{
+            name:'Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Pickle','Pickle Sandwich'],
+                [0,'Cooked Bacon','Bacon Sandwich'],
+                [0,'Plate','Plated Sandwich'],
+            ],
+        },{
+            name:'Plated Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Pickle','Plated Pickle Sandwich'],
+                [0,'Cooked Bacon','Plated Bacon Sandwich'],
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Bacon Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Pickle','Pickle Bacon Sandwich'],
+                [0,'Plate','Plated Bacon Sandwich'],
+            ],
+        },{
+            name:'Plated Bacon Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Pickle','Plated Pickle Bacon Sandwich'],
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Pickle',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Pickle Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Cooked Bacon','Pickle Bacon Sandwich'],
+                [0,'Plate','Plated Pickle Sandwich'],
+            ],
+        },{
+            name:'Plated Pickle Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Cooked Bacon','Plated Pickle Bacon Sandwich'],
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Pickle Bacon Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Pickle Bacon Sandwich'],
+            ],
+        },{
+            name:'Plated Pickle Bacon Sandwich',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Egg Ramen',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
+        },{
+            name:'Breaded Meat',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Breadcrumbs','Breadcrumbed Meat'],
+            ],
+        },{
+            name:'Crumbed Meat',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Flour','Breadcrumbed Meat'],
+            ],
+        },{
+            name:'Breadcrumbed Meat',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Pan','Raw Schnitzel Pan'],
+            ],
+        },{
+            name:'Raw Schnitzel Pan',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,180,'Schnitzel Pan'],
+                [5,'Trash','Pot'],
+            ],
+        },{
+            name:'Schnitzel Pan',
+            portions:1,
+            replace:true,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [6,60,'Cooked Schnitzel',`Pan`],
+                [9,120,'Burnt Pan'],
+                [5,'Trash','Pan'],
+            ],
+        },{
+            name:'Cooked Schnitzel',
+            holdDist:18,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Schnitzel'],
+            ],
+        },{
+            name:'Plated Schnitzel',
             holdDist:20,
             holdDir:0,
             component:false,
@@ -12244,13 +12551,22 @@ types={
             desc:'Add chopped garlic and chopped cheese to bread slice.\nCook and serve.',
         },{
             name:'Grilled Cheese',
-            group:'Toast',
+            group:'Sandwich',
             list:0,
             value:'7',
             obj:[
                 ['Plated Grilled Cheese',7],
             ],
             desc:'Stack bread slice, chopped cheese, butter, and another bread slice.\nCook, plate, and serve.',
+        },{
+            name:'Croque Madame',
+            group:'Sandwich',
+            list:0,
+            value:'8',
+            obj:[
+                ['Plated Croque Madame',8],
+            ],
+            desc:'Stack bread slice, chopped cheese, chopped meat, another bread slice, and a cracked egg.\nCook, plate, and serve.',
         },
 
         {
@@ -12528,6 +12844,15 @@ types={
                 ['Ramen',6],
             ],
             desc:'Boil water with onion to make broth.\nAdd bonito to broth and cook again.\nPortion soup and add noodles to make ramen, then serve.',
+        },{
+            name:'Egg Ramen',
+            group:'Spaghetti',
+            list:0,
+            value:'+1',
+            obj:[
+                ['Egg Ramen',7],
+            ],
+            desc:'Crack egg and cook to make fried egg.\nAdd to ramen bowl and serve.',
         },
 
         {
@@ -12650,7 +12975,7 @@ types={
 
         {
             name:'Fried Chicken',
-            group:'Fried Chicken',
+            group:'Chicken',
             list:0,
             value:'6',
             obj:[
@@ -12696,6 +13021,15 @@ types={
                 ['Plated 2 Chicken Nugget','Plated 2 Cherry Glaze Chicken Nugget',9],
             ],
             desc:'Combine chopped cherry and sugar.\nAdd to plate with chicken.',
+        },{
+            name:'Schnitzel',
+            group:'Chicken',
+            list:0,
+            value:'8',
+            obj:[
+                ['Plated Schnitzel',8],
+            ],
+            desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slice.\nToast bread and cut to make breadcrumbs.\nCombine chopped meat, breadcrumbs, and flour in a pan then cook to make Schnitzel.\nPortion from the pan, plate and serve.',
         },
 
         {
@@ -12726,6 +13060,36 @@ types={
                 ['Plated Soup Dumplings','Plated Chili Oil Soup Dumplings',8],
             ],
             desc:'Chop pepper and add to oil to make sauce.\nAdd sauce to plated dumplings.',
+        },
+
+        {
+            name:'Sandwich',
+            group:'Sandwich',
+            list:0,
+            value:'5',
+            obj:[
+                ['Plated Sandwich',5],
+            ],
+            desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slices.\nStack bread slice, chopped lettuce, chopped tomato, and another bread slice.\nPlate and serve.',
+        },{
+            name:'Bacon Sandwich',
+            group:'Sandwich',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated Bacon Sandwich',6],
+            ],
+            desc:'Cook bacon in pan.\nPortion from pan and serve.\nAdd bacon to sandwich, then plate and serve.',
+        },{
+            name:'Pickle Sandwich',
+            group:'Sandwich',
+            list:0,
+            value:'+1',
+            obj:[
+                ['Plated Pickle Sandwich',6],
+                ['Plated Bacon Sandwich','Plated Pickle Bacon Sandwich',7],
+            ],
+            desc:'Take pickle and add to completed sandwich',
         },
         
         {
@@ -13261,6 +13625,16 @@ types={
             mutex:[],
             wall:['Starter Hob','Starter Hob','Flour','Meat','Onions','Starter Sink','Starter Plates'],
             desc:'Adds dumplings as a main dish',
+        },{
+            name:'Sandwiches',
+            dish:['Sandwich'],
+            list:0,
+            rate:[2,'5'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Flour','Oven','Starter Sink','Lettuce','Tomatoes','Starter Plates'],
+            desc:'Adds sandwiches as a main dish',
         },
 
         {
@@ -13460,17 +13834,27 @@ types={
             prereq:[],
             mutex:[],
             wall:['Cheese','Garlic'],
-            desc:'Adds garlic bread as a starter',
+            desc:'Toast with cheese and garlic on it',
         },{
-            name:'Grilled Cheese',
+            name:'Grilled Cheese Sandwiches',
             dish:['Grilled Cheese'],
-            list:1,
-            rate:[3,'7'],
-            customerMult:0.64,
-            prereq:['Toast'],
+            list:0,
+            rate:[2,'7'],
+            customerMult:0.8,
+            prereq:[`Toast`],
             mutex:[],
             wall:['Cheese','Butter'],
-            desc:'Adds grilled cheese sandwiches as a main dish',
+            desc:'Toasted sandwiches with cheese and butter',
+        },{
+            name:'Croque Madame',
+            dish:['Croque Madame'],
+            list:1,
+            rate:[2,'8'],
+            customerMult:0.8,
+            prereq:['Toast'],
+            mutex:[],
+            wall:['Cheese','Meat','Eggs'],
+            desc:'Toasted sandwiches with cheese, meat, and a fried egg',
         },
         
         {
@@ -13695,6 +14079,16 @@ types={
             mutex:[],
             wall:['Onions','Bonito'],
             desc:'Noodles served inside soup',
+        },{
+            name:'Egg Ramen',
+            dish:['Egg Ramen'],
+            list:1,
+            rate:[1,'+1'],
+            customerMult:0.8,
+            prereq:['Ramen'],
+            mutex:[],
+            wall:['Eggs'],
+            desc:'Adds egg as a ramen topping',
         },
         
         {
@@ -13809,7 +14203,7 @@ types={
             customerMult:0.8,
             prereq:['Fried Chicken'],
             mutex:[],
-            wall:['Starter Hob','Peppers','Butter'],
+            wall:['Peppers','Butter'],
             desc:'Adds buffalo sauce as a chicken topping',
         },{
             name:'Lemon Pepper Chicken',
@@ -13819,7 +14213,7 @@ types={
             customerMult:0.8,
             prereq:['Fried Chicken'],
             mutex:[],
-            wall:['Starter Hob','Lemons'],
+            wall:['Lemons'],
             desc:'Adds lemon pepper sauce as a chicken topping',
         },{
             name:'Cherry Glaze Chicken',
@@ -13829,8 +14223,18 @@ types={
             customerMult:0.8,
             prereq:['Fried Chicken'],
             mutex:[],
-            wall:['Starter Hob','Cherries',`Sugar`],
+            wall:['Cherries',`Sugar`],
             desc:'Adds cherry glaze as a chicken topping',
+        },{
+            name:'Schnitzel',
+            dish:['Schnitzel'],
+            list:1,
+            rate:[3,'8'],
+            customerMult:0.64,
+            prereq:['Fried Chicken'],
+            mutex:[],
+            wall:['Meat','Oven','Pans'],
+            desc:'Adds schnitzel as a main dish',
         },
         
         {
@@ -13853,6 +14257,28 @@ types={
             mutex:[],
             wall:['Peppers','Oil'],
             desc:'Adds chili oil as a dumpling topping',
+        },
+
+        {
+            name:'Bacon Sandwiches',
+            dish:['Bacon Sandwich'],
+            list:1,
+            rate:[2,'6'],
+            customerMult:0.8,
+            prereq:[`Sandwiches`],
+            mutex:[],
+            wall:['Bacon','Pans','Starter Hob'],
+            desc:'Adds fried bacon as a sandwich ingredient',
+        },{
+            name:'Pickle Sandwiches',
+            dish:['Pickle Sandwich'],
+            list:1,
+            rate:[1,'+1'],
+            customerMult:1,
+            prereq:[`Sandwiches`],
+            mutex:[],
+            wall:['Pickles'],
+            desc:'Adds pickles as a sandwich topping',
         },
         
         {
@@ -14520,6 +14946,6 @@ dev={
     bound:false,customerMult:1,overlap:true,first:false,emergencyKey:false,zeroKey:false,
     test:[],
     display:[
-        //...types.item.slice(types.item.findIndex(item=>item.name=='Rice Flour')).map(item=>item.name)
+        //...types.item.slice(types.item.findIndex(item=>item.name=='Breaded Meat')).map(item=>item.name)
     ]
 }
