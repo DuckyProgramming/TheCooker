@@ -72,7 +72,7 @@ class operation{
     transition(scene,args){
         switch(scene){
             case 'main':
-                if(dev.test){
+                if(dev.test.length>0){
                     this.level=dev.first?0:types.level.length-1
                 }
                 this.entityManager.generatePlayers()
