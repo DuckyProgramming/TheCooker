@@ -686,6 +686,9 @@ class wall extends partisan{
                         let obj=this.parent.entities.walls[a][b]
                         if(obj!=this&&obj.checkIn(0,hand)){
                             obj.buff[0]*=1.5
+                            if(obj.name==`Laborer`){
+                                obj.removeMark=true
+                            }
                         }
                     }
                 }
