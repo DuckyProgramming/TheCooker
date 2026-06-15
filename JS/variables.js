@@ -4164,6 +4164,19 @@ types={
             prereq:[0],
             desc:'Provides Pickles',
             upgrade:[],
+        },{
+            name:'Sprinkles',
+            blueprint:['Sprinkles',7.5],
+            width:30,
+            height:30,
+            spec:[1],provide:'Sprinkles',
+            edit:true,
+            level:1,
+            rarity:1,
+            cost:60,
+            prereq:[0],
+            desc:'Provides Sprinkles',
+            upgrade:[],
         },
     ],item:[
         /*
@@ -4749,6 +4762,7 @@ types={
                 [0,'Cooked Bacon','Bacon on Bread'],
                 [0,'Oil','Oil on Bread'],
                 [0,'Chopped Tomato','Tomato on Bread'],
+                [0,'Sprinkles','Sprinkles on Bread'],
                 [1,90,'Toast'],
                 [7,180,''],
             ],
@@ -5660,6 +5674,7 @@ types={
             component:true,
             trashable:true,
             process:[
+                [0,'Chopped Nuts','Chocolate Bark'],
                 [9,180,'Burnt'],
             ],
         },{
@@ -5671,6 +5686,7 @@ types={
             process:[
                 [0,'Ice Cream C','Ice Cream CC'],
                 [0,'Ice Cream V','Ice Cream CV'],
+                [0,'Milk','Unmixed Milkshake'],
                 [7,180,''],
             ],
         },{
@@ -7641,6 +7657,7 @@ types={
             process:[
                 [0,'Bolognese Sauce','Tray With Lasagne 1'],
                 [0,'Chocolate Batter','Chocolate Batter Tray'],
+                [0,'Pizza Base','Tray With Baklava 1'],
             ],
         },{
             name:'Tin',
@@ -10974,6 +10991,7 @@ types={
             process:[
                 [0,'Chopped Cheese','Cheese Butter Bread'],
                 [0,'Cheese on Bread','Raw Grilled Cheese'],
+                [0,'Sprinkles','Fairy Bread'],
             ],
         },{
             name:'Cheese Butter Bread',
@@ -12265,6 +12283,119 @@ types={
                 [5,'Trash','Plate'],
                 [7,180,'Dirty Plate'],
             ],
+        },{
+            name:'Tray With Baklava 1',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Chopped Nuts','Tray With Baklava 2'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Baklava 2',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Pizza Base','Tray With Baklava 3'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Baklava 3',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,600,'Baklava Tray'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Baklava Tray',
+            portions:4,
+            replace:false,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [9,600,'Burnt Tray'],
+                [6,60,'Baklava Slice','Tray'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Baklava Slice',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
+        },{
+            name:'Chocolate Bark',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
+        },{
+            name:'Unmixed Milkshake',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [3,30,'Milkshake'],
+            ],
+        },{
+            name:'Milkshake',
+            holdDist:16,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
+        },{
+            name:'Spread Butter Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Sprinkles','Fairy Bread'],
+            ],
+        },{
+            name:'Sprinkles',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[],
+        },{
+            name:'Fairy Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,''],
+            ],
+        },{
+            name:'Sprinkles on Bread',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Butter','Fairy Bread'],
+            ],
         },
         //mark
     ],dish:[
@@ -13444,6 +13575,42 @@ types={
                 ['Full Board',2],
             ],
             desc:'Combine cheese, nuts, and chopped apple on a board and serve.',
+        },{
+            name:'Chocolate Bark',
+            group:'Chocolate Bark',
+            list:3,
+            value:'2',
+            obj:[
+                ['Chocolate Bark',2],
+            ],
+            desc:'Melt chocolate, add chopped nuts, and serve.',
+        },{
+            name:'Fairy Bread',
+            group:'Fairy Bread',
+            list:3,
+            value:'2',
+            obj:[
+                ['Fairy Bread',2],
+            ],
+            desc:'Add water to flour to make dough.\nCook dough to make bread.\nPortion a slice and add butter and sprinkles, then serve.',
+        },{
+            name:'Milkshake',
+            group:'Milkshake',
+            list:3,
+            value:'1',
+            obj:[
+                ['Milkshake',2],
+            ],
+            desc:'Combine milk and chocolate ice cream.\nMix and serve.',
+        },{
+            name:'Baklava',
+            group:'Baklava',
+            list:3,
+            value:'2',
+            obj:[
+                ['Baklava Slice',2],
+            ],
+            desc:'Add water to flour to make dough.\nAdd oil to make Filo pastry.\nStack pastry, chopped nuts, and pastry in a tray.\nCook, portion, and serve.',
         },
     ],card:[
         /*
@@ -14655,6 +14822,46 @@ types={
             mutex:[],
             wall:['Boards','Cheese','Apples','Nuts'],
             desc:'Adds cheese board as a dessert',
+        },{
+            name:'Chocolate Bark',
+            dish:['Chocolate Bark'],
+            list:4,
+            rate:[1,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Chocolate','Starter Hob','Nuts'],
+            desc:'Adds chocolate bark as a dessert',
+        },{
+            name:'Fairy Bread',
+            dish:['Fairy Bread'],
+            list:4,
+            rate:[2,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Flour','Starter Sink','Oven','Butter','Sprinkles'],
+            desc:'Adds cheese board as a dessert',
+        },{
+            name:'Milkshake',
+            dish:['Milkshake'],
+            list:4,
+            rate:[1,'1'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Milk','Ice Cream'],
+            desc:'Adds milkshake as a dessert',
+        },{
+            name:'Baklava',
+            dish:['Baklava'],
+            list:4,
+            rate:[3,'2'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Flour','Starter Sink','Oil','Tray','Nuts','Oven'],
+            desc:'Adds baklava as a dessert',
         },
         
         {
@@ -14946,6 +15153,6 @@ dev={
     bound:false,customerMult:1,overlap:true,first:false,emergencyKey:false,zeroKey:false,
     test:[],
     display:[
-        //...types.item.slice(types.item.findIndex(item=>item.name=='Breaded Meat')).map(item=>item.name)
+        //...types.item.slice(types.item.findIndex(item=>item.name=='Tray With Baklava 1')).map(item=>item.name)
     ]
 }
