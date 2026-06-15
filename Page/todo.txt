@@ -1,20 +1,6 @@
 operation 160?
 
 detroit pizza - made in a tray
-maple syrup - add to wafles
-
-downgrade grilled cheese
-downgrade some ramen
-
-+4 dessert
-chocolate bark - combine melted chocolate with chopped nuts
-fairy bread - bread but with butter and sprinkles
-milkshake - add milk to ice cream and mix
-baklava - roll pie crust to make filo (actually no just use pizza dough), stack filo, chopped nuts, and filo in a tray, cook and portion
-
-+4 premiership
-always wrong - punching a customer might change their order
-resale - when you trash an appliance get 50% refunded
-clearOuterWalls()
+[ramen topping]
 
 +14 maps

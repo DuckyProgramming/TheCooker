@@ -12604,6 +12604,34 @@ types={
                 ['Plated Lettuce, Garlic, and Breadcrumbs',7],
             ],
             desc:'Add water to flour to make dough.\nCook to make bread, portion bread slices, cook, and chop to make breadcrumbs.\nCombine chopped lettuce, chopped garlic, and breadcrumbs, and serve.',
+        },{
+            name:'Sandwich',
+            group:'Sandwich',
+            list:0,
+            value:'5',
+            obj:[
+                ['Plated Sandwich',5],
+            ],
+            desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slices.\nStack bread slice, chopped lettuce, chopped tomato, and another bread slice.\nPlate and serve.',
+        },{
+            name:'Bacon Sandwich',
+            group:'Sandwich',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated Bacon Sandwich',6],
+            ],
+            desc:'Cook bacon in pan.\nPortion from pan and serve.\nAdd bacon to sandwich, then plate and serve.',
+        },{
+            name:'Pickle Sandwich',
+            group:'Sandwich',
+            list:0,
+            value:'+1',
+            obj:[
+                ['Plated Pickle Sandwich',6],
+                ['Plated Bacon Sandwich','Plated Pickle Bacon Sandwich',7],
+            ],
+            desc:'Take pickle and add to completed sandwich',
         },
 
         {
@@ -12680,9 +12708,11 @@ types={
                 ['Plated Garlic Bread',6],
             ],
             desc:'Add chopped garlic and chopped cheese to bread slice.\nCook and serve.',
-        },{
+        },
+        
+        {
             name:'Grilled Cheese',
-            group:'Sandwich',
+            group:'Grilled Cheese',
             list:0,
             value:'7',
             obj:[
@@ -12691,7 +12721,7 @@ types={
             desc:'Stack bread slice, chopped cheese, butter, and another bread slice.\nCook, plate, and serve.',
         },{
             name:'Croque Madame',
-            group:'Sandwich',
+            group:'Grilled Cheese',
             list:0,
             value:'8',
             obj:[
@@ -13191,36 +13221,6 @@ types={
                 ['Plated Soup Dumplings','Plated Chili Oil Soup Dumplings',8],
             ],
             desc:'Chop pepper and add to oil to make sauce.\nAdd sauce to plated dumplings.',
-        },
-
-        {
-            name:'Sandwich',
-            group:'Sandwich',
-            list:0,
-            value:'5',
-            obj:[
-                ['Plated Sandwich',5],
-            ],
-            desc:'Add water to flour to make dough.\nCook to make bread, then portion bread slices.\nStack bread slice, chopped lettuce, chopped tomato, and another bread slice.\nPlate and serve.',
-        },{
-            name:'Bacon Sandwich',
-            group:'Sandwich',
-            list:0,
-            value:'6',
-            obj:[
-                ['Plated Bacon Sandwich',6],
-            ],
-            desc:'Cook bacon in pan.\nPortion from pan and serve.\nAdd bacon to sandwich, then plate and serve.',
-        },{
-            name:'Pickle Sandwich',
-            group:'Sandwich',
-            list:0,
-            value:'+1',
-            obj:[
-                ['Plated Pickle Sandwich',6],
-                ['Plated Bacon Sandwich','Plated Pickle Bacon Sandwich',7],
-            ],
-            desc:'Take pickle and add to completed sandwich',
         },
         
         {
@@ -13792,17 +13792,17 @@ types={
             mutex:[],
             wall:['Starter Hob','Starter Hob','Flour','Meat','Onions','Starter Sink','Starter Plates'],
             desc:'Adds dumplings as a main dish',
-        },{
-            name:'Sandwiches',
-            dish:['Sandwich'],
+        },/*{
+            name:'Ramen',
+            dish:['Ramen'],
             list:0,
             rate:[2,'5'],
             customerMult:0.8,
             prereq:[],
             mutex:[],
-            wall:['Flour','Oven','Starter Sink','Lettuce','Tomatoes','Starter Plates'],
-            desc:'Adds sandwiches as a main dish',
-        },
+            wall:['Starter Hob','Starter Hob','Noodles','Pots','Starter Sink','Onions','Bonito'],
+            desc:'Noodles served inside soup',
+        },*/
 
         {
             name:'Fish Fillet',
@@ -13938,6 +13938,36 @@ types={
             mutex:[],
             wall:['Garlic','Flour','Oven'],
             desc:'Consists of lettuce, garlic, and breadcrumbs',
+        },{
+            name:'Sandwiches',
+            dish:['Sandwich'],
+            list:1,
+            rate:[2,'5'],
+            customerMult:0.8,
+            prereq:[],
+            mutex:[],
+            wall:['Flour','Oven'],
+            desc:'Adds sandwiches as a main dish',
+        },{
+            name:'Bacon Sandwiches',
+            dish:['Bacon Sandwich'],
+            list:1,
+            rate:[2,'6'],
+            customerMult:0.8,
+            prereq:[`Sandwiches`],
+            mutex:[],
+            wall:['Bacon','Pans','Starter Hob'],
+            desc:'Adds fried bacon as a sandwich ingredient',
+        },{
+            name:'Pickle Sandwiches',
+            dish:['Pickle Sandwich'],
+            list:1,
+            rate:[1,'+1'],
+            customerMult:1,
+            prereq:[`Sandwiches`],
+            mutex:[],
+            wall:['Pickles'],
+            desc:'Adds pickles as a sandwich topping',
         },
         
         {
@@ -14005,7 +14035,7 @@ types={
         },{
             name:'Grilled Cheese Sandwiches',
             dish:['Grilled Cheese'],
-            list:0,
+            list:1,
             rate:[2,'7'],
             customerMult:0.8,
             prereq:[`Toast`],
@@ -14424,28 +14454,6 @@ types={
             mutex:[],
             wall:['Peppers','Oil'],
             desc:'Adds chili oil as a dumpling topping',
-        },
-
-        {
-            name:'Bacon Sandwiches',
-            dish:['Bacon Sandwich'],
-            list:1,
-            rate:[2,'6'],
-            customerMult:0.8,
-            prereq:[`Sandwiches`],
-            mutex:[],
-            wall:['Bacon','Pans','Starter Hob'],
-            desc:'Adds fried bacon as a sandwich ingredient',
-        },{
-            name:'Pickle Sandwiches',
-            dish:['Pickle Sandwich'],
-            list:1,
-            rate:[1,'+1'],
-            customerMult:1,
-            prereq:[`Sandwiches`],
-            mutex:[],
-            wall:['Pickles'],
-            desc:'Adds pickles as a sandwich topping',
         },
         
         {
@@ -15118,6 +15126,34 @@ types={
             prereq:[],
             mutex:[],
             desc:'Combines delivery and serving phase',
+        },{
+            name:'Gambler',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Reroll costs are 40% less',
+        },{
+            name:'Empathy',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'Punching a customer replenishes their patience',
+        },{
+            name:'Warehouse',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'After each day, receive a random kit item',
+        },{
+            name:'Hot Stuff',
+            list:6,
+            customerMult:1.4,
+            prereq:[],
+            mutex:[],
+            desc:'All items cook (and burn) 50% faster',
         },
     ],cosmetic:{
         color:[

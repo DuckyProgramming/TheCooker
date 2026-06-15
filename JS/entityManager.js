@@ -258,6 +258,9 @@ class entityManager extends manager{
             this.reroll.cost-=10
         }
         this.entities.walls.forEach(set=>set.forEach(wall=>wall.endDay()))
+        if(this.operation.cardManager.hasCard('Warehouse')){
+            this.sendPackages([['Upgrade Kit','Drill Kit','Deconstruction Kit','Sell Kit'][floor(random(0,4))]])
+        }
     }
     hasWall(type){
         for(let a=0,la=this.entities.walls.length;a<la;a++){

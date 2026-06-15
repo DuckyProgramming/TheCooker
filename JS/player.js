@@ -972,6 +972,9 @@ class player extends partisan{
                                     this.parent.entities.players[a].touch=true
                                 }
                             }
+                            if(this.parent.operation.cardManager.hasCard('Empathy')&&obj.mode==2){
+                                obj.follow.patience.main=min(obj.follow.patience.main+60,obj.follow.patience.base)
+                            }
                             if(result){
                                 return true
                             }

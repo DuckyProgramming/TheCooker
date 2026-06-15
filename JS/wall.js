@@ -619,6 +619,14 @@ class wall extends partisan{
     }
     preBeginDay(){
         this.buff[0]=1
+        switch(this.name){
+            case 'Starter Hob': case 'Hob': case 'Fast Hob': case 'Safe Hob': case 'Override Hob':
+            case 'Oven': case 'Fast Oven': case 'Microwave': case 'Waffle Iron':
+                if(this.parent.operation.cardManager.hasCard('Hot Stuff')){
+                    this.buff[0]*=1.5
+                }
+            break
+        }
     }
     beginDay(){
         let hand
@@ -2473,12 +2481,12 @@ class wall extends partisan{
                         if(this.animSet.contain>0){
                             switch(this.contain){
                                 case 2:
-                                    let len=numLength(this.parent.reroll.cost)
+                                    let len=numLength(this.parent.reroll.cost*(this.parent.operation.cardManager.hasCard('Gambler')?0.6:1))
                                     layer.fill(225,this.fade.main*this.animSet.contain)
                                     layer.rect(0,-27,4*len+24,12,4)
                                     layer.fill(0,this.fade.main*this.animSet.contain)
                                     layer.textSize(10)
-                                    layer.text(this.parent.reroll.cost,-4,-27)
+                                    layer.text(this.parent.reroll.cost*(this.parent.operation.cardManager.hasCard('Gambler')?0.6:1),-4,-27)
                                     layer.stroke(0,this.fade.main*this.animSet.contain)
                                     layer.strokeWeight(1)   
                                     layer.noFill()
@@ -4938,7 +4946,7 @@ class wall extends partisan{
                         break
                         case 'Option':
                             if(this.item!=-1){
-                                if(this.parent.operation.dayManager.hasCurrency([0,0,this.parent.reroll.cost,0][this.contain])){
+                                if(this.parent.operation.dayManager.hasCurrency([0,0,this.parent.reroll.cost*(this.parent.operation.cardManager.hasCard('Gambler')?0.6:1),0][this.contain])){
                                     let result=this.item.generalProcess([8],1)
                                     for(let a=0,la=result.length;a<la;a++){
                                         switch(result[a].type){
@@ -4951,7 +4959,7 @@ class wall extends partisan{
                                                         this.parent.operation.dayManager.beginPractice()
                                                     break
                                                     case 2:
-                                                        this.parent.operation.dayManager.loseCurrency(this.parent.reroll.cost)
+                                                        this.parent.operation.dayManager.loseCurrency(this.parent.reroll.cost*(this.parent.operation.cardManager.hasCard('Gambler')?0.6:1))
                                                         this.parent.reroll.cost+=10
                                                         this.parent.rerollBlueprints()
                                                     break
@@ -4969,7 +4977,7 @@ class wall extends partisan{
                     switch(this.name){
                         case 'Option':
                             if(this.item!=-1){
-                                if(this.parent.operation.dayManager.hasCurrency([0,0,this.parent.reroll.cost,0][this.contain])){
+                                if(this.parent.operation.dayManager.hasCurrency([0,0,this.parent.reroll.cost*(this.parent.operation.cardManager.hasCard('Gambler')?0.6:1),0][this.contain])){
                                     let result=this.item.generalProcess([8],1)
                                     for(let a=0,la=result.length;a<la;a++){
                                         switch(result[a].type){
@@ -5062,7 +5070,7 @@ class wall extends partisan{
                                 if(this.item.moved){
                                     return true
                                 }
-                                result=this.item.generalProcess([2,3],1)
+                                result=this.item.generalProcess([2,3],this.buff[0])
                                 for(let a=0,la=result.length;a<la;a++){
                                     switch(result[a].type){
                                         case 2:
