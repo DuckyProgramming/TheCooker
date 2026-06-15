@@ -168,12 +168,21 @@ function displayScene(layer,scene){
 					possible.push(a)
 				}
 			}
-			for(let a=0,la=8;a<la;a++){
+			/*for(let a=0,la=8;a<la;a++){
 				for(let b=0,lb=9;b<lb;b++){
 					let index=floor(random(0,possible.length))
 					let dish=types.dish[possible[index]]
 					let obj=dish.obj[floor(random(0,dish.obj.length))]
 					displayItem(layer,(b+0.25+a%2*0.5)/lb*layer.width,(a+0.5)/la*layer.height,obj[obj.length-2],0,0,2.5,1)
+					possible.splice(index,1)
+				}
+			}*/
+			for(let a=0,la=11;a<la;a++){
+				for(let b=0,lb=8;b<lb;b++){
+					let index=floor(random(0,possible.length))
+					let dish=types.dish[possible[index]]
+					let obj=dish.obj[floor(random(0,dish.obj.length))]
+					displayItem(layer,layer.width*0.5+90*even(a-0.25+b%2*0.5,la),layer.height*0.5+45*constants.sqrt3*even(b,lb),obj[obj.length-2],0,0,2.5,1)
 					possible.splice(index,1)
 				}
 			}
@@ -203,10 +212,17 @@ function displayScene(layer,scene){
 					possible.push(a)
 				}
 			}
-			for(let a=0,la=8;a<la;a++){
+			/*for(let a=0,la=8;a<la;a++){
 				for(let b=0,lb=9;b<lb;b++){
 					let index=floor(random(0,possible.length))
 					displayItem(layer,(b+0.25+a%2*0.5)/lb*layer.width,(a+0.5)/la*layer.height,types.item[possible[index]].name,types.item[possible[index]].portions,0,2.5,1)
+					possible.splice(index,1)
+				}
+			}*/
+			for(let a=0,la=11;a<la;a++){
+				for(let b=0,lb=8;b<lb;b++){
+					let index=floor(random(0,possible.length))
+					displayItem(layer,layer.width*0.5+90*even(a-0.25+b%2*0.5,la),layer.height*0.5+45*constants.sqrt3*even(b,lb),types.item[possible[index]].name,types.item[possible[index]].portions,0,2.5,1)
 					possible.splice(index,1)
 				}
 			}

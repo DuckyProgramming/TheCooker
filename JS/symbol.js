@@ -852,20 +852,31 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.quad(-5,3.5-1.5*(portions+1),5,3.5-1.5*(portions+1),7,-3.5-1.5*(portions+1),-7,-3.5-1.5*(portions+1))
         break
         case 'Nut Roast Slice':
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
         break
         case 'Plated Nut Roast Slice':
             layer.fill(220,fade)
             layer.ellipse(0,0,24)
             layer.fill(200,fade)
             layer.ellipse(0,0,20)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
         break
         case 'Raw Hot Dog':
             layer.fill(255,120,100,fade)
@@ -3886,10 +3897,17 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(1.5,5.5,3.5)
         break
         case 'Stuffing Nut Roast Slice':
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
             layer.noStroke()
             layer.fill(225,170,125,fade)
             layer.ellipse(-5.25,4.25,6)
@@ -3903,10 +3921,17 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,24)
             layer.fill(200,fade)
             layer.ellipse(0,0,20)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
             layer.noStroke()
             layer.fill(225,170,125,fade)
             layer.ellipse(-5.25,4.25,6)
@@ -7888,32 +7913,39 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.arc(0,-4,14,4,0,180)
         break
         case 'Lemon Nut Roast Slice':
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
             layer.noStroke()
             layer.fill(210,180,10,fade)
-            layer.ellipse(-2,0,6)
+            layer.ellipse(-2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(-2,0,4.5)
+            layer.ellipse(-2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
-            layer.ellipse(2,0,6)
+            layer.ellipse(2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(2,0,4.5)
+            layer.ellipse(2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
         break
@@ -7922,32 +7954,39 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,24)
             layer.fill(200,fade)
             layer.ellipse(0,0,20)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
             layer.noStroke()
             layer.fill(210,180,10,fade)
-            layer.ellipse(-2,0,6)
+            layer.ellipse(-2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(-2,0,4.5)
+            layer.ellipse(-2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
-            layer.ellipse(2,0,6)
+            layer.ellipse(2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(2,0,4.5)
+            layer.ellipse(2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
         break
@@ -7986,32 +8025,39 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(1.5,5.5,3.5)
         break
         case 'Lemon Stuffing Nut Roast Slice':
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
             layer.noStroke()
             layer.fill(210,180,10,fade)
-            layer.ellipse(-2,0,6)
+            layer.ellipse(-2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(-2,0,4.5)
+            layer.ellipse(-2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
-            layer.ellipse(2,0,6)
+            layer.ellipse(2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(2,0,4.5)
+            layer.ellipse(2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
             layer.fill(225,170,125,fade)
@@ -8026,32 +8072,39 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,24)
             layer.fill(200,fade)
             layer.ellipse(0,0,20)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.fill(195,120,35,fade)
+            layer.stroke(195,120,35,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
             layer.fill(215,140,45,fade)
             layer.stroke(215,140,45,fade)
-            layer.strokeWeight(2)
-            layer.quad(-5,3.5,5,3.5,7,-3.5,-7,-3.5)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
             layer.noStroke()
             layer.fill(210,180,10,fade)
-            layer.ellipse(-2,0,6)
+            layer.ellipse(-2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(-2,0,4.5)
+            layer.ellipse(-2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
-            layer.ellipse(2,0,6)
+            layer.ellipse(2,-0.5,6)
             layer.fill(250,240,180,fade)
-            layer.ellipse(2,0,4.5)
+            layer.ellipse(2,-0.5,4.5)
             layer.fill(210,180,10,fade)
             for(let a=0,la=6;a<la;a++){
                 layer.triangle(
-                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5,
-                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
                 )
             }
             layer.fill(225,170,125,fade)
@@ -17126,7 +17179,7 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,28)
             layer.fill(180,160,100,fade)
             layer.ellipse(0,0,24)
-            layer.fill(250,245,195,fade)
+            layer.fill(235,225,175,fade)
             layer.rotate(-5)
             layer.rect(8.5,1,3,1)
             layer.rect(3,-7.5,1,3)
@@ -17173,7 +17226,7 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.ellipse(0,0,17)
             layer.fill(180,160,100,fade)
             layer.ellipse(0,0,15)
-            layer.fill(250,245,195,fade)
+            layer.fill(235,225,175,fade)
             layer.rotate(-10)
             layer.rect(-4,1,1,5)
             layer.rect(2,-3.5,3,1)
@@ -19211,6 +19264,383 @@ function displayItem(layer,x,y,name,portions,direction,size,fade){
             layer.rect(2,-4,2.5,1)
             layer.fill(...col[(tick++)%6],fade)
             layer.rect(1.5,-2,1,2.5)
+        break
+        case 'Tray With Detroit Pizza 2':
+            layer.fill(135,145,155,fade)
+            layer.rect(-16,0,6,10,2)
+            layer.rect(16,0,6,10,2)
+            layer.rect(0,0,32,24,4)
+            layer.fill(220,220,160,fade)
+            layer.rect(0,0,28,20,2)
+            layer.fill(160,40,20,fade)
+            layer.rect(0,-1,28,18,2)
+        break
+        case 'Tray With Detroit Pizza 3':
+            layer.fill(135,145,155,fade)
+            layer.rect(-16,0,6,10,2)
+            layer.rect(16,0,6,10,2)
+            layer.rect(0,0,32,24,4)
+            layer.fill(220,220,160,fade)
+            layer.rect(0,0,28,20,2)
+            layer.fill(160,40,20,fade)
+            layer.rect(0,-1,28,18,2)
+            layer.fill(220,220,60,fade)
+            layer.rect(-7,-5.5,12,7,2)
+            layer.rect(7,-5.5,12,7,2)
+            layer.rect(-7,3.5,12,7,2)
+            layer.rect(7,3.5,12,7,2)
+            layer.fill(160,40,20,fade)
+            for(let a=0,la=4;a<la;a++){
+                layer.ellipse(-10+14*(a%2),-8+9*floor(a/2),3)
+                layer.ellipse(-2+14*(a%2),-4+9*floor(a/2),4)
+                layer.ellipse(-5.5+14*(a%2),-7+9*floor(a/2),2.5)
+                layer.ellipse(-8+14*(a%2),-3+9*floor(a/2),3.5)
+                layer.ellipse(-12.5+14*(a%2),-4.5+9*floor(a/2),2.5)
+            }
+        break
+        case 'Detroit Pizza Tray':
+            layer.fill(135,145,155,fade)
+            layer.rect(-16,0,6,10,2)
+            layer.rect(16,0,6,10,2)
+            layer.rect(0,0,32,24,4)
+            layer.fill(145,165,180,fade)
+            layer.rect(0,0,28,20,2)
+            switch(portions){
+                case 1:
+                    layer.fill(200,180,100,fade)
+                    layer.rect(7,-4.5,14,11,2)
+                    layer.fill(120,50,30,fade)
+                    layer.rect(7,-5.5,14,9,2)
+                break
+                case 2:
+                    layer.fill(200,180,100,fade)
+                    layer.rect(0,-4.5,28,11,2)
+                    layer.fill(120,50,30,fade)
+                    layer.rect(0,-5.5,28,9,2)
+                break
+                case 3:
+                    layer.fill(200,180,100,fade)
+                    layer.rect(0,-4.5,28,11,2)
+                    layer.rect(-7,0,14,20,2)
+                    layer.fill(120,50,30,fade)
+                    layer.rect(0,-5.5,28,9,2)
+                    layer.rect(-7,-1,14,18,2)
+                break
+                case 4:
+                    layer.fill(200,180,100,fade)
+                    layer.rect(0,0,28,20,2)
+                    layer.fill(120,50,30,fade)
+                    layer.rect(0,-1,28,18,2)
+                break
+            }
+            for(let a=0,la=4;a<la;a++){
+                if(portions==4||portions==3&&a!=3||portions==2&&a<2||portions==1&&a==1){
+                    layer.fill(200,140,60,fade)
+                    layer.rect(-7+14*(a%2),-5.5+9*floor(a/2),12,7,2)
+                    layer.fill(120,50,30,fade)
+                    layer.ellipse(-10+14*(a%2),-8+9*floor(a/2),3)
+                    layer.ellipse(-2+14*(a%2),-4+9*floor(a/2),4)
+                    layer.ellipse(-5.5+14*(a%2),-7+9*floor(a/2),2.5)
+                    layer.ellipse(-8+14*(a%2),-3+9*floor(a/2),3.5)
+                    layer.ellipse(-12.5+14*(a%2),-4.5+9*floor(a/2),2.5)
+                }
+            }
+        break
+        case 'Detroit Pizza Slice':
+            layer.fill(200,180,100,fade)
+            layer.rect(0,0,14,11,2)
+            layer.fill(120,50,30,fade)
+            layer.rect(0,-1,14,9,2)
+            layer.fill(200,140,60,fade)
+            layer.rect(0,-1,12,7,2)
+            layer.fill(120,50,30,fade)
+            layer.ellipse(-3,-3.5,3)
+            layer.ellipse(5,0.5,4)
+            layer.ellipse(1.5,-2.5,2.5)
+            layer.ellipse(-1,1.5,3.5)
+            layer.ellipse(-5.5,0,2.5)
+        break
+        case 'Plated Detroit Pizza Slice':
+            layer.fill(220,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(200,fade)
+            layer.ellipse(0,0,20)
+            layer.fill(200,180,100,fade)
+            layer.rect(0,0,14,11,2)
+            layer.fill(120,50,30,fade)
+            layer.rect(0,-1,14,9,2)
+            layer.fill(200,140,60,fade)
+            layer.rect(0,-1,12,7,2)
+            layer.fill(120,50,30,fade)
+            layer.ellipse(-3,-3.5,3)
+            layer.ellipse(5,0.5,4)
+            layer.ellipse(1.5,-2.5,2.5)
+            layer.ellipse(-1,1.5,3.5)
+            layer.ellipse(-5.5,0,2.5)
+        break
+        case 'Raw Garlic Nut Roast':
+            layer.fill(240,215,175,fade)
+            layer.rotate(20)
+            layer.quad(-1.25,0,0,-2.5,1.25,0,0,2.5)
+            layer.rotate(20)
+            layer.quad(-1,-5,0,-7,1,-5,0,-3)
+            layer.quad(5,0,4,-2,3,0,4,2)
+            layer.rotate(10)
+            layer.quad(-5,0,-4,-2,-3,0,-4,2)
+            layer.quad(-1,5,0,7,1,5,0,3)
+            layer.rotate(40)
+            layer.quad(-1,7,0,9,1,7,0,5)
+            layer.quad(-7,0,-6,-2,-5,0,-6,2)
+            layer.rotate(10)
+            layer.quad(-1,-7,0,-9,1,-7,0,-5)
+            layer.quad(7,0,6,-2,5,0,6,2)
+            layer.rotate(-10)
+            layer.fill(250,250,220,fade)
+            layer.rect(0,0,2,2)
+            layer.rotate(10)
+            layer.rect(-1,-4,2,2)
+            layer.rect(2,4,2.5,2.5)
+            layer.rotate(20)
+            layer.rect(-4,2,2,2)
+            layer.rect(5.5,-1,2.5,2.5)
+            layer.rect(-3,-4.5,2.5,2.5)
+            layer.rect(2.5,5,2,2)
+            layer.rect(-2,1,2.5,2.5)
+            layer.rect(2,-2.5,2,2)
+            layer.rotate(40)
+            layer.rect(-4.5,2,2,2)
+            layer.rect(3,-5,2.5,2.5)
+            layer.rect(-1.5,-5.5,2,2)
+            layer.rect(2,4,2.5,2.5)
+            layer.rect(-0.5,-0.5,2.5,2.5)
+        break
+        case 'Garlic Nut Roast':
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.rect(0,-3,14,3*(portions+1))
+            layer.quad(-5,3.5+1.5*(portions+1),5,3.5+1.5*(portions+1),7,-3.5+1.5*(portions+1),-7,-3.5+1.5*(portions+1))
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3.5-1.5*(portions+1),5,3.5-1.5*(portions+1),7,-3.5-1.5*(portions+1),-7,-3.5-1.5*(portions+1))
+        break
+        case 'Garlic Nut Roast Slice':
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+        break
+        case 'Lemon Garlic Nut Roast Slice':
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+            layer.noStroke()
+            layer.fill(210,180,10,fade)
+            layer.ellipse(-2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(-2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+            layer.ellipse(2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+        break
+        case 'Plated Garlic Nut Roast Slice':
+            layer.fill(220,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(200,fade)
+            layer.ellipse(0,0,20)
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+        break
+        case 'Plated Lemon Garlic Nut Roast Slice':
+            layer.fill(220,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(200,fade)
+            layer.ellipse(0,0,20)
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+            layer.noStroke()
+            layer.fill(210,180,10,fade)
+            layer.ellipse(-2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(-2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+            layer.ellipse(2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+        break
+        case 'Stuffing Garlic Nut Roast Slice':
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+            layer.noStroke()
+            layer.fill(225,170,125,fade)
+            layer.ellipse(-5.25,4.25,6)
+            layer.ellipse(0.5,6.25,6)
+            layer.fill(225,190,145,fade)
+            layer.ellipse(-4.25,3.5,3.5)
+            layer.ellipse(1.5,5.5,3.5)
+        break
+        case 'Plated Stuffing Garlic Nut Roast Slice':
+            layer.fill(220,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(200,fade)
+            layer.ellipse(0,0,20)
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+            layer.noStroke()
+            layer.fill(225,170,125,fade)
+            layer.ellipse(-5.25,4.25,6)
+            layer.ellipse(0.5,6.25,6)
+            layer.fill(225,190,145,fade)
+            layer.ellipse(-4.25,3.5,3.5)
+            layer.ellipse(1.5,5.5,3.5)
+        break
+        case 'Lemon Stuffing Garlic Nut Roast Slice':
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+            layer.noStroke()
+            layer.fill(210,180,10,fade)
+            layer.ellipse(-2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(-2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+            layer.ellipse(2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+            layer.fill(225,170,125,fade)
+            layer.ellipse(-5.25,4.25,6)
+            layer.ellipse(0.5,6.25,6)
+            layer.fill(225,190,145,fade)
+            layer.ellipse(-4.25,3.5,3.5)
+            layer.ellipse(1.5,5.5,3.5)
+        break
+        case 'Plated Lemon Stuffing Garlic Nut Roast Slice':
+            layer.fill(220,fade)
+            layer.ellipse(0,0,24)
+            layer.fill(200,fade)
+            layer.ellipse(0,0,20)
+            layer.fill(215,160,135,fade)
+            layer.stroke(215,160,135,fade)
+            layer.strokeWeight(2)
+            layer.quad(-5,6,5,6,7,-1,-7,-1)
+            layer.rect(0,-2.5,14,3)
+            layer.fill(235,190,145,fade)
+            layer.stroke(235,190,145,fade)
+            layer.quad(-5,3,5,3,7,-4,-7,-4)
+            layer.noStroke()
+            layer.fill(210,180,10,fade)
+            layer.ellipse(-2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(-2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    -2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    -2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+            layer.ellipse(2,-0.5,6)
+            layer.fill(250,240,180,fade)
+            layer.ellipse(2,-0.5,4.5)
+            layer.fill(210,180,10,fade)
+            for(let a=0,la=6;a<la;a++){
+                layer.triangle(
+                    2+lsin(a/la*360)*0.5,lcos(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5-lcos(a/la*360)*0.5,lcos(a/la*360)*2.5+lsin(a/la*360)*0.5-0.5,
+                    2+lsin(a/la*360)*2.5+lcos(a/la*360)*0.5,lcos(a/la*360)*2.5-lsin(a/la*360)*0.5-0.5
+                )
+            }
+            layer.fill(225,170,125,fade)
+            layer.ellipse(-5.25,4.25,6)
+            layer.ellipse(0.5,6.25,6)
+            layer.fill(225,190,145,fade)
+            layer.ellipse(-4.25,3.5,3.5)
+            layer.ellipse(1.5,5.5,3.5)
         break
         default:
             print(`No Image: ${name}`)

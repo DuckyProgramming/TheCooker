@@ -1,4 +1,4 @@
-constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt:3}
+constants={trig:[[],[]],graphics:{detail:15},sqrt2:0,sqrt3:0}
 graphics={main:undefined,menu:undefined}
 inputs={
     keys:[
@@ -7134,6 +7134,7 @@ types={
             trashable:true,
             process:[
                 [0,'Chopped Onion','Raw Nut Roast'],
+                [0,'Chopped Garlic','Raw Garlic Nut Roast'],
             ],
         },{
             name:'Raw Nut Roast',
@@ -8248,6 +8249,7 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Chopped Lemon','Plated Lemon and Stuffing'],
                 [0,'Nut Roast Slice','Plated Stuffing Nut Roast Slice'],
+                [0,'Garlic Nut Roast Slice','Plated Stuffing Garlic Nut Roast Slice'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -8280,6 +8282,7 @@ types={
                 [5,'Trash','Plate'],
                 [0,'Stuffing','Plated Lemon and Stuffing'],
                 [0,'Nut Roast Slice','Plated Lemon Nut Roast Slice'],
+                [0,'Garlic Nut Roast Slice','Plated Lemon Garlic Nut Roast Slice'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -8291,6 +8294,7 @@ types={
             process:[
                 [5,'Trash','Plate'],
                 [0,'Nut Roast Slice','Plated Lemon Stuffing Nut Roast Slice'],
+                [0,'Garlic Nut Roast Slice','Plated Lemon Stuffing Garlic Nut Roast Slice'],
                 [7,180,'Dirty Plate'],
             ],
         },{
@@ -12291,6 +12295,7 @@ types={
             trashable:true,
             process:[
                 [0,'Chopped Nuts','Tray With Baklava 2'],
+                [0,'Tomato Sauce','Tray With Detroit Pizza 2'],
                 [5,'Trash','Tray'],
             ],
         },{
@@ -12395,6 +12400,159 @@ types={
             trashable:true,
             process:[
                 [0,'Butter','Fairy Bread'],
+            ],
+        },{
+            name:'Tray With Detroit Pizza 2',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Chopped Cheese','Tray With Detroit Pizza 3'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Tray With Detroit Pizza 3',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,960,'Detroit Pizza Tray'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Detroit Pizza Tray',
+            portions:4,
+            replace:false,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [9,960,'Burnt Tray'],
+                [6,60,'Detroit Pizza Slice','Tray'],
+                [5,'Trash','Tray'],
+            ],
+        },{
+            name:'Detroit Pizza Slice',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Detroit Pizza Slice'],
+            ],
+        },{
+            name:'Plated Detroit Pizza Slice',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Raw Garlic Nut Roast',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [1,1200,'Garlic Nut Roast'],
+            ],
+        },{
+            name:'Garlic Nut Roast',
+            portions:3,
+            replace:false,
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [9,1200,'Burnt'],
+                [6,60,'Garlic Nut Roast Slice','Garlic Nut Roast Slice'],
+            ],
+        },{
+            name:'Garlic Nut Roast Slice',
+            holdDist:18,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Garlic Nut Roast Slice'],
+                [0,'Chopped Lemon','Lemon Garlic Nut Roast Slice'],
+            ],
+        },{
+            name:'Lemon Garlic Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:true,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Lemon Garlic Nut Roast Slice'],
+            ],
+        },{
+            name:'Plated Garlic Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lemon','Plated Lemon Garlic Nut Roast Slice'],
+                [0,'Stuffing','Plated Stuffing Garlic Nut Roast Slice'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Plated Lemon Garlic Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Stuffing','Plated Lemon Stuffing Garlic Nut Roast Slice'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Stuffing Garlic Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Plate','Stuffing Garlic Nut Roast Slice'],
+            ],
+        },{
+            name:'Plated Stuffing Garlic Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [0,'Chopped Lemon','Plated Lemon Stuffing Garlic Nut Roast Slice'],
+                [7,180,'Dirty Plate'],
+            ],
+        },{
+            name:'Lemon Stuffing Garlic Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [0,'Plate','Plated Lemon Stuffing Garlic Nut Roast Slice'],
+            ],
+        },{
+            name:'Plated Lemon Stuffing Garlic Nut Roast Slice',
+            holdDist:20,
+            holdDir:0,
+            component:false,
+            trashable:true,
+            process:[
+                [5,'Trash','Plate'],
+                [7,180,'Dirty Plate'],
             ],
         },
         //mark
@@ -12785,6 +12943,15 @@ types={
                 ['Plated Calzone',9],
             ],
             desc:'Add water to flour to make dough.\nKnead dough to make pie crust.\nAdd tomato sauce, chopped cheese, and a cracked egg.\nKnead to wrap, then cook and serve.',
+        },{
+            name:'Detroit Pizza',
+            group:'Pizza',
+            list:0,
+            value:'6',
+            obj:[
+                ['Plated Detroit Pizza Slice',6],
+            ],
+            desc:'Stack the normal pizza ingredients inside a tray.\nCook, portion, and serve.',
         },
 
         {
@@ -12855,12 +13022,22 @@ types={
             ],
             desc:'Slice nuts and onions.\nCombine and cook to make nut roast.\nPortion and serve.',
         },{
+            name:'Garlic Nut Roast',
+            group:'Garlic Nut Roast',
+            list:0,
+            value:'4',
+            obj:[
+                ['Plated Garlic Nut Roast Slice',4],
+            ],
+            desc:'Make nut roast, but use chopped garlic instead of chopped onion.',
+        },{
             name:'Lemon Nut Roast',
             group:'Nut Roast',
             list:0,
             value:'+1',
             obj:[
                 ['Plated Lemon Nut Roast Slice',5],
+                ['Plated Garlic Nut Roast Slice','Plated Lemon Garlic Nut Roast Slice',5],
             ],
             desc:'Chop lemon.\nAdd to nut roast portion and serve.',
         },{
@@ -12871,6 +13048,8 @@ types={
             obj:[
                 ['Plated Stuffing Nut Roast Slice',7],
                 ['Plated Lemon Nut Roast Slice','Plated Lemon Stuffing Nut Roast Slice',8],
+                ['Plated Garlic Nut Roast Slice','Plated Stuffing Garlic Nut Roast Slice',7],
+                ['Plated Lemon Garlic Nut Roast Slice','Plated Lemon Stuffing Garlic Nut Roast Slice',8],
             ],
             desc:'Add water to flour to make dough.\nCook to make bread, then portion a slice.\nCook the slice then chop to make breadcrumbs.\nCombine breadcrumbs and chopped onion, then cook.\nAdd to nut roast portion and serve.',
         },
@@ -14104,6 +14283,16 @@ types={
             mutex:[],
             wall:['Eggs'],
             desc:'Like a pizza, but also kinda like a pie',
+        },{
+            name:'Detroit Pizza',
+            dish:['Detroit Pizza'],
+            list:1,
+            rate:[3,'6'],
+            customerMult:0.8,
+            prereq:['Pizza'],
+            mutex:[],
+            wall:['Tray'],
+            desc:'Pizza baked in a tray rather than flat',
         },
         
         {
@@ -14151,6 +14340,16 @@ types={
         },
         
         {
+            name:'Garlic Nut Roast',
+            dish:['Garlic Nut Roast'],
+            list:1,
+            rate:[1,'4'],
+            customerMult:0.8,
+            prereq:['Nut Roast'],
+            mutex:[],
+            wall:['Garlic'],
+            desc:'Nut roast made with garlic instead of onion',
+        },{
             name:'Lemon Nut Roast',
             dish:['Lemon Nut Roast'],
             list:1,
@@ -15187,8 +15386,8 @@ types={
 }
 dev={
     bound:false,customerMult:1,overlap:true,first:false,emergencyKey:false,zeroKey:false,
-    test:[],
+    test:[/*'Fish'*/],
     display:[
-        //...types.item.slice(types.item.findIndex(item=>item.name=='Tray With Baklava 1')).map(item=>item.name)
+        //...types.item.slice(types.item.findIndex(item=>item.name=='Garlic Nut Roast')).map(item=>item.name)
     ]
 }
