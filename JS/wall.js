@@ -4495,8 +4495,7 @@ class wall extends partisan{
                                 }
                             }
                         break
-                        case 'Conveyor Mixer':
-                        case 'Grabber': case 'Levitating Grabber': case 'Combiner': case 'Portioner':
+                        case 'Conveyor Mixer': case 'Combiner': case 'Portioner':
                             if(player.item!=-1){
                                 if(this.item!=-1){
                                     if(this.item.attemptCombine(player.item)){
@@ -4513,6 +4512,33 @@ class wall extends partisan{
                                     this.item=player.item
                                     player.item=-1
                                     this.anim=0
+                                    return true
+                                }
+                            }else if(player.item==-1){
+                                if(this.item!=-1){
+                                    player.item=this.item
+                                    this.item=-1
+                                    return true
+                                }
+                            }
+                        break
+                        case 'Grabber': case 'Levitating Grabber':
+                            if(player.item!=-1){
+                                if(this.item!=-1){
+                                    if(this.item.attemptCombine(player.item)){
+                                        player.item=-1
+                                        return true
+                                    }else{
+                                        let result=this.item.attemptDoubleCombine(player.item)
+                                        if(result[0]){
+                                            player.item=this.generateItem(result[1])
+                                            return true
+                                        }
+                                    }
+                                }else if(this.item==-1){
+                                    this.item=player.item
+                                    player.item=-1
+                                    this.anim=48
                                     return true
                                 }
                             }else if(player.item==-1){

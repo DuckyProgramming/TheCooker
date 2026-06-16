@@ -2436,7 +2436,7 @@ types={
             id:69,
             floor:[
                 [[0,-2,0,0]],
-                [[3,-5,0,0]],
+                [[3,-6,0,0]],
             ],wall:[
                 [7,5,'Starter Trash Bin',0],
                 [1,1,'Blueprint Cabinet',3],
@@ -2725,7 +2725,7 @@ types={
                 [1,1,'Booking Desk',3],
             ],
             inside:[0,0,0,2],
-            spawn:[270],
+            spawn:[90],
             map:[
                 ` _ _ _ _ _ _ _ _ _ _ _ _ _ `,
                 `|                         |`,
