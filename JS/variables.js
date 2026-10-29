@@ -15635,7 +15635,7 @@ types={
             name:'Buffet',
             list:5,
             customerMult:1,
-            prereq:[],
+            prereq:['Double Helpings'],
             mutex:[],
             desc:'Customers may order a course any number of times',
         },{
